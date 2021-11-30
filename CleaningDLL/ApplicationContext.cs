@@ -5,7 +5,7 @@ namespace CleaningDLL
     public class ApplicationContext : DbContext
     {
         public DbSet<Address> Address { get; set; }
-        public DbSet<Application> Application { get; set; }
+        public DbSet<Order> Order { get; set; }
         public DbSet<Brigade> Brigade { get; set; }
         public DbSet<Client> CLient { get; set; }
         public DbSet<Consumable> Consumable { get; set; }
@@ -30,7 +30,7 @@ namespace CleaningDLL
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=;Port=;Database=;Username=;Password=");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Cleaning;Username=postgres;Password=qwertyuiop228");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

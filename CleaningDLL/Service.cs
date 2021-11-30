@@ -16,11 +16,8 @@ namespace CleaningDLL
         public string Service_Name { get; set; }
         [Required]
         public string Description { get; set; }
-        public ReferenceUnitsOfMeasurement Unit { get; set; }
-        [Required]
         public decimal Price { get; set; }
         public Inventory_Type Inventory_Type { get; set; }
-        public Provided_Service Provided_Service { get; set; }
         public Consumption_Rate Consumption_Rate { get; set; }
     }
 }

@@ -1,0 +1,44 @@
+﻿<Page x:Class="WPFCleaning.Client"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFCleaning"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      Title="Client">
+
+    <Grid Background="#d8d8f2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock FontSize="18" FontFamily="Arial bold" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="20 20 38 10" Text="Клиент" Background="#3a388a" Foreground ="#d8d8f2"/>
+        <TextBox materialDesign:HintAssist.Hint="Фамилия" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="20 0 0 0" Grid.RowSpan="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" />
+        <TextBox materialDesign:HintAssist.Hint="Имя" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="20 0 0 0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam"/>
+        <TextBox materialDesign:HintAssist.Hint="Отчество" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="20 0 0 0" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam"/>
+        <TextBox materialDesign:HintAssist.Hint="Телефон" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left"  Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="20 0 0 0" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam"/>
+        <CheckBox Content="Постоянный клиент" Foreground ="Gray" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Margin="20 0 38 0" VerticalAlignment="Top" Height="18" Width="145"/>
+
+        <TextBlock FontSize="18" FontFamily="Arial bold" Grid.Column="3" Grid.Row="0" Grid.ColumnSpan="2" Margin="0 20 58 10" Text="Адрес" Background="#3a388a" Foreground ="#d8d8f2"/>
+        <TextBox materialDesign:HintAssist.Hint="Улица" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Margin="0 0 0 0" Grid.RowSpan="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" />
+        <TextBox materialDesign:HintAssist.Hint="Номер дома" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Margin="0 0 0 0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam"/>
+        <TextBox materialDesign:HintAssist.Hint="Корпус" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="2" Margin="0 0 0 0" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam"/>
+        <TextBox materialDesign:HintAssist.Hint="Подъезд" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left"  Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2" Margin="0 0 0 0" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam"/>
+        <TextBox materialDesign:HintAssist.Hint="Квартира" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left"  Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="2" Margin="0 0 0 0" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam"/>
+    </Grid>
+</Page>

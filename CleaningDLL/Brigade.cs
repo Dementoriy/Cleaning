@@ -13,6 +13,7 @@ namespace CleaningDLL
         public string Brigade_Number { get; set; }
         [Required]
         public string Smena_Number { get; set; }
+        public Employee Employee { get; set; }
         public Inventory Inventory { get; set; }
 
     }

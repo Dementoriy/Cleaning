@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleaningDLL", "CleaningDLL\CleaningDLL.csproj", "{9ACAE649-64FE-490D-A49A-69360552A2C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{DBC78B89-EB45-4DDE-8660-A077A1ECA4E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test", "test\test.csproj", "{DBC78B89-EB45-4DDE-8660-A077A1ECA4E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFCleaning", "WPFCleaning\WPFCleaning.csproj", "{75AAB8C6-8E08-43AE-9DC1-1C604F704FB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DBC78B89-EB45-4DDE-8660-A077A1ECA4E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBC78B89-EB45-4DDE-8660-A077A1ECA4E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBC78B89-EB45-4DDE-8660-A077A1ECA4E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75AAB8C6-8E08-43AE-9DC1-1C604F704FB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75AAB8C6-8E08-43AE-9DC1-1C604F704FB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75AAB8C6-8E08-43AE-9DC1-1C604F704FB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75AAB8C6-8E08-43AE-9DC1-1C604F704FB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

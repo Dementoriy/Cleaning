@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleaningDLL
 {
-    public class Application //Заявка
+    public class Order //Заявка
     {
         public int ID { get; set; }
         [Required]
@@ -16,5 +16,14 @@ namespace CleaningDLL
         public Employee Employee { get; set; }
         public Address Address { get; set; }
         public Brigade Brigade { get; set; }
+
+        public static List<Order> Get()
+        {
+            using (var db = new ApplicationContext())
+            {
+                return db.Order.ToList();
+            }
+        }
     }
+    
 }
