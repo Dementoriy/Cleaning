@@ -20,24 +20,33 @@ namespace WPFCleaning
     /// </summary>
     public partial class MainWindow : Window
     {
+        Page client;
+        Page newApplication;
+        Page applications;
         public MainWindow()
         {
             InitializeComponent();
+            AddPage();
         }
-
+        public void AddPage()
+        {
+            client = new Client();
+            newApplication = new NewApplication();
+            applications = new Applications();
+        }
         private void ButtonClickClient(object sender, RoutedEventArgs e)
         {
-            this.View.NavigationService.Navigate(new Client());
+            this.View.NavigationService.Navigate(client);
         }
 
         private void ButtonClickNewApplication(object sender, RoutedEventArgs e)
         {
-            this.View.NavigationService.Navigate(new NewApplication());
+            this.View.NavigationService.Navigate(newApplication);
         }
 
         private void ButtonClickApplication(object sender, RoutedEventArgs e)
         {
-            this.View.NavigationService.Navigate(new Applications());
+            this.View.NavigationService.Navigate(applications);
         }
     }
 }

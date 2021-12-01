@@ -23,6 +23,7 @@ namespace WPFCleaning
         public Applications()
         {
             InitializeComponent();
+            AddAplication();
         }
         private void CheckActive_Checked(object sender, RoutedEventArgs e) => CheckInAssembly.IsChecked = false;
         private void CheckInAssembly_Checked(object sender, RoutedEventArgs e) => CheckActive.IsChecked = false;
