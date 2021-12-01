@@ -23,7 +23,7 @@ namespace WPFCleaning
             InitializeComponent();
             ChemistryCleanBox.IsEnabled = false;
             WindowCleanBox.IsEnabled = false;
-            DezinfectionBox.IsEditable = false;
+            DezinfectionBox.IsEnabled = false;
         }
 
         private void ChemistryClean_Checked(object sender, RoutedEventArgs e)

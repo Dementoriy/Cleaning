@@ -7,6 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
       Title="NewApplication">
 
     <Grid Background="#d8d8f2">
@@ -46,23 +47,22 @@
 
             <CheckBox x:Name="WindowClean" Content="Мытье окон" Checked="WindowClean_Checked" FontSize="18" FontFamily="Arial bold"/>
 
-            <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="WindowCleanBox" Margin="20 -5 5 5" Height="30" FontFamily="Arial bold" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <TextBox materialDesign:HintAssist.Hint="Количество окон:" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold"/>
-                <TextBox materialDesign:HintAssist.Hint="Количество дверей:" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold"/>
+            <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="WindowCleanBox" Margin="20 -5 5 5" Height="30" FontFamily="Arial bold" Background="#d8d8f2" Foreground="#d8d8f2" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                <mah:NumericUpDown x:Name="NumericUpDownKolvoWindow" materialDesign:HintAssist.Hint="Количество окон" Padding="0" Foreground="Black" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
+                <mah:NumericUpDown x:Name="NumericUpDownKolvoDoor" materialDesign:HintAssist.Hint="Количество дверей" Padding="0" Foreground="Black" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
             </ComboBox>
-
             <CheckBox x:Name="ChemistryClean" Content="Химчистка" FontSize="18" FontFamily="Arial bold" Checked="ChemistryClean_Checked"/>
 
-            <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="ChemistryCleanBox" Margin="20 -5 5 5" Height="30" FontFamily="Arial bold" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <TextBox materialDesign:HintAssist.Hint="Количество диванов:" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" />
-                <TextBox materialDesign:HintAssist.Hint="Количество кресел:" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" />
-                <TextBox materialDesign:HintAssist.Hint="Количество ковров:" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" />
+            <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="ChemistryCleanBox" Margin="20 -5 5 5" Height="30" FontFamily="Arial bold" Foreground="#d8d8f2" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                <mah:NumericUpDown x:Name="NumericUpDownKolvoSofa" materialDesign:HintAssist.Hint="Количество диванов" Padding="0" Foreground="Black" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
+                <mah:NumericUpDown x:Name="NumericUpDownKolvoChaer" materialDesign:HintAssist.Hint="Количество кресел" Padding="0" Foreground="Black" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
+                <mah:NumericUpDown x:Name="NumericUpDownKolvoCarpet" materialDesign:HintAssist.Hint="Количество ковров" Padding="0" Foreground="Black" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
             </ComboBox>
 
             <CheckBox x:Name="Dezinfection" Content="Дезинфекция" FontSize="18" FontFamily="Arial bold" Checked="Dezinfection_Checked"/>
 
-            <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="DezinfectionBox" Margin="20 -5 5 5" Height="30" FontFamily="Arial bold" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <TextBox materialDesign:HintAssist.Hint="Площадь:" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" />
+            <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="DezinfectionBox" Margin="20 -5 5 5" Height="30" Foreground="#d8d8f2" FontFamily="Arial bold" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                <mah:NumericUpDown x:Name="NumericUpDownKolvoDez" materialDesign:HintAssist.Hint="Площадь" Padding="0" Foreground="Black" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
             </ComboBox>
 
         </StackPanel>
