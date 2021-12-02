@@ -38,6 +38,7 @@
             <TextBox materialDesign:HintAssist.Hint="Имя" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold"/>
             <TextBox materialDesign:HintAssist.Hint="Отчество" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold"/>
             <mah:NumericUpDown x:Name="NumericUpDownTel" materialDesign:HintAssist.Hint="Телефон" Padding="0" Background="#d8d8f2" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
+            <Border Background="Gray" Height="1"/>
             <CheckBox x:Name="CheckOldClient" Content="Постоянный клиент" Foreground ="Black" HorizontalAlignment="Left"  Margin="0 10 38 0" Height="18" Width="145" FontFamily="Arial bold"/>
 
         </StackPanel>
