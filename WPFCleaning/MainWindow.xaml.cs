@@ -24,10 +24,12 @@ namespace WPFCleaning
         Page client;
         Page newApplication;
         Page applications;
+        Page enter;
         public MainWindow()
         {
             InitializeComponent();
             AddPage();
+            View.Navigate(client);
         }
         public void AddPage()
         {
@@ -67,7 +69,13 @@ namespace WPFCleaning
             NewOrderBtn.BorderBrush = Brushes.DarkBlue;
             OrderBtn.BorderBrush = Brushes.White;
         }
+        private void SignInButton_Click(object sender, RoutedEventArgs e)
+        {
 
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
 
     }
 }
