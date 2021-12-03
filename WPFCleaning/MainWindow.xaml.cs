@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace WPFCleaning
 {
     /// <summary>
@@ -36,17 +37,37 @@ namespace WPFCleaning
         }
         private void ButtonClickClient(object sender, RoutedEventArgs e)
         {
-            this.View.NavigationService.Navigate(client);
+            //this.View.NavigationService.Navigate(client);
+
+            View.Navigate(client);
+            ClientBtn.BorderBrush = Brushes.White;
+            //ClientBtn.Foreground = Brushes.Black;
+            NewOrderBtn.BorderBrush = Brushes.DarkBlue;
+            //NewOrderBtn.Foreground = Brushes.White;
+            OrderBtn.BorderBrush = Brushes.DarkBlue;
+            //OrderBtn.Foreground = Brushes.White;
         }
 
         private void ButtonClickNewApplication(object sender, RoutedEventArgs e)
         {
-            this.View.NavigationService.Navigate(newApplication);
+            //this.View.NavigationService.Navigate(newApplication);
+
+            View.Navigate(newApplication);
+            ClientBtn.BorderBrush = Brushes.DarkBlue;
+            NewOrderBtn.BorderBrush = Brushes.White;
+            OrderBtn.BorderBrush = Brushes.DarkBlue;
         }
 
         private void ButtonClickApplication(object sender, RoutedEventArgs e)
         {
-            this.View.NavigationService.Navigate(applications);
+            //this.View.NavigationService.Navigate(applications);
+
+            View.Navigate(applications);
+            ClientBtn.BorderBrush = Brushes.DarkBlue;
+            NewOrderBtn.BorderBrush = Brushes.DarkBlue;
+            OrderBtn.BorderBrush = Brushes.White;
         }
+
+
     }
 }

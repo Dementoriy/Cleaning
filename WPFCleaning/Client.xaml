@@ -16,43 +16,46 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition />
             <ColumnDefinition/>
-            <ColumnDefinition />
             <ColumnDefinition/>
-            <ColumnDefinition />
             <ColumnDefinition/>
-            <ColumnDefinition />
             <ColumnDefinition/>
-            <ColumnDefinition />
-
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="3" Grid.ColumnSpan="6" MaxHeight="500" MaxWidth="300" Margin="0 10 0 0" HorizontalAlignment="Left">
+        <StackPanel Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="5" MaxHeight="500" VerticalAlignment="Top">
             
-            <Border Margin="0 10 0 10" MinHeight="30" MaxHeight="40" MaxWidth="270"  Background="#3a388a" CornerRadius="3">
-                <TextBlock FontSize="18" FontFamily="Arial bold" Text="Клиент" Foreground ="#d8d8f2"  Margin="100 5 0 0"/>
+            <Border Margin="0 10 0 10" Height="40"  Background="#3a388a" CornerRadius="3">
+                <TextBlock FontSize="22" FontFamily="Arial bold" Text="Клиент" Foreground ="White"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
 
-            <TextBox materialDesign:HintAssist.Hint="Фамилия" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold"/>
-            <TextBox materialDesign:HintAssist.Hint="Имя" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold"/>
-            <TextBox materialDesign:HintAssist.Hint="Отчество" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold"/>
-            <mah:NumericUpDown x:Name="NumericUpDownTel" materialDesign:HintAssist.Hint="Телефон" Padding="0" Background="#d8d8f2" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
-            <Border Background="Gray" Height="1"/>
-            <CheckBox x:Name="CheckOldClient" Content="Постоянный клиент" Foreground ="Black" HorizontalAlignment="Left"  Margin="0 10 38 0" Height="18" Width="145" FontFamily="Arial bold"/>
+            <TextBox materialDesign:HintAssist.Hint="Фамилия" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="IBeam" FontFamily="Arial bold" FontSize="16"/>
+            <TextBox materialDesign:HintAssist.Hint="Имя" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="IBeam" FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
+            <TextBox materialDesign:HintAssist.Hint="Отчество" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="IBeam" FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
+            <TextBox materialDesign:HintAssist.Hint="Телефон" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="IBeam" FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
+            <CheckBox x:Name="CheckOldClient" Content="Постоянный клиент" Foreground ="Black" HorizontalAlignment="Left"  Margin="0 20 38 0" Height="20" Width="200" FontFamily="Arial bold" FontSize="16"/>
 
         </StackPanel>
 
-        <StackPanel Grid.Column="4" Grid.ColumnSpan="6" MaxHeight="500" MaxWidth="400" Margin="0 10 0 0" HorizontalAlignment="Right">
-            <Border Margin="0 10 0 10" MinHeight="30" MaxHeight="40" MaxWidth="270"  Background="#3a388a" CornerRadius="3">
-                <TextBlock FontSize="18" FontFamily="Arial bold" Text="Адрес" Foreground ="#d8d8f2"  Margin="100 5 0 0"/>
+        <StackPanel Grid.Column="5" Grid.ColumnSpan="2"  Grid.Row="1" Grid.RowSpan="5" MaxHeight="500" VerticalAlignment="Top">
+            <Border Margin="0 10 0 10" Height="40"  Background="#3a388a" CornerRadius="3">
+                <TextBlock FontSize="22" FontFamily="Arial bold" Text="Адрес" Foreground ="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
 
-            <TextBox materialDesign:HintAssist.Hint="Улица" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" Grid.RowSpan="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold"/>
-            <TextBox materialDesign:HintAssist.Hint="Номер дома" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold"/>
-            <TextBox materialDesign:HintAssist.Hint="Корпус" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold"/>
-            <mah:NumericUpDown x:Name="NumericUpDownPOD" materialDesign:HintAssist.Hint="Подъезд" Padding="0" Background="#d8d8f2" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
-            <mah:NumericUpDown x:Name="NumericUpDownKV" materialDesign:HintAssist.Hint="Квартира" Padding="0" Background="#d8d8f2" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
+            <TextBox materialDesign:HintAssist.Hint="Улица" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" FontFamily="Arial bold" FontSize="16" Margin="0 0 0 0"/>
+            <TextBox materialDesign:HintAssist.Hint="Номер дома" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
+            <TextBox materialDesign:HintAssist.Hint="Корпус" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
+            <TextBox materialDesign:HintAssist.Hint="Подъезд" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
+            <TextBox materialDesign:HintAssist.Hint="Квартира" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
         </StackPanel>
     </Grid>
 </Page>

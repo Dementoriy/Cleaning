@@ -20,63 +20,85 @@
             <ColumnDefinition/>
             <ColumnDefinition />
             <ColumnDefinition/>
-            <ColumnDefinition />
             <ColumnDefinition/>
-
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" MaxHeight="500" Width="280" Margin="0 10 0 0" HorizontalAlignment="Center">
+        <StackPanel Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="5">
 
-            <Border Margin="0 10 0 10" Height="30"  Background="#3a388a" CornerRadius="3">
-                <TextBlock FontSize="18" FontFamily="Arial bold" Text="Услуги" Foreground ="#d8d8f2"  Margin="110 5 0 0"/>
+            <Border Background="#3a388a" CornerRadius="3" Height="40">
+                <TextBlock FontSize="22" FontFamily="Arial bold" Text="Услуги" Foreground ="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
 
-            <CheckBox Content="Экспресс уборка" x:Name="CheckExpressClean" Checked="CheckExpressClean_Checked" Margin="5 0 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="18"/>
-            <CheckBox Content="Генеральная уборка" x:Name="CheckGeneralClean" Checked="CheckGeneralClean_Checked" Margin="5 10 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="18"/>
-            <CheckBox Content="Послестроительная" x:Name="CheckBuildingClean" Checked="CheckBuildingClean_Checked" Margin="5 10 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="18"/>
-            <CheckBox Content="Уборка офисов" x:Name="CheckOfficeClean" Checked="CheckOfficeClean_Checked" Margin="5 10 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="18"/>
+            <CheckBox Content="Экспресс уборка" x:Name="CheckExpressClean" Checked="CheckExpressClean_Checked" Margin="5 18 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="20" />
+            <CheckBox Content="Генеральная уборка" x:Name="CheckGeneralClean" Checked="CheckGeneralClean_Checked" Margin="5 18 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="20"/>
+            <CheckBox Content="Послестроительная" x:Name="CheckBuildingClean" Checked="CheckBuildingClean_Checked" Margin="5 18 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="20"/>
+            <CheckBox Content="Уборка офисов" x:Name="CheckOfficeClean" Checked="CheckOfficeClean_Checked" Margin="5 18 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="20"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="4" Grid.ColumnSpan="2" MaxHeight="500" Width="280" Margin="0 10 0 0" HorizontalAlignment="Center">
-            <Border Margin="0 10 0 10" Height="30"  Background="#3a388a" CornerRadius="3">
-                <TextBlock FontSize="18" FontFamily="Arial bold" Text="Дополнительные услуги" Foreground ="#d8d8f2"  Margin="40 5 10 0"/>
+        <StackPanel Grid.Column="6" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="5" VerticalAlignment="Top">
+            <Border Height="40"  Background="#3a388a" CornerRadius="3">
+                <TextBlock FontSize="22" FontFamily="Arial bold" Text="Доп. услуги" Foreground ="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
 
-            <CheckBox x:Name="WindowClean" Content="Мытье окон" Checked="WindowClean_Checked" FontSize="18" FontFamily="Arial bold" Margin="5 0 0 0"/>
+            <CheckBox x:Name="WindowClean" Content="Мытье окон" Checked="WindowClean_Checked" FontSize="18" FontFamily="Arial bold" Margin="5 18 0 0"/>
 
             <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="WindowCleanBox" Margin="20 -5 5 5" Height="30" FontFamily="Arial bold" Background="#d8d8f2" Foreground="#d8d8f2" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <mah:NumericUpDown x:Name="NumericUpDownKolvoWindow" materialDesign:HintAssist.Hint="Количество окон" Padding="0" Foreground="Black" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
-                <mah:NumericUpDown x:Name="NumericUpDownKolvoDoor" materialDesign:HintAssist.Hint="Количество дверей" Padding="0" Foreground="Black" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
+                <TextBox materialDesign:HintAssist.Hint="Количество окон:" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black"/>
+                <TextBox materialDesign:HintAssist.Hint="Количество дверей:" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black"/>
             </ComboBox>
-            <CheckBox x:Name="ChemistryClean" Content="Химчистка" FontSize="18" FontFamily="Arial bold" Checked="ChemistryClean_Checked" Margin="5 0 0 0"/>
+            <CheckBox x:Name="ChemistryClean" Content="Химчистка" FontSize="18" FontFamily="Arial bold" Checked="ChemistryClean_Checked" Margin="5 10 0 0"/>
 
             <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="ChemistryCleanBox" Margin="20 -5 5 5" Height="30" FontFamily="Arial bold" Foreground="#d8d8f2" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <mah:NumericUpDown x:Name="NumericUpDownKolvoSofa" materialDesign:HintAssist.Hint="Количество диванов" Padding="0" Foreground="Black" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
-                <mah:NumericUpDown x:Name="NumericUpDownKolvoChaer" materialDesign:HintAssist.Hint="Количество кресел" Padding="0" Foreground="Black" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
-                <mah:NumericUpDown x:Name="NumericUpDownKolvoCarpet" materialDesign:HintAssist.Hint="Количество ковров" Padding="0" Foreground="Black" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
+                <TextBox materialDesign:HintAssist.Hint="Количество диванов:" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black"/>
+                <TextBox materialDesign:HintAssist.Hint="Количество кресел:" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black"/>
+                <TextBox materialDesign:HintAssist.Hint="Количество ковров:" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black"/>
             </ComboBox>
 
-            <CheckBox x:Name="Dezinfection" Content="Дезинфекция" FontSize="18" FontFamily="Arial bold" Checked="Dezinfection_Checked" Margin="5 0 0 0"/>
+            <CheckBox x:Name="Dezinfection" Content="Дезинфекция" FontSize="18" FontFamily="Arial bold" Checked="Dezinfection_Checked" Margin="5 10 0 0"/>
 
             <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="DezinfectionBox" Margin="20 -5 5 5" Height="30" Foreground="#d8d8f2" FontFamily="Arial bold" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <mah:NumericUpDown x:Name="NumericUpDownKolvoDez" materialDesign:HintAssist.Hint="Площадь" Padding="0" Foreground="Black" FontSize="12" UpDownButtonsWidth="0" ButtonsAlignment="Left" TextAlignment="Left" FontFamily="Arial bold" />
+                <TextBox materialDesign:HintAssist.Hint="Площадь:" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black"/>
             </ComboBox>
 
         </StackPanel>
 
-        <StackPanel Grid.Column="7" Grid.ColumnSpan="2" MaxHeight="500" Width="280" Margin="0 10 0 0" HorizontalAlignment="Center">
-            <Border Margin="0 10 0 10" Height="30"  Background="#3a388a" CornerRadius="3">
-                <TextBlock FontSize="18" FontFamily="Arial bold" Text="Итог" Foreground ="#d8d8f2"  Margin="120 5 10 0"/>
+        <StackPanel Grid.Column="10" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="5" VerticalAlignment="Top">
+            <Border Height="40"  Background="#3a388a" CornerRadius="3">
+                <TextBlock FontSize="22" FontFamily="Arial bold" Text="Итог" Foreground ="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
-            <StackPanel Orientation="Horizontal" Margin="0 6 0 14">
+            <StackPanel Orientation="Horizontal" Margin="0 18 0 14">
                 <TextBlock Text="Цена:" FontFamily="Arial Bold" FontSize="20" Margin="5 0 0 0"/>
-                <TextBox Width="190" Margin="25 0 0 0"/>
+                <TextBox Width="190" Margin="25 0 0 0" FontFamily="Arial Bold" FontSize="20"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Время:" FontFamily="Arial Bold" FontSize="20" Margin="5 0 0 0"/>
-                <TextBox Width="190" Margin="10 0 0 0" Cursor="IBeam"/>
+                <TextBlock Text="Время:" FontFamily="Arial Bold" FontSize="20" Margin="5 18 0 0"/>
+                <TextBox Width="190" Margin="10 0 0 0" Cursor="IBeam" FontFamily="Arial Bold" FontSize="20"/>
             </StackPanel>
-            <Button x:Name="AddOrder" Content="Оформить" Height="40" FontFamily="Arial Bold" FontSize="18" Margin="0 30 0 0" BorderBrush="White" Background="#3a388a"/>
         </StackPanel>
+
+        <Border Grid.Column="4" Grid.Row="6" Grid.ColumnSpan="4" Grid.RowSpan="1" BorderBrush="#3a388a" BorderThickness="3" CornerRadius="3">
+            <TextBox AcceptsReturn="True" Height="120" Width="300" materialDesign:HintAssist.Hint="Комментарий:" FontFamily="Arial Bold" FontSize="20" Style="{StaticResource MaterialDesignTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Cursor="IBeam"/>
+        </Border>
+
+        <Button x:Name="AddOrder" Grid.Column="9" Grid.Row="6" Grid.ColumnSpan="2" Content="Оформить" Height="50" FontFamily="Arial Bold" FontSize="22" BorderThickness="2" BorderBrush="DarkBlue" Background="#7876e8" Cursor="Hand"/>
+
     </Grid>
 </Page>
