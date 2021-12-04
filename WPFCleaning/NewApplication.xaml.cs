@@ -30,17 +30,26 @@ namespace WPFCleaning
         {
             ChemistryCleanBox.IsEnabled = ChemistryClean.IsEnabled;
         }
-
+        private void ChemistryClean_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ChemistryCleanBox.IsEnabled = false;
+        }
         private void WindowClean_Checked(object sender, RoutedEventArgs e)
         {
             WindowCleanBox.IsEnabled = WindowClean.IsEnabled;
         }
-
+        private void WindowClean_Unchecked(object sender, RoutedEventArgs e)
+        {
+            WindowCleanBox.IsEnabled = false;
+        }
         private void Dezinfection_Checked(object sender, RoutedEventArgs e)
         {
             DezinfectionBox.IsEnabled = Dezinfection.IsEnabled;
         }
-
+        private void Dezinfection_Unchecked(object sender, RoutedEventArgs e)
+        {
+            DezinfectionBox.IsEnabled = false;
+        }
         private void CheckExpressClean_Checked(object sender, RoutedEventArgs e)
         {
             CheckGeneralClean.IsChecked = false;

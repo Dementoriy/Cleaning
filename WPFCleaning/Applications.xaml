@@ -29,19 +29,25 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Grid.Column="4" Grid.Row="10" Margin="0 0 10 0" Content="Найти" FontFamily="Arial Bold" FontSize="20" Background="#7876e8" Foreground ="White" Cursor="Hand" BorderBrush="DarkBlue" BorderThickness="2" Height="40"/>
-        <TextBox Grid.Row="10" Grid.Column="3" Background="White" MaxHeight="40" Cursor="IBeam" Margin="0 3 10 3" FontSize="18"/>
+        <Button Grid.Column="4" Grid.Row="10" Margin="0 0 10 0" Content="Найти" FontFamily="Arial Bold" FontSize="20" Background="#3a388a" Foreground ="White" Cursor="Hand" BorderBrush="White" BorderThickness="2" Height="40" Click="ButtonSearch_Click"/>
+        <TextBox x:Name="SearchBox" Grid.Row="10" Grid.Column="3" Background="White" MaxHeight="40" Cursor="IBeam" Margin="0 3 10 3" FontSize="18"/>
 
         <Border Background="#3a388a" Grid.Column="2" Grid.Row="10" Margin="10 3 10 2" Height="40" CornerRadius="3" BorderBrush="White" >
-            <CheckBox x:Name="CheckInAssembly" Foreground ="White" Background="White" FontFamily="Arial Bold" Margin="15,0,0,0"  FontSize="18" Checked="CheckInAssembly_Checked">В процессе</CheckBox>
+            <CheckBox x:Name="CheckInProcess" Foreground ="White" Background="White" FontFamily="Arial Bold" Margin="15,0,0,0"  FontSize="18" Checked="CheckInProcess_Checked" Unchecked="CheckInProcess_Unchecked">В процессе</CheckBox>
         </Border>
         <Border Background="#3a388a" Grid.Column="1" Grid.Row="10" Margin="15 3 0 2" Height="40" CornerRadius="3" BorderBrush="White">
-            <CheckBox x:Name="CheckActive" Foreground ="White" Background="White" FontFamily="Arial Bold" Margin="15,0,0,0" FontSize="18" Checked="CheckActive_Checked">Ожидает</CheckBox>
+            <CheckBox x:Name="CheckWait" Foreground ="White" Background="White" FontFamily="Arial Bold" Margin="15,0,0,0" FontSize="18" Checked="CheckWait_Checked" Unchecked="CheckWait_Unchecked">Ожидает</CheckBox>
         </Border>
 
         <DatePicker materialDesign:HintAssist.Hint="Выберете дату" Grid.Row="10" Grid.Column="0" Margin="20 0 0 0" SelectedDateFormat="Short"/>
 
-        <DataGrid x:Name="dataGridApplication" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1" FontFamily="Arial">
+        <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1" FontFamily="Arial" AutoGenerateColumns="False" ItemsSource="{Binding}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№" Width="60" Binding="{Binding Path=Number }"/>
+                <DataGridTextColumn Header="Услуга" Width="300" Binding="{Binding Path=Service}"/>
+                <DataGridTextColumn Header="Статус" Width="150" Binding="{Binding Path=Status}"/>
+                <DataGridTextColumn Header="Бригада" Width="110" Binding="{Binding Path=Brigade}"/>
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Page>

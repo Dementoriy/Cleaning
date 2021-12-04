@@ -24,6 +24,30 @@ namespace CleaningDLL
                 return db.Order.ToList();
             }
         }
+        public static List<OrderInfo> GetOrderInfo()
+        {
+            using (var db = new ApplicationContext())
+            {
+                return (from o in db.Order 
+                        join ps in db.Provided_Service on o.ID equals ps.Order.ID
+                        join s in db.Service on ps.Service.ID equals s.ID
+                        select new OrderInfo()
+                { 
+                    Number = o.ID,
+                    Brigade = o.Brigade.ID,
+                    Status = o.Status,
+                    Service = ps.Service.Service_Name
+                }).ToList();
+            }
+        }
+        public class OrderInfo
+        {
+            public int Number { get; set; }
+            public string Status { get; set; }
+            public int Brigade { get; set; }
+            public string Service { get; set; }
+
+        }
     }
     
 }

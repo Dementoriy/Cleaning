@@ -25,10 +25,17 @@ namespace WPFCleaning
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
-            
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
+            try
+            {
+                if(TextBoxLogin.Text == "Admin" && PasswordBox.Password == "123")
+                {
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    this.Close();
+                }
+                else MessageBox.Show("ТЫ ШПИОН!");
+            }
+            catch { }
         }
     }
 }

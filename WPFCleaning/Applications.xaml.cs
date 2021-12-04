@@ -25,12 +25,46 @@ namespace WPFCleaning
             InitializeComponent();
             AddAplication();
         }
-        private void CheckActive_Checked(object sender, RoutedEventArgs e) => CheckInAssembly.IsChecked = false;
-        private void CheckInAssembly_Checked(object sender, RoutedEventArgs e) => CheckActive.IsChecked = false;
-
+        private void CheckWait_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckInProcess.IsChecked = false;
+            SearchBox.Text = "";
+            dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "Ожидает");
+        }
+        private void CheckWait_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if ((bool)CheckInProcess.IsChecked) return;
+            AddAplication();
+        }
+        private void CheckInProcess_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckWait.IsChecked = false;
+            SearchBox.Text = "";
+            dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "В процессе");
+        }
+        private void CheckInProcess_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if ((bool)CheckWait.IsChecked) return;
+            AddAplication();
+        }
         public void AddAplication()
         {
-            dataGridApplication.ItemsSource = Order.Get();
+            dataGridApplication.ItemsSource = Order.GetOrderInfo();
+        }
+
+        private void ButtonSearch_Click(object sender, RoutedEventArgs e)
+        {
+
+            try
+            {
+                CheckWait.IsChecked = false;
+                CheckInProcess.IsChecked = false;
+                dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Number == int.Parse(SearchBox.Text));
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Введено не число!");
+            }
         }
     }
 }

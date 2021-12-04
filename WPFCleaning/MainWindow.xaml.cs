@@ -24,7 +24,6 @@ namespace WPFCleaning
         Page client;
         Page newApplication;
         Page applications;
-        Page enter;
         public MainWindow()
         {
             InitializeComponent();
@@ -44,9 +43,9 @@ namespace WPFCleaning
             View.Navigate(client);
             ClientBtn.BorderBrush = Brushes.White;
             //ClientBtn.Foreground = Brushes.Black;
-            NewOrderBtn.BorderBrush = Brushes.DarkBlue;
+            NewOrderBtn.BorderBrush = Brushes.Black;
             //NewOrderBtn.Foreground = Brushes.White;
-            OrderBtn.BorderBrush = Brushes.DarkBlue;
+            OrderBtn.BorderBrush = Brushes.Black;
             //OrderBtn.Foreground = Brushes.White;
         }
 
@@ -55,9 +54,9 @@ namespace WPFCleaning
             //this.View.NavigationService.Navigate(newApplication);
 
             View.Navigate(newApplication);
-            ClientBtn.BorderBrush = Brushes.DarkBlue;
+            ClientBtn.BorderBrush = Brushes.Black;
             NewOrderBtn.BorderBrush = Brushes.White;
-            OrderBtn.BorderBrush = Brushes.DarkBlue;
+            OrderBtn.BorderBrush = Brushes.Black;
         }
 
         private void ButtonClickApplication(object sender, RoutedEventArgs e)
@@ -65,8 +64,8 @@ namespace WPFCleaning
             //this.View.NavigationService.Navigate(applications);
 
             View.Navigate(applications);
-            ClientBtn.BorderBrush = Brushes.DarkBlue;
-            NewOrderBtn.BorderBrush = Brushes.DarkBlue;
+            ClientBtn.BorderBrush = Brushes.Black;
+            NewOrderBtn.BorderBrush = Brushes.Black;
             OrderBtn.BorderBrush = Brushes.White;
         }
         private void SignInButton_Click(object sender, RoutedEventArgs e)
