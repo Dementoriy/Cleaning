@@ -16,6 +16,8 @@ namespace CleaningDLL
         public Employee Employee { get; set; }
         public Address Address { get; set; }
         public Brigade Brigade { get; set; }
+        
+
 
         public static List<Order> Get()
         {

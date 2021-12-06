@@ -64,6 +64,7 @@ namespace WPFCleaning
             catch (FormatException)
             {
                 MessageBox.Show("Введено не число!");
+                AddAplication();
             }
         }
     }

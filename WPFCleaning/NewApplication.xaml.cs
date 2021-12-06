@@ -77,5 +77,24 @@ namespace WPFCleaning
             CheckGeneralClean.IsChecked = false;
             CheckBuildingClean.IsChecked = false;
         }
+        private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Convert.ToInt32(TextBoxSquare.Text);
+                if(CheckExpressClean.IsChecked == true) { MessageBox.Show("OK"); }
+                else if(CheckGeneralClean.IsChecked == true) { MessageBox.Show("OK"); }
+                else if (CheckBuildingClean.IsChecked == true) { MessageBox.Show("OK"); }
+                else if (CheckOfficeClean.IsChecked == true) { MessageBox.Show("OK"); };
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Введите число в поле \"Площадь\"");
+            }
+            catch when(CheckExpressClean.IsChecked == false && CheckGeneralClean.IsChecked == false && CheckBuildingClean.IsChecked == false && CheckOfficeClean.IsChecked == false)
+            {
+                MessageBox.Show("Ни одна из услуг не выбрана");
+            }
+        }
     }
 }
