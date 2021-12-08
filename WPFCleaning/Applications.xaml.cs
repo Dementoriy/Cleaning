@@ -28,23 +28,37 @@ namespace WPFCleaning
         private void CheckWait_Checked(object sender, RoutedEventArgs e)
         {
             CheckInProcess.IsChecked = false;
+            CheckFinish.IsChecked = false;
             SearchBox.Text = "";
             dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "Ожидает");
         }
         private void CheckWait_Unchecked(object sender, RoutedEventArgs e)
         {
-            if ((bool)CheckInProcess.IsChecked) return;
+            if ((bool)CheckInProcess.IsChecked && (bool)CheckFinish.IsChecked) return;
             AddAplication();
         }
         private void CheckInProcess_Checked(object sender, RoutedEventArgs e)
         {
             CheckWait.IsChecked = false;
+            CheckFinish.IsChecked = false;
             SearchBox.Text = "";
             dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "В процессе");
         }
         private void CheckInProcess_Unchecked(object sender, RoutedEventArgs e)
         {
-            if ((bool)CheckWait.IsChecked) return;
+            if ((bool)CheckWait.IsChecked && (bool)CheckFinish.IsChecked) return;
+            AddAplication();
+        }
+        private void CheckFinish_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckWait.IsChecked = false;
+            CheckInProcess.IsChecked = false;
+            SearchBox.Text = "";
+            dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "Завершена");
+        }
+        private void CheckFinish_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if ((bool)CheckWait.IsChecked && (bool)CheckInProcess.IsChecked) return;
             AddAplication();
         }
         public void AddAplication()
@@ -59,7 +73,8 @@ namespace WPFCleaning
             {
                 CheckWait.IsChecked = false;
                 CheckInProcess.IsChecked = false;
-                dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Number == int.Parse(SearchBox.Text));
+                CheckFinish.IsChecked = false;
+                //dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Number == int.Parse(SearchBox.Text));
             }
             catch (FormatException)
             {
@@ -67,5 +82,6 @@ namespace WPFCleaning
                 AddAplication();
             }
         }
+
     }
 }

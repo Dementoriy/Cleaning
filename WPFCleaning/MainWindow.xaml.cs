@@ -22,18 +22,18 @@ namespace WPFCleaning
     /// </summary>
     public partial class MainWindow : Window
     {
-        Page client;
+        Page clientPage;
         Page newApplication;
         Page applications;
         public MainWindow()
         {
             InitializeComponent();
             AddPage();
-            View.Navigate(client);
+            View.Navigate(clientPage);
         }
         public void AddPage()
         {
-            client = new Client();
+            clientPage = new ClientPage();
             newApplication = new NewApplication();
             applications = new Applications();
         }
@@ -41,7 +41,7 @@ namespace WPFCleaning
         {
             //this.View.NavigationService.Navigate(client);
 
-            View.Navigate(client);
+            View.Navigate(clientPage);
             ClientBtn.BorderBrush = Brushes.White;
             //ClientBtn.Foreground = Brushes.Black;
             NewOrderBtn.BorderBrush = Brushes.Black;

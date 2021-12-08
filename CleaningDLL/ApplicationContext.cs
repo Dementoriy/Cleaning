@@ -7,7 +7,7 @@ namespace CleaningDLL
         public DbSet<Address> Address { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<Brigade> Brigade { get; set; }
-        public DbSet<Client> CLient { get; set; }
+        public DbSet<Client> Client { get; set; }
         public DbSet<Consumable> Consumable { get; set; }
         public DbSet<Consumption_Rate> Consumption_Rate { get; set; }
         public DbSet<Contract> Contract { get; set; }
@@ -26,7 +26,7 @@ namespace CleaningDLL
         public DbSet<Service> Service { get; set; }
         public ApplicationContext()
         {
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -42,6 +42,8 @@ namespace CleaningDLL
             modelBuilder.Entity<Provider>().HasIndex(s => s.ProviderTelefonNumber).IsUnique();
             modelBuilder.Entity<ReferenceUnitsOfMeasurement>().HasIndex(s => s.Unit).IsUnique();
             modelBuilder.Entity<Consumable>().HasIndex(s => s.Consumable_Name).IsUnique();
+            modelBuilder.Entity<Employee>().HasIndex(s => s.Login).IsUnique();
+            modelBuilder.Entity<Employee>().HasIndex(s => s.Password).IsUnique();
         }
     }
 }
