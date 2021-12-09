@@ -15,7 +15,7 @@ namespace CleaningDLL
         public DateTime Delivery_Date { get; set; }
         [Required]
         public decimal Delivery_Cost { get; set; }
-        public Delivery_Content Delivery_Content { get; set; }
+        public DeliveryContent Delivery_Content { get; set; }
 
     }
 }

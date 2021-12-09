@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleaningDLL
 {
-    public class Consumption_Rate //Норма расхода
+    public class ConsumptionRate //Норма расхода
     {
         public int ID { get; set; }
         [Required]

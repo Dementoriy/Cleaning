@@ -20,6 +20,7 @@ namespace CleaningDLL
         [Required]
         public string EmployeeTelefonNumber { get; set; }
         public Position Position { get; set; }
+        public Brigade Brigade { get; set; }
         public DateTime Employment_Date { get; set; }
         [MaxLength(50)] public string Login { get; set; }
         [MaxLength(64)] [MinLength(64)] public string Password { get; set; }

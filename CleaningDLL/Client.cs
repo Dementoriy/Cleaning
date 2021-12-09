@@ -28,7 +28,7 @@ namespace CleaningDLL
         {
             using (var db = new ApplicationContext())
             {
-                return (from c in db.CLient
+                return (from c in db.Client
                         where c.ClientTelefonNumber == Telefon
                         join o in db.Order on c.ID equals o.Client.ID
                         join a in db.Address on o.Address.ID equals a.ID
@@ -61,7 +61,7 @@ namespace CleaningDLL
         {
         using (var db = new ApplicationContext())
             {
-                return db.CLient.Where(a => a.ClientTelefonNumber == ClientTelefonNumber).Any();
+                return db.Client.Where(a => a.ClientTelefonNumber == ClientTelefonNumber).Any();
             }
         }
     }

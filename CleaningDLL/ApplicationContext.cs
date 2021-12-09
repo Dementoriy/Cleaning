@@ -9,21 +9,23 @@ namespace CleaningDLL
         public DbSet<Brigade> Brigade { get; set; }
         public DbSet<Client> Client { get; set; }
         public DbSet<Consumable> Consumable { get; set; }
-        public DbSet<Consumption_Rate> Consumption_Rate { get; set; }
+        public DbSet<ConsumptionRate> ConsumptionRate { get; set; }
         public DbSet<Contract> Contract { get; set; }
         public DbSet<Delivery> Delivery { get; set; }
-        public DbSet<Delivery_Content> Delivery_Content { get; set; }
-        public DbSet<Delivery_Contract> Delivery_Contract { get; set; }
+        public DbSet<DeliveryContent> DeliveryContent { get; set; }
+        public DbSet<DeliveryContract> DeliveryContract { get; set; }
         public DbSet<Employee> Employee { get; set; }
         public DbSet<Inventory> Inventory { get; set; }
-        public DbSet<Inventory_Type> Inventory_Type { get; set; }
+        public DbSet<InventoryType> InventoryType { get; set; }
         public DbSet<Position> Position { get; set; }
-        public DbSet<Provided_Service> Provided_Service { get; set; }
+        public DbSet<ProvidedService> ProvidedService { get; set; }
         public DbSet<Provider> Provider { get; set; }
         public DbSet<PurchaseRequisition> PurchaseRequisition { get; set; }
         public DbSet<ReferenceUnitsOfMeasurement> ReferenceUnitsOfMeasurement { get; set; }
         public DbSet<RequisitionContent> RequisitionContent { get; set; }
         public DbSet<Service> Service { get; set; }
+        public DbSet<BrigadeInventory> BrigadeInventory { get; set; }
+        public DbSet<ConsumablesService> ConsumablesService { get; set; }
         public ApplicationContext()
         {
             Database.EnsureCreated();

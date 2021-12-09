@@ -14,7 +14,7 @@ namespace CleaningDLL
         public string Inventory_Name { get; set; }
         [Required]
         public string Description { get; set; }
-        public Inventory_Type Inventory_Type { get; set; }
+        public InventoryType Inventory_Type { get; set; }
         [Required]
         public string Use_Time { get; set; }
         [Required]

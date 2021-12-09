@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CleaningDLL
 {
-    public class Delivery_Contract //Договор на поставку
+    public class DeliveryContract //Договор на поставку
     {
         public int ID { get; set; }
         public Employee Employee { get; set; }

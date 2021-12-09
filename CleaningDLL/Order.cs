@@ -29,7 +29,7 @@ namespace CleaningDLL
             using (var db = new ApplicationContext())
             {
                 return (from o in db.Order 
-                        join ps in db.Provided_Service on o.ID equals ps.Order.ID
+                        join ps in db.ProvidedService on o.ID equals ps.Order.ID
                         join s in db.Service on ps.Service.ID equals s.ID
                         join a in db.Address on o.Address.ID equals a.ID
                         select new OrderInfo()

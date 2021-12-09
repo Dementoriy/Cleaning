@@ -7,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace CleaningDLL
 {
-    public class Provided_Service //Оказываемая услуга
+    public class ConsumablesService //Расходники услуги
     {
         public int ID { get; set; }
         public Service Service { get; set; }
-        [Required]
-        public int Amount { get; set; }
-        public Order Order { get; set; }
-        public Inventory Inventory { get; set; }
+        public ConsumptionRate Consumption_Rate { get; set; }
     }
 }

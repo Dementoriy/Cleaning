@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace CleaningDLL
 {
-    public class Brigade //Бригада
+    public class BrigadeInventory //Инвентарь бригады
     {
         public int ID { get; set; }
-        [Required]
-        public string Smena_Number { get; set; }
+        public Brigade Brigade { get; set; }
+        public Inventory Inventory { get; set; }
     }
 }

@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace CleaningDLL
 {
-    public class Inventory_Type //Тип инвентаря
+    public class DeliveryContent //Содержимое поставки
     {
         public int ID { get; set; }
+        public Consumable Consumable { get; set; }
         [Required]
-        public string Description { get; set; }
-    }
+        public int Delivery_Content_Amount { get; set; }
+}
 }
