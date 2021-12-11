@@ -27,7 +27,7 @@ namespace CleaningDLL
 
         public static List<ClientInfo> GetClientInfo(string Telefon)
         {
-            using (var db = new ApplicationContext())
+            using (var db = new ApplicationContext(ApplicationContext.GetDb()))
             {
                 return (from c in db.Client
                         where c.ClientTelefonNumber == Telefon
@@ -60,7 +60,7 @@ namespace CleaningDLL
 
         public static bool proverkaClientTelefon(string ClientTelefonNumber)
         {
-        using (var db = new ApplicationContext())
+        using (var db = new ApplicationContext(ApplicationContext.GetDb()))
             {
                 return db.Client.Where(a => a.ClientTelefonNumber == ClientTelefonNumber).Any();
             }

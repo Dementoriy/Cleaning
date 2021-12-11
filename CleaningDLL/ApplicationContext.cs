@@ -26,9 +26,10 @@ namespace CleaningDLL
         public DbSet<Service> Service { get; set; }
         public DbSet<BrigadeInventory> BrigadeInventory { get; set; }
         public DbSet<ConsumablesService> ConsumablesService { get; set; }
-        public ApplicationContext()
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
-            //Database.EnsureCreated();
+
+            Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -46,6 +47,12 @@ namespace CleaningDLL
             modelBuilder.Entity<Consumable>().HasIndex(s => s.Consumable_Name).IsUnique();
             modelBuilder.Entity<Employee>().HasIndex(s => s.Login).IsUnique();
             modelBuilder.Entity<Employee>().HasIndex(s => s.Password).IsUnique();
+        }
+        public static DbContextOptions<ApplicationContext> GetDb()
+        {
+            var optionsBuilder = new DbContextOptions<ApplicationContext>();
+            optionsBuilder.UseNpgsql();
+            return optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Cleaning;Username=postgres;Password=qwertyuiop228").options;
         }
     }
 }

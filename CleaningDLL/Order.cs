@@ -23,14 +23,14 @@ namespace CleaningDLL
 
         public static List<Order> Get()
         {
-            using (var db = new ApplicationContext())
+            using (var db = new ApplicationContext(ApplicationContext.GetDb()))
             {
                 return db.Order.ToList();
             }
         }
         public static List<OrderInfo> GetOrderInfo()
         {
-            using (var db = new ApplicationContext())
+            using (var db = new ApplicationContext(ApplicationContext.GetDb()))
             {
                 return (from o in db.Order
                         join a in db.Address on o.Address.ID equals a.ID
@@ -58,7 +58,7 @@ namespace CleaningDLL
 
         public static List<BrigadeInfo> GetBrigadeInfo()
         {
-            using (var db = new ApplicationContext())
+            using (var db = new ApplicationContext(ApplicationContext.GetDb()))
             {
                 return (from o in db.Order
                         join a in db.Address on o.Address.ID equals a.ID

@@ -36,7 +36,7 @@ namespace CleaningDLL
 
         public static Employee GetEmployee(string Login, string Password)
         {
-            using (var db = new ApplicationContext())
+            using (var db = new ApplicationContext(ApplicationContext.GetDb()))
             {
                 return db.Employee.Where(a => a.Login == Login && a.Password == Password).FirstOrDefault();
                 //return (from e in db.Employee

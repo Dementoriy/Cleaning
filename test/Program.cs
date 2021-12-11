@@ -7,7 +7,7 @@ namespace test
     {
         static void Main(string[] args)
         {
-            using (ApplicationContext db = new ApplicationContext())
+            using (ApplicationContext db = new ApplicationContext(ApplicationContext.GetDb()))
             {
                 db.SaveChanges();
             }
