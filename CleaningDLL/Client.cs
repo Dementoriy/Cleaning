@@ -11,12 +11,13 @@ namespace CleaningDLL
     {
         public int ID { get; set; }
         [Required]
-        public string Surname { get; set; }
+        [MaxLength(50)] public string Surname { get; set; }
         [Required]
-        public string Name { get; set; }
-        public string MiddleName { get; set; }
+        [MaxLength(50)] public string Name { get; set; }
+        [MaxLength(50)] public string? MiddleName { get; set; }
         [Required]
-        public string ClientTelefonNumber { get; set; }
+        [MaxLength(11)] public string ClientTelefonNumber { get; set; }
+
         public string AddFIO()
         {
             string str = $"{Surname} {Name.Substring(0, 1)}.";

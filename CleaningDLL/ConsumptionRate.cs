@@ -11,8 +11,10 @@ namespace CleaningDLL
     {
         public int ID { get; set; }
         [Required]
-        public string Consumption { get; set; }
+        [MaxLength(150)] public string Consumption { get; set; }
+        [Required]
         public Consumable Consumable { get; set; }
+        [Required]
         public ReferenceUnitsOfMeasurement Unit { get; set; }
 
     }

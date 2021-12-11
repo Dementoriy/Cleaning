@@ -11,8 +11,8 @@ namespace CleaningDLL
     {
         public int ID { get; set; }
         [Required]
-        public string NamePosition { get; set; }
+        [MaxLength(50)] public string NamePosition { get; set; }
         [Required]
-        public string Description { get; set; }
+        [MaxLength(150)] public string Description { get; set; }
     }
 }

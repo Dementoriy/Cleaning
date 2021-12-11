@@ -11,9 +11,12 @@ namespace CleaningDLL
     {
         public int ID { get; set; }
         [Required]
-        public string Status { get; set; }
+        [MaxLength(50)] public string Status { get; set; }
+        [Required]
         public Employee Employee { get; set; }
+        [Required]
         public Provider Provider { get; set; }
+        [Required]
         public RequisitionContent RequisitionContent { get; set; }
     }
 }

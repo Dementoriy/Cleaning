@@ -11,6 +11,6 @@ namespace CleaningDLL
     {
         public int ID { get; set; }
         [Required]
-        public string Smena_Number { get; set; }
+        [MaxLength(10)] public string Smena_Number { get; set; }
     }
 }

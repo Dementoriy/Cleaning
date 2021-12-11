@@ -41,5 +41,6 @@
         <TextBox x:Name="TextBoxLogin" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="7" materialDesign:HintAssist.Hint="Введите логин"  Padding="5 0 0 0 " FontSize="18" BorderThickness="2" Cursor="IBeam" Margin="7,34,57,34" Grid.RowSpan="3"></TextBox>
         <PasswordBox x:Name="PasswordBox" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="7" Padding="5 0 0 0 " materialDesign:HintAssist.Hint="Введите пароль" FontSize="18" BorderThickness="2" Margin="7,34,57,0" Grid.RowSpan="2"></PasswordBox>
         <Button Content="Войти" Grid.Column="2" Grid.ColumnSpan="5" x:Name="SignInButton" Grid.Row="8" Grid.RowSpan="2"  Cursor="Hand" Click="SignInButton_Click" FontFamily="Arial Bold" FontSize="20" BorderThickness="2" BorderBrush="White" Background="#3a388a" Margin="57,18,57,19"/>
+        <Button Content="Войти" Grid.Column="2" Grid.ColumnSpan="5" x:Name="SignInButtonBrigadir" Grid.Row="10" Grid.RowSpan="2"  Cursor="Hand" Click="SignInBrigadirButton_Click" FontFamily="Arial Bold" FontSize="20" BorderThickness="2" BorderBrush="White" Background="#3a388a" Margin="57,18,57,19"/>
     </Grid>
 </Window>

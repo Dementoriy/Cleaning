@@ -11,10 +11,11 @@ namespace CleaningDLL
     {
         public int ID { get; set; }
         [Required]
-        public string Service_Name { get; set; }
+        [MaxLength(100)] public string Service_Name { get; set; }
         [Required]
-        public string Description { get; set; }
+        [MaxLength(200)] public string Description { get; set; }
+        [Required]
         public decimal Price { get; set; }
-        public InventoryType Inventory_Type { get; set; }
+        public InventoryType? Inventory_Type { get; set; }
     }
 }

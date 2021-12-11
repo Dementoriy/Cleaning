@@ -28,7 +28,7 @@ namespace CleaningDLL
         public DbSet<ConsumablesService> ConsumablesService { get; set; }
         public ApplicationContext()
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

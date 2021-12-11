@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using CleaningDLL;
 
 
+
 namespace WPFCleaning
 {
     /// <summary>
@@ -30,12 +31,18 @@ namespace WPFCleaning
             InitializeComponent();
             AddPage();
             View.Navigate(clientPage);
+            WindowState = WindowState.Maximized;
         }
         public void AddPage()
         {
             clientPage = new ClientPage();
             newApplication = new NewApplication();
             applications = new Applications();
+        }
+        public void EmployeeEnter()
+        {
+            //using (var db = new ApplicationContext())
+            //TextBlockEmployeeEnter.Text = Employee.AddFIO(ID);
         }
         private void ButtonClickClient(object sender, RoutedEventArgs e)
         {
@@ -76,6 +83,30 @@ namespace WPFCleaning
             mainWindow.Show();
             this.Close();
         }
-        
+
+        //private void Exit_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //MessageBox.Show("Выйти из учетной записи?", MessageBoxButtons.YesNo);
+        //    if (MessageBox.Show("Выйти из учетной записи?") == DialogResult.OK)
+        //    {
+        //        AuthorizationWindow authorizationWindow = new AuthorizationWindow();
+        //        authorizationWindow.Show();
+        //        this.Close();
+        //    }
+        //}
+        private void Exit_Click(object sender, EventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show(
+                "Выйти из учетной записи?",
+                "Выход",
+                MessageBoxButton.YesNo);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                AuthorizationWindow authorizationWindow = new AuthorizationWindow();
+                authorizationWindow.Show();
+                this.Close();
+            }
+        }
     }
 }

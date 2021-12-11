@@ -1,14 +1,12 @@
-﻿<Page x:Class="WPFCleaning.Applications"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:WPFCleaning"
-      mc:Ignorable="d" 
-        d:DesignHeight="1080" d:DesignWidth="1920"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      Title="Application">
-
+﻿<Window x:Class="WPFCleaning.BrigadeInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFCleaning"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="&quot;Чистый дом&quot;" Height="555" Width="1100" Cursor="IBeam" Icon="/logo2.png" ResizeMode="NoResize">
     <Grid Background="#d8d8f2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -51,9 +49,7 @@
                 <DataGridTextColumn Header="Адрес" Width="400" Binding="{Binding Path=Address}"/>
                 <DataGridTextColumn Header="Статус" Width="150" Binding="{Binding Path=Status}"/>
                 <DataGridTextColumn Header="Бригада" Width="110" Binding="{Binding Path=Brigade}"/>
-                <DataGridTextColumn Header="Телефон" Width="200" Binding="{Binding Path=Telefon}"/>
-                <DataGridTextColumn Header="Клиент" Width="*" Binding="{Binding Path=Client}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
-</Page>
+</Window>

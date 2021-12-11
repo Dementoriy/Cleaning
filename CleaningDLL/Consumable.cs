@@ -11,11 +11,12 @@ namespace CleaningDLL
     {
         public int ID { get; set; }
         [Required]
-        public string Consumable_Name { get; set; }
+        [MaxLength(50)] public string Consumable_Name { get; set; }
         [Required]
-        public string Description { get; set; }
+        [MaxLength(150)] public string Description { get; set; }
         [Required]
         public decimal Current_Price { get; set; }
+        [Required]
         public ReferenceUnitsOfMeasurement Unit { get; set; }
         [Required]
         public int amount { get; set; }

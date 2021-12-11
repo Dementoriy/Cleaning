@@ -11,12 +11,12 @@ namespace CleaningDLL
     {
         public int ID { get; set; }
         [Required]
-        public string Street { get; set; }
+        [MaxLength(100)] public string Street { get; set; }
         [Required]
-        public string HouseNumber { get; set; }
-        public string Building { get; set; }
-        public string Entrance { get; set; }
-        public string Apartment_Number { get; set; }
+        [MaxLength(10)] public string HouseNumber { get; set; }
+        [MaxLength(10)] public string? Building { get; set; }
+        [MaxLength(10)] public string? Entrance { get; set; }
+        [MaxLength(10)] public string? Apartment_Number { get; set; }
         public string AddAddress()
         {
             string str = $"ул.{Street}, д.{HouseNumber}. ";

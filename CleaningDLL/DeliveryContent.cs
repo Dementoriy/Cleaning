@@ -10,6 +10,7 @@ namespace CleaningDLL
     public class DeliveryContent //Содержимое поставки
     {
         public int ID { get; set; }
+        [Required]
         public Consumable Consumable { get; set; }
         [Required]
         public int Delivery_Content_Amount { get; set; }

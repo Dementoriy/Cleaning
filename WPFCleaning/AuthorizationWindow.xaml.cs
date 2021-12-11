@@ -22,19 +22,55 @@ namespace WPFCleaning
         public AuthorizationWindow()
         {
             InitializeComponent();
+            var role = new Position
+            {
+                NamePosition = "Администратор",
+                Description = "Обрабатывать заявки"
+            };
+            var employee = new Employee
+            {
+                Position = role,
+                Surname = "Ведерников",
+                Name = "Дмитрий",
+                MiddleName = "Михайлович",
+                PassportData = "1111222222",
+                EmployeeTelefonNumber = "79998887766",
+            };
         }
 
-
+        private void SignInBrigadirButton_Click(object sender, RoutedEventArgs e)
+        {
+            BrigadirWindow brigadirWindow = new BrigadirWindow();
+            brigadirWindow.Show();
+            this.Close();
+        }
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Employee.proverka(TextBoxLogin.Text, GetHash(PasswordBox.Password)))
-            {
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
-                this.Close();
-            }
-            else MessageBox.Show("Введен неверный логин или пароль.\n Повторите попытку.");
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
         }
+        //private void SignInButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Employee employee = Employee.GetEmployee(TextBoxLogin.Text, GetHash(PasswordBox.Password));
+
+        //    if (employee != null)
+        //    {
+        //        if (employee.Position.ID == 1)
+        //        {
+        //            MainWindow mainWindow = new MainWindow();
+        //            mainWindow.Show();
+        //            this.Close();
+        //        }
+        //        else if (employee.Position.ID == 2)
+        //        {
+        //            BrigadirWindow brigadirWindow = new BrigadirWindow();
+        //            brigadirWindow.Show();
+        //            this.Close();
+        //        }
+        //    }
+        //    else MessageBox.Show("Введен неверный логин или пароль.\n Повторите попытку.");
+        //}
         private static string GetHash(string input)
         {
             byte[] data = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(input));

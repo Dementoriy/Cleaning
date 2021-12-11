@@ -11,10 +11,14 @@ namespace CleaningDLL
     {
         public int ID { get; set; }
         [Required]
-        public string Status { get; set; }
+        [MaxLength(50)] public string Status { get; set; }
+        [Required]
         public Client Client{ get; set; }
+        [Required]
         public Employee Employee { get; set; }
+        [Required]
         public Address Address { get; set; }
+        [Required]
         public Brigade Brigade { get; set; }
 
         public static List<Order> Get()
@@ -28,11 +32,10 @@ namespace CleaningDLL
         {
             using (var db = new ApplicationContext())
             {
-                return (from o in db.Order 
-                        join ps in db.ProvidedService on o.ID equals ps.Order.ID
-                        join s in db.Service on ps.Service.ID equals s.ID
+                return (from o in db.Order
                         join a in db.Address on o.Address.ID equals a.ID
                         select new OrderInfo()
+
                 { 
                     Brigade = o.Brigade.ID,
                     Status = o.Status,
@@ -51,6 +54,30 @@ namespace CleaningDLL
             public int Brigade { get; set; }
             public string Telefone { get; set; }
             public string Client { get; set; }
+        }
+
+        public static List<BrigadeInfo> GetBrigadeInfo()
+        {
+            using (var db = new ApplicationContext())
+            {
+                return (from o in db.Order
+                        join a in db.Address on o.Address.ID equals a.ID
+                        select new BrigadeInfo()
+
+                        {
+                            Brigade = o.Brigade.ID,
+                            Status = o.Status,
+                            Address = a.AddAddress(),
+                        }).ToList();
+            }
+        }
+        public class BrigadeInfo
+        {
+            public int Date { get; set; }
+            public string Time { get; set; }
+            public string Address { get; set; }
+            public string Status { get; set; }
+            public int Brigade { get; set; }
         }
     }
     

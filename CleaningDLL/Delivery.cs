@@ -10,11 +10,13 @@ namespace CleaningDLL
     public class Delivery //Поставка
     {
         public int ID { get; set; }
+        [Required]
         public Provider Provider { get; set; }
         [Required]
         public DateTime Delivery_Date { get; set; }
         [Required]
         public decimal Delivery_Cost { get; set; }
+        [Required]
         public DeliveryContent Delivery_Content { get; set; }
 
     }

@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Linq;
 
 namespace WPFCleaning
 {
@@ -95,6 +96,19 @@ namespace WPFCleaning
             {
                 MessageBox.Show("Ни одна из услуг не выбрана");
             }
+        }
+        private void ButtonCalculate_Click(object sender, RoutedEventArgs e)
+        {
+        }
+        private void BtnBrigadeInfo_Click(object sender, RoutedEventArgs e)
+        {
+            BrigadeInfoWindow brigadeInfoWindow = new BrigadeInfoWindow(Convert.ToInt32(((TextBlock)BrigadeBox.SelectedItem).Text));
+            brigadeInfoWindow.Show();
+        }
+
+        private void BrigadeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

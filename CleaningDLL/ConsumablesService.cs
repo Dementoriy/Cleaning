@@ -10,7 +10,9 @@ namespace CleaningDLL
     public class ConsumablesService //Расходники услуги
     {
         public int ID { get; set; }
+        [Required]
         public Service Service { get; set; }
+        [Required]
         public ConsumptionRate Consumption_Rate { get; set; }
     }
 }
