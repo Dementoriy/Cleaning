@@ -28,8 +28,9 @@ namespace CleaningDLL
         public DbSet<ConsumablesService> ConsumablesService { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
-
-            Database.EnsureCreated();
+            Database.Migrate();
+            Context.AddDb(this);
+            //Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -50,9 +51,8 @@ namespace CleaningDLL
         }
         public static DbContextOptions<ApplicationContext> GetDb()
         {
-            var optionsBuilder = new DbContextOptions<ApplicationContext>();
-            optionsBuilder.UseNpgsql();
-            return optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Cleaning;Username=postgres;Password=qwertyuiop228").options;
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+            return optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Cleaning;Username=postgres;Password=qwertyuiop228").Options;
         }
     }
 }

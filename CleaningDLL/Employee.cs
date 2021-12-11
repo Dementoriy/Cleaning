@@ -34,16 +34,17 @@ namespace CleaningDLL
         //    return str;
         //}
 
+        private static ApplicationContext db = Context.Db;
+
         public static Employee GetEmployee(string Login, string Password)
         {
-            using (var db = new ApplicationContext(ApplicationContext.GetDb()))
-            {
-                return db.Employee.Where(a => a.Login == Login && a.Password == Password).FirstOrDefault();
-                //return (from e in db.Employee
-                //        where e.Login == Login && e.Password == Password
-                //        select new Employee()).ToList();
-            }
+            return db.Employee.Where(a => a.Login == Login && a.Password == Password).FirstOrDefault();
         }
 
+        public static void Add (Employee employee)
+        {
+            db.Employee.Add(employee);
+            db.SaveChanges();
+        }
     }
 }

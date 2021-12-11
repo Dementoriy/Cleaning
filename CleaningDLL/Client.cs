@@ -57,13 +57,10 @@ namespace CleaningDLL
             public string Entrance { get; set; }
             public string Apartment_Number { get; set; }
         }
-
+        private static ApplicationContext db = Context.Db;
         public static bool proverkaClientTelefon(string ClientTelefonNumber)
         {
-        using (var db = new ApplicationContext(ApplicationContext.GetDb()))
-            {
                 return db.Client.Where(a => a.ClientTelefonNumber == ClientTelefonNumber).Any();
-            }
         }
     }
 }

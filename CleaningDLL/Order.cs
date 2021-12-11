@@ -21,17 +21,14 @@ namespace CleaningDLL
         [Required]
         public Brigade Brigade { get; set; }
 
+        private static ApplicationContext db = Context.Db;
+
         public static List<Order> Get()
         {
-            using (var db = new ApplicationContext(ApplicationContext.GetDb()))
-            {
                 return db.Order.ToList();
-            }
         }
         public static List<OrderInfo> GetOrderInfo()
         {
-            using (var db = new ApplicationContext(ApplicationContext.GetDb()))
-            {
                 return (from o in db.Order
                         join a in db.Address on o.Address.ID equals a.ID
                         select new OrderInfo()
@@ -43,7 +40,6 @@ namespace CleaningDLL
                     Address = a.AddAddress(),
                     Telefone = o.Client.ClientTelefonNumber
                 }).ToList();
-            }
         }
         public class OrderInfo
         {
@@ -55,11 +51,9 @@ namespace CleaningDLL
             public string Telefone { get; set; }
             public string Client { get; set; }
         }
-
+            
         public static List<BrigadeInfo> GetBrigadeInfo()
         {
-            using (var db = new ApplicationContext(ApplicationContext.GetDb()))
-            {
                 return (from o in db.Order
                         join a in db.Address on o.Address.ID equals a.ID
                         select new BrigadeInfo()
@@ -69,7 +63,6 @@ namespace CleaningDLL
                             Status = o.Status,
                             Address = a.AddAddress(),
                         }).ToList();
-            }
         }
         public class BrigadeInfo
         {
