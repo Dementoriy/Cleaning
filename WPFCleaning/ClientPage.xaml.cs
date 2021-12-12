@@ -53,5 +53,10 @@ namespace WPFCleaning
             Entrance.Text = "";
             Apartment_Number.Text = "";
         }
+
+        public void NextPageNewOrder_Click(object sender, RoutedEventArgs e)
+        {
+            //MainWindow.GoNewApplication();
+        }
     }
 }

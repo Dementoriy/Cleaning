@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WPFCleaning"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
         d:DesignHeight="1080" d:DesignWidth="1920"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -45,9 +46,22 @@
         <Border Background="#3a388a" Grid.Column="3" Grid.Row="10" Margin="0 3 10 2" Height="40" CornerRadius="3" BorderBrush="White" >
             <CheckBox x:Name="CheckFinish" Foreground ="White" Background="White" FontFamily="Arial Bold" Margin="15,0,0,0"  FontSize="18" Checked="CheckFinish_Checked" Unchecked="CheckFinish_Unchecked">Завершена</CheckBox>
         </Border>
-        <DatePicker materialDesign:HintAssist.Hint="Выберете дату" Grid.Row="10" Grid.Column="0" Margin="20 0 0 0" SelectedDateFormat="Short" FontFamily="Arial Bold" FontSize="20"/>
+        <DatePicker x:Name="DatePickerSearch" SelectedDate="{x:Static sys:DateTime.Now}" materialDesign:HintAssist.Hint="Выберете дату" Grid.Row="10" Grid.Column="0" Margin="20 0 0 0" SelectedDateFormat="Short" FontFamily="Arial Bold" FontSize="20" CalendarClosed="DatePickerSearch_CalendarClosed"/>
 
-        <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1" FontFamily="Arial" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserResizeColumns="False" CanUserReorderColumns="False">
+        <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1" FontFamily="Arial" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserResizeColumns="False" CanUserReorderColumns="False" SelectionMode="Single" SelectionUnit="FullRow">
+
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="Background" Value="#ffdadada" />
+                            <Setter Property="Foreground" Value="Black" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Дата" Width="134" Binding="{Binding Path=Date}"/>
                 <DataGridTextColumn Header="Время" Width="100" Binding="{Binding Path=Time}"/>
@@ -57,6 +71,15 @@
                 <DataGridTextColumn Header="Телефон" Width="200" Binding="{Binding Path=Telefone}"/>
                 <DataGridTextColumn Header="Клиент" Width="*" Binding="{Binding Path=Client}"/>
             </DataGrid.Columns>
+
+            <DataGrid.ItemContainerStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Height" Value="34"/>
+                    <Setter Property="Margin" Value="12 12 0 0"/>
+                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+            </DataGrid.ItemContainerStyle>
+
         </DataGrid>
     </Grid>
 </Page>

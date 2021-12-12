@@ -24,42 +24,85 @@ namespace WPFCleaning
         {
             InitializeComponent();
             AddAplication();
+            SelectedDatePicker();
         }
         private void CheckWait_Checked(object sender, RoutedEventArgs e)
         {
-            CheckInProcess.IsChecked = false;
-            CheckFinish.IsChecked = false;
-            SearchBox.Text = "";
-            dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "Ожидает");
+            if (DatePickerSearch.Text == "")
+            {
+                CheckInProcess.IsChecked = false;
+                CheckFinish.IsChecked = false;
+                SearchBox.Text = "";
+                dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "Ожидает");
+            }
+            else
+            {
+                CheckInProcess.IsChecked = false;
+                CheckFinish.IsChecked = false;
+                SearchBox.Text = "";
+                dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "Ожидает" && e.Date == DatePickerSearch.SelectedDate.Value.ToString("d"));
+            }
         }
         private void CheckWait_Unchecked(object sender, RoutedEventArgs e)
         {
             if ((bool)CheckInProcess.IsChecked && (bool)CheckFinish.IsChecked) return;
             AddAplication();
+            if (DatePickerSearch.Text != "")
+            {
+                SelectedDatePicker();
+            }
         }
         private void CheckInProcess_Checked(object sender, RoutedEventArgs e)
         {
-            CheckWait.IsChecked = false;
-            CheckFinish.IsChecked = false;
-            SearchBox.Text = "";
-            dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "В процессе");
+            if (DatePickerSearch.Text == "")
+            {
+                CheckWait.IsChecked = false;
+                CheckFinish.IsChecked = false;
+                SearchBox.Text = "";
+                dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "В процессе");
+            }
+            else
+            {
+                CheckWait.IsChecked = false;
+                CheckFinish.IsChecked = false;
+                SearchBox.Text = "";
+                dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "В процессе" && e.Date == DatePickerSearch.SelectedDate.Value.ToString("d"));
+            }
         }
         private void CheckInProcess_Unchecked(object sender, RoutedEventArgs e)
         {
             if ((bool)CheckWait.IsChecked && (bool)CheckFinish.IsChecked) return;
             AddAplication();
+            if (DatePickerSearch.Text != "")
+            {
+                SelectedDatePicker();
+            }
         }
         private void CheckFinish_Checked(object sender, RoutedEventArgs e)
         {
-            CheckWait.IsChecked = false;
-            CheckInProcess.IsChecked = false;
-            SearchBox.Text = "";
-            dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "Завершена");
+            if(DatePickerSearch.Text == "")
+            {
+                CheckWait.IsChecked = false;
+                CheckInProcess.IsChecked = false;
+                SearchBox.Text = "";
+                dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "Завершена");
+            }
+            else
+            {
+                CheckWait.IsChecked = false;
+                CheckInProcess.IsChecked = false;
+                SearchBox.Text = "";
+                dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "Завершена" && e.Date == DatePickerSearch.SelectedDate.Value.ToString("d"));
+            }
         }
         private void CheckFinish_Unchecked(object sender, RoutedEventArgs e)
         {
             if ((bool)CheckWait.IsChecked && (bool)CheckInProcess.IsChecked) return;
             AddAplication();
+            if (DatePickerSearch.Text != "")
+            {
+                SelectedDatePicker();
+            }
         }
         public void AddAplication()
         {
@@ -83,5 +126,22 @@ namespace WPFCleaning
             }
         }
 
+        private void SelectedDatePicker()
+        {
+            DateTime dt = DatePickerSearch.SelectedDate.Value;
+            dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Date == dt.ToString("d"));
+        }
+        private void DatePickerSearch_CalendarClosed(object sender, RoutedEventArgs e)
+        {
+            SelectedDatePicker();
+        }
+
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ApplicationsFullInfo applicationsFullInfo = new ApplicationsFullInfo();
+            Order.OrderInfo selectedOrder = (Order.OrderInfo)dataGridApplication.SelectedValue;
+            applicationsFullInfo.Show();
+            applicationsFullInfo.AddSelectedOrder(selectedOrder.ID);
+        }
     }
 }

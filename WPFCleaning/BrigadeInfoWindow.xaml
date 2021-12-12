@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:WPFCleaning"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -34,13 +35,13 @@
                 <materialDesign:PackIcon Kind="Search"/>
             </Button>
         </StackPanel>
-        
 
-        <DatePicker materialDesign:HintAssist.Hint="Выберете дату" Grid.Row="10" Grid.Column="0" Margin="20 0 0 0" SelectedDateFormat="Short" FontFamily="Arial Bold" FontSize="18"/>
+
+        <DatePicker x:Name="DatePickerSearch" materialDesign:HintAssist.Hint="Выберете дату" SelectedDate="{x:Static sys:DateTime.Now}" Grid.Row="10" Grid.Column="0" Margin="20 0 0 0" SelectedDateFormat="Short" FontFamily="Arial Bold" FontSize="18" CalendarClosed="DatePickerSearch_CalendarClosed"/>
 
         <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1" FontFamily="Arial" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserResizeColumns="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Дата" Width="100" Binding="{Binding Path=Date}"/>
+                <DataGridTextColumn Header="Дата" Width="133" Binding="{Binding Path=Date}"/>
                 <DataGridTextColumn Header="Время" Width="100" Binding="{Binding Path=Time}"/>
                 <DataGridTextColumn Header="Адрес" Width="400" Binding="{Binding Path=Address}"/>
                 <DataGridTextColumn Header="Статус" Width="150" Binding="{Binding Path=Status}"/>

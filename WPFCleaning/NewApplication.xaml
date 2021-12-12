@@ -84,7 +84,7 @@
                 <TextBlock FontSize="22" FontFamily="Arial bold" Text="Время и бригада" Foreground ="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
             <DatePicker materialDesign:HintAssist.Hint="Выберите дату" Grid.Row="10" Grid.Column="0" Margin="10 18 10 0" SelectedDateFormat="Short" FontFamily="Arial Bold" FontSize="20"/>
-            <materialDesign:TimePicker materialDesign:HintAssist.Hint="Выберите время" FontFamily="Arial Bold" FontSize="20" Margin="10 18 10 0"/>
+            <materialDesign:TimePicker materialDesign:HintAssist.Hint="Выберите время" FontFamily="Arial Bold" FontSize="20" Margin="10 18 10 0" Height="50"/>
             <StackPanel Orientation="Horizontal">
                 <ComboBox materialDesign:HintAssist.Hint="Выберите бригаду" x:Name="BrigadeBox" Margin="10 10 5 0" Height="50" Width="230" FontFamily="Arial bold" Background="#d8d8f2" FontSize="20" Style="{StaticResource MaterialDesignFloatingHintComboBox}" SelectionChanged="BrigadeBox_SelectionChanged">
                     <TextBlock Text="1" Style="{StaticResource MaterialDesignTextBlock}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="40" Cursor="IBeam" FontFamily="Arial bold" FontSize="20" Foreground="Black"/>

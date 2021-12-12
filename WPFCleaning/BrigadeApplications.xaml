@@ -4,9 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WPFCleaning"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1080" d:DesignWidth="1920"
       Title="BrigadeApplications">
 
     <Grid Background="#d8d8f2">
@@ -37,26 +38,27 @@
             </Button>
         </StackPanel>
 
-        <Border Background="#3a388a" Grid.Column="3" Grid.Row="10" Margin="10 3 10 2" Height="40" CornerRadius="3" BorderBrush="White" BorderThickness="2">
+        <Border Background="#3a388a" Grid.Column="2" Grid.Row="10" Margin="10 3 10 2" Height="40" CornerRadius="3" BorderBrush="White" BorderThickness="2">
             <CheckBox x:Name="CheckInProcess" Foreground ="White" Background="White" FontFamily="Arial Bold" Margin="15,0,0,0"  FontSize="18" Checked="CheckInProcess_Checked" Unchecked="CheckInProcess_Unchecked">В процессе</CheckBox>
         </Border>
-        <Border Background="#3a388a" Grid.Column="2" Grid.Row="10" Margin="15 3 0 2" Height="40" CornerRadius="3" BorderBrush="White" BorderThickness="2">
+        <Border Background="#3a388a" Grid.Column="1" Grid.Row="10" Margin="15 3 0 2" Height="40" CornerRadius="3" BorderBrush="White" BorderThickness="2">
             <CheckBox x:Name="CheckWait" Foreground ="White" Background="White" FontFamily="Arial Bold" Margin="15,0,0,0" FontSize="18" Checked="CheckWait_Checked" Unchecked="CheckWait_Unchecked">Ожидает</CheckBox>
         </Border>
-        <Border Background="#3a388a" Grid.Column="4" Grid.Row="10" Margin="0 3 10 2" Height="40" CornerRadius="3" BorderBrush="White" BorderThickness="2">
+        <Border Background="#3a388a" Grid.Column="3" Grid.Row="10" Margin="0 3 10 2" Height="40" CornerRadius="3" BorderBrush="White" BorderThickness="2">
             <CheckBox x:Name="CheckFinish" Foreground ="White" Background="White" FontFamily="Arial Bold" Margin="15,0,0,0"  FontSize="18" Checked="CheckFinish_Checked" Unchecked="CheckFinish_Unchecked">Завершена</CheckBox>
         </Border>
-        <DatePicker materialDesign:HintAssist.Hint="Выберете дату" Grid.Row="10" Grid.Column="0" Margin="20 0 0 0" SelectedDateFormat="Short"/>
-        <DatePicker materialDesign:HintAssist.Hint="Выберете дату" Grid.Row="10" Grid.Column="1" Margin="20 0 0 0" SelectedDateFormat="Short"/>
+        <StackPanel Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <DatePicker Name="DatePickerSearch" SelectedDate="{x:Static sys:DateTime.Now}" materialDesign:HintAssist.Hint="Выберете дату от"  Margin="10 0 0 0" SelectedDateFormat="Short" CalendarClosed="DatePickerSearch_CalendarClosed"/>
+            <DatePicker materialDesign:HintAssist.Hint="Выберете дату до" Margin="10 0 0 0" SelectedDateFormat="Short"/>
+        </StackPanel>
 
         <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1" FontFamily="Arial" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserResizeColumns="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Дата" Width="100" Binding="{Binding Path=Date}"/>
+                <DataGridTextColumn Header="Дата" Width="134" Binding="{Binding Path=Date}"/>
                 <DataGridTextColumn Header="Время" Width="100" Binding="{Binding Path=Time}"/>
                 <DataGridTextColumn Header="Адрес" Width="400" Binding="{Binding Path=Address}"/>
                 <DataGridTextColumn Header="Статус" Width="150" Binding="{Binding Path=Status}"/>
-                <DataGridTextColumn Header="Бригада" Width="110" Binding="{Binding Path=Brigade}"/>
-                <DataGridTextColumn Header="Телефон" Width="200" Binding="{Binding Path=Telefon}"/>
+                <DataGridTextColumn Header="Телефон" Width="200" Binding="{Binding Path=Telefone}"/>
                 <DataGridTextColumn Header="Клиент" Width="*" Binding="{Binding Path=Client}"/>
             </DataGrid.Columns>
         </DataGrid>

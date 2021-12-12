@@ -62,7 +62,7 @@
             <TextBox x:Name="Entrance" materialDesign:HintAssist.Hint="Подъезд" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
             <TextBox x:Name="Apartment_Number" materialDesign:HintAssist.Hint="Квартира" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
         </StackPanel>
-        <Button x:Name="NextPageNewOrder" Grid.Column="5" Grid.Row="5" Grid.ColumnSpan="2" Content="Сохранить" Width="200" Height="50" FontFamily="Arial Bold" FontSize="20" BorderThickness="2" BorderBrush="White" Background="#2ca847" Cursor="Hand" Foreground="White"/>
+        <Button x:Name="NextPageNewOrder" Grid.Column="5" Grid.Row="5" Grid.ColumnSpan="2" Content="Сохранить" Width="200" Height="50" FontFamily="Arial Bold" FontSize="20" BorderThickness="2" BorderBrush="White" Background="#2ca847" Cursor="Hand" Foreground="White" Click="NextPageNewOrder_Click"/>
 
     </Grid>
 </Page>

@@ -24,18 +24,28 @@ namespace WPFCleaning
         private int _br;
         public BrigadeInfoWindow(int br)
         {
-            InitializeComponent();
             _br = br;
+            InitializeComponent();
             AddAplication();
+            SelectedDatePicker();
         }
        
         public void AddAplication()
         {
-            dataGridApplication.ItemsSource = Order.GetBrigadeInfo().Where(d => d.Brigade == _br && d.Status !="Завершена");
+            dataGridApplication.ItemsSource = Order.GetBrigadeInfo().Where(d => d.Brigade == _br && d.Status !="Завершена" && d.Date == DatePickerSearch.SelectedDate.Value.ToString("d"));
         }
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void SelectedDatePicker()
+        {
+            DateTime dt = DatePickerSearch.SelectedDate.Value;
+            dataGridApplication.ItemsSource = Order.GetBrigadeInfo().Where(d => d.Brigade == _br && d.Status != "Завершена" && d.Date == DatePickerSearch.SelectedDate.Value.ToString("d"));
+        }
+        private void DatePickerSearch_CalendarClosed(object sender, RoutedEventArgs e)
+        {
+            SelectedDatePicker();
         }
     }
 }

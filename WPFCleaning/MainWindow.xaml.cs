@@ -53,13 +53,16 @@ namespace WPFCleaning
             NewOrderBtn.BorderBrush = Brushes.Black;
             OrderBtn.BorderBrush = Brushes.Black;
         }
-
-        private void ButtonClickNewApplication(object sender, RoutedEventArgs e)
+        public void GoNewApplication()
         {
             View.Navigate(newApplication);
             ClientBtn.BorderBrush = Brushes.Black;
             NewOrderBtn.BorderBrush = Brushes.White;
             OrderBtn.BorderBrush = Brushes.Black;
+        }
+        private void ButtonClickNewApplication(object sender, RoutedEventArgs e)
+        {
+            GoNewApplication();
         }
 
         private void ButtonClickApplication(object sender, RoutedEventArgs e)

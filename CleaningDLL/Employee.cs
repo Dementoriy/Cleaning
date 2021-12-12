@@ -24,6 +24,7 @@ namespace CleaningDLL
         [Required]
         public int PositionID { get; set; }
         public Brigade? Brigade { get; set; }
+        public int? BrigadeID { get; set; }
         [Required]
         public DateTime Employment_Date { get; set; }
         [MaxLength(50)] public string? Login { get; set; }

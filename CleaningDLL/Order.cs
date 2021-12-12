@@ -35,18 +35,20 @@ namespace CleaningDLL
                         join a in db.Address on o.Address.ID equals a.ID
                         select new OrderInfo()
 
-                {
+                        {
+                            ID = o.ID,
                             Time = o.Date.ToString("t"),
                             Date = o.Date.ToString("d"),
-                        Brigade = o.Brigade.ID,
-                        Status = o.Status,
-                        Client = o.Client.AddFIO(),
-                        Address = a.AddAddress(),
-                        Telefone = o.Client.ClientTelefonNumber
-                }).ToList();
+                            Brigade = o.Brigade.ID,
+                            Status = o.Status,
+                            Client = o.Client.AddFIO(),
+                            Address = a.AddAddress(),
+                            Telefone = o.Client.ClientTelefonNumber
+                        }).ToList();
         }
         public class OrderInfo
         {
+            public int ID { get; set; }
             public string Date { get; set; }
             public string Time { get; set; }
             public string Address { get; set; }
@@ -63,6 +65,8 @@ namespace CleaningDLL
                         select new BrigadeInfo()
 
                         {
+                            Time = o.Date.ToString("t"),
+                            Date = o.Date.ToString("d"),
                             Brigade = o.Brigade.ID,
                             Status = o.Status,
                             Address = a.AddAddress(),
@@ -70,7 +74,7 @@ namespace CleaningDLL
         }
         public class BrigadeInfo
         {
-            public int Date { get; set; }
+            public string Date { get; set; }
             public string Time { get; set; }
             public string Address { get; set; }
             public string Status { get; set; }
