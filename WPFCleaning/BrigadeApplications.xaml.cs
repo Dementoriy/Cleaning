@@ -11,10 +11,16 @@ namespace WPFCleaning
     /// </summary>
     public partial class BrigadeApplications : Page
     {
-        public BrigadeApplications()
+        private int _br;
+        public BrigadeApplications(int br)
         {
             InitializeComponent();
+            _br = br;
             AddAplication();
+        }
+        public void AddAplication()
+        {
+            dataGridApplication.ItemsSource = Order.GetBrigadeInfo().Where(d => d.Brigade == _br);
         }
         private void CheckWait_Checked(object sender, RoutedEventArgs e)
         {
@@ -51,10 +57,6 @@ namespace WPFCleaning
         {
             if ((bool)CheckWait.IsChecked && (bool)CheckInProcess.IsChecked) return;
             AddAplication();
-        }
-        public void AddAplication()
-        {
-            dataGridApplication.ItemsSource = Order.GetBrigadeInfo();
         }
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {

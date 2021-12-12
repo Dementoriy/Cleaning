@@ -173,7 +173,7 @@ namespace CleaningDLL.Migrations
                     MiddleName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     PassportData = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
                     EmployeeTelefonNumber = table.Column<string>(type: "character varying(11)", maxLength: 11, nullable: false),
-                    PositionID = table.Column<int>(type: "integer", nullable: true),
+                    PositionID = table.Column<int>(type: "integer", nullable: false),
                     BrigadeID = table.Column<int>(type: "integer", nullable: true),
                     Employment_Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Login = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
@@ -193,7 +193,7 @@ namespace CleaningDLL.Migrations
                         column: x => x.PositionID,
                         principalTable: "Position",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -282,7 +282,8 @@ namespace CleaningDLL.Migrations
                     ClientID = table.Column<int>(type: "integer", nullable: true),
                     EmployeeID = table.Column<int>(type: "integer", nullable: true),
                     AddressID = table.Column<int>(type: "integer", nullable: true),
-                    BrigadeID = table.Column<int>(type: "integer", nullable: true)
+                    BrigadeID = table.Column<int>(type: "integer", nullable: true),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {

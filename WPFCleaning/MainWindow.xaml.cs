@@ -26,12 +26,19 @@ namespace WPFCleaning
         Page clientPage;
         Page newApplication;
         Page applications;
-        public MainWindow()
+        private Employee emp;
+        public MainWindow(Employee e)
         {
+            emp = e;
             InitializeComponent();
             AddPage();
             View.Navigate(clientPage);
             WindowState = WindowState.Maximized;
+            AddAdmin();
+        }
+        public void AddAdmin()
+        {
+            TextBlockEmployeeEnter.Text = emp.AddFIO();
         }
         public void AddPage()
         {
@@ -39,28 +46,16 @@ namespace WPFCleaning
             newApplication = new NewApplication();
             applications = new Applications();
         }
-        public void EmployeeEnter()
-        {
-            //using (var db = new ApplicationContext())
-            //TextBlockEmployeeEnter.Text = Employee.AddFIO(ID);
-        }
         private void ButtonClickClient(object sender, RoutedEventArgs e)
         {
-            //this.View.NavigationService.Navigate(client);
-
             View.Navigate(clientPage);
             ClientBtn.BorderBrush = Brushes.White;
-            //ClientBtn.Foreground = Brushes.Black;
             NewOrderBtn.BorderBrush = Brushes.Black;
-            //NewOrderBtn.Foreground = Brushes.White;
             OrderBtn.BorderBrush = Brushes.Black;
-            //OrderBtn.Foreground = Brushes.White;
         }
 
         private void ButtonClickNewApplication(object sender, RoutedEventArgs e)
         {
-            //this.View.NavigationService.Navigate(newApplication);
-
             View.Navigate(newApplication);
             ClientBtn.BorderBrush = Brushes.Black;
             NewOrderBtn.BorderBrush = Brushes.White;
@@ -69,31 +64,11 @@ namespace WPFCleaning
 
         private void ButtonClickApplication(object sender, RoutedEventArgs e)
         {
-            //this.View.NavigationService.Navigate(applications);
-
             View.Navigate(applications);
             ClientBtn.BorderBrush = Brushes.Black;
             NewOrderBtn.BorderBrush = Brushes.Black;
             OrderBtn.BorderBrush = Brushes.White;
         }
-        private void SignInButton_Click(object sender, RoutedEventArgs e)
-        {
-
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Close();
-        }
-
-        //private void Exit_Click(object sender, RoutedEventArgs e)
-        //{
-        //    //MessageBox.Show("Выйти из учетной записи?", MessageBoxButtons.YesNo);
-        //    if (MessageBox.Show("Выйти из учетной записи?") == DialogResult.OK)
-        //    {
-        //        AuthorizationWindow authorizationWindow = new AuthorizationWindow();
-        //        authorizationWindow.Show();
-        //        this.Close();
-        //    }
-        //}
         private void Exit_Click(object sender, EventArgs e)
         {
             MessageBoxResult result = MessageBox.Show(

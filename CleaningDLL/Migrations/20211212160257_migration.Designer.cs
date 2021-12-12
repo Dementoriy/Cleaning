@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CleaningDLL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20211211195105_migration")]
+    [Migration("20211212160257_migration")]
     partial class migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -356,7 +356,7 @@ namespace CleaningDLL.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("character varying(64)");
 
-                    b.Property<int?>("PositionID")
+                    b.Property<int>("PositionID")
                         .HasColumnType("integer");
 
                     b.Property<string>("Surname")
@@ -457,6 +457,9 @@ namespace CleaningDLL.Migrations
 
                     b.Property<int?>("ClientID")
                         .HasColumnType("integer");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int?>("EmployeeID")
                         .HasColumnType("integer");
@@ -797,8 +800,10 @@ namespace CleaningDLL.Migrations
                         .HasForeignKey("BrigadeID");
 
                     b.HasOne("CleaningDLL.Position", "Position")
-                        .WithMany()
-                        .HasForeignKey("PositionID");
+                        .WithMany("Employees")
+                        .HasForeignKey("PositionID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Brigade");
 
@@ -914,6 +919,11 @@ namespace CleaningDLL.Migrations
                         .HasForeignKey("Inventory_TypeID");
 
                     b.Navigation("Inventory_Type");
+                });
+
+            modelBuilder.Entity("CleaningDLL.Position", b =>
+                {
+                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

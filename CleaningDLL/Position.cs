@@ -14,5 +14,15 @@ namespace CleaningDLL
         [MaxLength(50)] public string NamePosition { get; set; }
         [Required]
         [MaxLength(150)] public string Description { get; set; }
+        public ICollection<Employee> Employees { get; set; }
+        private static ApplicationContext db = Context.Db;
+        public Position()
+        {
+            Employees = new List<Employee>();
+        }
+        public static Position GetByID(int id)
+        {
+            return db.Position.Where(d => d.ID == id).FirstOrDefault();
+        }
     }
 }

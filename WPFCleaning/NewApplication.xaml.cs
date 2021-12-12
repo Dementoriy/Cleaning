@@ -102,8 +102,12 @@ namespace WPFCleaning
         }
         private void BtnBrigadeInfo_Click(object sender, RoutedEventArgs e)
         {
-            BrigadeInfoWindow brigadeInfoWindow = new BrigadeInfoWindow(Convert.ToInt32(((TextBlock)BrigadeBox.SelectedItem).Text));
-            brigadeInfoWindow.Show();
+            if (BrigadeBox.SelectedIndex != -1)
+            {
+                BrigadeInfoWindow brigadeInfoWindow = new BrigadeInfoWindow(Convert.ToInt32(((TextBlock)BrigadeBox.SelectedItem).Text));
+                brigadeInfoWindow.Show();
+            }
+            else MessageBox.Show("Выберите бригаду");
         }
 
         private void BrigadeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Linq;
+using CleaningDLL;
 
 namespace WPFCleaning
 {
@@ -18,16 +19,30 @@ namespace WPFCleaning
     /// </summary>
     public partial class BrigadirWindow : Window
     {
-        Page BrigadeApplications;
-        //Page applications;
-        public BrigadirWindow()
+        Page brigadeApplications;
+        Page brigadeInfoPage;
+
+        private Employee emp;
+        public BrigadirWindow(Employee e)
         {
+            emp = e;
             InitializeComponent();
             AddPage();
+            BrigadeFrame.Navigate(brigadeInfoPage);
+            WindowState = WindowState.Maximized;
+            
+            AddBrig();
+
         }
+        public void AddBrig()
+        {
+            TextBlockEmployeeEnter.Text = emp.AddFIO();
+        }
+
         public void AddPage()
         {
-            BrigadeApplications = new BrigadeApplications();
+            brigadeApplications = new BrigadeApplications(emp.Brigade.ID);
+            brigadeInfoPage = new BrigadeInfoPage();
         }
         private void Exit_Click(object sender, EventArgs e)
         {
@@ -45,12 +60,13 @@ namespace WPFCleaning
         }
         private void ButtonClickBrigadeInfo(object sender, RoutedEventArgs e)
         {
+            BrigadeFrame.Navigate(brigadeInfoPage);
             BtnBrigadeInfo.BorderBrush = Brushes.White;
             BtnBrigadeOrder.BorderBrush = Brushes.Black;
         }
         private void ButtonClickBrigadeOrder(object sender, RoutedEventArgs e)
         {
-            BrigadeFrame.Navigate(BrigadeApplications);
+            BrigadeFrame.Navigate(brigadeApplications);
             BtnBrigadeInfo.BorderBrush = Brushes.Black;
             BtnBrigadeOrder.BorderBrush = Brushes.White;
         }

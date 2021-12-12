@@ -20,6 +20,8 @@ namespace CleaningDLL
         public Address Address { get; set; }
         [Required]
         public Brigade Brigade { get; set; }
+        [Required]
+        public DateTime Date { get; set; }
 
         private static ApplicationContext db = Context.Db;
 
@@ -33,17 +35,19 @@ namespace CleaningDLL
                         join a in db.Address on o.Address.ID equals a.ID
                         select new OrderInfo()
 
-                { 
-                    Brigade = o.Brigade.ID,
-                    Status = o.Status,
-                    Client = o.Client.AddFIO(),
-                    Address = a.AddAddress(),
-                    Telefone = o.Client.ClientTelefonNumber
+                {
+                            Time = o.Date.ToString("t"),
+                            Date = o.Date.ToString("d"),
+                        Brigade = o.Brigade.ID,
+                        Status = o.Status,
+                        Client = o.Client.AddFIO(),
+                        Address = a.AddAddress(),
+                        Telefone = o.Client.ClientTelefonNumber
                 }).ToList();
         }
         public class OrderInfo
         {
-            public int Date { get; set; }
+            public string Date { get; set; }
             public string Time { get; set; }
             public string Address { get; set; }
             public string Status { get; set; }
