@@ -23,15 +23,19 @@ namespace WPFCleaning
     /// </summary>
     public partial class MainWindow : Window
     {
-        Page clientPage;
-        Page newApplication;
+        public Page clientPage { get; }
+        public Page newApplication { get; }
         Page applications;
-        private Employee emp;
+        public Employee emp { get; }
         public MainWindow(Employee e)
         {
             emp = e;
             InitializeComponent();
-            AddPage();
+
+            clientPage = new ClientPage(this);
+            newApplication = new NewApplication();
+            applications = new Applications();
+
             View.Navigate(clientPage);
             WindowState = WindowState.Maximized;
             AddAdmin();
@@ -40,12 +44,7 @@ namespace WPFCleaning
         {
             TextBlockEmployeeEnter.Text = emp.AddFIO();
         }
-        public void AddPage()
-        {
-            clientPage = new ClientPage();
-            newApplication = new NewApplication();
-            applications = new Applications();
-        }
+        
         private void ButtonClickClient(object sender, RoutedEventArgs e)
         {
             View.Navigate(clientPage);

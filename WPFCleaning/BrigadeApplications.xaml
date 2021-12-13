@@ -47,12 +47,22 @@
         <Border Background="#3a388a" Grid.Column="3" Grid.Row="10" Margin="0 3 10 2" Height="40" CornerRadius="3" BorderBrush="White" BorderThickness="2">
             <CheckBox x:Name="CheckFinish" Foreground ="White" Background="White" FontFamily="Arial Bold" Margin="15,0,0,0"  FontSize="18" Checked="CheckFinish_Checked" Unchecked="CheckFinish_Unchecked">Завершена</CheckBox>
         </Border>
-        <StackPanel Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <DatePicker Name="DatePickerSearch" SelectedDate="{x:Static sys:DateTime.Now}" materialDesign:HintAssist.Hint="Выберете дату от"  Margin="10 0 0 0" SelectedDateFormat="Short" CalendarClosed="DatePickerSearch_CalendarClosed"/>
-            <DatePicker  materialDesign:HintAssist.Hint="Выберете дату до" Margin="10 0 0 0" SelectedDateFormat="Short"/>
+        <StackPanel Grid.Row="10" Grid.Column="0" Orientation="Horizontal" Margin="20 2 0 0">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="От:" FontFamily="Arial Bold" FontSize="18" Margin="0 6 0 0"/>
+                <TextBlock Text="До:"  FontFamily="Arial Bold" FontSize="18" Margin="0 10 0 0"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0 0 -10 0">
+                <DatePicker Name="DatePickerSearchStart" SelectedDate="{x:Static sys:DateTime.Now}" materialDesign:HintAssist.Hint="Выберете дату"  Margin="10 0 0 0" SelectedDateFormat="Short" CalendarClosed="DatePickerSearchStart_CalendarClosed" FontFamily="Arial Bold" FontSize="18"/>
+                <DatePicker Name="DatePickerSearchEnd" materialDesign:HintAssist.Hint="Выберете дату" Margin="10 4 0 0" SelectedDateFormat="Short" CalendarClosed="DatePickerSearchEnd_CalendarClosed" FontFamily="Arial Bold" FontSize="18"/>
+            </StackPanel>
+            <Button x:Name="DelDate" Background="#d8d8f2" Margin="14 28 0 0" Click="DelDateButton_Click" BorderThickness="0" Padding="7 1 7 1">
+                <materialDesign:PackIcon Kind="Backspace" Foreground="#3a388a"/>
+            </Button>
         </StackPanel>
 
-        <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1" FontFamily="Arial" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserResizeColumns="False" CanUserReorderColumns="False">
+        <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1"
+                  FontFamily="Arial Bold" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserResizeColumns="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Дата" Width="134" Binding="{Binding Path=Date}"/>
                 <DataGridTextColumn Header="Время" Width="100" Binding="{Binding Path=Time}"/>

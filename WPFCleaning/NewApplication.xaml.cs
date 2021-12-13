@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Linq;
+using CleaningDLL;
 
 namespace WPFCleaning
 {
@@ -80,22 +81,7 @@ namespace WPFCleaning
         }
         private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Convert.ToInt32(TextBoxSquare.Text);
-                if(CheckExpressClean.IsChecked == true) { MessageBox.Show("OK"); }
-                else if(CheckGeneralClean.IsChecked == true) { MessageBox.Show("OK"); }
-                else if (CheckBuildingClean.IsChecked == true) { MessageBox.Show("OK"); }
-                else if (CheckOfficeClean.IsChecked == true) { MessageBox.Show("OK"); };
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Введите число в поле \"Площадь\"");
-            }
-            catch when(CheckExpressClean.IsChecked == false && CheckGeneralClean.IsChecked == false && CheckBuildingClean.IsChecked == false && CheckOfficeClean.IsChecked == false)
-            {
-                MessageBox.Show("Ни одна из услуг не выбрана");
-            }
+            
         }
         private void ButtonCalculate_Click(object sender, RoutedEventArgs e)
         {
@@ -104,7 +90,7 @@ namespace WPFCleaning
         {
             if (BrigadeBox.SelectedIndex != -1)
             {
-                BrigadeInfoWindow brigadeInfoWindow = new BrigadeInfoWindow(Convert.ToInt32(((TextBlock)BrigadeBox.SelectedItem).Text));
+                BrigadeInfoWindow brigadeInfoWindow = new BrigadeInfoWindow(Employee.GetEmployeeBrigade(int.Parse(BrigadeBox.Text)));
                 brigadeInfoWindow.Show();
             }
             else MessageBox.Show("Выберите бригаду");

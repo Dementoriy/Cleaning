@@ -80,10 +80,25 @@ namespace WPFCleaning
             {
                 listSort = listSort.Where(e => e.Status == "Ожидает").ToList();
             }
-            if (DatePickerSearch.Text != "")
+            if (DatePickerSearchEnd.Text != "")
             {
-                DateTime dt = DatePickerSearch.SelectedDate.Value;
-                listSort = listSort.Where(e => e.Date == dt.ToString("d")).ToList();
+                DateTime dtStart = DatePickerSearchStart.SelectedDate.Value;
+                DateTime dtEnd = DatePickerSearchEnd.SelectedDate.Value;
+
+                if (DatePickerSearchStart.SelectedDate.Value <= DatePickerSearchEnd.SelectedDate.Value)
+                    listSort = listSort = listSort.Where(e => DateTime.Parse(e.Date) >= dtStart.Date && DateTime.Parse(e.Date) <= dtEnd.Date).ToList(); 
+                else
+                {
+                    MessageBox.Show("Дата конца периода больше \n даты начала периода");
+                    DatePickerSearchEnd.Text = "";
+                }
+                
+            }
+            if (DatePickerSearchEnd.Text == "")
+            {
+                DateTime dtStart = DatePickerSearchStart.SelectedDate.Value;
+
+                listSort = listSort.Where(e => DateTime.Parse(e.Date) == dtStart.Date).ToList();
             }
             if (SearchBox.Text != "")
             {
@@ -96,14 +111,29 @@ namespace WPFCleaning
                 || e.Status.ToLower().Contains(SearchBox.Text.ToLower())
                 ).ToList();
             }
-            dataGridApplication.ItemsSource = listSort;
+            dataGridApplication.ItemsSource = listSort.Where(d => d.Brigade == _br.BrigadeID);
         }
-        private void DatePickerSearch_CalendarClosed(object sender, RoutedEventArgs e)
+        private void DatePickerSearchStart_CalendarClosed(object sender, RoutedEventArgs e)
+        {
+            SelectedOrderInfo();
+        }
+        private void DatePickerSearchEnd_CalendarClosed(object sender, RoutedEventArgs e)
         {
             SelectedOrderInfo();
         }
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            SelectedOrderInfo();
+        }
+
+        private void DelDateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DatePickerSearchEnd.Text != "")
+            {
+                DatePickerSearchEnd.Text = "";
+                SelectedOrderInfo();
+            }
+            else
             SelectedOrderInfo();
         }
     }

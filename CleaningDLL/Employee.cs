@@ -55,5 +55,9 @@ namespace CleaningDLL
             db.Employee.Add(employee);
             db.SaveChanges();
         }
+        public static Employee GetEmployeeBrigade(int Brigade)
+        {
+            return db.Employee.Where(a => a.BrigadeID == Brigade).FirstOrDefault();
+        }
     }
 }

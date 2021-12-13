@@ -13,17 +13,12 @@ namespace WPFCleaning
     /// </summary>
     public partial class BrigadeInfoWindow : Window
     {
-        private int _br;
-        public BrigadeInfoWindow(int br)
+        private Employee _br;
+        public BrigadeInfoWindow(Employee br)
         {
             _br = br;
             InitializeComponent();
-            AddAplication();
             SelectedOrderInfo();
-        }
-        public void AddAplication()
-        {
-            dataGridApplication.ItemsSource = Order.GetOrderInfo();
         }
 
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
@@ -50,7 +45,7 @@ namespace WPFCleaning
                 || e.Status.ToLower().Contains(SearchBox.Text.ToLower())
                 ).ToList();
             }
-            dataGridApplication.ItemsSource = listSort;
+            dataGridApplication.ItemsSource = listSort.Where(d => d.Brigade == _br.BrigadeID && d.Status != "Завершена");
         }
         private void DatePickerSearch_CalendarClosed(object sender, RoutedEventArgs e)
         {

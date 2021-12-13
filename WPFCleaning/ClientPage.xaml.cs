@@ -19,11 +19,12 @@ namespace WPFCleaning
     /// </summary>
     public partial class ClientPage : Page
     {
-        public ClientPage()
+        public ClientPage(MainWindow window)
         {
+            this.window = window;
             InitializeComponent();
         }
-
+        private MainWindow window;
         private void ClientSearch_Click(object sender, RoutedEventArgs e)
         {
             ClearClientInfo();
@@ -56,7 +57,10 @@ namespace WPFCleaning
 
         public void NextPageNewOrder_Click(object sender, RoutedEventArgs e)
         {
-            //MainWindow.GoNewApplication();
+            this.window.View.Navigate(window.newApplication);
+            window.ClientBtn.BorderBrush = Brushes.Black;
+            window.NewOrderBtn.BorderBrush = Brushes.White;
+            window.OrderBtn.BorderBrush = Brushes.Black;
         }
     }
 }

@@ -31,7 +31,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="10" Grid.Column="5">
             <TextBox x:Name="SearchBox" materialDesign:HintAssist.Hint="Поиск:" Background="#d8d8f2" Height="38" Width="126" Cursor="IBeam" Margin="0 3 0 3" FontSize="18" TextChanged="SearchBox_TextChanged"/>
-            <Button x:Name="SearchPath" Margin="5 0 0 0" FontFamily="Arial Bold" FontSize="20" Background="#3a388a" Foreground ="White" Cursor="IBeam" BorderBrush="White" BorderThickness="2" Height="40" Click="ButtonSearch_Click" HorizontalAlignment="Right">
+            <Button  Margin="5 0 0 0" FontFamily="Arial Bold" FontSize="20" Background="#3a388a" Foreground ="White" Cursor="IBeam" BorderBrush="White" BorderThickness="2" Height="40" Click="ButtonSearch_Click" HorizontalAlignment="Right">
                 <materialDesign:PackIcon Kind="Search"/>
             </Button>
         </StackPanel>
