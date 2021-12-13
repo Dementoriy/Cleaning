@@ -79,8 +79,8 @@
 
         </StackPanel>
 
-        <StackPanel Grid.Column="10" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="5" VerticalAlignment="Top">
-            <Border Height="40"  Background="#3a388a" CornerRadius="3">
+        <StackPanel Grid.Column="6" Grid.ColumnSpan="3" Grid.Row="4" Grid.RowSpan="5" VerticalAlignment="Top">
+            <Border Height="40"  Background="#3a388a" CornerRadius="3" Margin="0 20 0 0">
                 <TextBlock FontSize="22" FontFamily="Arial bold" Text="Время и бригада" Foreground ="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
             <DatePicker materialDesign:HintAssist.Hint="Выберите дату" Grid.Row="10" Grid.Column="0" Margin="10 18 10 0" SelectedDateFormat="Short" FontFamily="Arial Bold" FontSize="20"/>
@@ -96,7 +96,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Column="6" Grid.ColumnSpan="3" Grid.Row="4" Grid.RowSpan="5" VerticalAlignment="Top" Margin="0 20 0 0">
+        <StackPanel Grid.Column="10" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" >
             <Border Height="40"  Background="#3a388a" CornerRadius="3">
                 <TextBlock FontSize="22" FontFamily="Arial bold" Text="Итог" Foreground ="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>

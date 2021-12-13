@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using CleaningDLL;
+using System.Windows.Input;
 using System.Linq;
+using CleaningDLL;
+
 
 namespace WPFCleaning
 {
@@ -17,115 +20,91 @@ namespace WPFCleaning
             _br = br;
             InitializeComponent(); 
             AddAplication();
-            SelectedDatePicker();
-        }
-        public void AddAplication()
-        {
-            dataGridApplication.ItemsSource = Order.GetBrigadeInfo().Where(d => d.Brigade == _br.BrigadeID);
+            SelectedOrderInfo();
         }
         private void CheckWait_Checked(object sender, RoutedEventArgs e)
         {
-            if (DatePickerSearch.Text == "")
-            {
-                CheckInProcess.IsChecked = false;
-                CheckFinish.IsChecked = false;
-                SearchBox.Text = "";
-                dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "Ожидает" && e.Brigade == _br.BrigadeID);
-            }
-            else
-            {
-                CheckInProcess.IsChecked = false;
-                CheckFinish.IsChecked = false;
-                SearchBox.Text = "";
-                dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "Ожидает" && e.Date == DatePickerSearch.SelectedDate.Value.ToString("d") && e.Brigade == _br.BrigadeID);
-            }
+            CheckInProcess.IsChecked = false;
+            CheckFinish.IsChecked = false;
+            SelectedOrderInfo();
         }
         private void CheckWait_Unchecked(object sender, RoutedEventArgs e)
         {
-            if ((bool)CheckInProcess.IsChecked && (bool)CheckFinish.IsChecked) return;
-            AddAplication();
-            if (DatePickerSearch.Text != "")
-            {
-                SelectedDatePicker();
-            }
+            if (!(bool)CheckInProcess.IsChecked && !(bool)CheckFinish.IsChecked)
+                SelectedOrderInfo();
         }
         private void CheckInProcess_Checked(object sender, RoutedEventArgs e)
         {
-            if (DatePickerSearch.Text == "")
-            {
-                CheckWait.IsChecked = false;
-                CheckFinish.IsChecked = false;
-                SearchBox.Text = "";
-                dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "В процессе" && e.Brigade == _br.BrigadeID);
-            }
-            else
-            {
-                CheckWait.IsChecked = false;
-                CheckFinish.IsChecked = false;
-                SearchBox.Text = "";
-                dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "В процессе" && e.Date == DatePickerSearch.SelectedDate.Value.ToString("d") && e.Brigade == _br.BrigadeID);
-            }
+            CheckWait.IsChecked = false;
+            CheckFinish.IsChecked = false;
+            SelectedOrderInfo();
         }
         private void CheckInProcess_Unchecked(object sender, RoutedEventArgs e)
         {
-            if ((bool)CheckWait.IsChecked && (bool)CheckFinish.IsChecked) return;
-            AddAplication();
-            if (DatePickerSearch.Text != "")
-            {
-                SelectedDatePicker();
-            }
+            if (!(bool)CheckWait.IsChecked && !(bool)CheckFinish.IsChecked)
+                SelectedOrderInfo();
         }
         private void CheckFinish_Checked(object sender, RoutedEventArgs e)
         {
-            if (DatePickerSearch.Text == "")
-            {
-                CheckWait.IsChecked = false;
-                CheckInProcess.IsChecked = false;
-                SearchBox.Text = "";
-                dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "Завершена" && e.Brigade == _br.BrigadeID);
-            }
-            else
-            {
-                CheckWait.IsChecked = false;
-                CheckInProcess.IsChecked = false;
-                SearchBox.Text = "";
-                dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Status == "Завершена" && e.Date == DatePickerSearch.SelectedDate.Value.ToString("d") && e.Brigade == _br.BrigadeID);
-            }
+            CheckWait.IsChecked = false;
+            CheckInProcess.IsChecked = false;
+            SelectedOrderInfo();
         }
         private void CheckFinish_Unchecked(object sender, RoutedEventArgs e)
         {
-            if ((bool)CheckWait.IsChecked && (bool)CheckInProcess.IsChecked) return;
-            AddAplication();
-            if (DatePickerSearch.Text != "")
-            {
-                SelectedDatePicker();
-            }
+            if (!(bool)CheckWait.IsChecked && !(bool)CheckInProcess.IsChecked)
+                SelectedOrderInfo();
         }
+        public void AddAplication()
+        {
+            dataGridApplication.ItemsSource = Order.GetOrderInfo();
+        }
+
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
-
-            try
-            {
-                CheckWait.IsChecked = false;
-                CheckInProcess.IsChecked = false;
-                CheckFinish.IsChecked = false;
-                //dataGridApplication.ItemsSource = Order.GetBrigadeInfo().Where(e => e.Number == int.Parse(SearchBox.Text));
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Введено не число!");
-                AddAplication();
-            }
+            SelectedOrderInfo();
         }
 
-        private void SelectedDatePicker()
+        private void SelectedOrderInfo()
         {
-            DateTime dt = DatePickerSearch.SelectedDate.Value;
-            dataGridApplication.ItemsSource = Order.GetOrderInfo().Where(e => e.Date == dt.ToString("d") && e.Brigade == _br.BrigadeID);
+            List<Order.OrderInfo> listSort = Order.GetOrderInfo();
+            if (CheckFinish.IsChecked == true)
+            {
+                listSort = listSort.Where(e => e.Status == "Завершена").ToList();
+            }
+            else if (CheckInProcess.IsChecked == true)
+            {
+                listSort = listSort.Where(e => e.Status == "В процессе").ToList();
+            }
+            else if (CheckWait.IsChecked == true)
+            {
+                listSort = listSort.Where(e => e.Status == "Ожидает").ToList();
+            }
+            if (DatePickerSearch.Text != "")
+            {
+                DateTime dt = DatePickerSearch.SelectedDate.Value;
+                listSort = listSort.Where(e => e.Date == dt.ToString("d")).ToList();
+            }
+            if (SearchBox.Text != "")
+            {
+                listSort = listSort.Where(e => e.Address.ToLower().Contains(SearchBox.Text.ToLower())
+                || e.Telefone.ToLower().Contains(SearchBox.Text.ToLower())
+                || e.Client.ToLower().Contains(SearchBox.Text.ToLower())
+                || e.Brigade.ToString().ToLower().Contains(SearchBox.Text.ToLower())
+                || e.Date.ToLower().Contains(SearchBox.Text.ToLower())
+                || e.Time.ToLower().Contains(SearchBox.Text.ToLower())
+                || e.Status.ToLower().Contains(SearchBox.Text.ToLower())
+                ).ToList();
+            }
+            dataGridApplication.ItemsSource = listSort;
         }
         private void DatePickerSearch_CalendarClosed(object sender, RoutedEventArgs e)
         {
-            SelectedDatePicker();
+            SelectedOrderInfo();
+        }
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SelectedOrderInfo();
         }
     }
 }

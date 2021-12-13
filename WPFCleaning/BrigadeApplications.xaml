@@ -32,7 +32,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="10" Grid.Column="5">
-            <TextBox x:Name="SearchBox" materialDesign:HintAssist.Hint="Поиск:" Background="White" Height="38" Width="200" Cursor="IBeam" Margin="0 3 0 3" FontSize="18"/>
+            <TextBox x:Name="SearchBox" materialDesign:HintAssist.Hint="Поиск:" Background="White" Height="38" Width="200" Cursor="IBeam" Margin="0 3 0 3" FontSize="18" TextChanged="SearchBox_TextChanged"/>
             <Button Margin="5 0 0 0" FontFamily="Arial Bold" FontSize="20" Background="#3a388a" Foreground ="White" Cursor="IBeam" BorderBrush="White" BorderThickness="2" Height="40" Click="ButtonSearch_Click" HorizontalAlignment="Right">
                 <materialDesign:PackIcon Kind="Search"/>
             </Button>
@@ -49,7 +49,7 @@
         </Border>
         <StackPanel Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
             <DatePicker Name="DatePickerSearch" SelectedDate="{x:Static sys:DateTime.Now}" materialDesign:HintAssist.Hint="Выберете дату от"  Margin="10 0 0 0" SelectedDateFormat="Short" CalendarClosed="DatePickerSearch_CalendarClosed"/>
-            <DatePicker materialDesign:HintAssist.Hint="Выберете дату до" Margin="10 0 0 0" SelectedDateFormat="Short"/>
+            <DatePicker  materialDesign:HintAssist.Hint="Выберете дату до" Margin="10 0 0 0" SelectedDateFormat="Short"/>
         </StackPanel>
 
         <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1" FontFamily="Arial" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserResizeColumns="False" CanUserReorderColumns="False">
