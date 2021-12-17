@@ -17,5 +17,20 @@ namespace CleaningDLL
         [Required]
         public decimal Price { get; set; }
         public InventoryType? Inventory_Type { get; set; }
+
+        private static ApplicationContext db = Context.Db;
+
+        public static int GetIdService(string str)
+        {
+            int idService;
+            Service service = db.Service.Where(s => s.Service_Name == str).ToList()[0];
+            idService = service.ID;
+            return idService;
+        }
+
+        public static Service GetPrice(int idService)
+        {
+            return db.Service.Where(s => s.ID == idService).ToList()[0];
+        }
     }
 }

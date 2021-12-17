@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CleaningDLL;
+using Xceed.Wpf.Toolkit;
 
 namespace WPFCleaning
 {
@@ -23,6 +24,7 @@ namespace WPFCleaning
         {
             this.window = window;
             InitializeComponent();
+
         }
         private MainWindow window;
         private void ClientSearch_Click(object sender, RoutedEventArgs e)
@@ -40,7 +42,7 @@ namespace WPFCleaning
                 Entrance.Text = Client.GetClientInfo(Telefon.Text)[tmp].Entrance;
                 Apartment_Number.Text = Client.GetClientInfo(Telefon.Text)[tmp].Apartment_Number;
             }
-            else MessageBox.Show("Клиента нет в БД");
+            else System.Windows.MessageBox.Show("Клиента нет в БД");
         }
 
         private void ClearClientInfo()
@@ -61,6 +63,32 @@ namespace WPFCleaning
             window.ClientBtn.BorderBrush = Brushes.Black;
             window.NewOrderBtn.BorderBrush = Brushes.White;
             window.OrderBtn.BorderBrush = Brushes.Black;
+        }
+
+        private void Telefon_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            string t = Telefon.Text;
+            if (t.Length == 0)
+            {
+                Telefon.Text = "+";
+                Telefon.SelectionStart = Telefon.Text.Length; //коретка в конец строки
+            }
+            if (t.Length >= 12)
+            {
+                e.Handled = true; // отклоняем ввод
+            }
+            int val;
+            if (!Int32.TryParse(e.Text, out val))
+            {
+                e.Handled = true; // отклоняем ввод
+            }
+        }
+        private void Telefon_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true; // если пробел, отклоняем ввод
+            }
         }
     }
 }
