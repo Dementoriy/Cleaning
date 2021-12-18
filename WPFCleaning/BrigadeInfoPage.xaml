@@ -2,7 +2,9 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:local="clr-namespace:WPFCleaning"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
@@ -14,15 +16,36 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border Grid.Column="1" Grid.Row="1" BorderBrush="Black" BorderThickness="5">
-            <TextBlock Background="#3a388a"/>
-        </Border>
+        <StackPanel Orientation="Horizontal" Grid.Row="10" Grid.Column="5">
+            <TextBox x:Name="SearchBox" materialDesign:HintAssist.Hint="Поиск:" Background="#d8d8f2" Height="38" Width="190" Cursor="IBeam" Margin="0 3 0 3" FontSize="18" TextChanged="SearchBox_TextChanged"/>
+            <Button  Margin="5 0 0 0" FontFamily="Arial Bold" FontSize="20" Background="#3a388a" Foreground ="White" Cursor="IBeam" BorderBrush="White" BorderThickness="2" Height="40" Click="ButtonSearch_Click" HorizontalAlignment="Right">
+                <materialDesign:PackIcon Kind="Search"/>
+            </Button>
+        </StackPanel>
+
+        <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1"
+                  FontFamily="Arial Bold" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserResizeColumns="False" CanUserReorderColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Клинер" Width="300" Binding="{Binding Path=Cleaner}"/>
+                <DataGridTextColumn Header="Должность" Width="200" Binding="{Binding Path=Positions}"/>
+                <DataGridTextColumn Header="Телефон" Width="200" Binding="{Binding Path=Telefone}"/>
+                <DataGridTextColumn Header="Стаж" Width="150" Binding="{Binding Path=WorkExperience}"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

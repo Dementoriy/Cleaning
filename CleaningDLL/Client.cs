@@ -16,7 +16,7 @@ namespace CleaningDLL
         [MaxLength(50)] public string Name { get; set; }
         [MaxLength(50)] public string? MiddleName { get; set; }
         [Required]
-        [MaxLength(11)] public string ClientTelefonNumber { get; set; }
+        [MaxLength(12)] public string ClientTelefonNumber { get; set; }
 
         public string AddFIO()
         {

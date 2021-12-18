@@ -25,10 +25,10 @@ namespace CleaningDLL
 
         private static ApplicationContext db = Context.Db;
 
-        public static List<Order> Get()
-        {
-                return db.Order.ToList();
-        }
+        //public static List<Order> Get()
+        //{
+        //        return db.Order.ToList();
+        //}
         public static List<OrderInfo> GetOrderInfo()
         {
                 return (from o in db.Order

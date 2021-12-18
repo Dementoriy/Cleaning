@@ -13,7 +13,7 @@ namespace CleaningDLL
         [Required]
         [MaxLength(50)] public string CompanyName { get; set; }
         [Required]
-        [MaxLength(11)] public string ProviderTelefonNumber { get; set; }
+        [MaxLength(12)] public string ProviderTelefonNumber { get; set; }
         [Required]
         public Address ProviderAddress { get; set; }
     }

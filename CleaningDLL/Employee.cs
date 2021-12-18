@@ -18,7 +18,7 @@ namespace CleaningDLL
         [Required]
         [MaxLength(10)] public string PassportData { get; set; }
         [Required]
-        [MaxLength(11)] public string EmployeeTelefonNumber { get; set; }
+        [MaxLength(12)] public string EmployeeTelefonNumber { get; set; }
         [Required]
         public Position Position { get; set; }
         [Required]
@@ -58,6 +58,32 @@ namespace CleaningDLL
         public static Employee GetEmployeeBrigade(int Brigade)
         {
             return db.Employee.Where(a => a.BrigadeID == Brigade).FirstOrDefault();
+        }
+
+        
+        public static List<EmployeeFullInfo> GetEmployeeFullInfo()
+        {
+            return (from e in db.Employee
+                    join p in db.Position on e.PositionID equals p.ID
+                    select new EmployeeFullInfo()
+
+                    {
+                        ID = e.ID,
+                        Cleaner = e.AddFIO(),
+                        Positions = p.NamePosition,
+                        WorkExperience = e.Employment_Date.ToString("d"), //(DateTime.Today - e.Employment_Date).ToString("d"),
+                        Brigade = e.Brigade.ID,
+                        Telefone = e.EmployeeTelefonNumber,
+                    }).ToList();
+        }
+        public class EmployeeFullInfo
+        {
+            public int ID { get; set; }
+            public string Cleaner { get; set; }
+            public string Positions { get; set; }
+            public string WorkExperience { get; set; }
+            public int? Brigade { get; set; }
+            public string Telefone { get; set; }
         }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using CleaningDLL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CleaningDLL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20211217155803_DropTimeToIntToServiceAdded")]
+    partial class DropTimeToIntToServiceAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,8 +103,8 @@ namespace CleaningDLL.Migrations
 
                     b.Property<string>("ClientTelefonNumber")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("character varying(12)");
+                        .HasMaxLength(11)
+                        .HasColumnType("character varying(11)");
 
                     b.Property<string>("MiddleName")
                         .HasMaxLength(50)
@@ -326,8 +328,8 @@ namespace CleaningDLL.Migrations
 
                     b.Property<string>("EmployeeTelefonNumber")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("character varying(12)");
+                        .HasMaxLength(11)
+                        .HasColumnType("character varying(11)");
 
                     b.Property<DateTime>("Employment_Date")
                         .HasColumnType("timestamp without time zone");
@@ -554,8 +556,8 @@ namespace CleaningDLL.Migrations
 
                     b.Property<string>("ProviderTelefonNumber")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("character varying(12)");
+                        .HasMaxLength(11)
+                        .HasColumnType("character varying(11)");
 
                     b.HasKey("ID");
 
@@ -669,9 +671,6 @@ namespace CleaningDLL.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
-
-                    b.Property<int>("Time")
-                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 

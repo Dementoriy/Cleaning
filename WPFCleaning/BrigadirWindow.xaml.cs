@@ -42,7 +42,7 @@ namespace WPFCleaning
         public void AddPage()
         {
             brigadeApplications = new BrigadeApplications(emp);
-            brigadeInfoPage = new BrigadeInfoPage();
+            brigadeInfoPage = new BrigadeInfoPage(emp);
         }
         private void Exit_Click(object sender, EventArgs e)
         {

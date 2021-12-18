@@ -39,7 +39,7 @@
 
         <DatePicker x:Name="DatePickerSearch" materialDesign:HintAssist.Hint="Выберете дату" SelectedDate="{x:Static sys:DateTime.Now}" Grid.Row="10" Grid.Column="0" Margin="20 0 0 0" SelectedDateFormat="Short" FontFamily="Arial Bold" FontSize="18" CalendarClosed="DatePickerSearch_CalendarClosed"/>
 
-        <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1" FontFamily="Arial" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserResizeColumns="False" CanUserReorderColumns="False">
+        <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1" FontFamily="Arial Bold" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserResizeColumns="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Дата" Width="133" Binding="{Binding Path=Date}"/>
                 <DataGridTextColumn Header="Время" Width="100" Binding="{Binding Path=Time}"/>

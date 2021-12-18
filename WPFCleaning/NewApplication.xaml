@@ -109,7 +109,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="≈Время:" FontFamily="Arial Bold" FontSize="20" Margin="5 18 0 0"/>
-                <TextBox Width="190" Margin="10 0 0 0" Cursor="IBeam" FontFamily="Arial Bold" FontSize="20" IsReadOnly="True"/>
+                <TextBox x:Name="ApproximateTime" Width="190" Margin="10 0 0 0" Cursor="IBeam" FontFamily="Arial Bold" FontSize="20" IsReadOnly="True" VerticalAlignment="Bottom"/>
             </StackPanel>
             <Button x:Name="BtnCalculate" Content="Рассчитать" Height="40" Width="260" FontFamily="Arial Bold" FontSize="20" BorderThickness="2" BorderBrush="White" Background="#3a388a" Cursor="Hand" Foreground="White" Margin="0 25 0 0" Click="ButtonCalculate_Click"/>
         </StackPanel>

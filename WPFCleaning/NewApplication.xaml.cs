@@ -30,6 +30,7 @@ namespace WPFCleaning
 
         private int idService;
         decimal finalPrice = 0;
+        int approximateTime = 0;
         private void ChemistryClean_Checked(object sender, RoutedEventArgs e)
         {
             ChemistryCleanBox.IsEnabled = ChemistryClean.IsEnabled;
@@ -40,6 +41,9 @@ namespace WPFCleaning
             finalPrice -= Convert.ToInt32(KolvoSofa.Text) * Convert.ToInt32(Service.GetPrice(idService).Price);
             finalPrice -= Convert.ToInt32(KolvoArmcheir.Text) * Convert.ToInt32(Service.GetPrice(idService).Price);
             finalPrice -= Convert.ToInt32(KolvoCarpet.Text) * Convert.ToInt32(Service.GetPrice(idService).Price);
+            approximateTime -= Convert.ToInt32(KolvoSofa.Text) * Service.GetPrice(idService).Time;
+            approximateTime -= Convert.ToInt32(KolvoArmcheir.Text) * Service.GetPrice(idService).Time;
+            approximateTime -= Convert.ToInt32(KolvoCarpet.Text) * Service.GetPrice(idService).Time;
             if (finalPrice != 0)
             {
 
@@ -57,6 +61,8 @@ namespace WPFCleaning
             WindowCleanBox.IsEnabled = false;
             finalPrice -= Convert.ToInt32(KolvoWindow.Text) * Convert.ToInt32(Service.GetPrice(idService).Price);
             finalPrice -= Convert.ToInt32(KolvoDoor.Text) * Convert.ToInt32(Service.GetPrice(idService).Price);
+            approximateTime -= Convert.ToInt32(KolvoWindow.Text) * Service.GetPrice(idService).Time;
+            approximateTime -= Convert.ToInt32(KolvoDoor.Text) * Service.GetPrice(idService).Time;
             if (finalPrice != 0)
             {
                 KolvoWindow.Text = "0";
@@ -72,6 +78,7 @@ namespace WPFCleaning
             DezinfectionBox.IsEnabled = false;
             if (finalPrice != 0)
                 finalPrice -= Convert.ToInt32(KolvoDezinfection.Text) * Convert.ToInt32(Service.GetPrice(idService).Price);
+                approximateTime -= Convert.ToInt32(KolvoDezinfection.Text) * Service.GetPrice(idService).Time;
             KolvoDezinfection.Text = "0";
         }
 
@@ -110,7 +117,10 @@ namespace WPFCleaning
         {
             CheckBox checkBox = (CheckBox)sender;
             if (finalPrice != 0)
+            {
                 finalPrice -= Service.GetPrice(Service.GetIdService(checkBox.Content.ToString())).Price * Convert.ToInt32(TextBoxSquare.Text);
+                approximateTime -= Service.GetPrice(Service.GetIdService(CheckExpressClean.Content.ToString())).Time * Convert.ToInt32(TextBoxSquare.Text);
+            }
         }
         private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {
@@ -119,24 +129,30 @@ namespace WPFCleaning
         private void ButtonCalculate_Click(object sender, RoutedEventArgs e)
         {
             PriceBox.Text = "";
+            ApproximateTime.Text = "";
             finalPrice = 0;
+            approximateTime = 0;
             try
             {
                 if ((bool)CheckExpressClean.IsChecked)
                 {
                     finalPrice += Service.GetPrice(Service.GetIdService(CheckExpressClean.Content.ToString())).Price * Convert.ToInt32(TextBoxSquare.Text);
+                    approximateTime += Service.GetPrice(Service.GetIdService(CheckExpressClean.Content.ToString())).Time * Convert.ToInt32(TextBoxSquare.Text);
                 }
                 if ((bool)CheckGeneralClean.IsChecked)
                 {
                     finalPrice += Service.GetPrice(Service.GetIdService(CheckGeneralClean.Content.ToString())).Price * Convert.ToInt32(TextBoxSquare.Text);
+                    approximateTime += Service.GetPrice(Service.GetIdService(CheckGeneralClean.Content.ToString())).Time * Convert.ToInt32(TextBoxSquare.Text);
                 }
                 if ((bool)CheckBuildingClean.IsChecked)
                 {
                     finalPrice += Service.GetPrice(Service.GetIdService(CheckBuildingClean.Content.ToString())).Price * Convert.ToInt32(TextBoxSquare.Text);
+                    approximateTime += Service.GetPrice(Service.GetIdService(CheckBuildingClean.Content.ToString())).Time * Convert.ToInt32(TextBoxSquare.Text);
                 }
                 if ((bool)CheckOfficeClean.IsChecked)
                 {
                     finalPrice += Service.GetPrice(Service.GetIdService(CheckOfficeClean.Content.ToString())).Price * Convert.ToInt32(TextBoxSquare.Text);
+                    approximateTime += Service.GetPrice(Service.GetIdService(CheckOfficeClean.Content.ToString())).Time * Convert.ToInt32(TextBoxSquare.Text);
                 }
             }
             catch
@@ -152,6 +168,7 @@ namespace WPFCleaning
                     idService = Service.GetIdService(str);
 
                     finalPrice += Convert.ToInt32(KolvoWindow.Text) * Service.GetPrice(idService).Price;
+                    approximateTime += Convert.ToInt32(KolvoWindow.Text) * Service.GetPrice(idService).Time;
                 }
                 if (KolvoDoor.Text != "")
                 {
@@ -159,6 +176,7 @@ namespace WPFCleaning
                     idService = Service.GetIdService(str);
 
                     finalPrice += Convert.ToInt32(KolvoDoor.Text) * Service.GetPrice(idService).Price;
+                    approximateTime += Convert.ToInt32(KolvoDoor.Text) * Service.GetPrice(idService).Time;
                 }
             }
 
@@ -170,6 +188,7 @@ namespace WPFCleaning
                     idService = Service.GetIdService(str);
 
                     finalPrice += Convert.ToInt32(KolvoSofa.Text) * Service.GetPrice(idService).Price;
+                    approximateTime += Convert.ToInt32(KolvoSofa.Text) * Service.GetPrice(idService).Time;
                 }
                 if (KolvoArmcheir.Text != "")
                 {
@@ -177,6 +196,7 @@ namespace WPFCleaning
                     idService = Service.GetIdService(str);
 
                     finalPrice += Convert.ToInt32(KolvoArmcheir.Text) * Service.GetPrice(idService).Price;
+                    approximateTime += Convert.ToInt32(KolvoArmcheir.Text) * Service.GetPrice(idService).Time;
                 }
                 if (KolvoCarpet.Text != "")
                 {
@@ -184,6 +204,7 @@ namespace WPFCleaning
                     idService = Service.GetIdService(str);
 
                     finalPrice += Convert.ToInt32(KolvoCarpet.Text) * Service.GetPrice(idService).Price;
+                    approximateTime += Convert.ToInt32(KolvoCarpet.Text) * Service.GetPrice(idService).Time;
                 }
             }
             if ((bool)Dezinfection.IsChecked)
@@ -192,9 +213,21 @@ namespace WPFCleaning
                 idService = Service.GetIdService(str);
 
                 finalPrice += Convert.ToInt32(KolvoDezinfection.Text) * Service.GetPrice(idService).Price;
+                approximateTime += Convert.ToInt32(KolvoDezinfection.Text) * Service.GetPrice(idService).Time;
             }
 
+            //if (ClientPage.CheckOldClient.IsChecked)
+            //{
+            //    finalPrice = finalPrice - 10 %;
+            //}
+
+            int t = approximateTime / 60;
+            int h = t / 60;
+            int m = t % 60;
+
             PriceBox.Text = finalPrice.ToString() + "₽";
+            ApproximateTime.Text = h + " ч. " + m + "мин.";
+            //ApproximateTime.Text = approximateTime.ToString();
         }
         private void BtnBrigadeInfo_Click(object sender, RoutedEventArgs e)
         {

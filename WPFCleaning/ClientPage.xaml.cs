@@ -90,5 +90,9 @@ namespace WPFCleaning
                 e.Handled = true; // если пробел, отклоняем ввод
             }
         }
+
+        public void CheckOldClient_Checked(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

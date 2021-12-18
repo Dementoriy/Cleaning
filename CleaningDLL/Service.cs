@@ -17,6 +17,8 @@ namespace CleaningDLL
         [Required]
         public decimal Price { get; set; }
         public InventoryType? Inventory_Type { get; set; }
+        [Required]
+        public int Time { get; set; }
 
         private static ApplicationContext db = Context.Db;
 
