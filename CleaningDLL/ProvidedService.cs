@@ -16,8 +16,5 @@ namespace CleaningDLL
         public Service Service { get; set; }
         [Required]
         public int Amount { get; set; }
-        [Required]
-        public ReferenceUnitsOfMeasurement ReferenceUnitsOfMeasurement { get; set; }
-        public Inventory? Inventory { get; set; }
     }
 }

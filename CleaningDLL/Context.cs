@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CleaningDLL
 {
-    static class Context
+    public static class Context
     {
         public static ApplicationContext Db
         {

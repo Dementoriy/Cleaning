@@ -14,5 +14,6 @@ namespace CleaningDLL
         [MaxLength(30)] public string Unit { get; set; }
         [Required]
         [MaxLength(150)] public string Description { get; set; }
+
     }
 }

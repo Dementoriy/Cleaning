@@ -33,7 +33,7 @@ namespace WPFCleaning
             InitializeComponent();
 
             clientPage = new ClientPage(this);
-            newApplication = new NewApplication();
+            newApplication = new NewApplication(clientPage, emp);
             applications = new Applications();
 
             View.Navigate(clientPage);

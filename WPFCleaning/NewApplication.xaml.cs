@@ -20,8 +20,13 @@ namespace WPFCleaning
     /// </summary>
     public partial class NewApplication : Page
     {
-        public NewApplication()
+        private ClientPage _clientPage;
+        private Employee _emp;
+
+        public NewApplication(Page clientPage, Employee emp)
         {
+            _clientPage = (ClientPage)clientPage;
+            _emp = emp;
             InitializeComponent();
             ChemistryCleanBox.IsEnabled = false;
             WindowCleanBox.IsEnabled = false;
@@ -122,10 +127,68 @@ namespace WPFCleaning
                 approximateTime -= Service.GetPrice(Service.GetIdService(CheckExpressClean.Content.ToString())).Time * Convert.ToInt32(TextBoxSquare.Text);
             }
         }
+
+        public int GetIdServiceByCheckBox()
+        {
+            if ((bool)CheckExpressClean.IsChecked)
+                return Service.GetIdService(CheckExpressClean.Content.ToString());
+            if ((bool)CheckGeneralClean.IsChecked)
+                return Service.GetIdService(CheckGeneralClean.Content.ToString());
+            if ((bool)CheckBuildingClean.IsChecked)
+                return Service.GetIdService(CheckBuildingClean.Content.ToString());
+            if ((bool)CheckOfficeClean.IsChecked)
+                return Service.GetIdService(CheckOfficeClean.Content.ToString());
+            return 0;
+        }
+
         private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {
-            
+            var client = new Client
+            {
+                Surname = _clientPage.Surname.Text,
+                Name = _clientPage.Name.Text,
+                MiddleName = _clientPage.MiddleName.Text,
+                ClientTelefonNumber = _clientPage.Telefon.Text
+            };
+            var address = new Address
+            {
+                Street = _clientPage.Street.Text,
+                HouseNumber = _clientPage.HouseNumber.Text,
+                Building = _clientPage.Building.Text,
+                Entrance = _clientPage.Entrance.Text,
+                Apartment_Number = _clientPage.Apartment_Number.Text
+            };
+            var order = new Order
+            {
+                Status = "Ожидает",
+                Client = client,
+                Employee = _emp,
+                Address = address,
+                Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text)),
+                Date = DateTime.Now,
+                FinalPrice = Convert.ToInt32(PriceBox.Text),
+                ApproximateTime = at
+            };
+            var providedService = new ProvidedService
+            {
+                Order = order,
+                Service = Service.GetServiceByID(GetIdServiceByCheckBox()),
+                Amount = Convert.ToInt32(TextBoxSquare.Text),
+                
+            };
+            var contract = new Contract
+            {
+                Client = client,
+                Employee = _emp,
+                Date_Of_Contract = DateTime.Now
+            };
+            Context.Db.Contract.Add(contract);
+            Context.Db.ProvidedService.Add(providedService);
+            Context.Db.SaveChanges();
         }
+
+        int at = 0;
+
         private void ButtonCalculate_Click(object sender, RoutedEventArgs e)
         {
             PriceBox.Text = "";
@@ -221,11 +284,12 @@ namespace WPFCleaning
             //    finalPrice = finalPrice - 10 %;
             //}
 
+            at = approximateTime;
             int t = approximateTime / 60;
             int h = t / 60;
             int m = t % 60;
 
-            PriceBox.Text = finalPrice.ToString() + "₽";
+            PriceBox.Text = finalPrice.ToString() ;
             ApproximateTime.Text = h + " ч. " + m + "мин.";
             //ApproximateTime.Text = approximateTime.ToString();
         }

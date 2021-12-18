@@ -46,12 +46,7 @@
         <Border Background="#3a388a" Grid.Column="3" Grid.Row="10" Margin="0 3 10 2" Height="40" CornerRadius="3" BorderBrush="White" >
             <CheckBox x:Name="CheckFinish" Foreground ="White" Background="White" FontFamily="Arial Bold" Margin="15,0,0,0"  FontSize="18" Checked="CheckFinish_Checked" Unchecked="CheckFinish_Unchecked">Завершена</CheckBox>
         </Border>
-        <Button Grid.Column="4"  Grid.Row="10" Margin="0 3 10 2" Height="40" FontFamily="Arial Bold" FontSize="18" BorderBrush="White" Background="#3a388a">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Удалить"/>
-                <materialDesign:PackIcon Kind="DeleteOutline" VerticalAlignment="Center" Margin="5 0 0 0"/>
-            </StackPanel>
-        </Button>
+        
         <DatePicker x:Name="DatePickerSearch" SelectedDate="{x:Static sys:DateTime.Now}" materialDesign:HintAssist.Hint="Выберете дату" Grid.Row="10" Grid.Column="0" Margin="20 0 0 0" SelectedDateFormat="Short" FontFamily="Arial Bold" FontSize="20" CalendarClosed="DatePickerSearch_CalendarClosed"/>
 
         <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1" FontFamily="Arial" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserResizeColumns="False" CanUserReorderColumns="False" SelectionMode="Single" SelectionUnit="FullRow">

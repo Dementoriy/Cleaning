@@ -34,5 +34,10 @@ namespace CleaningDLL
         {
             return db.Service.Where(s => s.ID == idService).ToList()[0];
         }
+
+        public static Service GetServiceByID(int id)
+        {
+            return db.Service.Where(e => e.ID == id).ToList()[0];
+        }
     }
 }

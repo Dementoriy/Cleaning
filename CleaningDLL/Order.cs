@@ -22,6 +22,8 @@ namespace CleaningDLL
         public Brigade Brigade { get; set; }
         [Required]
         public DateTime Date { get; set; }
+        public int FinalPrice { get; set; }
+        public int ApproximateTime { get; set; }
 
         private static ApplicationContext db = Context.Db;
 

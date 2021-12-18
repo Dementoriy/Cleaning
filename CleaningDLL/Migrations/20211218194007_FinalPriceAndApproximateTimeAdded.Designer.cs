@@ -3,15 +3,17 @@ using System;
 using CleaningDLL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CleaningDLL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20211218194007_FinalPriceAndApproximateTimeAdded")]
+    partial class FinalPriceAndApproximateTimeAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -450,9 +452,6 @@ namespace CleaningDLL.Migrations
                     b.Property<int?>("AddressID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ApproximateTime")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("BrigadeID")
                         .HasColumnType("integer");
 
@@ -463,9 +462,6 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<int?>("EmployeeID")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("FinalPrice")
                         .HasColumnType("integer");
 
                     b.Property<string>("Status")

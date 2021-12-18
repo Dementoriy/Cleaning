@@ -12,5 +12,12 @@ namespace CleaningDLL
         public int ID { get; set; }
         [Required]
         [MaxLength(10)] public string Smena_Number { get; set; }
+
+        private static ApplicationContext db = Context.Db;
+
+        public static Brigade GetBrigadeByID(int id)
+        {
+            return db.Brigade.Where(e => e.ID == id).ToList()[0];
+        }
     }
 }

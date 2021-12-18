@@ -3,15 +3,17 @@ using System;
 using CleaningDLL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CleaningDLL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20211218191455_DropReferenceUnitsOfMeasurement")]
+    partial class DropReferenceUnitsOfMeasurement
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -450,9 +452,6 @@ namespace CleaningDLL.Migrations
                     b.Property<int?>("AddressID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ApproximateTime")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("BrigadeID")
                         .HasColumnType("integer");
 
@@ -463,9 +462,6 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<int?>("EmployeeID")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("FinalPrice")
                         .HasColumnType("integer");
 
                     b.Property<string>("Status")
@@ -518,6 +514,9 @@ namespace CleaningDLL.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("InventoryID")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("OrderID")
                         .HasColumnType("integer");
 
@@ -525,6 +524,8 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("InventoryID");
 
                     b.HasIndex("OrderID");
 
@@ -845,6 +846,10 @@ namespace CleaningDLL.Migrations
 
             modelBuilder.Entity("CleaningDLL.ProvidedService", b =>
                 {
+                    b.HasOne("CleaningDLL.Inventory", "Inventory")
+                        .WithMany()
+                        .HasForeignKey("InventoryID");
+
                     b.HasOne("CleaningDLL.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderID");
@@ -852,6 +857,8 @@ namespace CleaningDLL.Migrations
                     b.HasOne("CleaningDLL.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceID");
+
+                    b.Navigation("Inventory");
 
                     b.Navigation("Order");
 
