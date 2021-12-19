@@ -31,6 +31,12 @@ namespace CleaningDLL
         //{
         //        return db.Order.ToList();
         //}
+
+        public static Order GetOrderById(int id)
+        {
+            return db.Order.Where(e => e.ID == id).ToList()[0];
+        }
+
         public static List<OrderInfo> GetOrderInfo()
         {
                 return (from o in db.Order
@@ -45,7 +51,9 @@ namespace CleaningDLL
                             Status = o.Status,
                             Client = o.Client.AddFIO(),
                             Address = a.AddAddress(),
-                            Telefone = o.Client.ClientTelefonNumber
+                            Telefone = o.Client.ClientTelefonNumber,
+                            FinalPrice = o.FinalPrice,
+                            ApproximateTime = (GetTimeByInt(o.ApproximateTime)).ToString()
                         }).ToList();
         }
         public class OrderInfo
@@ -58,8 +66,18 @@ namespace CleaningDLL
             public int Brigade { get; set; }
             public string Telefone { get; set; }
             public string Client { get; set; }
+            public string ApproximateTime { get; set; }
+            public int FinalPrice { get; set; }
         }
-            
+
+        public static string GetTimeByInt(int t)
+        {
+            t = t / 60;
+            int h = t / 60;
+            int m = t % 60;
+            return (h + " ч. " + m + "мин.");
+        }
+
         public static List<BrigadeInfo> GetBrigadeInfo()
         {
                 return (from o in db.Order

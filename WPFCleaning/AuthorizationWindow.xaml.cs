@@ -23,56 +23,7 @@ namespace WPFCleaning
         {
             new ApplicationContext(ApplicationContext.GetDb());
             InitializeComponent();
-            //var role = new Position
-            //{
-            //    NamePosition = "Администратор",
-            //    Description = "Обрабатывать заявки"
-            //};
-            //var employee = new Employee
-            //{
-            //    Position = role,
-            //    Surname = "Ведерников",
-            //    Name = "Дмитрий",
-            //    MiddleName = "Михайлович",
-            //    PassportData = "1111222223",
-            //    EmployeeTelefonNumber = "79998887765",
-            //    Employment_Date = DateTime.Now,
-            //    Login = "Admin1",
-            //    Password = "3a46fa46c1c732dc668a59cd9b7ff61a86426000ab2760d871e873c22c63093e"
-            //};
-            //Employee.Add(employee);
-            //var role = new Position
-            //{
-            //    NamePosition = "Бригадир",
-            //    Description = "Главный клинер"
-            //};
-            //var employee = new Employee
-            //{
-            //    Position = role,
-            //    Surname = "Бессонов",
-            //    Name = "Иван",
-            //    MiddleName = "Анатольевич",
-            //    PassportData = "1111222224",
-            //    EmployeeTelefonNumber = "79998887764",
-            //    Employment_Date = DateTime.Now,
-            //    Login = "Brigadir1",
-            //    Password = "60bcad77c43c4ab9840d8aa44b6c18e692e6c8e5e4f40351561c41274f1197c8"
-            //};
-            //Employee.Add(employee);
         }
-
-        //private void SignInBrigadirButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    BrigadirWindow brigadirWindow = new BrigadirWindow();
-        //    brigadirWindow.Show();
-        //    this.Close();
-        //}
-        //private void SignInButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    MainWindow mainWindow = new MainWindow();
-        //    mainWindow.Show();
-        //    this.Close();
-        //}
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
             Employee employee = Employee.GetEmployee(TextBoxLogin.Text.Trim(), GetHash(PasswordBox.Password.Trim()));

@@ -1,69 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using System.Linq;
 using CleaningDLL;
-
 
 namespace WPFCleaning
 {
     /// <summary>
-    /// Логика взаимодействия для BrigadeApplications.xaml
+    /// Логика взаимодействия для ReportPage.xaml
     /// </summary>
-    public partial class BrigadeApplications : Page
+    public partial class ReportPage : Page
     {
-        private Employee _br;
-        public BrigadeApplications(Employee br)
+        public ReportPage()
         {
-            _br = br;
-            InitializeComponent(); 
+            InitializeComponent();
             AddAplication();
             SelectedOrderInfo();
+            CheckFinish.IsChecked = true;
         }
-        private void CheckWait_Checked(object sender, RoutedEventArgs e)
+        
+        public void AddAplication()
         {
-            CheckInProcess.IsChecked = false;
-            CheckFinish.IsChecked = false;
-            SelectedOrderInfo();
+            dataGridOrder.ItemsSource = Order.GetOrderInfo();
         }
-        private void CheckWait_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (!(bool)CheckInProcess.IsChecked && !(bool)CheckFinish.IsChecked)
-                SelectedOrderInfo();
-        }
-        private void CheckInProcess_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckWait.IsChecked = false;
-            CheckFinish.IsChecked = false;
-            SelectedOrderInfo();
-        }
-        private void CheckInProcess_Unchecked(object sender, RoutedEventArgs e)
-        {
-            if (!(bool)CheckWait.IsChecked && !(bool)CheckFinish.IsChecked)
-                SelectedOrderInfo();
-        }
+
         private void CheckFinish_Checked(object sender, RoutedEventArgs e)
         {
-            CheckWait.IsChecked = false;
-            CheckInProcess.IsChecked = false;
+            CheckCanceled.IsChecked = false;
             SelectedOrderInfo();
         }
         private void CheckFinish_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (!(bool)CheckWait.IsChecked && !(bool)CheckInProcess.IsChecked)
+            if (!(bool)CheckCanceled.IsChecked)
                 SelectedOrderInfo();
         }
-        public void AddAplication()
+        private void CheckCanceled_Checked(object sender, RoutedEventArgs e)
         {
-            dataGridApplication.ItemsSource = Order.GetOrderInfo();
+            CheckFinish.IsChecked = false;
+            SelectedOrderInfo();
+        }
+        private void CheckCanceled_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (!(bool)CheckFinish.IsChecked)
+                SelectedOrderInfo();
         }
 
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)
         {
             SelectedOrderInfo();
         }
+
+        private List<Order.OrderInfo> _listSort;
 
         private void SelectedOrderInfo()
         {
@@ -72,13 +68,9 @@ namespace WPFCleaning
             {
                 listSort = listSort.Where(e => e.Status == "Завершена").ToList();
             }
-            else if (CheckInProcess.IsChecked == true)
+            else if (CheckCanceled.IsChecked == true)
             {
-                listSort = listSort.Where(e => e.Status == "В процессе").ToList();
-            }
-            else if (CheckWait.IsChecked == true)
-            {
-                listSort = listSort.Where(e => e.Status == "Ожидает").ToList();
+                listSort = listSort.Where(e => e.Status == "Отменена").ToList();
             }
             if (DatePickerSearchEnd.Text != "" && DatePickerSearchStart.Text != "")
             {
@@ -86,13 +78,13 @@ namespace WPFCleaning
                 DateTime dtEnd = DatePickerSearchEnd.SelectedDate.Value;
 
                 if (DatePickerSearchStart.SelectedDate.Value <= DatePickerSearchEnd.SelectedDate.Value)
-                    listSort = listSort = listSort.Where(e => DateTime.Parse(e.Date) >= dtStart.Date && DateTime.Parse(e.Date) <= dtEnd.Date).ToList(); 
+                    listSort = listSort.Where(e => DateTime.Parse(e.Date) >= dtStart.Date && DateTime.Parse(e.Date) <= dtEnd.Date).ToList();
                 else
                 {
                     MessageBox.Show("Дата конца периода больше \n даты начала периода");
                     DatePickerSearchEnd.Text = "";
                 }
-                
+
             }
             if (DatePickerSearchStart.Text == "")
             {
@@ -107,15 +99,16 @@ namespace WPFCleaning
             if (SearchBox.Text != "")
             {
                 listSort = listSort.Where(e => e.Address.ToLower().Contains(SearchBox.Text.ToLower())
-                || e.Telefone.ToLower().Contains(SearchBox.Text.ToLower())
-                || e.Client.ToLower().Contains(SearchBox.Text.ToLower())
+                || e.FinalPrice.ToString().ToLower().Contains(SearchBox.Text.ToLower())
+                || e.ApproximateTime.ToString().ToLower().Contains(SearchBox.Text.ToLower())
                 || e.Brigade.ToString().ToLower().Contains(SearchBox.Text.ToLower())
                 || e.Date.ToLower().Contains(SearchBox.Text.ToLower())
                 || e.Time.ToLower().Contains(SearchBox.Text.ToLower())
                 || e.Status.ToLower().Contains(SearchBox.Text.ToLower())
                 ).ToList();
             }
-            dataGridApplication.ItemsSource = listSort.Where(d => d.Brigade == _br.BrigadeID);
+            _listSort = listSort;
+            dataGridOrder.ItemsSource = listSort;
         }
         private void DatePickerSearchStart_CalendarClosed(object sender, RoutedEventArgs e)
         {
@@ -149,6 +142,33 @@ namespace WPFCleaning
             }
             else
                 SelectedOrderInfo();
+        }
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ApplicationsFullInfo applicationsFullInfo = new ApplicationsFullInfo();
+            Order.OrderInfo selectedOrder = (Order.OrderInfo)dataGridOrder.SelectedValue;
+            applicationsFullInfo.Show();
+            applicationsFullInfo.AddSelectedOrder(selectedOrder.ID);
+        }
+
+        private void CalculateReport_Click(object sender, RoutedEventArgs e)
+        {
+            List<Order> orders = new List<Order>();
+            int fp = 0;
+            int sec = 0;
+
+            foreach (Order.OrderInfo order in _listSort)
+            {
+                orders.Add(Order.GetOrderById(order.ID));
+            }
+            foreach (Order order in orders)
+            {
+                fp += order.FinalPrice;
+                sec += order.ApproximateTime;
+            }
+            KolvoOrderBox.Text = orders.Count().ToString();
+            KolvoTimeBox.Text = Order.GetTimeByInt(sec);
+            PriceBox.Text = fp.ToString();
         }
     }
 }

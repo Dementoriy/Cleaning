@@ -32,7 +32,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="10" Grid.Column="5">
-            <TextBox x:Name="SearchBox" materialDesign:HintAssist.Hint="Поиск:" Background="White" Height="38" Width="200" Cursor="IBeam" Margin="0 3 0 3" FontSize="18" TextChanged="SearchBox_TextChanged"/>
+            <TextBox x:Name="SearchBox" materialDesign:HintAssist.Hint="Поиск:" Background="#d8d8f2" Height="38" Width="200" Cursor="IBeam" Margin="0 3 0 3" FontSize="18" TextChanged="SearchBox_TextChanged"/>
             <Button Margin="5 0 0 0" FontFamily="Arial Bold" FontSize="20" Background="#3a388a" Foreground ="White" Cursor="IBeam" BorderBrush="White" BorderThickness="2" Height="40" Click="ButtonSearch_Click" HorizontalAlignment="Right">
                 <materialDesign:PackIcon Kind="Search"/>
             </Button>
@@ -56,9 +56,14 @@
                 <DatePicker Name="DatePickerSearchStart" SelectedDate="{x:Static sys:DateTime.Now}" materialDesign:HintAssist.Hint="Выберете дату"  Margin="10 0 0 0" SelectedDateFormat="Short" CalendarClosed="DatePickerSearchStart_CalendarClosed" FontFamily="Arial Bold" FontSize="18"/>
                 <DatePicker Name="DatePickerSearchEnd" materialDesign:HintAssist.Hint="Выберете дату" Margin="10 4 0 0" SelectedDateFormat="Short" CalendarClosed="DatePickerSearchEnd_CalendarClosed" FontFamily="Arial Bold" FontSize="18"/>
             </StackPanel>
-            <Button x:Name="DelDate" Background="#d8d8f2" Margin="14 28 0 0" Click="DelDateButton_Click" BorderThickness="0" Padding="7 1 7 1">
-                <materialDesign:PackIcon Kind="Backspace" Foreground="#3a388a"/>
-            </Button>
+            <StackPanel Orientation="Vertical">
+                <Button x:Name="DelDateStart" Background="#d8d8f2" Margin="14 0 0 0" Click="DelDateStartButton_Click" BorderThickness="0" Padding="7 1 7 1">
+                    <materialDesign:PackIcon Kind="Backspace" Foreground="Black"/>
+                </Button>
+                <Button x:Name="DelDateEnd" Background="#d8d8f2" Margin="14 0 0 0" Click="DelDateEndButton_Click" BorderThickness="0" Padding="7 1 7 1">
+                    <materialDesign:PackIcon Kind="Backspace" Foreground="Black"/>
+                </Button>
+            </StackPanel>
         </StackPanel>
 
         <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1"

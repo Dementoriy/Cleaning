@@ -158,6 +158,7 @@ namespace WPFCleaning
                 Entrance = _clientPage.Entrance.Text,
                 Apartment_Number = _clientPage.Apartment_Number.Text
             };
+
             var order = new Order
             {
                 Status = "Ожидает",
@@ -285,14 +286,12 @@ namespace WPFCleaning
             //}
 
             at = approximateTime;
-            int t = approximateTime / 60;
-            int h = t / 60;
-            int m = t % 60;
 
             PriceBox.Text = finalPrice.ToString() ;
-            ApproximateTime.Text = h + " ч. " + m + "мин.";
+            ApproximateTime.Text = Order.GetTimeByInt(approximateTime);
             //ApproximateTime.Text = approximateTime.ToString();
         }
+        
         private void BtnBrigadeInfo_Click(object sender, RoutedEventArgs e)
         {
             if (BrigadeBox.SelectedIndex != -1)

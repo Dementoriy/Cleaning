@@ -46,10 +46,10 @@
                 <TextBlock FontSize="22" FontFamily="Arial bold" Text="Услуги" Foreground ="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Border>
 
-            <CheckBox Content="Экспресс уборка" x:Name="CheckExpressClean" Checked="CheckExpressClean_Checked" Margin="5 18 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="20" Unchecked="CheckService_Unchecked"/>
-            <CheckBox Content="Генеральная уборка" x:Name="CheckGeneralClean" Checked="CheckGeneralClean_Checked" Margin="5 18 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="20" Unchecked="CheckService_Unchecked"/>
-            <CheckBox Content="Послестроительная уборка" x:Name="CheckBuildingClean" Checked="CheckBuildingClean_Checked" Margin="5 18 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="20" Unchecked="CheckService_Unchecked"/>
-            <CheckBox Content="Уборка офисов" x:Name="CheckOfficeClean" Checked="CheckOfficeClean_Checked" Margin="5 18 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="20" Unchecked="CheckService_Unchecked"/>
+            <CheckBox Content="Экспресс уборка" x:Name="CheckExpressClean" Cursor="Hand" Checked="CheckExpressClean_Checked" Margin="5 18 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="20" Unchecked="CheckService_Unchecked"/>
+            <CheckBox Content="Генеральная уборка" x:Name="CheckGeneralClean" Cursor="Hand" Checked="CheckGeneralClean_Checked" Margin="5 18 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="20" Unchecked="CheckService_Unchecked"/>
+            <CheckBox Content="Послестроительная уборка" x:Name="CheckBuildingClean" Cursor="Hand" Checked="CheckBuildingClean_Checked" Margin="5 18 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="20" Unchecked="CheckService_Unchecked"/>
+            <CheckBox Content="Уборка офисов" x:Name="CheckOfficeClean" Cursor="Hand" Checked="CheckOfficeClean_Checked" Margin="5 18 0 0" Foreground ="Black" FontFamily="Arial Bold" FontSize="20" Unchecked="CheckService_Unchecked"/>
         </StackPanel>
 
         <StackPanel Grid.Column="6" Grid.ColumnSpan="3" Grid.Row="1" Grid.RowSpan="5" VerticalAlignment="Top">
@@ -57,13 +57,13 @@
                 <TextBlock FontSize="22" FontFamily="Arial bold" Text="Доп. услуги" Foreground ="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Border>
 
-            <CheckBox x:Name="WindowClean" Content="Мойка окон" FontSize="18" FontFamily="Arial bold" Margin="5 18 0 0" Checked="WindowClean_Checked" Unchecked="WindowClean_Unchecked"/>
+            <CheckBox x:Name="WindowClean" Content="Мойка окон" Cursor="Hand" FontSize="18" FontFamily="Arial bold" Margin="5 18 0 0" Checked="WindowClean_Checked" Unchecked="WindowClean_Unchecked"/>
 
-            <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="WindowCleanBox" Margin="20 -5 5 5" Height="30" FontFamily="Arial bold" Background="#d8d8f2" Foreground="#d8d8f2" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+            <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="WindowCleanBox" Cursor="Hand" Margin="20 -5 5 5" Height="30" FontFamily="Arial bold" Background="#d8d8f2" Foreground="#d8d8f2" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                 <TextBox x:Name="KolvoWindow" materialDesign:HintAssist.Hint="Количество окон(створа):" Text="0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black" GotFocus="KolvoService_GotFocus" LostFocus="KolvoService_LostFocus"/>
                 <TextBox x:Name="KolvoDoor" materialDesign:HintAssist.Hint="Количество дверей:" Text="0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black" GotFocus="KolvoService_GotFocus" LostFocus="KolvoService_LostFocus"/>
             </ComboBox>
-            <CheckBox x:Name="ChemistryClean" Content="Химчистка" FontSize="18" FontFamily="Arial bold" Margin="5 10 0 0" Checked="ChemistryClean_Checked" Unchecked="ChemistryClean_Unchecked"/>
+            <CheckBox x:Name="ChemistryClean" Content="Химчистка" Cursor="Hand" FontSize="18" FontFamily="Arial bold" Margin="5 10 0 0" Checked="ChemistryClean_Checked" Unchecked="ChemistryClean_Unchecked"/>
 
             <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="ChemistryCleanBox" Margin="20 -5 5 5" Height="30" FontFamily="Arial bold" Foreground="#d8d8f2" Style="{StaticResource MaterialDesignFloatingHintComboBox}" >
                 <TextBox x:Name="KolvoSofa" materialDesign:HintAssist.Hint="Количество диванов(мест):" Text="0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black" GotFocus="KolvoService_GotFocus" LostFocus="KolvoService_LostFocus"/>
@@ -71,7 +71,7 @@
                 <TextBox x:Name="KolvoCarpet" materialDesign:HintAssist.Hint="Количество ковров:" Text="0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black" GotFocus="KolvoService_GotFocus" LostFocus="KolvoService_LostFocus"/>
             </ComboBox>
 
-            <CheckBox x:Name="Dezinfection" Content="Дезинфекция" FontSize="18" FontFamily="Arial bold" Margin="5 10 0 0" Checked="Dezinfection_Checked" Unchecked="Dezinfection_Unchecked"/>
+            <CheckBox x:Name="Dezinfection" Content="Дезинфекция" Cursor="Hand" FontSize="18" FontFamily="Arial bold" Margin="5 10 0 0" Checked="Dezinfection_Checked" Unchecked="Dezinfection_Unchecked"/>
 
             <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="DezinfectionBox" Margin="20 -5 5 5" Height="30" Foreground="#d8d8f2" FontFamily="Arial bold" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                 <TextBox x:Name="KolvoDezinfection" materialDesign:HintAssist.Hint="Площадь:" Text="0" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black" GotFocus="KolvoService_GotFocus" LostFocus="KolvoService_LostFocus"/>
