@@ -53,8 +53,8 @@
                 <TextBlock Text="До:"  FontFamily="Arial Bold" FontSize="18" Margin="0 10 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="0 0 -10 0">
-                <DatePicker Name="DatePickerSearchStart" SelectedDate="{x:Static sys:DateTime.Now}" materialDesign:HintAssist.Hint="Выберете дату"  Margin="10 0 0 0" SelectedDateFormat="Short" CalendarClosed="DatePickerSearchStart_CalendarClosed" FontFamily="Arial Bold" FontSize="18"/>
-                <DatePicker Name="DatePickerSearchEnd" materialDesign:HintAssist.Hint="Выберете дату" Margin="10 4 0 0" SelectedDateFormat="Short" CalendarClosed="DatePickerSearchEnd_CalendarClosed" FontFamily="Arial Bold" FontSize="18"/>
+                <DatePicker Name="DatePickerSearchStart" SelectedDate="{x:Static sys:DateTime.Now}" materialDesign:HintAssist.Hint="Выберите дату"  Margin="10 0 0 0" SelectedDateFormat="Short" CalendarClosed="DatePickerSearchStart_CalendarClosed" FontFamily="Arial Bold" FontSize="18"/>
+                <DatePicker Name="DatePickerSearchEnd" materialDesign:HintAssist.Hint="Выберите дату" Margin="10 4 0 0" SelectedDateFormat="Short" CalendarClosed="DatePickerSearchEnd_CalendarClosed" FontFamily="Arial Bold" FontSize="18"/>
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <Button x:Name="DelDateStart" Background="#d8d8f2" Margin="14 0 0 0" Click="DelDateStartButton_Click" BorderThickness="0" Padding="7 1 7 1">

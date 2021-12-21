@@ -24,9 +24,35 @@ namespace WPFCleaning
             InitializeComponent();
             WindowState = WindowState.Maximized;
         }
-        public void AddSelectedOrder(int orderID)
+        public void AddSelectedOrder(int id)
         {
-            //orderInfo.Text = Order.GetOrderInfo();
+            Order order = Order.GetOrderById(id);
+
+            Telefon.Text = order.Client.ClientTelefonNumber;
+            Surname.Text = order.Client.Surname;
+            Name.Text = order.Client.Name;
+            if (order.Client.MiddleName != null)
+                MiddleName.Text = order.Client.MiddleName;
+            //CheckOldClient = ClientPage
+
+            Street.Text = order.Address.Street;
+            HouseNumber.Text = order.Address.HouseNumber;
+            Building.Text = order.Address.Building;
+            Entrance.Text = order.Address.Entrance;
+            Apartment_Number.Text = order.Address.Apartment_Number;
+
+            PriceBox.Text = order.FinalPrice.ToString();
+            ApproximateTime.Text = Order.GetTimeByInt(order.ApproximateTime);
+            BrigadeBox.Text = order.Status;
+
+            //Employee brigadir = Employee.GetBrigadirByBrigada(order.Brigade.ID);
+
+            //BrigadirTelefon.Text = brigadir.EmployeeTelefonNumber;
+            //BrigadirSurname.Text = brigadir.Surname;
+            //BrigadirName.Text = brigadir.Name;
+            //BrigadirMiddleName.Text = brigadir.MiddleName;
+            //BrigadeNumber.Text = order.Brigade.ID.ToString();
+
         }
 
         private void CheckExpressClean_Checked(object sender, RoutedEventArgs e)

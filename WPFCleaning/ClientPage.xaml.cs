@@ -27,6 +27,7 @@ namespace WPFCleaning
 
         }
         private MainWindow window;
+
         private void ClientSearch_Click(object sender, RoutedEventArgs e)
         {
             ClearClientInfo();
@@ -89,10 +90,6 @@ namespace WPFCleaning
             {
                 e.Handled = true; // если пробел, отклоняем ввод
             }
-        }
-
-        public void CheckOldClient_Checked(object sender, RoutedEventArgs e)
-        {
         }
     }
 }

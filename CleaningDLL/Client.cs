@@ -17,9 +17,16 @@ namespace CleaningDLL
         [MaxLength(50)] public string? MiddleName { get; set; }
         [Required]
         [MaxLength(12)] public string ClientTelefonNumber { get; set; }
+        [Required]
+        public bool IsOldClient { get; set; }
 
         private static ApplicationContext db = Context.Db;
 
+
+        public static Client GetClientByTelefon(string telefon)
+        {
+            return db.Client.Where(e => e.ClientTelefonNumber == telefon).ToList()[0];
+        }
         public string AddFIO()
         {
             string str = $"{Surname} {Name.Substring(0, 1)}.";

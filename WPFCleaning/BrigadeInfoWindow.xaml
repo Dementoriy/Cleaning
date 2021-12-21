@@ -45,7 +45,7 @@
                 <DataGridTextColumn Header="Время" Width="100" Binding="{Binding Path=Time}"/>
                 <DataGridTextColumn Header="Адрес" Width="400" Binding="{Binding Path=Address}"/>
                 <DataGridTextColumn Header="Статус" Width="150" Binding="{Binding Path=Status}"/>
-                <DataGridTextColumn Header="≈Время" Width="110" Binding="{Binding Path=Brigade}"/>
+                <DataGridTextColumn Header="≈Время" Width="200" Binding="{Binding Path=ApproximateTime}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

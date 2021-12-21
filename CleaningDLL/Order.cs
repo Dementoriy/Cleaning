@@ -90,6 +90,7 @@ namespace CleaningDLL
                             Brigade = o.Brigade.ID,
                             Status = o.Status,
                             Address = a.AddAddress(),
+                            ApproximateTime = (GetTimeByInt(o.ApproximateTime)).ToString(),
                         }).ToList();
         }
         public class BrigadeInfo
@@ -99,6 +100,7 @@ namespace CleaningDLL
             public string Address { get; set; }
             public string Status { get; set; }
             public int Brigade { get; set; }
+            public string ApproximateTime { get; set; }
         }
     }
     

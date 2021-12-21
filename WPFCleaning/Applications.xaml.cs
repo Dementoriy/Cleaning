@@ -112,5 +112,16 @@ namespace WPFCleaning
         {
             SelectedOrderInfo();
         }
+
+        private void DelDateEndButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DatePickerSearch.Text != "")
+            {
+                DatePickerSearch.Text = "";
+                SelectedOrderInfo();
+            }
+            else
+                SelectedOrderInfo();
+        }
     }
 }

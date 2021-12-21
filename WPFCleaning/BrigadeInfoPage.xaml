@@ -44,7 +44,7 @@
                 <DataGridTextColumn Header="Клинер" Width="300" Binding="{Binding Path=Cleaner}"/>
                 <DataGridTextColumn Header="Должность" Width="200" Binding="{Binding Path=Positions}"/>
                 <DataGridTextColumn Header="Телефон" Width="200" Binding="{Binding Path=Telefone}"/>
-                <DataGridTextColumn Header="Стаж" Width="150" Binding="{Binding Path=WorkExperience}"/>
+                <DataGridTextColumn Header="Работает с" Width="160" Binding="{Binding Path=WorkExperience}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -45,6 +45,10 @@ namespace CleaningDLL
 
         private static ApplicationContext db = Context.Db;
 
+        public static Employee GetBrigadirByBrigada(int id)
+        {
+            return db.Employee.Where(a => a.BrigadeID == id).FirstOrDefault();
+        }
         public static Employee GetEmployee(string Login, string Password)
         {
             return db.Employee.Where(a => a.Login == Login && a.Password == Password).FirstOrDefault();

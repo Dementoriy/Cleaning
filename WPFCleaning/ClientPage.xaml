@@ -48,7 +48,7 @@
             <TextBox x:Name="Surname" materialDesign:HintAssist.Hint="Фамилия" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="IBeam" FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
             <TextBox x:Name="Name" materialDesign:HintAssist.Hint="Имя" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="IBeam" FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
             <TextBox x:Name="MiddleName" materialDesign:HintAssist.Hint="Отчество" Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="IBeam" FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
-            <CheckBox x:Name="CheckOldClient" Content="Постоянный клиент" Foreground ="Black" HorizontalAlignment="Left" Cursor="Hand" Margin="0 20 38 0" Height="20" Width="200" FontFamily="Arial bold" FontSize="16" Checked="CheckOldClient_Checked" />
+            <CheckBox x:Name="CheckOldClient" Content="Постоянный клиент" Foreground ="Black" HorizontalAlignment="Left" Cursor="Hand" Margin="0 20 38 0" Height="20" Width="200" FontFamily="Arial bold" FontSize="16"  />
 
         </StackPanel>
 

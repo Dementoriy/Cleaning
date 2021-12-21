@@ -51,7 +51,6 @@ namespace WPFCleaning
             approximateTime -= Convert.ToInt32(KolvoCarpet.Text) * Service.GetPrice(idService).Time;
             if (finalPrice != 0)
             {
-
                 KolvoSofa.Text = "0";
                 KolvoArmcheir.Text = "0";
                 KolvoCarpet.Text = "0";
@@ -128,64 +127,123 @@ namespace WPFCleaning
             }
         }
 
+        //List<int> listService = new List<int>() { 0, 0, 0, 0, 0, 0, 0};
+        int[,] arrayService = new int[2, 7];
         public int GetIdServiceByCheckBox()
         {
             if ((bool)CheckExpressClean.IsChecked)
+            {
+                arrayService[0,0] = (Service.GetIdService(CheckExpressClean.Content.ToString()));
+                arrayService[1,0] = Convert.ToInt32(TextBoxSquare.Text);
                 return Service.GetIdService(CheckExpressClean.Content.ToString());
+            }
+                
             if ((bool)CheckGeneralClean.IsChecked)
+            {
+                arrayService[0, 0] = (Service.GetIdService(CheckExpressClean.Content.ToString()));
+                arrayService[1, 0] = Convert.ToInt32(TextBoxSquare.Text);
                 return Service.GetIdService(CheckGeneralClean.Content.ToString());
+            }
+                
             if ((bool)CheckBuildingClean.IsChecked)
+            {
+                arrayService[0, 0] = (Service.GetIdService(CheckExpressClean.Content.ToString()));
+                arrayService[1, 0] = Convert.ToInt32(TextBoxSquare.Text);
                 return Service.GetIdService(CheckBuildingClean.Content.ToString());
+            }
             if ((bool)CheckOfficeClean.IsChecked)
+            {
+                arrayService[0, 0] = (Service.GetIdService(CheckExpressClean.Content.ToString()));
+                arrayService[1, 0] = Convert.ToInt32(TextBoxSquare.Text);
                 return Service.GetIdService(CheckOfficeClean.Content.ToString());
+            }     
             return 0;
         }
 
         private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {
-            var client = new Client
+            GetIdServiceByCheckBox();
+            try
             {
-                Surname = _clientPage.Surname.Text,
-                Name = _clientPage.Name.Text,
-                MiddleName = _clientPage.MiddleName.Text,
-                ClientTelefonNumber = _clientPage.Telefon.Text
-            };
-            var address = new Address
-            {
-                Street = _clientPage.Street.Text,
-                HouseNumber = _clientPage.HouseNumber.Text,
-                Building = _clientPage.Building.Text,
-                Entrance = _clientPage.Entrance.Text,
-                Apartment_Number = _clientPage.Apartment_Number.Text
-            };
+                Client client;
+                try
+                {
+                    client = new Client
+                    {
+                        Surname = _clientPage.Surname.Text,
+                        Name = _clientPage.Name.Text,
+                        MiddleName = _clientPage.MiddleName.Text,
+                        ClientTelefonNumber = _clientPage.Telefon.Text,
+                        IsOldClient = false
+                    };
+                }
+                catch
+                {
+                    client = Client.GetClientByTelefon(_clientPage.Telefon.Text);
+                    MessageBox.Show("Клиент есть в БД");
+                }
+                var address = new Address
+                {
+                    Street = _clientPage.Street.Text,
+                    HouseNumber = _clientPage.HouseNumber.Text,
+                    Building = _clientPage.Building.Text,
+                    Entrance = _clientPage.Entrance.Text,
+                    Apartment_Number = _clientPage.Apartment_Number.Text
+                };
+                //Context.Db.Client.Add(client);
+                //Context.Db.Address.Add(address);
+                //Context.Db.SaveChanges();
+                string NewDate = (DatePicker.Text + " " + SelectTime.Text);
+                var order = new Order
+                {
+                    Status = "Ожидает",
+                    Client = client,
+                    Employee = _emp,
+                    Address = address,
+                    Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text)),
+                    Date = DateTime.Parse(NewDate),
+                    FinalPrice = Convert.ToInt32(PriceBox.Text),
+                    ApproximateTime = at
+                };
+                for (int i = 0; i < 7; i++)
+                {
+                    if (arrayService[0, i] != 0)
+                    {
+                        var providedService = new ProvidedService
+                        {
+                            Order = order,
+                            Service = Service.GetServiceByID(arrayService[0, i]),
+                            Amount = arrayService[1, i],
+                        };
+                        Context.Db.ProvidedService.Add(providedService);
+                    }
+                }
+                var contract = new Contract
+                {
+                    Client = client,
+                    Employee = _emp,
+                    Date_Of_Contract = DateTime.Now
+                };
+                Context.Db.Contract.Add(contract);
+                Context.Db.SaveChanges();
+                MessageBox.Show("Успешно!");
+                CheckExpressClean.IsChecked = false;
+                CheckGeneralClean.IsChecked = false;
+                CheckBuildingClean.IsChecked = false;
+                CheckOfficeClean.IsChecked = false;
+                WindowClean.IsChecked = false;
+                ChemistryClean.IsChecked = false;
+                Dezinfection.IsChecked = false;
+                TextBoxSquare.Text = "";
+                DatePicker.Text = "";
+                SelectTime.Text = "";
+                BrigadeBox.Text = "";
+                PriceBox.Text = "";
+                ApproximateTime.Text = "";
+                Comment.Text = "";
 
-            var order = new Order
-            {
-                Status = "Ожидает",
-                Client = client,
-                Employee = _emp,
-                Address = address,
-                Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text)),
-                Date = DateTime.Now,
-                FinalPrice = Convert.ToInt32(PriceBox.Text),
-                ApproximateTime = at
-            };
-            var providedService = new ProvidedService
-            {
-                Order = order,
-                Service = Service.GetServiceByID(GetIdServiceByCheckBox()),
-                Amount = Convert.ToInt32(TextBoxSquare.Text),
-                
-            };
-            var contract = new Contract
-            {
-                Client = client,
-                Employee = _emp,
-                Date_Of_Contract = DateTime.Now
-            };
-            Context.Db.Contract.Add(contract);
-            Context.Db.ProvidedService.Add(providedService);
-            Context.Db.SaveChanges();
+            }
+            catch { MessageBox.Show("Не все поля заполнены"); }
         }
 
         int at = 0;
@@ -231,6 +289,8 @@ namespace WPFCleaning
                     string str = "Мойка окон";
                     idService = Service.GetIdService(str);
 
+                    arrayService[0, 1] = idService;
+                    arrayService[1, 1] = Convert.ToInt32(KolvoWindow.Text);
                     finalPrice += Convert.ToInt32(KolvoWindow.Text) * Service.GetPrice(idService).Price;
                     approximateTime += Convert.ToInt32(KolvoWindow.Text) * Service.GetPrice(idService).Time;
                 }
@@ -239,6 +299,8 @@ namespace WPFCleaning
                     string str = "Мойка стеклянных дверей";
                     idService = Service.GetIdService(str);
 
+                    arrayService[0, 2] = idService;
+                    arrayService[1, 2] = Convert.ToInt32(KolvoDoor.Text);
                     finalPrice += Convert.ToInt32(KolvoDoor.Text) * Service.GetPrice(idService).Price;
                     approximateTime += Convert.ToInt32(KolvoDoor.Text) * Service.GetPrice(idService).Time;
                 }
@@ -251,6 +313,8 @@ namespace WPFCleaning
                     string str = "Химчистка диванов";
                     idService = Service.GetIdService(str);
 
+                    arrayService[0, 3] = idService;
+                    arrayService[1, 3] = Convert.ToInt32(KolvoSofa.Text);
                     finalPrice += Convert.ToInt32(KolvoSofa.Text) * Service.GetPrice(idService).Price;
                     approximateTime += Convert.ToInt32(KolvoSofa.Text) * Service.GetPrice(idService).Time;
                 }
@@ -259,6 +323,8 @@ namespace WPFCleaning
                     string str = "Химчистка кресел";
                     idService = Service.GetIdService(str);
 
+                    arrayService[0, 4] = idService;
+                    arrayService[1, 4] = Convert.ToInt32(KolvoArmcheir.Text);
                     finalPrice += Convert.ToInt32(KolvoArmcheir.Text) * Service.GetPrice(idService).Price;
                     approximateTime += Convert.ToInt32(KolvoArmcheir.Text) * Service.GetPrice(idService).Time;
                 }
@@ -267,6 +333,8 @@ namespace WPFCleaning
                     string str = "Химчистка ковров";
                     idService = Service.GetIdService(str);
 
+                    arrayService[0, 5] = idService;
+                    arrayService[1, 5] = Convert.ToInt32(KolvoCarpet.Text);
                     finalPrice += Convert.ToInt32(KolvoCarpet.Text) * Service.GetPrice(idService).Price;
                     approximateTime += Convert.ToInt32(KolvoCarpet.Text) * Service.GetPrice(idService).Time;
                 }
@@ -276,14 +344,16 @@ namespace WPFCleaning
                 string str = "Дезинфекция";
                 idService = Service.GetIdService(str);
 
+                arrayService[0, 6] = idService;
+                arrayService[1, 6] = Convert.ToInt32(KolvoDezinfection.Text);
                 finalPrice += Convert.ToInt32(KolvoDezinfection.Text) * Service.GetPrice(idService).Price;
                 approximateTime += Convert.ToInt32(KolvoDezinfection.Text) * Service.GetPrice(idService).Time;
             }
 
-            //if (ClientPage.CheckOldClient.IsChecked)
-            //{
-            //    finalPrice = finalPrice - 10 %;
-            //}
+            if ((bool)_clientPage.CheckOldClient.IsChecked)
+            {
+                finalPrice = Convert.ToInt32((finalPrice * 90)/100);
+            }
 
             at = approximateTime;
 
@@ -352,23 +422,6 @@ namespace WPFCleaning
                 e.Handled = true; // если пробел, отклоняем ввод
             }
         }
-
-
-        private void TextBoxSquare_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            int val;
-            if (!Int32.TryParse(e.Text, out val))
-            {
-                e.Handled = true; // отклоняем ввод
-            }
-        }
-        private void TextBoxSquare_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Space)
-            {
-                e.Handled = true; // если пробел, отклоняем ввод
-            }
-        }
         private void TextBoxSquare_GotFocus(object sender, RoutedEventArgs e)
         {
             //if (TextBoxSquare.Text == "")
@@ -376,6 +429,22 @@ namespace WPFCleaning
             //    TextBoxSquare.Text = " m^2";
             //    TextBoxSquare.SelectionStart = 0;
             //}
+        }
+
+        public void CheckToInt(object sender, TextCompositionEventArgs e)
+        {
+            int val;
+            if (!Int32.TryParse(e.Text, out val))
+            {
+                e.Handled = true; // отклоняем ввод
+            }
+        }
+        private void CheckKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true; // если пробел, отклоняем ввод
+            }
         }
     }
 }
