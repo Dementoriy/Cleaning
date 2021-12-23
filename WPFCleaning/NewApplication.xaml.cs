@@ -160,13 +160,31 @@ namespace WPFCleaning
             return 0;
         }
 
+        public void ClearNewApplication()
+        {
+            CheckExpressClean.IsChecked = false;
+            CheckGeneralClean.IsChecked = false;
+            CheckBuildingClean.IsChecked = false;
+            CheckOfficeClean.IsChecked = false;
+            WindowClean.IsChecked = false;
+            ChemistryClean.IsChecked = false;
+            Dezinfection.IsChecked = false;
+            TextBoxSquare.Text = "";
+            DatePicker.Text = "";
+            SelectTime.Text = "";
+            BrigadeBox.Text = "";
+            PriceBox.Text = "";
+            ApproximateTime.Text = "";
+            Comment.Text = "";
+        }
         private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {
             GetIdServiceByCheckBox();
-            try
+            //try
             {
                 Client client;
-                try
+                
+                if(Client.ClientByTelefonIsNew(_clientPage.Telefon.Text))
                 {
                     client = new Client
                     {
@@ -177,11 +195,8 @@ namespace WPFCleaning
                         IsOldClient = false
                     };
                 }
-                catch
-                {
-                    client = Client.GetClientByTelefon(_clientPage.Telefon.Text);
-                    MessageBox.Show("Клиент есть в БД");
-                }
+                else client = Client.GetClientByTelefon(_clientPage.Telefon.Text);
+                
                 var address = new Address
                 {
                     Street = _clientPage.Street.Text,
@@ -190,9 +205,6 @@ namespace WPFCleaning
                     Entrance = _clientPage.Entrance.Text,
                     Apartment_Number = _clientPage.Apartment_Number.Text
                 };
-                //Context.Db.Client.Add(client);
-                //Context.Db.Address.Add(address);
-                //Context.Db.SaveChanges();
                 string NewDate = (DatePicker.Text + " " + SelectTime.Text);
                 var order = new Order
                 {
@@ -224,26 +236,14 @@ namespace WPFCleaning
                     Employee = _emp,
                     Date_Of_Contract = DateTime.Now
                 };
+                Context.Db.Address.Add(address);
                 Context.Db.Contract.Add(contract);
                 Context.Db.SaveChanges();
                 MessageBox.Show("Успешно!");
-                CheckExpressClean.IsChecked = false;
-                CheckGeneralClean.IsChecked = false;
-                CheckBuildingClean.IsChecked = false;
-                CheckOfficeClean.IsChecked = false;
-                WindowClean.IsChecked = false;
-                ChemistryClean.IsChecked = false;
-                Dezinfection.IsChecked = false;
-                TextBoxSquare.Text = "";
-                DatePicker.Text = "";
-                SelectTime.Text = "";
-                BrigadeBox.Text = "";
-                PriceBox.Text = "";
-                ApproximateTime.Text = "";
-                Comment.Text = "";
-
+                ClearNewApplication();
+                _clientPage.ClearClientInfo();
             }
-            catch { MessageBox.Show("Не все поля заполнены"); }
+            //catch { MessageBox.Show("Не все поля заполнены!"); }
         }
 
         int at = 0;

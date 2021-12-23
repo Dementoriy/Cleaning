@@ -31,22 +31,29 @@ namespace WPFCleaning
         private void ClientSearch_Click(object sender, RoutedEventArgs e)
         {
             ClearClientInfo();
+
+
             if (Client.proverkaClientTelefon(Telefon.Text))
             {
-                var tmp = Client.GetClientInfo(Telefon.Text).ToArray().Length - 1;
-                Surname.Text = Client.GetClientInfo(Telefon.Text)[0].Surname;
-                Name.Text = Client.GetClientInfo(Telefon.Text)[0].Name;
-                MiddleName.Text = Client.GetClientInfo(Telefon.Text)[0].MiddleName;
-                Street.Text = Client.GetClientInfo(Telefon.Text)[tmp].Street;
-                HouseNumber.Text = Client.GetClientInfo(Telefon.Text)[tmp].HouseNumber;
-                Building.Text = Client.GetClientInfo(Telefon.Text)[tmp].Building;
-                Entrance.Text = Client.GetClientInfo(Telefon.Text)[tmp].Entrance;
-                Apartment_Number.Text = Client.GetClientInfo(Telefon.Text)[tmp].Apartment_Number;
+                var lastAddress = Client.GetClientInfo(Telefon.Text).ToArray().Length - 1;
+                Client.ClientInfo client = Client.GetClientInfo(Telefon.Text)[lastAddress];
+
+                Surname.Text = client.Surname;
+                Name.Text = client.Name;
+                MiddleName.Text = client.MiddleName;
+                Street.Text = client.Street;
+                HouseNumber.Text = client.HouseNumber;
+                Building.Text = client.Building;
+                Entrance.Text = client.Entrance;
+                Apartment_Number.Text = client.Apartment_Number;
+                if (Order.IsOldClient(client.ID))
+                    CheckOldClient.IsChecked = true;
+                else CheckOldClient.IsChecked = false;
             }
             else System.Windows.MessageBox.Show("Клиента нет в БД");
         }
 
-        private void ClearClientInfo()
+        public void ClearClientInfo()
         {
             Surname.Text = "";
             Name.Text = "";

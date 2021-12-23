@@ -27,6 +27,18 @@ namespace CleaningDLL
         {
             return db.Client.Where(e => e.ClientTelefonNumber == telefon).ToList()[0];
         }
+        public static bool ClientByTelefonIsNew(string telefon)
+        {
+            try
+            {
+                Client client = db.Client.Where(e => e.ClientTelefonNumber == telefon).ToList()[0];
+                return false;
+            }
+            catch
+            {
+                return true;
+            }
+        }
         public string AddFIO()
         {
             string str = $"{Surname} {Name.Substring(0, 1)}.";
@@ -34,29 +46,29 @@ namespace CleaningDLL
             return str;
         }
 
-        public static List<ClientInfo> GetClientInfo(string Telefon)
+        public static List<ClientInfo> GetClientInfo(string Telefon) //Клиент не связан с адресом. В листе хранится клиент с разными адресами
         {
-            using (var db = new ApplicationContext(ApplicationContext.GetDb()))
-            {
-                return (from c in db.Client
-                        where c.ClientTelefonNumber == Telefon
-                        join o in db.Order on c.ID equals o.Client.ID
-                        join a in db.Address on o.Address.ID equals a.ID
-                        select new ClientInfo()
-                        {
-                            Surname = c.Surname,
-                            Name = c.Name,
-                            MiddleName = c.MiddleName,
-                            Street = a.Street,
-                            HouseNumber = a.HouseNumber,
-                            Building = a.Building,
-                            Entrance = a.Entrance,
-                            Apartment_Number = a.Apartment_Number
-                        }).ToList();
-            }
+            return (from c in db.Client
+                    where c.ClientTelefonNumber == Telefon
+                    join o in db.Order on c.ID equals o.Client.ID
+                    join a in db.Address on o.Address.ID equals a.ID
+                    select new ClientInfo()
+                    {
+                        ID = c.ID,
+                        Surname = c.Surname,
+                        Name = c.Name,
+                        MiddleName = c.MiddleName,
+                        Street = a.Street,
+                        HouseNumber = a.HouseNumber,
+                        Building = a.Building,
+                        Entrance = a.Entrance,
+                        Apartment_Number = a.Apartment_Number,
+                        IsOldClient = c.IsOldClient
+                    }).ToList();
         }
         public class ClientInfo
         {
+            public int ID { get; set; }
             public string Surname { get; set; }
             public string Name { get; set; }
             public string MiddleName { get; set; }
@@ -65,6 +77,7 @@ namespace CleaningDLL
             public string Building { get; set; }
             public string Entrance { get; set; }
             public string Apartment_Number { get; set; }
+            public bool IsOldClient { get; set; }
         }
         
         public static bool proverkaClientTelefon(string ClientTelefonNumber)

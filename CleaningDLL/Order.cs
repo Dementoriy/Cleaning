@@ -27,10 +27,12 @@ namespace CleaningDLL
 
         private static ApplicationContext db = Context.Db;
 
-        //public static List<Order> Get()
-        //{
-        //        return db.Order.ToList();
-        //}
+        public static bool IsOldClient(int clientId)
+        {
+            List<Order> ordersByClientID = db.Order.Where(o => o.Client.ID == clientId && o.Status == "Завершена").ToList();
+            if (ordersByClientID.Count >= 3) return true;
+            return false;
+        }
 
         public static Order GetOrderById(int id)
         {
@@ -77,31 +79,5 @@ namespace CleaningDLL
             int m = t % 60;
             return (h + " ч. " + m + "мин.");
         }
-
-        public static List<BrigadeInfo> GetBrigadeInfo()
-        {
-                return (from o in db.Order
-                        join a in db.Address on o.Address.ID equals a.ID
-                        select new BrigadeInfo()
-
-                        {
-                            Time = o.Date.ToString("t"),
-                            Date = o.Date.ToString("d"),
-                            Brigade = o.Brigade.ID,
-                            Status = o.Status,
-                            Address = a.AddAddress(),
-                            ApproximateTime = (GetTimeByInt(o.ApproximateTime)).ToString(),
-                        }).ToList();
-        }
-        public class BrigadeInfo
-        {
-            public string Date { get; set; }
-            public string Time { get; set; }
-            public string Address { get; set; }
-            public string Status { get; set; }
-            public int Brigade { get; set; }
-            public string ApproximateTime { get; set; }
-        }
     }
-    
 }
