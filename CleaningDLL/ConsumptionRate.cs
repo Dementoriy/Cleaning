@@ -13,9 +13,9 @@ namespace CleaningDLL
         [Required]
         [MaxLength(150)] public string Consumption { get; set; }
         [Required]
-        public Consumable Consumable { get; set; }
+        public virtual Consumable Consumable { get; set; }
         [Required]
-        public ReferenceUnitsOfMeasurement Unit { get; set; }
+        public virtual ReferenceUnitsOfMeasurement Unit { get; set; }
 
     }
 }

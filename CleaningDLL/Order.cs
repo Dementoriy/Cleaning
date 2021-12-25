@@ -13,13 +13,13 @@ namespace CleaningDLL
         [Required]
         [MaxLength(50)] public string Status { get; set; }
         [Required]
-        public Client Client{ get; set; }
+        public virtual Client Client{ get; set; }
         [Required]
-        public Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
         [Required]
-        public Address Address { get; set; }
+        public virtual Address Address { get; set; }
         [Required]
-        public Brigade Brigade { get; set; }
+        public virtual Brigade Brigade { get; set; }
         [Required]
         public DateTime Date { get; set; }
         public int FinalPrice { get; set; }

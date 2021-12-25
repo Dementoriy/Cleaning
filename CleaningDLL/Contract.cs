@@ -11,9 +11,9 @@ namespace CleaningDLL
     {
         public int ID { get; set; }
         [Required]
-        public Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
         [Required]
-        public Client Client { get; set; }
+        public virtual Client Client { get; set; }
         [Required]
         public DateTime Date_Of_Contract { get; set; }
     }

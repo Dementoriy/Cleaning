@@ -11,9 +11,9 @@ namespace CleaningDLL
     {
         public int ID { get; set; }
         [Required]
-        public Order Order { get; set; }
+        public virtual Order Order { get; set; }
         [Required]
-        public Service Service { get; set; }
+        public virtual Service Service { get; set; }
         [Required]
         public int Amount { get; set; }
     }

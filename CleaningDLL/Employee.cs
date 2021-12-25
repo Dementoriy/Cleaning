@@ -20,10 +20,10 @@ namespace CleaningDLL
         [Required]
         [MaxLength(12)] public string EmployeeTelefonNumber { get; set; }
         [Required]
-        public Position Position { get; set; }
+        public virtual Position Position { get; set; }
         [Required]
         public int PositionID { get; set; }
-        public Brigade? Brigade { get; set; }
+        public virtual Brigade? Brigade { get; set; }
         public int? BrigadeID { get; set; }
         [Required]
         public DateTime Employment_Date { get; set; }

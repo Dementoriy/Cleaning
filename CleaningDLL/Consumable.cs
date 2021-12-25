@@ -17,7 +17,7 @@ namespace CleaningDLL
         [Required]
         public decimal Current_Price { get; set; }
         [Required]
-        public ReferenceUnitsOfMeasurement Unit { get; set; }
+        public virtual ReferenceUnitsOfMeasurement Unit { get; set; }
         [Required]
         public int amount { get; set; }
     }

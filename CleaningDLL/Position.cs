@@ -14,7 +14,7 @@ namespace CleaningDLL
         [MaxLength(50)] public string NamePosition { get; set; }
         [Required]
         [MaxLength(150)] public string Description { get; set; }
-        public ICollection<Employee> Employees { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
         private static ApplicationContext db = Context.Db;
         public Position()
         {

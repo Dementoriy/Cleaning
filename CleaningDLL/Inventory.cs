@@ -15,7 +15,7 @@ namespace CleaningDLL
         [Required]
         [MaxLength(150)] public string Description { get; set; }
         [Required]
-        public InventoryType Inventory_Type { get; set; }
+        public virtual InventoryType Inventory_Type { get; set; }
         [Required]
         [MaxLength(50)] public string Use_Time { get; set; }
         [Required]

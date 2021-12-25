@@ -11,8 +11,8 @@ namespace CleaningDLL
     {
         public int ID { get; set; }
         [Required]
-        public Service Service { get; set; }
+        public virtual Service Service { get; set; }
         [Required]
-        public ConsumptionRate Consumption_Rate { get; set; }
+        public virtual ConsumptionRate Consumption_Rate { get; set; }
     }
 }

@@ -13,10 +13,10 @@ namespace CleaningDLL
         [Required]
         [MaxLength(50)] public string Status { get; set; }
         [Required]
-        public Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
         [Required]
-        public Provider Provider { get; set; }
+        public virtual Provider Provider { get; set; }
         [Required]
-        public RequisitionContent RequisitionContent { get; set; }
+        public virtual RequisitionContent RequisitionContent { get; set; }
     }
 }

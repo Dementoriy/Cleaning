@@ -45,13 +45,13 @@ namespace WPFCleaning
             ApproximateTime.Text = Order.GetTimeByInt(order.ApproximateTime);
             BrigadeBox.Text = order.Status;
 
-            //Employee brigadir = Employee.GetBrigadirByBrigada(order.Brigade.ID);
+            Employee brigadir = Employee.GetBrigadirByBrigada(order.Brigade.ID);
 
-            //BrigadirTelefon.Text = brigadir.EmployeeTelefonNumber;
-            //BrigadirSurname.Text = brigadir.Surname;
-            //BrigadirName.Text = brigadir.Name;
-            //BrigadirMiddleName.Text = brigadir.MiddleName;
-            //BrigadeNumber.Text = order.Brigade.ID.ToString();
+            BrigadirTelefon.Text = brigadir.EmployeeTelefonNumber;
+            BrigadirSurname.Text = brigadir.Surname;
+            BrigadirName.Text = brigadir.Name;
+            BrigadirMiddleName.Text = brigadir.MiddleName;
+            BrigadeNumber.Text = order.Brigade.ID.ToString();
 
         }
 

@@ -15,6 +15,6 @@ namespace CleaningDLL
         [Required]
         [MaxLength(12)] public string ProviderTelefonNumber { get; set; }
         [Required]
-        public Address ProviderAddress { get; set; }
+        public virtual Address ProviderAddress { get; set; }
     }
 }

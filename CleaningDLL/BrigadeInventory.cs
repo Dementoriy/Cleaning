@@ -11,8 +11,8 @@ namespace CleaningDLL
     {
         public int ID { get; set; }
         [Required]
-        public Brigade Brigade { get; set; }
+        public virtual Brigade Brigade { get; set; }
         [Required]
-        public Inventory Inventory { get; set; }
+        public virtual Inventory Inventory { get; set; }
     }
 }
