@@ -47,6 +47,7 @@ namespace WPFCleaning.Admin
             BrigadirMiddleName.Text = brigadir.MiddleName;
             BrigadeNumber.Text = order.Brigade.ID.ToString();
 
+            Comment.Text = order.Comment;
         }
 
         private void CheckExpressClean_Checked(object sender, RoutedEventArgs e)

@@ -20,6 +20,18 @@ namespace WPFCleaning
             Order.CheckOrder();
             InitializeComponent();
         }
+        private void SignInButtonA_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow(Employee.GetEmployee("Admin1", "7c04837eb356565e28bb14e5a1dedb240a5ac2561f8ed318c54a279fb6a9665e"));
+            mainWindow.Show();
+            this.Close();
+        }
+        private void SignInButtonB_Click(object sender, RoutedEventArgs e)
+        {
+            BrigadirWindow brigadirWindow = new BrigadirWindow(Employee.GetEmployee("Brigadir1", "60bcad77c43c4ab9840d8aa44b6c18e692e6c8e5e4f40351561c41274f1197c8"));
+            brigadirWindow.Show();
+            this.Close();
+        }
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
             Employee employee = Employee.GetEmployee(TextBoxLogin.Text.Trim(), GetHash(PasswordBox.Password.Trim()));

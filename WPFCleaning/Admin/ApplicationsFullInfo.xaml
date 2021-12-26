@@ -109,7 +109,7 @@
             </ComboBox>
 
             <Border BorderBrush="#3a388a" BorderThickness="3" CornerRadius="3" Margin="0 20 0 0">
-                <TextBox x:Name="TextBoxSquare" AcceptsReturn="True" Height="75" Width="290" materialDesign:HintAssist.Hint="Комментарий:" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Arial Bold" FontSize="22" HorizontalAlignment="Left" TextWrapping="Wrap" Cursor="IBeam" Margin="2 0 0 0" PreviewKeyDown="TextBoxSquare_PreviewKeyDown" PreviewTextInput="TextBoxSquare_PreviewTextInput" GotFocus="TextBoxSquare_GotFocus" />
+                <TextBox x:Name="Comment" AcceptsReturn="True" Height="75" Width="290" materialDesign:HintAssist.Hint="Комментарий:" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Arial Bold" FontSize="22" HorizontalAlignment="Left" TextWrapping="Wrap" Cursor="IBeam" Margin="2 0 0 0" PreviewKeyDown="TextBoxSquare_PreviewKeyDown" PreviewTextInput="TextBoxSquare_PreviewTextInput" GotFocus="TextBoxSquare_GotFocus" />
             </Border>
 
         </StackPanel>

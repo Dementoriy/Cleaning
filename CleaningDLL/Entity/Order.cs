@@ -24,6 +24,7 @@ namespace CleaningDLL.Entity
         public DateTime Date { get; set; }
         public int FinalPrice { get; set; }
         public int ApproximateTime { get; set; }
+        public string? Comment { get; set; }
 
         private static ApplicationContext db = Context.Db;
 

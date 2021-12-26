@@ -169,6 +169,52 @@ namespace WPFCleaning.Admin
             ApproximateTime.Text = "";
             Comment.Text = "";
         }
+        public bool IsCorrectData()
+        {
+            if (_clientPage.Telefon.Text == "")
+            {
+                MessageBox.Show("Заполните клиента!");
+                return false;
+            }
+            else if (_clientPage.Street.Text == "")
+            {
+                MessageBox.Show("Введите улицу!");
+                return false;
+            }
+            else if (_clientPage.HouseNumber.Text == "")
+            {
+                MessageBox.Show("Введите номер дома!");
+                return false;
+            }
+            else if (DatePicker.Text == "")
+            {
+                MessageBox.Show("Введите дату!");
+                return false;
+            }
+            else if (SelectTime.Text == "")
+            {
+                MessageBox.Show("Введите время!");
+                return false;
+            }
+            else if (BrigadeBox.Text == "")
+            {
+                MessageBox.Show("Введите бригаду!");
+                return false;
+            }
+            else if (PriceBox.Text == "")
+            {
+                MessageBox.Show("Нажмите кнопку рассчитать!");
+                return false;
+            }
+            else if(Convert.ToInt32(PriceBox.Text) == 0)
+            {
+                MessageBox.Show("Ни одна из услуг не выбрана");
+                PriceBox.Text = "";
+                ApproximateTime.Text = "";
+                return false;
+            }
+            else return true;
+        }
         private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {
             GetIdServiceByCheckBox();
@@ -197,51 +243,56 @@ namespace WPFCleaning.Admin
                     Apartment_Number = _clientPage.Apartment_Number.Text
                 };
 
-                string NewDate = (DatePicker.Text + " " + SelectTime.Text);
-                Order order;
+                
+                if (IsCorrectData())
+                { 
+                    string NewDate = (DatePicker.Text + " " + SelectTime.Text);
+                    Order order;
 
-                if (DateTime.Parse(NewDate) > DateTime.Now)
-                {
-                    order = new Order
+                    if (DateTime.Parse(NewDate) > DateTime.Now)
                     {
-                        Status = "Ожидает",
-                        Client = client,
-                        Employee = _emp,
-                        Address = address,
-                        Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text)),
-                        Date = DateTime.Parse(NewDate),
-                        FinalPrice = Convert.ToInt32(PriceBox.Text),
-                        ApproximateTime = at
-                    };
-                    Context.Db.Order.Add(order);
-                    for (int i = 0; i < 7; i++)
-                    {
-                        if (arrayService[0, i] != 0)
+                        order = new Order
                         {
-                            var providedService = new ProvidedService
+                            Status = "Ожидает",
+                            Client = client,
+                            Employee = _emp,
+                            Address = address,
+                            Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text)),
+                            Date = DateTime.Parse(NewDate),
+                            FinalPrice = Convert.ToInt32(PriceBox.Text),
+                            ApproximateTime = at,
+                            Comment = Comment.Text
+                        };
+                        Context.Db.Order.Add(order);
+                        for (int i = 0; i < 7; i++)
+                        {
+                            if (arrayService[0, i] != 0)
                             {
-                                Order = order,
-                                Service = Service.GetServiceByID(arrayService[0, i]),
-                                Amount = arrayService[1, i],
-                            };
-                            Context.Db.ProvidedService.Add(providedService);
+                                var providedService = new ProvidedService
+                                {
+                                    Order = order,
+                                    Service = Service.GetServiceByID(arrayService[0, i]),
+                                    Amount = arrayService[1, i],
+                                };
+                                Context.Db.ProvidedService.Add(providedService);
+                            }
                         }
-                    }
-                    var contract = new Contract
-                    {
-                        Client = client,
-                        Employee = _emp,
-                        Date_Of_Contract = DateTime.Now
-                    };
+                        var contract = new Contract
+                        {
+                            Client = client,
+                            Employee = _emp,
+                            Date_Of_Contract = DateTime.Now
+                        };
 
-                    Context.Db.Address.Add(address);
-                    Context.Db.Contract.Add(contract);
-                    Context.Db.SaveChanges();
-                    MessageBox.Show("Успешно!");
-                    ClearNewApplication();
-                    _clientPage.ClearClientInfo();
+                        Context.Db.Address.Add(address);
+                        Context.Db.Contract.Add(contract);
+                        Context.Db.SaveChanges();
+                        MessageBox.Show("Успешно!");
+                        ClearNewApplication();
+                        _clientPage.ClearClientInfo();
+                    }
+                    else MessageBox.Show("Что-то пошло не так :(");
                 }
-                else MessageBox.Show("Некоректная дата");
             }
         }
 
@@ -253,7 +304,13 @@ namespace WPFCleaning.Admin
             ApproximateTime.Text = "";
             finalPrice = 0;
             approximateTime = 0;
-            try
+
+            if(((bool)CheckExpressClean.IsChecked || (bool)CheckGeneralClean.IsChecked || (bool)CheckBuildingClean.IsChecked
+                || (bool)CheckOfficeClean.IsChecked) && TextBoxSquare.Text == "")
+            {
+                MessageBox.Show("Введите площадь!");
+            }
+            else
             {
                 if ((bool)CheckExpressClean.IsChecked)
                 {
@@ -275,10 +332,6 @@ namespace WPFCleaning.Admin
                     finalPrice += Service.GetPrice(Service.GetIdService(CheckOfficeClean.Content.ToString())).Price * Convert.ToInt32(TextBoxSquare.Text);
                     approximateTime += Service.GetPrice(Service.GetIdService(CheckOfficeClean.Content.ToString())).Time * Convert.ToInt32(TextBoxSquare.Text);
                 }
-            }
-            catch
-            {
-                MessageBox.Show("Укажите площадь!");
             }
 
             if ((bool)WindowClean.IsChecked)
@@ -356,9 +409,16 @@ namespace WPFCleaning.Admin
 
             at = approximateTime;
 
-            PriceBox.Text = finalPrice.ToString() ;
-            ApproximateTime.Text = Order.GetTimeByInt(approximateTime);
-            //ApproximateTime.Text = approximateTime.ToString();
+            if (((bool)CheckExpressClean.IsChecked || (bool)CheckGeneralClean.IsChecked || (bool)CheckBuildingClean.IsChecked
+                || (bool)CheckOfficeClean.IsChecked) && TextBoxSquare.Text == "")
+            {
+                MessageBox.Show("Введите площадь!");
+            }
+            else
+            {
+                PriceBox.Text = finalPrice.ToString();
+                ApproximateTime.Text = Order.GetTimeByInt(approximateTime);
+            }      
         }
         
         private void BtnBrigadeInfo_Click(object sender, RoutedEventArgs e)
@@ -393,7 +453,6 @@ namespace WPFCleaning.Admin
                 textBox.Text = "0";
             }
         }
-
         private void SelectTime_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             string tt = SelectTime.Text;
