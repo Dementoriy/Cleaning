@@ -132,20 +132,20 @@ namespace WPFCleaning.Admin
                 
             if ((bool)CheckGeneralClean.IsChecked)
             {
-                arrayService[0, 0] = (Service.GetIdService(CheckExpressClean.Content.ToString()));
+                arrayService[0, 0] = (Service.GetIdService(CheckGeneralClean.Content.ToString()));
                 arrayService[1, 0] = Convert.ToInt32(TextBoxSquare.Text);
                 return Service.GetIdService(CheckGeneralClean.Content.ToString());
             }
                 
             if ((bool)CheckBuildingClean.IsChecked)
             {
-                arrayService[0, 0] = (Service.GetIdService(CheckExpressClean.Content.ToString()));
+                arrayService[0, 0] = (Service.GetIdService(CheckBuildingClean.Content.ToString()));
                 arrayService[1, 0] = Convert.ToInt32(TextBoxSquare.Text);
                 return Service.GetIdService(CheckBuildingClean.Content.ToString());
             }
             if ((bool)CheckOfficeClean.IsChecked)
             {
-                arrayService[0, 0] = (Service.GetIdService(CheckExpressClean.Content.ToString()));
+                arrayService[0, 0] = (Service.GetIdService(CheckOfficeClean.Content.ToString()));
                 arrayService[1, 0] = Convert.ToInt32(TextBoxSquare.Text);
                 return Service.GetIdService(CheckOfficeClean.Content.ToString());
             }     
@@ -172,7 +172,6 @@ namespace WPFCleaning.Admin
         private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {
             GetIdServiceByCheckBox();
-            //try
             {
                 Client client;
                 
@@ -197,45 +196,53 @@ namespace WPFCleaning.Admin
                     Entrance = _clientPage.Entrance.Text,
                     Apartment_Number = _clientPage.Apartment_Number.Text
                 };
+
                 string NewDate = (DatePicker.Text + " " + SelectTime.Text);
-                var order = new Order
+                Order order;
+
+                if (DateTime.Parse(NewDate) > DateTime.Now)
                 {
-                    Status = "Ожидает",
-                    Client = client,
-                    Employee = _emp,
-                    Address = address,
-                    Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text)),
-                    Date = DateTime.Parse(NewDate),
-                    FinalPrice = Convert.ToInt32(PriceBox.Text),
-                    ApproximateTime = at
-                };
-                for (int i = 0; i < 7; i++)
-                {
-                    if (arrayService[0, i] != 0)
+                    order = new Order
                     {
-                        var providedService = new ProvidedService
+                        Status = "Ожидает",
+                        Client = client,
+                        Employee = _emp,
+                        Address = address,
+                        Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text)),
+                        Date = DateTime.Parse(NewDate),
+                        FinalPrice = Convert.ToInt32(PriceBox.Text),
+                        ApproximateTime = at
+                    };
+                    Context.Db.Order.Add(order);
+                    for (int i = 0; i < 7; i++)
+                    {
+                        if (arrayService[0, i] != 0)
                         {
-                            Order = order,
-                            Service = Service.GetServiceByID(arrayService[0, i]),
-                            Amount = arrayService[1, i],
-                        };
-                        Context.Db.ProvidedService.Add(providedService);
+                            var providedService = new ProvidedService
+                            {
+                                Order = order,
+                                Service = Service.GetServiceByID(arrayService[0, i]),
+                                Amount = arrayService[1, i],
+                            };
+                            Context.Db.ProvidedService.Add(providedService);
+                        }
                     }
+                    var contract = new Contract
+                    {
+                        Client = client,
+                        Employee = _emp,
+                        Date_Of_Contract = DateTime.Now
+                    };
+
+                    Context.Db.Address.Add(address);
+                    Context.Db.Contract.Add(contract);
+                    Context.Db.SaveChanges();
+                    MessageBox.Show("Успешно!");
+                    ClearNewApplication();
+                    _clientPage.ClearClientInfo();
                 }
-                var contract = new Contract
-                {
-                    Client = client,
-                    Employee = _emp,
-                    Date_Of_Contract = DateTime.Now
-                };
-                Context.Db.Address.Add(address);
-                Context.Db.Contract.Add(contract);
-                Context.Db.SaveChanges();
-                MessageBox.Show("Успешно!");
-                ClearNewApplication();
-                _clientPage.ClearClientInfo();
+                else MessageBox.Show("Некоректная дата");
             }
-            //catch { MessageBox.Show("Не все поля заполнены!"); }
         }
 
         int at = 0;
@@ -406,7 +413,35 @@ namespace WPFCleaning.Admin
                 e.Handled = true; // отклоняем ввод
             }
         }
+        private void SelectTime_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string tt = SelectTime.Text;
 
+            if (tt.Length == 1)
+            {
+                if (Convert.ToInt32(tt) > 2)
+                {
+                    SelectTime.Text = "0" + tt;
+                    SelectTime.SelectionStart = SelectTime.Text.Length;
+                }
+            }
+            if (tt.Length == 2)
+            {
+                if (Convert.ToInt32(tt.Substring(0, 2)) > 23)
+                {
+                    SelectTime.Text = tt.Remove(1, 1);
+                    SelectTime.SelectionStart = SelectTime.Text.Length;
+                }
+            }
+            if (tt.Length == 4)
+            {
+                if (Convert.ToInt32(tt.Substring(3, 1)) > 5)
+                {
+                    SelectTime.Text = tt.Substring(0, 3) + "0" + tt.Substring(3, 1);
+                    SelectTime.SelectionStart = SelectTime.Text.Length;
+                }
+            }
+        }
         private void SelectTime_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)

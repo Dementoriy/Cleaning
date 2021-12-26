@@ -23,9 +23,6 @@ namespace WPFCleaning.Admin
 
         private void ClientSearch_Click(object sender, RoutedEventArgs e)
         {
-            ClearClientInfo();
-
-
             if (Client.proverkaClientTelefon(Telefon.Text))
             {
                 var lastAddress = Client.GetClientInfo(Telefon.Text).ToArray().Length - 1;
@@ -43,11 +40,17 @@ namespace WPFCleaning.Admin
                     CheckOldClient.IsChecked = true;
                 else CheckOldClient.IsChecked = false;
             }
-            else System.Windows.MessageBox.Show("Клиента нет в БД");
+            else
+            {
+                System.Windows.MessageBox.Show("Клиента нет в БД");
+                ClearClientInfo();
+            }
+                
         }
 
         public void ClearClientInfo()
         {
+            Telefon.Text = "";
             Surname.Text = "";
             Name.Text = "";
             MiddleName.Text = "";

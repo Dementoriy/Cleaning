@@ -20,15 +20,19 @@ namespace CleaningDLL.Entity
         public string AddAddress()
         {
             string str = $"ул.{Street}, д.{HouseNumber}. ";
-            if (Building != null)
+            int x = str.Length - 2;
+            if (Building != "")
             {
-                int x = str.Length - 2;
                 str = str.Remove(x);
-                str += $", {Building}, ";
+                str += $", к.{Building}, ";
             }
-            if (Apartment_Number != null)
+            if (Entrance != "")
             {
-                int x = str.Length - 2;
+                str = str.Remove(x);
+                str += $", п.{Entrance}.";
+            }
+            if (Apartment_Number != "")
+            {
                 str = str.Remove(x);
                 str += $", кв.{Apartment_Number}.";
             }

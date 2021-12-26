@@ -42,7 +42,7 @@ namespace CleaningDLL.Entity
         public string AddFIO()
         {
             string str = $"{Surname} {Name.Substring(0, 1)}.";
-            if (MiddleName != null) str += $"{MiddleName.Substring(0, 1)}.";
+            if (MiddleName != "") str += $"{MiddleName.Substring(0, 1)}.";
             return str;
         }
 

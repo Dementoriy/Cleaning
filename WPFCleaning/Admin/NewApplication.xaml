@@ -85,7 +85,7 @@
             </Border>
             <DatePicker x:Name="DatePicker" materialDesign:HintAssist.Hint="Выберите дату:" Grid.Row="10" Grid.Column="0" Margin="10 18 10 0" SelectedDateFormat="Short" FontFamily="Arial Bold" FontSize="20" />
             <StackPanel Orientation="Horizontal" Margin="10 18 10 0">
-                <TextBox x:Name="SelectTime" materialDesign:HintAssist.Hint="Выберите время:" FontFamily="Arial Bold" FontSize="20" Width="270" PreviewTextInput="SelectTime_PreviewTextInput" PreviewKeyDown="SelectTime_PreviewKeyDown" />
+                <TextBox x:Name="SelectTime" materialDesign:HintAssist.Hint="Выберите время:" FontFamily="Arial Bold" FontSize="20" Width="270" PreviewTextInput="SelectTime_PreviewTextInput" PreviewKeyDown="SelectTime_PreviewKeyDown" Cursor="IBeam" TextChanged="SelectTime_TextChanged" />
                 <materialDesign:PackIcon Kind="Clock" Foreground="Gray" VerticalAlignment="Center"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
