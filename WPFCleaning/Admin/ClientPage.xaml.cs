@@ -49,7 +49,6 @@ namespace WPFCleaning.Admin
             else
             {
                 System.Windows.MessageBox.Show("Клиента нет в БД");
-                ClearClientInfo();
             }
                 
         }
