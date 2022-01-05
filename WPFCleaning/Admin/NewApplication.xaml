@@ -181,7 +181,7 @@
         </Border>
 
         <Button x:Name="AddOrder" Grid.Column="11" Grid.Row="7" Grid.ColumnSpan="2" Content="Оформить" Height="50" FontFamily="Arial Bold" FontSize="22"
-                BorderThickness="2" BorderBrush="White" Background="#2ca847" Cursor="IBeam" Foreground="White" Click="ButtonAddOrder_Click" 
+                BorderThickness="2" BorderBrush="White" Background="#2ca847" Cursor="Hand" Foreground="White" Click="ButtonAddOrder_Click" 
                 VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
 
     </Grid>

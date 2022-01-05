@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using CleaningDLL;
 using CleaningDLL.Entity;
 using Xceed.Wpf.Toolkit;
 
@@ -21,6 +22,7 @@ namespace WPFCleaning.Admin
         }
         private MainWindow window;
 
+        private static ApplicationContext db = Context.Db;
         private void ClientSearch_Click(object sender, RoutedEventArgs e)
         {
             if (Client.proverkaClientTelefon(Telefon.Text))
@@ -36,8 +38,12 @@ namespace WPFCleaning.Admin
                 Building.Text = client.Building;
                 Entrance.Text = client.Entrance;
                 Apartment_Number.Text = client.Apartment_Number;
-                if (Order.IsOldClient(client.ID))
+                if (Order.IsOldClienCheck(client.ID))
+                {
                     CheckOldClient.IsChecked = true;
+                    Client.ClientIsOld(client.ID);
+                    db.SaveChanges();
+                }
                 else CheckOldClient.IsChecked = false;
             }
             else
@@ -59,6 +65,7 @@ namespace WPFCleaning.Admin
             Building.Text = "";
             Entrance.Text = "";
             Apartment_Number.Text = "";
+            CheckOldClient.IsChecked = false;
         }
 
         public void NextPageNewOrder_Click(object sender, RoutedEventArgs e)

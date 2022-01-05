@@ -39,10 +39,11 @@ namespace CleaningDLL.Entity
             }
             db.SaveChanges();
         }
-        public static bool IsOldClient(int clientId)
+        public static bool IsOldClienCheck(int clientId)
         {
             List<Order> ordersByClientID = db.Order.Where(o => o.Client.ID == clientId && o.Status == "Завершена").ToList();
-            if (ordersByClientID.Count >= 3) return true;
+            if (ordersByClientID.Count >= 3)
+                return true;
             return false;
         }
 

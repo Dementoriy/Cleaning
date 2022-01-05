@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleaningDLL.Entity
 {
@@ -22,7 +20,11 @@ namespace CleaningDLL.Entity
 
         private static ApplicationContext db = Context.Db;
 
-
+        public static void ClientIsOld(int id)
+        {
+            Client oldClient = db.Client.Where(c => c.ID == id).FirstOrDefault();
+            oldClient.IsOldClient = true;
+        }
         public static Client GetClientByTelefon(string telefon)
         {
             return db.Client.Where(e => e.ClientTelefonNumber == telefon).ToList()[0];

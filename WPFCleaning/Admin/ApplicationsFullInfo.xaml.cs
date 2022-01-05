@@ -26,9 +26,9 @@ namespace WPFCleaning.Admin
             Telefon.Text = order.Client.ClientTelefonNumber;
             Surname.Text = order.Client.Surname;
             Name.Text = order.Client.Name;
-            if (order.Client.MiddleName != null)
-                MiddleName.Text = order.Client.MiddleName;
-            //CheckOldClient = ClientPage
+            if (order.Client.MiddleName != null) MiddleName.Text = order.Client.MiddleName;
+
+            if (order.Client.IsOldClient) CheckOldClient.IsChecked = true;
 
             Street.Text = order.Address.Street;
             HouseNumber.Text = order.Address.HouseNumber;
