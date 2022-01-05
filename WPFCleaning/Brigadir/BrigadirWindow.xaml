@@ -28,11 +28,17 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Button x:Name="BtnBrigadeInfo" Grid.Column="2" Margin="5 0 5 0" BorderBrush="White" Background="#3a388a" Content="Бригада" FontFamily="Arial bold" FontSize="22" Foreground ="White" Cursor="Hand" Click="ButtonClickBrigadeInfo"  Height="40" BorderThickness="2"/>
-        <Button x:Name="BtnBrigadeOrder" Grid.Column="3" Margin="5 0 5 0" BorderBrush="Black" Background="#3a388a" Content="Заявки" FontFamily="Arial bold" FontSize="22" Foreground ="White" Cursor="Hand" Click="ButtonClickBrigadeOrder"  Height="40" BorderThickness="2"/>
+        <Button x:Name="BtnBrigadeInfo" Grid.Column="2" Margin="5 0 5 0" BorderBrush="White" Background="#3a388a" Content="Бригада" 
+                FontFamily="Arial bold" FontSize="22" Foreground ="White" Cursor="Hand" Click="ButtonClickBrigadeInfo"  Height="40" 
+                BorderThickness="2"/>
+        <Button x:Name="BtnBrigadeOrder" Grid.Column="3" Margin="5 0 5 0" BorderBrush="Black" Background="#3a388a" Content="Заявки" 
+                FontFamily="Arial bold" FontSize="22" Foreground ="White" Cursor="Hand" Click="ButtonClickBrigadeOrder"  Height="40" 
+                BorderThickness="2"/>
         <StackPanel Orientation="Horizontal" Grid.Column="5" Margin="10">
-            <TextBlock x:Name="TextBlockEmployeeEnter" FontSize="18" FontFamily="Arial Bold" HorizontalAlignment="Right" TextAlignment="Right" VerticalAlignment="Center" Width="170"/>
-            <Button x:Name="Exit" Background="#3a388a" BorderBrush="White" BorderThickness="1" Cursor="Hand" Margin="20 0 0 0" HorizontalAlignment="Right" Click="Exit_Click">
+            <TextBlock x:Name="TextBlockEmployeeEnter" FontSize="18" FontFamily="Arial Bold" HorizontalAlignment="Right" TextAlignment="Right"
+                       VerticalAlignment="Center" Width="170"/>
+            <Button x:Name="Exit" Background="#3a388a" BorderBrush="White" BorderThickness="1" Cursor="Hand" Margin="20 0 0 0" 
+                    HorizontalAlignment="Right" Click="Exit_Click">
                 <materialDesign:PackIcon Kind="ExitToApp"/>
             </Button>
         </StackPanel>

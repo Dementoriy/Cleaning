@@ -10,7 +10,7 @@ namespace WPFCleaning.Admin
     /// <summary>
     /// Логика взаимодействия для NewApplication.xaml
     /// </summary>
-    public partial class NewApplication : Page
+    public partial class NewApplication : Page //Класс создан как partial (разделяемый)
     {
         private ClientPage _clientPage;
         private Employee _emp;
@@ -54,16 +54,20 @@ namespace WPFCleaning.Admin
         }
         private void WindowClean_Unchecked(object sender, RoutedEventArgs e)
         {
+
             WindowCleanBox.IsEnabled = false;
-            finalPrice -= Convert.ToInt32(KolvoWindow.Text) * Convert.ToInt32(Service.GetPrice(idService).Price);
-            finalPrice -= Convert.ToInt32(KolvoDoor.Text) * Convert.ToInt32(Service.GetPrice(idService).Price);
-            approximateTime -= Convert.ToInt32(KolvoWindow.Text) * Service.GetPrice(idService).Time;
-            approximateTime -= Convert.ToInt32(KolvoDoor.Text) * Service.GetPrice(idService).Time;
-            if (finalPrice != 0)
-            {
+            //if (KolvoWindow.Text != "0")
+            //finalPrice -= Convert.ToInt32(KolvoWindow.Text) * Convert.ToInt32(Service.GetPrice(idService).Price);
+            //finalPrice -= Convert.ToInt32(KolvoDoor.Text) * Convert.ToInt32(Service.GetPrice(idService).Price);
+            //PriceBox.Text = finalPrice.ToString();
+            //approximateTime -= Convert.ToInt32(KolvoWindow.Text) * Service.GetPrice(idService).Time;
+            //approximateTime -= Convert.ToInt32(KolvoDoor.Text) * Service.GetPrice(idService).Time;
+            //ApproximateTime.Text = approximateTime.ToString();
+            //if (finalPrice != 0)
+            //{
                 KolvoWindow.Text = "0";
                 KolvoDoor.Text = "0";
-            }
+            //}
         }
         private void Dezinfection_Checked(object sender, RoutedEventArgs e)
         {
@@ -119,7 +123,6 @@ namespace WPFCleaning.Admin
             }
         }
 
-        //List<int> listService = new List<int>() { 0, 0, 0, 0, 0, 0, 0};
         int[,] arrayService = new int[2, 7];
         public int GetIdServiceByCheckBox()
         {
@@ -334,7 +337,7 @@ namespace WPFCleaning.Admin
                 }
             }
 
-            if ((bool)WindowClean.IsChecked)
+            if (WindowClean.IsChecked.GetValueOrDefault())
             {
                 if (KolvoWindow.Text != "")
                 {
@@ -531,6 +534,12 @@ namespace WPFCleaning.Admin
             {
                 e.Handled = true; // если пробел, отклоняем ввод
             }
+        }
+
+        private void CorrectSquare_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (this.IsInitialized)
+                CorrectSquare.CorrectSqareValue(this);
         }
     }
 }

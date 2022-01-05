@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CleaningDLL.Entity;
+using System.Linq;
 
 namespace WPFCleaning.Admin
 {
@@ -37,17 +38,47 @@ namespace WPFCleaning.Admin
 
             PriceBox.Text = order.FinalPrice.ToString();
             ApproximateTime.Text = Order.GetTimeByInt(order.ApproximateTime);
-            BrigadeBox.Text = order.Status;
+            StatusBox.Text = order.Status;
 
-            Employee brigadir = Employee.GetBrigadirByBrigada(order.Brigade.ID);
+            Employee brigadir = Employee.GetBrigadirByBrigada(order.BrigadeID);
 
             BrigadirTelefon.Text = brigadir.EmployeeTelefonNumber;
             BrigadirSurname.Text = brigadir.Surname;
             BrigadirName.Text = brigadir.Name;
             BrigadirMiddleName.Text = brigadir.MiddleName;
-            BrigadeNumber.Text = order.Brigade.ID.ToString();
+            BrigadeNumber.Text = order.BrigadeID.ToString();
 
             Comment.Text = order.Comment;
+
+            List<ProvidedService> pvs = ProvidedService.GetPSByOrder(order.ID);
+
+            Sqare.Text = pvs.Where(a => a.ServiceID < 5).FirstOrDefault().Amount.ToString();
+
+            foreach (var p in pvs)
+            {
+                if (p.ServiceID == 1) CheckExpressClean.IsChecked = true;
+                if (p.ServiceID == 2) CheckGeneralClean.IsChecked = true;
+                if (p.ServiceID == 3) CheckBuildingClean.IsChecked = true;
+                if (p.ServiceID == 4) CheckOfficeClean.IsChecked = true;
+                if (p.ServiceID == 5 || p.ServiceID == 6)
+                {
+                    WindowClean.IsChecked = true;
+                    KolvoWindow.Text = pvs.Where(a => a.ServiceID == 5).FirstOrDefault().Amount.ToString();
+                    KolvoDoor.Text = pvs.Where(a => a.ServiceID == 6).FirstOrDefault().Amount.ToString();
+                }
+                if (p.ServiceID == 7 || p.ServiceID == 8 || p.ServiceID == 9)
+                {
+                    ChemistryClean.IsChecked = true;
+                    KolvoSofa.Text = pvs.Where(a => a.ServiceID == 7).FirstOrDefault().Amount.ToString();
+                    KolvoArmcheir.Text = pvs.Where(a => a.ServiceID == 8).FirstOrDefault().Amount.ToString();
+                    KolvoCarpet.Text = pvs.Where(a => a.ServiceID == 9).FirstOrDefault().Amount.ToString();
+                }
+                if (p.ServiceID == 10)
+                {
+                    Dezinfection.IsChecked = true;
+                    KolvoDezinfection.Text = pvs.Where(a => a.ServiceID == 10).FirstOrDefault().Amount.ToString();
+                }
+            }
         }
 
         private void CheckExpressClean_Checked(object sender, RoutedEventArgs e)

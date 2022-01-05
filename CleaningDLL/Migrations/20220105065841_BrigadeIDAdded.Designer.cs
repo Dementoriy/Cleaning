@@ -3,15 +3,17 @@ using System;
 using CleaningDLL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CleaningDLL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220105065841_BrigadeIDAdded")]
+    partial class BrigadeIDAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -456,7 +458,7 @@ namespace CleaningDLL.Migrations
                     b.Property<int>("ApproximateTime")
                         .HasColumnType("integer");
 
-                    b.Property<int>("BrigadeID")
+                    b.Property<int?>("BrigadeID")
                         .HasColumnType("integer");
 
                     b.Property<int?>("ClientID")
@@ -527,7 +529,7 @@ namespace CleaningDLL.Migrations
                     b.Property<int?>("OrderID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ServiceID")
+                    b.Property<int?>("ServiceID")
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
@@ -830,9 +832,7 @@ namespace CleaningDLL.Migrations
 
                     b.HasOne("CleaningDLL.Entity.Brigade", "Brigade")
                         .WithMany()
-                        .HasForeignKey("BrigadeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BrigadeID");
 
                     b.HasOne("CleaningDLL.Entity.Client", "Client")
                         .WithMany()
@@ -859,9 +859,7 @@ namespace CleaningDLL.Migrations
 
                     b.HasOne("CleaningDLL.Entity.Service", "Service")
                         .WithMany()
-                        .HasForeignKey("ServiceID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ServiceID");
 
                     b.Navigation("Order");
 

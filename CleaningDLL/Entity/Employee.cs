@@ -47,17 +47,11 @@ namespace CleaningDLL.Entity
 
         public static Employee GetBrigadirByBrigada(int id)
         {
-            return db.Employee.Where(a => a.BrigadeID == id).FirstOrDefault();
+            return db.Employee.Where(a => a.BrigadeID == id && a.Position.ID == 2).FirstOrDefault();
         }
         public static Employee GetEmployee(string Login, string Password)
         {
             return db.Employee.Where(a => a.Login == Login && a.Password == Password).FirstOrDefault();
-        }
-
-        public static void Add (Employee employee)
-        {
-            db.Employee.Add(employee);
-            db.SaveChanges();
         }
         public static Employee GetEmployeeBrigade(int Brigade)
         {

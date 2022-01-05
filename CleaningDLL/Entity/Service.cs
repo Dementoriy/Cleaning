@@ -25,14 +25,14 @@ namespace CleaningDLL.Entity
         public static int GetIdService(string str)
         {
             int idService;
-            Service service = db.Service.Where(s => s.Service_Name == str).ToList()[0];
+            Service service = db.Service.Where(s => s.Service_Name == str).FirstOrDefault();
             idService = service.ID;
             return idService;
         }
 
         public static Service GetPrice(int idService)
         {
-            return db.Service.Where(s => s.ID == idService).ToList()[0];
+            return db.Service.Where(s => s.ID == idService).FirstOrDefault();
         }
 
         public static Service GetServiceByID(int id)

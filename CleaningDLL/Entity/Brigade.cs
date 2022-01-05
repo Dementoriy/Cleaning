@@ -17,7 +17,7 @@ namespace CleaningDLL.Entity
 
         public static Brigade GetBrigadeByID(int id)
         {
-            return db.Brigade.Where(e => e.ID == id).ToList()[0];
+            return db.Brigade.Where(e => e.ID == id).FirstOrDefault();
         }
     }
 }

@@ -30,16 +30,22 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="10" Grid.Column="5">
-            <TextBox x:Name="SearchBox" materialDesign:HintAssist.Hint="Поиск:" Background="#d8d8f2" Height="38" Width="126" Cursor="IBeam" Margin="0 3 0 3" FontSize="18" TextChanged="SearchBox_TextChanged"/>
-            <Button  Margin="5 0 0 0" FontFamily="Arial Bold" FontSize="20" Background="#3a388a" Foreground ="White" Cursor="IBeam" BorderBrush="White" BorderThickness="2" Height="40" Click="ButtonSearch_Click" HorizontalAlignment="Right">
+            <TextBox x:Name="SearchBox" materialDesign:HintAssist.Hint="Поиск:" Background="#d8d8f2" Height="38" Width="126" Cursor="IBeam"
+                     Margin="0 3 0 3" FontSize="18" TextChanged="SearchBox_TextChanged"/>
+            <Button  Margin="5 0 0 0" FontFamily="Arial Bold" FontSize="20" Background="#3a388a" Foreground ="White" Cursor="IBeam"
+                     BorderBrush="White" BorderThickness="2" Height="40" Click="ButtonSearch_Click" HorizontalAlignment="Right">
                 <materialDesign:PackIcon Kind="Search"/>
             </Button>
         </StackPanel>
 
 
-        <DatePicker x:Name="DatePickerSearch" materialDesign:HintAssist.Hint="Выберете дату" SelectedDate="{x:Static sys:DateTime.Now}" Grid.Row="10" Grid.Column="0" Margin="20 0 0 0" SelectedDateFormat="Short" FontFamily="Arial Bold" FontSize="18" CalendarClosed="DatePickerSearch_CalendarClosed"/>
+        <DatePicker x:Name="DatePickerSearch" materialDesign:HintAssist.Hint="Выберете дату" SelectedDate="{x:Static sys:DateTime.Now}" 
+                    Grid.Row="10" Grid.Column="0" Margin="20 0 0 0" SelectedDateFormat="Short" FontFamily="Arial Bold" FontSize="18" 
+                    CalendarClosed="DatePickerSearch_CalendarClosed"/>
 
-        <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0" FontSize="20" BorderThickness="1" FontFamily="Arial Bold" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserResizeColumns="False" CanUserReorderColumns="False">
+        <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0"
+                  FontSize="20" BorderThickness="1" FontFamily="Arial Bold" AutoGenerateColumns="False" ItemsSource="{Binding}" 
+                  CanUserResizeColumns="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Дата" Width="133" Binding="{Binding Path=Date}"/>
                 <DataGridTextColumn Header="Время" Width="100" Binding="{Binding Path=Time}"/>

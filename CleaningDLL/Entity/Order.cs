@@ -20,6 +20,7 @@ namespace CleaningDLL.Entity
         public virtual Address Address { get; set; }
         [Required]
         public virtual Brigade Brigade { get; set; }
+        public int BrigadeID { get; set; }
         [Required]
         public DateTime Date { get; set; }
         public int FinalPrice { get; set; }
@@ -47,27 +48,27 @@ namespace CleaningDLL.Entity
 
         public static Order GetOrderById(int id)
         {
-            return db.Order.Where(e => e.ID == id).ToList()[0];
+            return db.Order.Where(e => e.ID == id).FirstOrDefault();
         }
 
         public static List<OrderInfo> GetOrderInfo()
         {
-                return (from o in db.Order
-                        join a in db.Address on o.Address.ID equals a.ID
-                        select new OrderInfo()
+            return (from o in db.Order
+                    join a in db.Address on o.Address.ID equals a.ID
+                    select new OrderInfo()
 
-                        {
-                            ID = o.ID,
-                            Time = o.Date.ToString("t"),
-                            Date = o.Date.ToString("d"),
-                            Brigade = o.Brigade.ID,
-                            Status = o.Status,
-                            Client = o.Client.AddFIO(),
-                            Address = a.AddAddress(),
-                            Telefone = o.Client.ClientTelefonNumber,
-                            FinalPrice = o.FinalPrice,
-                            ApproximateTime = (GetTimeByInt(o.ApproximateTime)).ToString()
-                        }).ToList();
+                    {
+                        ID = o.ID,
+                        Time = o.Date.ToString("t"),
+                        Date = o.Date.ToString("d"),
+                        Brigade = o.Brigade.ID,
+                        Status = o.Status,
+                        Client = o.Client.AddFIO(),
+                        Address = a.AddAddress(),
+                        Telefone = o.Client.ClientTelefonNumber,
+                        FinalPrice = o.FinalPrice,
+                        ApproximateTime = (GetTimeByInt(o.ApproximateTime)).ToString()
+                    }).ToList();
         }
         public class OrderInfo
         {
