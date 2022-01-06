@@ -4,8 +4,10 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CleaningDLL;
 using CleaningDLL.Entity;
 using System.Linq;
+using System.Windows.Media;
 
 namespace WPFCleaning.Brigadir
 {
@@ -14,15 +16,20 @@ namespace WPFCleaning.Brigadir
     /// </summary>
     public partial class FullInfoForBrigadir : Window
     {
-        public FullInfoForBrigadir()
+        private static ApplicationContext db = Context.Db;
+        Order order;
+        private BrigadeApplications _brigadeApplications;
+        public FullInfoForBrigadir(int id, BrigadeApplications ba)
         {
             InitializeComponent();
+            _brigadeApplications = ba;
             WindowState = WindowState.Maximized;
+            order = Order.GetOrderById(id);
+            StatusBox.IsEnabled = false;
         }
+
         public void AddSelectedOrder(int id)
         {
-            Order order = Order.GetOrderById(id);
-
             Telefon.Text = order.Client.ClientTelefonNumber;
             Surname.Text = order.Client.Surname;
             Name.Text = order.Client.Name;
@@ -52,14 +59,28 @@ namespace WPFCleaning.Brigadir
 
             List<ProvidedService> pvs = ProvidedService.GetPSByOrder(order.ID);
 
-            Sqare.Text = pvs.Where(a => a.ServiceID < 5 && a.ServiceID > 0 && a.Amount != 0).FirstOrDefault().Amount.ToString();
-
             foreach (var p in pvs)
             {
-                if (p.ServiceID == 1) CheckExpressClean.IsChecked = true;
-                if (p.ServiceID == 2) CheckGeneralClean.IsChecked = true;
-                if (p.ServiceID == 3) CheckBuildingClean.IsChecked = true;
-                if (p.ServiceID == 4) CheckOfficeClean.IsChecked = true;
+                if (p.ServiceID == 1)
+                {
+                    CheckExpressClean.IsChecked = true;
+                    Sqare.Text = p.Amount.ToString();
+                }
+                if (p.ServiceID == 2)
+                {
+                    CheckGeneralClean.IsChecked = true;
+                    Sqare.Text = p.Amount.ToString();
+                }
+                if (p.ServiceID == 3)
+                {
+                    CheckBuildingClean.IsChecked = true;
+                    Sqare.Text = p.Amount.ToString();
+                }
+                if (p.ServiceID == 4)
+                {
+                    CheckOfficeClean.IsChecked = true;
+                    Sqare.Text = p.Amount.ToString();
+                }
                 if (p.ServiceID == 5 || p.ServiceID == 6)
                 {
                     WindowClean.IsChecked = true;
@@ -91,11 +112,27 @@ namespace WPFCleaning.Brigadir
 
         }
 
-        private void UpdateOrder_Click(object sender, RoutedEventArgs e)
+        public void SaveUpdatedOrderBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            order.Status = StatusBox.Text;
+            Context.Db.SaveChanges();
+            MessageBox.Show("Статус заявки изменен успешно!");
+            _brigadeApplications.SelectedOrderInfo();
+            this.Close();
         }
 
-
+        private void UpdateOrder_Click(object sender, RoutedEventArgs e)
+        {
+            if (StatusBox.Text == "Завершена")
+            {
+                MessageBox.Show("Статус заявки изменить нельзя!");
+                this.Close();
+            }
+            else
+            {
+                StatusBox.IsEnabled = true;
+                SaveUpdatedOrder.IsEnabled = true;
+            }    
+        }
     }
 }

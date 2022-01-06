@@ -30,14 +30,9 @@ namespace CleaningDLL.Entity
             return idService;
         }
 
-        public static Service GetPrice(int idService)
+        public static Service GetServiceById(int idService)
         {
             return db.Service.Where(s => s.ID == idService).FirstOrDefault();
-        }
-
-        public static Service GetServiceByID(int id)
-        {
-            return db.Service.Where(e => e.ID == id).ToList()[0];
         }
     }
 }

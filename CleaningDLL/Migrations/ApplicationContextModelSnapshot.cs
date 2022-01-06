@@ -474,10 +474,9 @@ namespace CleaningDLL.Migrations
                     b.Property<int>("FinalPrice")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
+                    b.Property<int>("Status")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 

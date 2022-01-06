@@ -54,17 +54,26 @@ namespace WPFCleaning.Admin
 
             foreach (var p in pvs)
             {
-                if (p.ServiceID < 5)
-                    Sqare.Text = pvs.Where(a => a.ServiceID < 5).FirstOrDefault().Amount.ToString();
-                else Sqare.Text = "";
-            }
-
-            foreach (var p in pvs)
-            {
-                if (p.ServiceID == 1) CheckExpressClean.IsChecked = true;
-                if (p.ServiceID == 2) CheckGeneralClean.IsChecked = true;
-                if (p.ServiceID == 3) CheckBuildingClean.IsChecked = true;
-                if (p.ServiceID == 4) CheckOfficeClean.IsChecked = true;
+                if (p.ServiceID == 1)
+                {
+                    CheckExpressClean.IsChecked = true;
+                    Sqare.Text = p.Amount.ToString();
+                }
+                if (p.ServiceID == 2)
+                {
+                    CheckGeneralClean.IsChecked = true;
+                    Sqare.Text = p.Amount.ToString();
+                }
+                if (p.ServiceID == 3)
+                {
+                    CheckBuildingClean.IsChecked = true;
+                    Sqare.Text = p.Amount.ToString();
+                }
+                if (p.ServiceID == 4)
+                {
+                    CheckOfficeClean.IsChecked = true;
+                    Sqare.Text = p.Amount.ToString();
+                }
                 if (p.ServiceID == 5 || p.ServiceID == 6)
                 {
                     WindowClean.IsChecked = true;

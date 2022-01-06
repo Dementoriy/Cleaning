@@ -78,7 +78,7 @@
             </StackPanel>
         </StackPanel>
 
-        <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="10" Margin="0 0 2 0" 
+        <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0 0 2 0" 
                   FontSize="20" BorderThickness="1" FontFamily="Arial Bold" AutoGenerateColumns="False" ItemsSource="{Binding}" 
                   CanUserResizeColumns="False" CanUserReorderColumns="False" SelectionMode="Single" SelectionUnit="FullRow">
 

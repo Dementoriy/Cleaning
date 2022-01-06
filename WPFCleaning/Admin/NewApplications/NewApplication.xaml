@@ -169,7 +169,7 @@
             <TextBox x:Name="TextBoxSquare" AcceptsReturn="True" Height="75" Width="290" materialDesign:HintAssist.Hint="Площадь:" 
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Arial Bold" FontSize="22" HorizontalAlignment="Left" 
                      TextWrapping="Wrap" Cursor="IBeam" Margin="2 0 0 0" PreviewKeyDown="CheckKeyDown" PreviewTextInput="CheckToInt" 
-                     GotFocus="TextBoxSquare_GotFocus" TextChanged="CorrectSquare_TextChanged" />
+                     TextChanged="CorrectSquare_TextChanged" />
         </Border>
 
         <Border Grid.Column="10" Grid.Row="4" Grid.ColumnSpan="3" Grid.RowSpan="3" BorderBrush="#3a388a" BorderThickness="3" CornerRadius="3" 

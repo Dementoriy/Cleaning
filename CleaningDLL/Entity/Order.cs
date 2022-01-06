@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace CleaningDLL.Entity
 {
@@ -31,17 +31,17 @@ namespace CleaningDLL.Entity
 
         public static void CheckOrder()
         {
-            List<Order> orders = db.Order.Where(o => o.Status == "Ожидает" && o.Date < DateTime.Today).ToList();
+            List<Order> orders = db.Order.Where(o => o.Status == EnumStatus.GetDescription(EnumStatus.Status.wait) && o.Date < DateTime.Today).ToList();
             foreach (var d in orders)
             {
-                d.Status = "Отменена";
+                d.Status = EnumStatus.GetDescription(EnumStatus.Status.canceled);
                 
             }
             db.SaveChanges();
         }
         public static bool IsOldClienCheck(int clientId)
         {
-            List<Order> ordersByClientID = db.Order.Where(o => o.Client.ID == clientId && o.Status == "Завершена").ToList();
+            List<Order> ordersByClientID = db.Order.Where(o => o.Client.ID == clientId && o.Status == EnumStatus.GetDescription(EnumStatus.Status.сompleted)).ToList();
             if (ordersByClientID.Count >= 3)
                 return true;
             return false;
@@ -68,7 +68,7 @@ namespace CleaningDLL.Entity
                         Address = a.AddAddress(),
                         Telefone = o.Client.ClientTelefonNumber,
                         FinalPrice = o.FinalPrice,
-                        ApproximateTime = (GetTimeByInt(o.ApproximateTime)).ToString()
+                        ApproximateTime = GetTimeByInt(o.ApproximateTime).ToString()
                     }).ToList();
         }
         public class OrderInfo
@@ -84,7 +84,6 @@ namespace CleaningDLL.Entity
             public string ApproximateTime { get; set; }
             public int FinalPrice { get; set; }
         }
-
         public static string GetTimeByInt(int t)
         {
             t = t / 60;

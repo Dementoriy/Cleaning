@@ -7,9 +7,9 @@ using CleaningDLL;
 
 namespace WPFCleaning.Admin
 {
-    public static class ButtonAddOrder
+    public static class NewOrder
     {
-        public static void BtnAddOrder(NewApplication newApplication, ClientPage clientPage, Employee emp)
+        public static void AddOrder(NewApplication newApplication, ClientPage clientPage, Employee emp)
         {
             Client client;
 
@@ -45,7 +45,7 @@ namespace WPFCleaning.Admin
                 {
                     order = new Order
                     {
-                        Status = "Ожидает",
+                        Status = EnumStatus.GetDescription(EnumStatus.Status.wait),
                         Client = client,
                         Employee = emp,
                         Address = address,
@@ -63,7 +63,7 @@ namespace WPFCleaning.Admin
                             var providedService = new ProvidedService
                             {
                                 Order = order,
-                                Service = Service.GetServiceByID(newApplication.arrayService[0, i]),
+                                Service = Service.GetServiceById(newApplication.arrayService[0, i]),
                                 Amount = newApplication.arrayService[1, i],
                             };
                             Context.Db.ProvidedService.Add(providedService);

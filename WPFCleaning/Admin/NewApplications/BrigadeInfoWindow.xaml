@@ -47,7 +47,7 @@
                   FontSize="20" BorderThickness="1" FontFamily="Arial Bold" AutoGenerateColumns="False" ItemsSource="{Binding}" 
                   CanUserResizeColumns="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Дата" Width="133" Binding="{Binding Path=Date}"/>
+                <DataGridTextColumn Header="Дата" Width="135" Binding="{Binding Path=Date}"/>
                 <DataGridTextColumn Header="Время" Width="100" Binding="{Binding Path=Time}"/>
                 <DataGridTextColumn Header="Адрес" Width="400" Binding="{Binding Path=Address}"/>
                 <DataGridTextColumn Header="Статус" Width="150" Binding="{Binding Path=Status}"/>

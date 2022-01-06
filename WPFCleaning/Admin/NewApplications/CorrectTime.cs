@@ -4,11 +4,17 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using CleaningDLL.Entity;
 using CleaningDLL;
+using System.Linq;
 
 namespace WPFCleaning.Admin
 {
     public static class CorrectTime
     {
+        public static int GetSecByTime(string tt)
+        {
+            int sec = (Convert.ToInt32(tt.Substring(0, 2)) * 60 * 60) + (Convert.ToInt32(tt.Substring(6, 2)) * 60);
+            return sec;
+        }
         public static void PreviewTextInput(NewApplication newApplication, TextCompositionEventArgs e)
         {
             string tt = newApplication.SelectTime.Text;
@@ -28,6 +34,7 @@ namespace WPFCleaning.Admin
                 e.Handled = true; // отклоняем ввод
             }
         }
+
         public static void TextChanged(NewApplication newApplication)
         {
             string tt = newApplication.SelectTime.Text;

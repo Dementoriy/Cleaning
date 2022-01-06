@@ -64,57 +64,9 @@ namespace WPFCleaning.Brigadir
             SelectedOrderInfo();
         }
 
-        private void SelectedOrderInfo()
+        public void SelectedOrderInfo()
         {
-            List<Order.OrderInfo> listSort = Order.GetOrderInfo();
-            if (CheckFinish.IsChecked == true)
-            {
-                listSort = listSort.Where(e => e.Status == "Завершена").ToList();
-            }
-            else if (CheckInProcess.IsChecked == true)
-            {
-                listSort = listSort.Where(e => e.Status == "В процессе").ToList();
-            }
-            else if (CheckWait.IsChecked == true)
-            {
-                listSort = listSort.Where(e => e.Status == "Ожидает").ToList();
-            }
-            if (DatePickerSearchEnd.Text != "" && DatePickerSearchStart.Text != "")
-            {
-                DateTime dtStart = DatePickerSearchStart.SelectedDate.Value;
-                DateTime dtEnd = DatePickerSearchEnd.SelectedDate.Value;
-
-                if (DatePickerSearchStart.SelectedDate.Value <= DatePickerSearchEnd.SelectedDate.Value)
-                    listSort = listSort = listSort.Where(e => DateTime.Parse(e.Date) >= dtStart.Date && DateTime.Parse(e.Date) <= dtEnd.Date).ToList(); 
-                else
-                {
-                    MessageBox.Show("Дата конца периода больше \n даты начала периода");
-                    DatePickerSearchEnd.Text = "";
-                }
-                
-            }
-            if (DatePickerSearchStart.Text == "")
-            {
-                listSort = listSort.ToList();
-            }
-            if (DatePickerSearchEnd.Text == "" && DatePickerSearchStart.Text != "")
-            {
-                DateTime dtStart = DatePickerSearchStart.SelectedDate.Value;
-
-                listSort = listSort.Where(e => DateTime.Parse(e.Date) == dtStart.Date).ToList();
-            }
-            if (SearchBox.Text != "")
-            {
-                listSort = listSort.Where(e => e.Address.ToLower().Contains(SearchBox.Text.ToLower())
-                || e.Telefone.ToLower().Contains(SearchBox.Text.ToLower())
-                || e.Client.ToLower().Contains(SearchBox.Text.ToLower())
-                || e.Brigade.ToString().ToLower().Contains(SearchBox.Text.ToLower())
-                || e.Date.ToLower().Contains(SearchBox.Text.ToLower())
-                || e.Time.ToLower().Contains(SearchBox.Text.ToLower())
-                || e.Status.ToLower().Contains(SearchBox.Text.ToLower())
-                ).ToList();
-            }
-            dataGridApplication.ItemsSource = listSort.Where(d => d.Brigade == _br.BrigadeID);
+            SelectedOrderInformations.GetSelectOrderInfo(this, _br);
         }
         private void DatePickerSearchStart_CalendarClosed(object sender, RoutedEventArgs e)
         {
@@ -151,8 +103,8 @@ namespace WPFCleaning.Brigadir
         }
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Brigadir.FullInfoForBrigadir applicationsFullInfo = new Brigadir.FullInfoForBrigadir();
             Order.OrderInfo selectedOrder = (Order.OrderInfo)dataGridApplication.SelectedValue;
+            FullInfoForBrigadir applicationsFullInfo = new FullInfoForBrigadir(selectedOrder.ID, this);
             applicationsFullInfo.Show();
             applicationsFullInfo.AddSelectedOrder(selectedOrder.ID);
         }

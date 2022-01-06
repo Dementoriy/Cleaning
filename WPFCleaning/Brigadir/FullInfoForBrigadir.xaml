@@ -49,7 +49,7 @@
             <TextBox x:Name="MiddleName" materialDesign:HintAssist.Hint="Отчество" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="No"
                      FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True"/>
-            <CheckBox x:Name="CheckOldClient" Content="Постоянный клиент" Foreground ="Black" HorizontalAlignment="Left" 
+            <CheckBox x:Name="CheckOldClient" Content="Постоянный клиент" Foreground ="Black" HorizontalAlignment="Left" Cursor="No"
                       Margin="0 20 38 0" Height="20" Width="200" FontFamily="Arial bold" FontSize="16" Click="LockSelection" />
 
         </StackPanel>
@@ -61,20 +61,20 @@
             </Border>
 
             <TextBox x:Name="Street" materialDesign:HintAssist.Hint="Улица" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam"
-                     FontFamily="Arial bold" FontSize="16" Margin="0 0 0 0" IsReadOnly="True"/>
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40"
+                     FontFamily="Arial bold" FontSize="16" Margin="0 0 0 0" IsReadOnly="True" Cursor="No"/>
             <TextBox x:Name="HouseNumber" materialDesign:HintAssist.Hint="Номер дома" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam"
-                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True"/>
+                     HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40"
+                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True" Cursor="No"/>
             <TextBox x:Name="Building" materialDesign:HintAssist.Hint="Корпус" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam"
-                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True"/>
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40"
+                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True" Cursor="No"/>
             <TextBox x:Name="Entrance" materialDesign:HintAssist.Hint="Подъезд" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam"
-                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True"/>
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40"
+                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True" Cursor="No"/>
             <TextBox x:Name="Apartment_Number" materialDesign:HintAssist.Hint="Квартира" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam"
-                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True"/>
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40"
+                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True" Cursor="No"/>
         </StackPanel>
 
         <StackPanel Grid.Column="7" Grid.ColumnSpan="2" Grid.Row="0" Grid.RowSpan="3" MaxHeight="500" VerticalAlignment="Top">
@@ -85,19 +85,19 @@
             </Border>
 
             <TextBox x:Name="BrigadirTelefon" materialDesign:HintAssist.Hint="Телефон" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="IBeam"
+                     HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="No"
                      FontFamily="Arial bold" FontSize="16" IsReadOnly="True"/>
             <TextBox x:Name="BrigadirSurname" materialDesign:HintAssist.Hint="Фамилия" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="IBeam"
+                     HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="No"
                      FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True"/>
             <TextBox x:Name="BrigadirName" materialDesign:HintAssist.Hint="Имя" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="IBeam"
+                     HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="No"
                      FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True"/>
             <TextBox x:Name="BrigadirMiddleName" materialDesign:HintAssist.Hint="Отчество" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="IBeam"
+                     HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="No"
                      FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True"/>
             <TextBox x:Name="BrigadeNumber" materialDesign:HintAssist.Hint="Номер бригады" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="IBeam"
+                     HorizontalAlignment="Left" VerticalAlignment="Top" Width="360" Height="40" TextWrapping="Wrap" Cursor="No"
                      FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True"/>
 
         </StackPanel>
@@ -131,38 +131,42 @@
             <CheckBox x:Name="WindowClean" Content="Мойка окон" FontSize="18" FontFamily="Arial bold" Margin="5 18 0 0"
                       Click="LockSelection" Cursor="No"/>
 
-            <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="WindowCleanBox" Margin="20 -5 5 5" Height="30" FontFamily="Arial bold"
+            <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="WindowCleanBox" Margin="20 -5 5 5" 
+                      Height="30" FontFamily="Arial bold" Cursor="Hand"
                       Background="#d8d8f2" Foreground="#d8d8f2" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <TextBox x:Name="KolvoWindow" materialDesign:HintAssist.Hint="Количество окон(створа):" Text="0"
+                <TextBox x:Name="KolvoWindow" materialDesign:HintAssist.Hint="Количество окон(створа):" Text="0" IsReadOnly="True"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap"
-                         VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black"/>
-                <TextBox x:Name="KolvoDoor" materialDesign:HintAssist.Hint="Количество дверей:" Text="0"
+                         VerticalAlignment="Top" Width="261" Height="40" Cursor="No" FontFamily="Arial bold" Foreground="Black"/>
+                <TextBox x:Name="KolvoDoor" materialDesign:HintAssist.Hint="Количество дверей:" Text="0" IsReadOnly="True"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap"
-                         VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black"/>
+                         VerticalAlignment="Top" Width="261" Height="40" Cursor="No" FontFamily="Arial bold" Foreground="Black"/>
             </ComboBox>
             <CheckBox x:Name="ChemistryClean" Content="Химчистка" FontSize="18" FontFamily="Arial bold" Margin="5 10 0 0"
                       Cursor="No" Click="LockSelection"/>
 
-            <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="ChemistryCleanBox" Margin="20 -5 5 5" Height="30" FontFamily="Arial bold" Foreground="#d8d8f2" Style="{StaticResource MaterialDesignFloatingHintComboBox}" >
-                <TextBox x:Name="KolvoSofa" materialDesign:HintAssist.Hint="Количество диванов(мест):" Text="0"
+            <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="ChemistryCleanBox" Margin="20 -5 5 5" 
+                      Height="30" FontFamily="Arial bold" Foreground="#d8d8f2" Cursor="Hand"
+                      Style="{StaticResource MaterialDesignFloatingHintComboBox}" >
+                <TextBox x:Name="KolvoSofa" materialDesign:HintAssist.Hint="Количество диванов(мест):" Text="0" IsReadOnly="True"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap"
-                         VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black"/>
-                <TextBox x:Name="KolvoArmcheir" materialDesign:HintAssist.Hint="Количество кресел:" Text="0" 
+                         VerticalAlignment="Top" Width="261" Height="40" Cursor="No" FontFamily="Arial bold" Foreground="Black"/>
+                <TextBox x:Name="KolvoArmcheir" materialDesign:HintAssist.Hint="Количество кресел:" Text="0" IsReadOnly="True"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" 
-                         VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black"/>
-                <TextBox x:Name="KolvoCarpet" materialDesign:HintAssist.Hint="Количество ковров:" Text="0" 
+                         VerticalAlignment="Top" Width="261" Height="40" Cursor="No" FontFamily="Arial bold" Foreground="Black"/>
+                <TextBox x:Name="KolvoCarpet" materialDesign:HintAssist.Hint="Количество ковров:" Text="0" IsReadOnly="True"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" 
-                         VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black"/>
+                         VerticalAlignment="Top" Width="261" Height="40" Cursor="No" FontFamily="Arial bold" Foreground="Black"/>
             </ComboBox>
 
             <CheckBox x:Name="Dezinfection" Content="Дезинфекция" FontSize="18" FontFamily="Arial bold" Margin="5 10 0 0"
                       Cursor="No" Click="LockSelection"/>
 
-            <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="DezinfectionBox" Margin="20 -5 5 5" Height="30" Foreground="#d8d8f2" 
+            <ComboBox materialDesign:HintAssist.Hint="количество" x:Name="DezinfectionBox" Margin="20 -5 5 5" 
+                      Height="30" Foreground="#d8d8f2" Cursor="Hand"
                       FontFamily="Arial bold" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                <TextBox x:Name="KolvoDezinfection" materialDesign:HintAssist.Hint="Площадь:" Text="0" 
+                <TextBox x:Name="KolvoDezinfection" materialDesign:HintAssist.Hint="Площадь:" Text="0" IsReadOnly="True"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" 
-                         VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black"/>
+                         VerticalAlignment="Top" Width="261" Height="40" Cursor="No" FontFamily="Arial bold" Foreground="Black"/>
             </ComboBox>
 
             <Border BorderBrush="#3a388a" BorderThickness="3" CornerRadius="3" Margin="0 20 0 0">
@@ -180,31 +184,30 @@
             </Border>
             <StackPanel Orientation="Horizontal" Margin="0 18 0 14">
                 <TextBlock Text="Цена:" FontFamily="Arial Bold" FontSize="20" Margin="5 0 0 0"/>
-                <TextBox x:Name="PriceBox" Width="190" Margin="34 0 0 0" FontFamily="Arial Bold" FontSize="20" IsReadOnly="True"/>
+                <TextBox x:Name="PriceBox" Width="190" Margin="34 0 0 0" Cursor="Arrow" FontFamily="Arial Bold" FontSize="20" IsReadOnly="True"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="≈Время:" FontFamily="Arial Bold" FontSize="20" Margin="5 18 0 0"/>
-                <TextBox x:Name="ApproximateTime" Width="190" Margin="10 0 0 0" Cursor="IBeam" FontFamily="Arial Bold" FontSize="20" IsReadOnly="True"
+                <TextBox x:Name="ApproximateTime" Width="190" Margin="10 0 0 0" Cursor="Arrow" FontFamily="Arial Bold" FontSize="20" IsReadOnly="True"
                          VerticalAlignment="Bottom"/>
             </StackPanel>
             
-            <ComboBox materialDesign:HintAssist.Hint="Статус:" x:Name="StatusBox" Margin="10 60 5 0" Height="50" Width="230" FontFamily="Arial bold"
+            <ComboBox materialDesign:HintAssist.Hint="Статус:" x:Name="StatusBox" Margin="10 60 5 0" Height="54" 
+                      Width="230" FontFamily="Arial bold" Cursor="Hand"
                       Background="#d8d8f2" FontSize="20" Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
                       SelectionChanged="BrigadeBox_SelectionChanged">
-                <TextBlock Text="Ожидает" Style="{StaticResource MaterialDesignTextBlock}" HorizontalAlignment="Left" TextWrapping="Wrap" 
-                           VerticalAlignment="Top" Width="200" Height="40" Cursor="IBeam" FontFamily="Arial bold" FontSize="20" Foreground="Black"/>
-                <TextBlock Text="В процессе" Style="{StaticResource MaterialDesignTextBlock}" HorizontalAlignment="Left" TextWrapping="Wrap" 
-                           VerticalAlignment="Top" Width="200" Height="40" Cursor="IBeam" FontFamily="Arial bold" FontSize="20" Foreground="Black"/>
-                <TextBlock Text="Завершена" Style="{StaticResource MaterialDesignTextBlock}" HorizontalAlignment="Left" TextWrapping="Wrap" 
-                           VerticalAlignment="Top" Width="200" Height="40" Cursor="IBeam" FontFamily="Arial bold" FontSize="20" Foreground="Black"/>
-                </ComboBox>
+                <TextBlock Style="{StaticResource MaterialDesignTextBlock}" HorizontalAlignment="Left" TextWrapping="Wrap" 
+                           VerticalAlignment="Top" Width="200" Height="40" Cursor="Hand" FontFamily="Arial bold" FontSize="20" Foreground="Black"/>
+            </ComboBox>
 
-            <Button x:Name="UpdateOrder" Content="Редактировать" Height="50" Width="280" FontFamily="Arial Bold" FontSize="22" BorderThickness="2"
-                    BorderBrush="White" Background="#2ca847" Cursor="Hand" Foreground="White" Click="UpdateOrder_Click" VerticalAlignment="Bottom"
-                    HorizontalAlignment="Center" Margin="0 20 0 0"/>
-            <Button x:Name="SaveUpdateOrder" Content="Сохранить изменения" Height="50" Width="280" FontFamily="Arial Bold" FontSize="22" 
-                    BorderThickness="2" BorderBrush="White" Background="#2ca847" Cursor="Hand" Foreground="White" Click="UpdateOrder_Click"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 30 0 0"/>
+            <Button x:Name="UpdateOrder" Content="Редактировать" Height="50" Width="280" FontFamily="Arial Bold" 
+                    FontSize="22" BorderThickness="2"
+                    BorderBrush="White" Background="#2ca847" Cursor="Hand" Foreground="White" 
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center" Margin="0 20 0 0" Click="UpdateOrder_Click"/>
+            <Button x:Name="SaveUpdatedOrder" Content="Сохранить изменения" Height="50" Width="280" FontFamily="Arial Bold" FontSize="22" 
+                    BorderThickness="2" BorderBrush="White" Background="#2ca847" Cursor="Hand" Foreground="White" Click="SaveUpdatedOrderBtn_Click"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 30 0 0" IsEnabled="False"/>
 
         </StackPanel>
 
