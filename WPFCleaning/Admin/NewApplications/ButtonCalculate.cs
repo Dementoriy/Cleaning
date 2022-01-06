@@ -9,6 +9,7 @@ namespace WPFCleaning.Admin
 {
     public static class ButtonCalculate
     {
+        public static int[,] arrayService = new int[2, 7];
         public static void BtnCalculate(NewApplication newApplication, ClientPage clientPage)
         {
             newApplication.PriceBox.Text = "";
@@ -26,6 +27,8 @@ namespace WPFCleaning.Admin
             {
                 if (newApplication.CheckExpressClean.IsChecked.GetValueOrDefault())
                 {
+                    arrayService[0, 0] = (Service.GetIdService(newApplication.CheckExpressClean.Content.ToString()));
+                    arrayService[1, 0] = Convert.ToInt32(newApplication.TextBoxSquare.Text);
                     newApplication.finalPrice += Service.GetPrice(Service.GetIdService(newApplication.CheckExpressClean.Content.ToString())).Price
                         * Convert.ToInt32(newApplication.TextBoxSquare.Text);
                     newApplication.approximateTime += Service.GetPrice(Service.GetIdService(newApplication.CheckExpressClean.Content.ToString())).Time
@@ -33,6 +36,8 @@ namespace WPFCleaning.Admin
                 }
                 if (newApplication.CheckGeneralClean.IsChecked.GetValueOrDefault())
                 {
+                    arrayService[0, 0] = (Service.GetIdService(newApplication.CheckGeneralClean.Content.ToString()));
+                    arrayService[1, 0] = Convert.ToInt32(newApplication.TextBoxSquare.Text);
                     newApplication.finalPrice += Service.GetPrice(Service.GetIdService(newApplication.CheckGeneralClean.Content.ToString())).Price
                         * Convert.ToInt32(newApplication.TextBoxSquare.Text);
                     newApplication.approximateTime += Service.GetPrice(Service.GetIdService(newApplication.CheckGeneralClean.Content.ToString())).Time
@@ -40,6 +45,8 @@ namespace WPFCleaning.Admin
                 }
                 if (newApplication.CheckBuildingClean.IsChecked.GetValueOrDefault())
                 {
+                    arrayService[0, 0] = (Service.GetIdService(newApplication.CheckBuildingClean.Content.ToString()));
+                    arrayService[1, 0] = Convert.ToInt32(newApplication.TextBoxSquare.Text);
                     newApplication.finalPrice += Service.GetPrice(Service.GetIdService(newApplication.CheckBuildingClean.Content.ToString())).Price
                         * Convert.ToInt32(newApplication.TextBoxSquare.Text);
                     newApplication.approximateTime += Service.GetPrice(Service.GetIdService(newApplication.CheckBuildingClean.Content.ToString())).Time
@@ -47,6 +54,8 @@ namespace WPFCleaning.Admin
                 }
                 if (newApplication.CheckOfficeClean.IsChecked.GetValueOrDefault())
                 {
+                    arrayService[0, 0] = (Service.GetIdService(newApplication.CheckOfficeClean.Content.ToString()));
+                    arrayService[1, 0] = Convert.ToInt32(newApplication.TextBoxSquare.Text);
                     newApplication.finalPrice += Service.GetPrice(Service.GetIdService(newApplication.CheckOfficeClean.Content.ToString())).Price
                         * Convert.ToInt32(newApplication.TextBoxSquare.Text);
                     newApplication.approximateTime += Service.GetPrice(Service.GetIdService(newApplication.CheckOfficeClean.Content.ToString())).Time
@@ -61,8 +70,8 @@ namespace WPFCleaning.Admin
                     string str = "Мойка окон";
                     newApplication.idService = Service.GetIdService(str);
 
-                    newApplication.arrayService[0, 1] = newApplication.idService;
-                    newApplication.arrayService[1, 1] = Convert.ToInt32(newApplication.KolvoWindow.Text);
+                    arrayService[0, 1] = newApplication.idService;
+                    arrayService[1, 1] = Convert.ToInt32(newApplication.KolvoWindow.Text);
                     newApplication.finalPrice += Convert.ToInt32(newApplication.KolvoWindow.Text) * Service.GetPrice(newApplication.idService).Price;
                     newApplication.approximateTime += Convert.ToInt32(newApplication.KolvoWindow.Text) * Service.GetPrice(newApplication.idService).Time;
                 }
@@ -71,8 +80,8 @@ namespace WPFCleaning.Admin
                     string str = "Мойка стеклянных дверей";
                     newApplication.idService = Service.GetIdService(str);
 
-                    newApplication.arrayService[0, 2] = newApplication.idService;
-                    newApplication.arrayService[1, 2] = Convert.ToInt32(newApplication.KolvoDoor.Text);
+                    arrayService[0, 2] = newApplication.idService;
+                    arrayService[1, 2] = Convert.ToInt32(newApplication.KolvoDoor.Text);
                     newApplication.finalPrice += Convert.ToInt32(newApplication.KolvoDoor.Text) * Service.GetPrice(newApplication.idService).Price;
                     newApplication.approximateTime += Convert.ToInt32(newApplication.KolvoDoor.Text) * Service.GetPrice(newApplication.idService).Time;
                 }
@@ -85,8 +94,8 @@ namespace WPFCleaning.Admin
                     string str = "Химчистка диванов";
                     newApplication.idService = Service.GetIdService(str);
 
-                    newApplication.arrayService[0, 3] = newApplication.idService;
-                    newApplication.arrayService[1, 3] = Convert.ToInt32(newApplication.KolvoSofa.Text);
+                    arrayService[0, 3] = newApplication.idService;
+                    arrayService[1, 3] = Convert.ToInt32(newApplication.KolvoSofa.Text);
                     newApplication.finalPrice += Convert.ToInt32(newApplication.KolvoSofa.Text) * Service.GetPrice(newApplication.idService).Price;
                     newApplication.approximateTime += Convert.ToInt32(newApplication.KolvoSofa.Text) * Service.GetPrice(newApplication.idService).Time;
                 }
@@ -95,8 +104,8 @@ namespace WPFCleaning.Admin
                     string str = "Химчистка кресел";
                     newApplication.idService = Service.GetIdService(str);
 
-                    newApplication.arrayService[0, 4] = newApplication.idService;
-                    newApplication.arrayService[1, 4] = Convert.ToInt32(newApplication.KolvoArmcheir.Text);
+                    arrayService[0, 4] = newApplication.idService;
+                    arrayService[1, 4] = Convert.ToInt32(newApplication.KolvoArmcheir.Text);
                     newApplication.finalPrice += Convert.ToInt32(newApplication.KolvoArmcheir.Text) * Service.GetPrice(newApplication.idService).Price;
                     newApplication.approximateTime += Convert.ToInt32(newApplication.KolvoArmcheir.Text) * Service.GetPrice(newApplication.idService).Time;
                 }
@@ -105,8 +114,8 @@ namespace WPFCleaning.Admin
                     string str = "Химчистка ковров";
                     newApplication.idService = Service.GetIdService(str);
 
-                    newApplication.arrayService[0, 5] = newApplication.idService;
-                    newApplication.arrayService[1, 5] = Convert.ToInt32(newApplication.KolvoCarpet.Text);
+                    arrayService[0, 5] = newApplication.idService;
+                    arrayService[1, 5] = Convert.ToInt32(newApplication.KolvoCarpet.Text);
                     newApplication.finalPrice += Convert.ToInt32(newApplication.KolvoCarpet.Text) * Service.GetPrice(newApplication.idService).Price;
                     newApplication.approximateTime += Convert.ToInt32(newApplication.KolvoCarpet.Text) * Service.GetPrice(newApplication.idService).Time;
                 }
@@ -116,8 +125,8 @@ namespace WPFCleaning.Admin
                 string str = "Дезинфекция";
                 newApplication.idService = Service.GetIdService(str);
 
-                newApplication.arrayService[0, 6] = newApplication.idService;
-                newApplication.arrayService[1, 6] = Convert.ToInt32(newApplication.KolvoDezinfection.Text);
+                arrayService[0, 6] = newApplication.idService;
+                arrayService[1, 6] = Convert.ToInt32(newApplication.KolvoDezinfection.Text);
                 newApplication.finalPrice += Convert.ToInt32(newApplication.KolvoDezinfection.Text) * Service.GetPrice(newApplication.idService).Price;
                 newApplication.approximateTime += Convert.ToInt32(newApplication.KolvoDezinfection.Text) * Service.GetPrice(newApplication.idService).Time;
             }

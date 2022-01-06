@@ -7,14 +7,14 @@ using System.Windows.Input;
 using CleaningDLL.Entity;
 using System.Linq;
 
-namespace WPFCleaning.Admin
+namespace WPFCleaning.Brigadir
 {
     /// <summary>
-    /// Логика взаимодействия для ApplicationsFullInfo.xaml
+    /// Логика взаимодействия для FullInfoForBrigadir.xaml
     /// </summary>
-    public partial class ApplicationsFullInfo : Window
+    public partial class FullInfoForBrigadir : Window
     {
-        public ApplicationsFullInfo()
+        public FullInfoForBrigadir()
         {
             InitializeComponent();
             WindowState = WindowState.Maximized;
@@ -52,12 +52,7 @@ namespace WPFCleaning.Admin
 
             List<ProvidedService> pvs = ProvidedService.GetPSByOrder(order.ID);
 
-            foreach (var p in pvs)
-            {
-                if (p.ServiceID < 5)
-                    Sqare.Text = pvs.Where(a => a.ServiceID < 5).FirstOrDefault().Amount.ToString();
-                else Sqare.Text = "";
-            }
+            Sqare.Text = pvs.Where(a => a.ServiceID < 5 && a.ServiceID > 0 && a.Amount != 0).FirstOrDefault().Amount.ToString();
 
             foreach (var p in pvs)
             {
@@ -86,91 +81,11 @@ namespace WPFCleaning.Admin
             }
         }
 
-        private void CheckExpressClean_Checked(object sender, RoutedEventArgs e)
+        private void LockSelection(object sender, EventArgs e)
         {
-
+            if (sender is CheckBox)
+                ((CheckBox)sender).IsChecked = !((CheckBox)sender).IsChecked;
         }
-
-        private void CheckGeneralClean_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CheckBuildingClean_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CheckOfficeClean_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void WindowClean_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ChemistryClean_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Dezinfection_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void KolvoService_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void KolvoService_LostFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CheckService_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void WindowClean_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ChemistryClean_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Dezinfection_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void TextBoxSquare_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-
-        }
-
-        private void TextBoxSquare_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void TextBoxSquare_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ButtonCalculate_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void BrigadeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -181,15 +96,6 @@ namespace WPFCleaning.Admin
 
         }
 
-        private void MiddleName_TextChanged(object sender, TextChangedEventArgs e)
-        {
 
-        }
-
-        private void CheckOldClient_Click(object sender, EventArgs e)
-        {
-            if (sender is CheckBox)
-                ((CheckBox)sender).IsChecked = !((CheckBox)sender).IsChecked;
-        }
     }
 }

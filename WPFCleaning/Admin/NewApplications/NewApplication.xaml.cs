@@ -123,13 +123,6 @@ namespace WPFCleaning.Admin
             }
         }
 
-        public int[,] arrayService = new int[2, 7];
-        public void GetIdServiceByCheckBox()
-        {
-            IdServiceByCheckBox.GetServiceByCheckBox(this);
-            arrayService = IdServiceByCheckBox.arrayService;
-        }
-
         public void ClearNewApplication()
         {
             CheckExpressClean.IsChecked = false;
@@ -151,19 +144,20 @@ namespace WPFCleaning.Admin
         {
             return CorrectValue.CorrectDate(_clientPage, this);
         }
-        private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
-        {
-            GetIdServiceByCheckBox();
-            ButtonAddOrder.BtnAddOrder(this, _clientPage, _emp);
-        }
 
-        public int at = 0;
-
+        public int[,] arrayService = new int[2, 7];
         private void ButtonCalculate_Click(object sender, RoutedEventArgs e)
         {
             ButtonCalculate.BtnCalculate(this, _clientPage);
         }
-        
+        private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
+        {
+            arrayService = ButtonCalculate.arrayService;
+            ButtonAddOrder.BtnAddOrder(this, _clientPage, _emp);
+        }
+
+        public int at = 0;
+  
         private void BtnBrigadeInfo_Click(object sender, RoutedEventArgs e)
         {
             if (BrigadeBox.SelectedIndex != -1)

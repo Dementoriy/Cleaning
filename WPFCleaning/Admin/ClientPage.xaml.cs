@@ -100,5 +100,11 @@ namespace WPFCleaning.Admin
                 e.Handled = true; // если пробел, отклоняем ввод
             }
         }
+
+        private void CheckOldClient_Click(object sender, EventArgs e)
+        {
+            if (sender is CheckBox)
+                ((CheckBox)sender).IsChecked = !((CheckBox)sender).IsChecked;
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace CleaningDLL.Entity
         public int ID { get; set; }
         [Required]
         public virtual Order Order { get; set; }
+        public int OrderID { get; set; }
         [Required]
         public virtual Service Service { get; set; }
         public int ServiceID { get; set; }
@@ -24,7 +25,7 @@ namespace CleaningDLL.Entity
         public static List<ProvidedService> GetPSByOrder(int id)
         {
             return (from ps in db.ProvidedService
-                    where ps.Order.ID == id
+                    where ps.OrderID == id
                     select ps
                     ).ToList();
         }

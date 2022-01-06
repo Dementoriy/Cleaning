@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Linq;
 using CleaningDLL.Entity;
 
@@ -147,6 +148,13 @@ namespace WPFCleaning.Brigadir
             }
             else
                 SelectedOrderInfo();
+        }
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Brigadir.FullInfoForBrigadir applicationsFullInfo = new Brigadir.FullInfoForBrigadir();
+            Order.OrderInfo selectedOrder = (Order.OrderInfo)dataGridApplication.SelectedValue;
+            applicationsFullInfo.Show();
+            applicationsFullInfo.AddSelectedOrder(selectedOrder.ID);
         }
     }
 }

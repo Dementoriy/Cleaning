@@ -90,7 +90,7 @@
                      IsReadOnly="True" HorizontalAlignment="Left" Cursor="Arrow"/>
         </StackPanel>
 
-        <DataGrid x:Name="dataGridOrder" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="10" Margin="0,0,2,0" 
+        <DataGrid x:Name="dataGridOrder" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="10" Margin="0 0 2 0" 
                   FontSize="20" BorderThickness="1" FontFamily="Arial Bold" AutoGenerateColumns="False" ItemsSource="{Binding}" 
                   CanUserResizeColumns="False" CanUserReorderColumns="False" SelectionMode="Single" SelectionUnit="FullRow">
                 

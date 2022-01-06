@@ -78,9 +78,22 @@
             </StackPanel>
         </StackPanel>
 
-        <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0"
-                  FontSize="20" BorderThickness="1"
-                  FontFamily="Arial Bold" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserResizeColumns="False" CanUserReorderColumns="False">
+        <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="10" Margin="0 0 2 0" 
+                  FontSize="20" BorderThickness="1" FontFamily="Arial Bold" AutoGenerateColumns="False" ItemsSource="{Binding}" 
+                  CanUserResizeColumns="False" CanUserReorderColumns="False" SelectionMode="Single" SelectionUnit="FullRow">
+
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Style.Triggers>
+                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                            <Setter Property="Background" Value="#ffdadada" />
+                            <Setter Property="Foreground" Value="Black" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.CellStyle>
+
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Дата" Width="134" Binding="{Binding Path=Date}"/>
                 <DataGridTextColumn Header="Время" Width="100" Binding="{Binding Path=Time}"/>
@@ -89,6 +102,15 @@
                 <DataGridTextColumn Header="Телефон" Width="200" Binding="{Binding Path=Telefone}"/>
                 <DataGridTextColumn Header="Клиент" Width="*" Binding="{Binding Path=Client}"/>
             </DataGrid.Columns>
+
+            <DataGrid.ItemContainerStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="Height" Value="34"/>
+                    <Setter Property="Margin" Value="12 12 0 0"/>
+                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+            </DataGrid.ItemContainerStyle>
+
         </DataGrid>
     </Grid>
 </Page>
