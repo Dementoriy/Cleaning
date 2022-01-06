@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Reflection;
+using System.Collections.Generic;
 
 namespace CleaningDLL.Entity
 {
@@ -12,6 +13,19 @@ namespace CleaningDLL.Entity
             [Description("В процессе")] inProcessing = 2,
             [Description("Завершена")] сompleted = 3,
             [Description("Отменена")] canceled = 4
+        }
+        public static List<string> GetStatusesForBrigadir(string st)
+        {
+            Status startStatus = GetValueFromDescription<Status>(st);
+            List<string> list = new List<string>();
+            foreach(Status status in Enum.GetValues(typeof(Status)))
+            {
+                if(status >= startStatus && status != Status.canceled)
+                {
+                    list.Add(GetDescription(status));
+                }
+            }
+            return list;
         }
         public static string GetDescription(Enum enumElement)
         {
@@ -43,7 +57,7 @@ namespace CleaningDLL.Entity
                         return (T)field.GetValue(null);
                 }
             }
-
+            //MessageBox.Show("Не найдено!");
             throw new ArgumentException("Не найдено!", nameof(description));
             // Or return default(T);
         }

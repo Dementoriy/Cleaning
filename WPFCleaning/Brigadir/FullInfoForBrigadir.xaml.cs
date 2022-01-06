@@ -25,7 +25,9 @@ namespace WPFCleaning.Brigadir
             _brigadeApplications = ba;
             WindowState = WindowState.Maximized;
             order = Order.GetOrderById(id);
+            GetStatus();
             StatusBox.IsEnabled = false;
+            SaveUpdatedOrder.IsEnabled = false;
         }
 
         public void AddSelectedOrder(int id)
@@ -133,6 +135,11 @@ namespace WPFCleaning.Brigadir
                 StatusBox.IsEnabled = true;
                 SaveUpdatedOrder.IsEnabled = true;
             }    
+        }
+        public void GetStatus()
+        {
+            var statuses = EnumStatus.GetStatusesForBrigadir(order.Status);
+            StatusBox.ItemsSource = statuses;
         }
     }
 }
