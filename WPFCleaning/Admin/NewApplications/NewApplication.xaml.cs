@@ -23,11 +23,14 @@ namespace WPFCleaning.Admin
             ChemistryCleanBox.IsEnabled = false;
             WindowCleanBox.IsEnabled = false;
             DezinfectionBox.IsEnabled = false;
+            PriceBox.Text = "0";
+            ApproximateTime.Text = "0ч. 0мин.";
         }
 
         public int idService;
         public decimal finalPrice = 0;
         public int approximateTime = 0;
+        
         private void WindowClean_Checked(object sender, RoutedEventArgs e)
         {
             WindowCleanBox.IsEnabled = WindowClean.IsEnabled;
@@ -36,16 +39,7 @@ namespace WPFCleaning.Admin
         {
 
             WindowCleanBox.IsEnabled = false;
-            if (finalPrice != 0)
-            {
-                finalPrice -= Convert.ToInt32(KolvoWindow.Text) * Convert.ToInt32(Service.GetServiceById(idService).Price);
-                finalPrice -= Convert.ToInt32(KolvoDoor.Text) * Convert.ToInt32(Service.GetServiceById(idService).Price);
-                PriceBox.Text = finalPrice.ToString();
-                approximateTime = CorrectTime.GetSecByTime(ApproximateTime.Text) - (Convert.ToInt32(KolvoWindow.Text) * Service.GetServiceById(idService).Time);
-                approximateTime = CorrectTime.GetSecByTime(ApproximateTime.Text) - (Convert.ToInt32(KolvoDoor.Text) * Service.GetServiceById(idService).Time);
-                ApproximateTime.Text = Order.GetTimeByInt(approximateTime);
-            }
-
+            OrderPrice.Calculate(this, _clientPage);
             KolvoWindow.Text = "0";
             KolvoDoor.Text = "0";
 
@@ -57,17 +51,7 @@ namespace WPFCleaning.Admin
         private void ChemistryClean_Unchecked(object sender, RoutedEventArgs e)
         {
             ChemistryCleanBox.IsEnabled = false;
-            if (finalPrice != 0)
-            {
-                finalPrice -= Convert.ToInt32(KolvoSofa.Text) * Convert.ToInt32(Service.GetServiceById(idService).Price);
-                finalPrice -= Convert.ToInt32(KolvoArmcheir.Text) * Convert.ToInt32(Service.GetServiceById(idService).Price);
-                finalPrice -= Convert.ToInt32(KolvoCarpet.Text) * Convert.ToInt32(Service.GetServiceById(idService).Price);
-                approximateTime = CorrectTime.GetSecByTime(ApproximateTime.Text) - (Convert.ToInt32(KolvoSofa.Text) * Service.GetServiceById(idService).Time);
-                approximateTime = CorrectTime.GetSecByTime(ApproximateTime.Text) - (Convert.ToInt32(KolvoArmcheir.Text) * Service.GetServiceById(idService).Time);
-                approximateTime = CorrectTime.GetSecByTime(ApproximateTime.Text) - (Convert.ToInt32(KolvoCarpet.Text) * Service.GetServiceById(idService).Time);
-                ApproximateTime.Text = Order.GetTimeByInt(approximateTime);
-            }
-
+            OrderPrice.Calculate(this, _clientPage);
             KolvoSofa.Text = "0";
             KolvoArmcheir.Text = "0";
             KolvoCarpet.Text = "0";
@@ -75,58 +59,83 @@ namespace WPFCleaning.Admin
         private void Dezinfection_Checked(object sender, RoutedEventArgs e)
         {
             DezinfectionBox.IsEnabled = Dezinfection.IsEnabled;
+            OrderPrice.Calculate(this, _clientPage);
         }
         private void Dezinfection_Unchecked(object sender, RoutedEventArgs e)
         {
             DezinfectionBox.IsEnabled = false;
-            if (finalPrice != 0)
-            {
-                finalPrice -= Convert.ToInt32(KolvoDezinfection.Text) * Convert.ToInt32(Service.GetServiceById(idService).Price);
-                approximateTime = CorrectTime.GetSecByTime(ApproximateTime.Text) - (Convert.ToInt32(KolvoDezinfection.Text) * Service.GetServiceById(idService).Time);
-                ApproximateTime.Text = Order.GetTimeByInt(approximateTime);
-            }
+            OrderPrice.Calculate(this, _clientPage);
             KolvoDezinfection.Text = "0";
         }
 
         private void CheckExpressClean_Checked(object sender, RoutedEventArgs e)
         {
-            CheckGeneralClean.IsChecked = false;
-            CheckBuildingClean.IsChecked = false;
-            CheckOfficeClean.IsChecked = false;
-            idService = Service.GetIdService(CheckExpressClean.Content.ToString());
+            if (TextBoxSquare.Text != "")
+            {
+                CheckGeneralClean.IsChecked = false;
+                CheckBuildingClean.IsChecked = false;
+                CheckOfficeClean.IsChecked = false;
+                idService = Service.GetIdService(CheckExpressClean.Content.ToString());
+                OrderPrice.Calculate(this, _clientPage);
+            }
+            else
+            {
+                CheckExpressClean.IsChecked = false;
+                MessageBox.Show("Введите площадь!");
+            } 
         }
         private void CheckGeneralClean_Checked(object sender, RoutedEventArgs e)
         {
-
-            CheckExpressClean.IsChecked = false;
-            CheckBuildingClean.IsChecked = false;
-            CheckOfficeClean.IsChecked = false;
-            idService = Service.GetIdService(CheckGeneralClean.Content.ToString());
+            if (TextBoxSquare.Text != "")
+            {
+                CheckExpressClean.IsChecked = false;
+                CheckBuildingClean.IsChecked = false;
+                CheckOfficeClean.IsChecked = false;
+                idService = Service.GetIdService(CheckGeneralClean.Content.ToString());
+                OrderPrice.Calculate(this, _clientPage);
+            }
+            else
+            {
+                CheckGeneralClean.IsChecked = false;
+                MessageBox.Show("Введите площадь!");
+            }
         }
         private void CheckBuildingClean_Checked(object sender, RoutedEventArgs e)
         {
-
-            CheckExpressClean.IsChecked = false;
-            CheckGeneralClean.IsChecked = false;
-            CheckOfficeClean.IsChecked = false;
-            idService = Service.GetIdService(CheckBuildingClean.Content.ToString());
+            if (TextBoxSquare.Text != "")
+            {
+                CheckExpressClean.IsChecked = false;
+                CheckGeneralClean.IsChecked = false;
+                CheckOfficeClean.IsChecked = false;
+                idService = Service.GetIdService(CheckBuildingClean.Content.ToString());
+                OrderPrice.Calculate(this, _clientPage);
+            }
+            else
+            {
+                CheckBuildingClean.IsChecked = false;
+                MessageBox.Show("Введите площадь!");
+            }
         }
         private void CheckOfficeClean_Checked(object sender, RoutedEventArgs e)
         {
-
-            CheckExpressClean.IsChecked = false;
-            CheckGeneralClean.IsChecked = false;
-            CheckBuildingClean.IsChecked = false;
-            idService = Service.GetIdService(CheckOfficeClean.Content.ToString());
+            if (TextBoxSquare.Text != "")
+            {
+                CheckExpressClean.IsChecked = false;
+                CheckGeneralClean.IsChecked = false;
+                CheckBuildingClean.IsChecked = false;
+                idService = Service.GetIdService(CheckOfficeClean.Content.ToString());
+                OrderPrice.Calculate(this, _clientPage);
+            }
+            else
+            {
+                CheckOfficeClean.IsChecked = false;
+                MessageBox.Show("Введите площадь!");
+            }
         }
         private void CheckService_Unchecked(object sender, RoutedEventArgs e)
         {
-            CheckBox checkBox = sender as CheckBox;
-            if (finalPrice != 0)
-            {
-                finalPrice -= Service.GetServiceById(Service.GetIdService(checkBox.Content.ToString())).Price * Convert.ToInt32(TextBoxSquare.Text);
-                approximateTime -= Service.GetServiceById(Service.GetIdService(CheckExpressClean.Content.ToString())).Time * Convert.ToInt32(TextBoxSquare.Text);
-            }
+            OrderPrice.Calculate(this, _clientPage);
+            //TextBoxSquare.Text = "";
         }
 
         public void ClearNewApplication()
@@ -152,10 +161,6 @@ namespace WPFCleaning.Admin
         }
 
         public int[,] arrayService = new int[2, 7];
-        private void ButtonCalculate_Click(object sender, RoutedEventArgs e)
-        {
-            OrderPrice.Calculate(this, _clientPage);
-        }
         private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {
             OrderPrice.Calculate(this, _clientPage);
@@ -191,6 +196,7 @@ namespace WPFCleaning.Admin
             {
                 textBox.Text = "0";
             }
+            OrderPrice.Calculate(this, _clientPage);
         }
         private void SelectTime_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {

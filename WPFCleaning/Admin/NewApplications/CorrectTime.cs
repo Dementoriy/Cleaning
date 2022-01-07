@@ -12,7 +12,7 @@ namespace WPFCleaning.Admin
     {
         public static int GetSecByTime(string tt)
         {
-            int sec = (Convert.ToInt32(tt.Substring(0, 2)) * 60 * 60) + (Convert.ToInt32(tt.Substring(6, 2)) * 60);
+            int sec = (Convert.ToInt32(tt.Substring(0, 1)) * 60 * 60) + (Convert.ToInt32(tt.Substring(4, 2)) * 60);
             return sec;
         }
         public static void PreviewTextInput(NewApplication newApplication, TextCompositionEventArgs e)

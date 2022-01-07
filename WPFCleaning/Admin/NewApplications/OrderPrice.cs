@@ -12,55 +12,48 @@ namespace WPFCleaning.Admin
         public static int[,] arrayService = new int[2, 7];
         public static void Calculate(NewApplication newApplication, ClientPage clientPage)
         {
+            Array.Clear(arrayService, 0, arrayService.Length);
+
             newApplication.PriceBox.Text = "";
             newApplication.ApproximateTime.Text = "";
             newApplication.finalPrice = 0;
             newApplication.approximateTime = 0;
 
-            if ((newApplication.CheckExpressClean.IsChecked.GetValueOrDefault() || newApplication.CheckGeneralClean.IsChecked.GetValueOrDefault()
-                || newApplication.CheckBuildingClean.IsChecked.GetValueOrDefault()
-                || newApplication.CheckOfficeClean.IsChecked.GetValueOrDefault()) && newApplication.TextBoxSquare.Text == "")
+            if (newApplication.CheckExpressClean.IsChecked.GetValueOrDefault())
             {
-                MessageBox.Show("Введите площадь!");
+                arrayService[0, 0] = (Service.GetIdService(newApplication.CheckExpressClean.Content.ToString()));
+                arrayService[1, 0] = Convert.ToInt32(newApplication.TextBoxSquare.Text);
+                newApplication.finalPrice += Service.GetServiceById(Service.GetIdService(newApplication.CheckExpressClean.Content.ToString())).Price
+                    * Convert.ToInt32(newApplication.TextBoxSquare.Text);
+                newApplication.approximateTime += Service.GetServiceById(Service.GetIdService(newApplication.CheckExpressClean.Content.ToString())).Time
+                    * Convert.ToInt32(newApplication.TextBoxSquare.Text);
             }
-            else
+            if (newApplication.CheckGeneralClean.IsChecked.GetValueOrDefault())
             {
-                if (newApplication.CheckExpressClean.IsChecked.GetValueOrDefault())
-                {
-                    arrayService[0, 0] = (Service.GetIdService(newApplication.CheckExpressClean.Content.ToString()));
-                    arrayService[1, 0] = Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                    newApplication.finalPrice += Service.GetServiceById(Service.GetIdService(newApplication.CheckExpressClean.Content.ToString())).Price
-                        * Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                    newApplication.approximateTime += Service.GetServiceById(Service.GetIdService(newApplication.CheckExpressClean.Content.ToString())).Time
-                        * Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                }
-                if (newApplication.CheckGeneralClean.IsChecked.GetValueOrDefault())
-                {
-                    arrayService[0, 0] = (Service.GetIdService(newApplication.CheckGeneralClean.Content.ToString()));
-                    arrayService[1, 0] = Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                    newApplication.finalPrice += Service.GetServiceById(Service.GetIdService(newApplication.CheckGeneralClean.Content.ToString())).Price
-                        * Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                    newApplication.approximateTime += Service.GetServiceById(Service.GetIdService(newApplication.CheckGeneralClean.Content.ToString())).Time
-                        * Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                }
-                if (newApplication.CheckBuildingClean.IsChecked.GetValueOrDefault())
-                {
-                    arrayService[0, 0] = (Service.GetIdService(newApplication.CheckBuildingClean.Content.ToString()));
-                    arrayService[1, 0] = Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                    newApplication.finalPrice += Service.GetServiceById(Service.GetIdService(newApplication.CheckBuildingClean.Content.ToString())).Price
-                        * Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                    newApplication.approximateTime += Service.GetServiceById(Service.GetIdService(newApplication.CheckBuildingClean.Content.ToString())).Time
-                        * Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                }
-                if (newApplication.CheckOfficeClean.IsChecked.GetValueOrDefault())
-                {
-                    arrayService[0, 0] = (Service.GetIdService(newApplication.CheckOfficeClean.Content.ToString()));
-                    arrayService[1, 0] = Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                    newApplication.finalPrice += Service.GetServiceById(Service.GetIdService(newApplication.CheckOfficeClean.Content.ToString())).Price
-                        * Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                    newApplication.approximateTime += Service.GetServiceById(Service.GetIdService(newApplication.CheckOfficeClean.Content.ToString())).Time
-                        * Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                }
+                arrayService[0, 0] = (Service.GetIdService(newApplication.CheckGeneralClean.Content.ToString()));
+                arrayService[1, 0] = Convert.ToInt32(newApplication.TextBoxSquare.Text);
+                newApplication.finalPrice += Service.GetServiceById(Service.GetIdService(newApplication.CheckGeneralClean.Content.ToString())).Price
+                    * Convert.ToInt32(newApplication.TextBoxSquare.Text);
+                newApplication.approximateTime += Service.GetServiceById(Service.GetIdService(newApplication.CheckGeneralClean.Content.ToString())).Time
+                    * Convert.ToInt32(newApplication.TextBoxSquare.Text);
+            }
+            if (newApplication.CheckBuildingClean.IsChecked.GetValueOrDefault())
+            {
+                arrayService[0, 0] = (Service.GetIdService(newApplication.CheckBuildingClean.Content.ToString()));
+                arrayService[1, 0] = Convert.ToInt32(newApplication.TextBoxSquare.Text);
+                newApplication.finalPrice += Service.GetServiceById(Service.GetIdService(newApplication.CheckBuildingClean.Content.ToString())).Price
+                    * Convert.ToInt32(newApplication.TextBoxSquare.Text);
+                newApplication.approximateTime += Service.GetServiceById(Service.GetIdService(newApplication.CheckBuildingClean.Content.ToString())).Time
+                    * Convert.ToInt32(newApplication.TextBoxSquare.Text);
+            }
+            if (newApplication.CheckOfficeClean.IsChecked.GetValueOrDefault())
+            {
+                arrayService[0, 0] = (Service.GetIdService(newApplication.CheckOfficeClean.Content.ToString()));
+                arrayService[1, 0] = Convert.ToInt32(newApplication.TextBoxSquare.Text);
+                newApplication.finalPrice += Service.GetServiceById(Service.GetIdService(newApplication.CheckOfficeClean.Content.ToString())).Price
+                    * Convert.ToInt32(newApplication.TextBoxSquare.Text);
+                newApplication.approximateTime += Service.GetServiceById(Service.GetIdService(newApplication.CheckOfficeClean.Content.ToString())).Time
+                    * Convert.ToInt32(newApplication.TextBoxSquare.Text);
             }
 
             if (newApplication.WindowClean.IsChecked.GetValueOrDefault())
@@ -138,17 +131,8 @@ namespace WPFCleaning.Admin
 
             newApplication.at = newApplication.approximateTime;
 
-            if ((newApplication.CheckExpressClean.IsChecked.GetValueOrDefault() || newApplication.CheckGeneralClean.IsChecked.GetValueOrDefault()
-                || newApplication.CheckBuildingClean.IsChecked.GetValueOrDefault()
-                || newApplication.CheckOfficeClean.IsChecked.GetValueOrDefault()) && newApplication.TextBoxSquare.Text == "")
-            {
-                MessageBox.Show("Введите площадь!");
-            }
-            else
-            {
-                newApplication.PriceBox.Text = newApplication.finalPrice.ToString();
-                newApplication.ApproximateTime.Text = Order.GetTimeByInt(newApplication.approximateTime);
-            }
+            newApplication.PriceBox.Text = newApplication.finalPrice.ToString();
+            newApplication.ApproximateTime.Text = Order.GetTimeByInt(newApplication.approximateTime);
         }
     }
 }

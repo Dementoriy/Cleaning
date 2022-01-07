@@ -89,7 +89,7 @@ namespace CleaningDLL.Entity
             t = t / 60;
             int h = t / 60;
             int m = t % 60;
-            return (h + " ч. " + m + "мин.");
+            return (h + "ч. " + m + "мин.");
         }
     }
 }

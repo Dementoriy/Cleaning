@@ -57,9 +57,8 @@ namespace CleaningDLL.Entity
                         return (T)field.GetValue(null);
                 }
             }
-            //MessageBox.Show("Не найдено!");
+
             throw new ArgumentException("Не найдено!", nameof(description));
-            // Or return default(T);
         }
     }
     

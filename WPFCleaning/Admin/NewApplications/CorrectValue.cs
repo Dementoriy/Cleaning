@@ -134,8 +134,6 @@ namespace WPFCleaning.Admin
             else if (Convert.ToInt32(newApplication.PriceBox.Text) == 0)
             {
                 MessageBox.Show("Ни одна из услуг не выбрана");
-                newApplication.PriceBox.Text = "";
-                newApplication.ApproximateTime.Text = "";
                 return false;
             }
             else return true;

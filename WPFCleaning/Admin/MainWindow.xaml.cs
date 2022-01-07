@@ -67,6 +67,7 @@ namespace WPFCleaning.Admin
         private void ButtonClickApplication(object sender, RoutedEventArgs e)
         {
             View.Navigate(applications);
+            //Applications.SelectedOrderInfo();
             ReportBtn.BorderBrush = Brushes.Black;
             ClientBtn.BorderBrush = Brushes.Black;
             NewOrderBtn.BorderBrush = Brushes.Black;
