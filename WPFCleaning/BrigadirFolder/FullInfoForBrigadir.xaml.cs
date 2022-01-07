@@ -4,25 +4,34 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CleaningDLL;
 using CleaningDLL.Entity;
 using System.Linq;
+using System.Windows.Media;
 
-namespace WPFCleaning.Admin
+namespace WPFCleaning.Brigadir
 {
     /// <summary>
-    /// Логика взаимодействия для ApplicationsFullInfo.xaml
+    /// Логика взаимодействия для FullInfoForBrigadir.xaml
     /// </summary>
-    public partial class ApplicationsFullInfo : Window
+    public partial class FullInfoForBrigadir : Window
     {
-        public ApplicationsFullInfo()
+        private static ApplicationContext db = Context.Db;
+        Order order;
+        private BrigadeApplications _brigadeApplications;
+        public FullInfoForBrigadir(int id, BrigadeApplications ba)
         {
             InitializeComponent();
+            _brigadeApplications = ba;
             WindowState = WindowState.Maximized;
+            order = Order.GetOrderById(id);
+            GetStatus();
+            StatusBox.IsEnabled = false;
+            SaveUpdatedOrder.IsEnabled = false;
         }
+
         public void AddSelectedOrder(int id)
         {
-            Order order = Order.GetOrderById(id);
-
             Telefon.Text = order.Client.ClientTelefonNumber;
             Surname.Text = order.Client.Surname;
             Name.Text = order.Client.Name;
@@ -95,110 +104,38 @@ namespace WPFCleaning.Admin
             }
         }
 
-        private void CheckExpressClean_Checked(object sender, RoutedEventArgs e)
+        private void LockSelection(object sender, EventArgs e)
         {
-
+            if (sender is CheckBox)
+                ((CheckBox)sender).IsChecked = !((CheckBox)sender).IsChecked;
         }
 
-        private void CheckGeneralClean_Checked(object sender, RoutedEventArgs e)
+        public void SaveUpdatedOrderBtn_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void CheckBuildingClean_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CheckOfficeClean_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void WindowClean_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ChemistryClean_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Dezinfection_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void KolvoService_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void KolvoService_LostFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void CheckService_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void WindowClean_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ChemistryClean_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Dezinfection_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void TextBoxSquare_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-
-        }
-
-        private void TextBoxSquare_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void TextBoxSquare_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ButtonCalculate_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BrigadeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
+            order.Status = StatusBox.Text;
+            Context.Db.SaveChanges();
+            MessageBox.Show("Статус заявки изменен успешно!");
+            _brigadeApplications.SelectedOrderInfo();
+            this.Close();
         }
 
         private void UpdateOrder_Click(object sender, RoutedEventArgs e)
         {
-
+            if (StatusBox.Text == "Завершена")
+            {
+                MessageBox.Show("Статус заявки изменить нельзя!");
+                this.Close();
+            }
+            else
+            {
+                StatusBox.IsEnabled = true;
+                SaveUpdatedOrder.IsEnabled = true;
+            }    
         }
-
-        private void MiddleName_TextChanged(object sender, TextChangedEventArgs e)
+        public void GetStatus()
         {
-
-        }
-
-        private void CheckOldClient_Click(object sender, EventArgs e)
-        {
-            if (sender is CheckBox)
-                ((CheckBox)sender).IsChecked = !((CheckBox)sender).IsChecked;
+            var statuses = EnumStatus.GetStatusesForBrigadir(order.Status);
+            StatusBox.ItemsSource = statuses;
         }
     }
 }

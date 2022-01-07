@@ -31,7 +31,7 @@ namespace WPFCleaning.Admin
         public decimal finalPrice = 0;
         public int approximateTime = 0;
         
-        private void WindowClean_Checked(object sender, RoutedEventArgs e)
+    private void WindowClean_Checked(object sender, RoutedEventArgs e)
         {
             WindowCleanBox.IsEnabled = WindowClean.IsEnabled;
         }
@@ -59,7 +59,6 @@ namespace WPFCleaning.Admin
         private void Dezinfection_Checked(object sender, RoutedEventArgs e)
         {
             DezinfectionBox.IsEnabled = Dezinfection.IsEnabled;
-            OrderPrice.Calculate(this, _clientPage);
         }
         private void Dezinfection_Unchecked(object sender, RoutedEventArgs e)
         {
@@ -161,6 +160,7 @@ namespace WPFCleaning.Admin
         }
 
         public int[,] arrayService = new int[2, 7];
+
         private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {
             OrderPrice.Calculate(this, _clientPage);

@@ -33,7 +33,7 @@ namespace WPFCleaning.Admin
         }
         private void CheckFinish_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (!(bool)CheckCanceled.IsChecked)
+            if (CheckCanceled.IsChecked.GetValueOrDefault())
                 SelectedOrderInfo();
         }
         private void CheckCanceled_Checked(object sender, RoutedEventArgs e)
@@ -43,7 +43,7 @@ namespace WPFCleaning.Admin
         }
         private void CheckCanceled_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (!(bool)CheckFinish.IsChecked)
+            if (CheckFinish.IsChecked.GetValueOrDefault())
                 SelectedOrderInfo();
         }
 
@@ -138,10 +138,10 @@ namespace WPFCleaning.Admin
         }
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ApplicationsFullInfo applicationsFullInfo = new ApplicationsFullInfo();
             Order.OrderInfo selectedOrder = (Order.OrderInfo)dataGridOrder.SelectedValue;
+            ApplicationsFullInfo applicationsFullInfo = new ApplicationsFullInfo(selectedOrder.ID, default);
             applicationsFullInfo.Show();
-            applicationsFullInfo.AddSelectedOrder(selectedOrder.ID);
+            applicationsFullInfo.AddSelectedOrder();
         }
 
         private void CalculateReport_Click(object sender, RoutedEventArgs e)

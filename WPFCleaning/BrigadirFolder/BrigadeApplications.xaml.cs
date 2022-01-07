@@ -29,7 +29,7 @@ namespace WPFCleaning.Brigadir
         }
         private void CheckWait_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (!(bool)CheckInProcess.IsChecked && !(bool)CheckFinish.IsChecked)
+            if (!CheckInProcess.IsChecked.GetValueOrDefault() && !CheckFinish.IsChecked.GetValueOrDefault())
                 SelectedOrderInfo();
         }
         private void CheckInProcess_Checked(object sender, RoutedEventArgs e)
@@ -40,7 +40,7 @@ namespace WPFCleaning.Brigadir
         }
         private void CheckInProcess_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (!(bool)CheckWait.IsChecked && !(bool)CheckFinish.IsChecked)
+            if (!CheckWait.IsChecked.GetValueOrDefault() && !CheckFinish.IsChecked.GetValueOrDefault())
                 SelectedOrderInfo();
         }
         private void CheckFinish_Checked(object sender, RoutedEventArgs e)
@@ -51,7 +51,7 @@ namespace WPFCleaning.Brigadir
         }
         private void CheckFinish_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (!(bool)CheckWait.IsChecked && !(bool)CheckInProcess.IsChecked)
+            if (!CheckWait.IsChecked.GetValueOrDefault() && !CheckInProcess.IsChecked.GetValueOrDefault())
                 SelectedOrderInfo();
         }
         public void AddAplication()

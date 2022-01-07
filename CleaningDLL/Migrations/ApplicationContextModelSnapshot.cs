@@ -474,9 +474,10 @@ namespace CleaningDLL.Migrations
                     b.Property<int>("FinalPrice")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Status")
+                    b.Property<string>("Status")
+                        .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("integer");
+                        .HasColumnType("character varying(50)");
 
                     b.HasKey("ID");
 
@@ -853,7 +854,7 @@ namespace CleaningDLL.Migrations
             modelBuilder.Entity("CleaningDLL.Entity.ProvidedService", b =>
                 {
                     b.HasOne("CleaningDLL.Entity.Order", "Order")
-                        .WithMany()
+                        .WithMany("ProvidedServices")
                         .HasForeignKey("OrderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -915,6 +916,11 @@ namespace CleaningDLL.Migrations
                         .HasForeignKey("Inventory_TypeID");
 
                     b.Navigation("Inventory_Type");
+                });
+
+            modelBuilder.Entity("CleaningDLL.Entity.Order", b =>
+                {
+                    b.Navigation("ProvidedServices");
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.Position", b =>

@@ -46,11 +46,5 @@
         <Button Content="Войти" Grid.Column="2" Grid.ColumnSpan="5" x:Name="SignInButton" Grid.Row="8" Grid.RowSpan="2" Cursor="Hand" 
                 Click="SignInButton_Click" FontFamily="Arial Bold" FontSize="20" BorderThickness="2" BorderBrush="White" Background="#3a388a" 
                 Margin="57,18,57,19"/>
-        <Button Content="Админ" Grid.Column="2" Grid.ColumnSpan="5" x:Name="SignInButtonA" Grid.Row="9" Grid.RowSpan="2"  Cursor="Hand" 
-                Click="SignInButtonA_Click" FontFamily="Arial Bold" FontSize="20" BorderThickness="2" BorderBrush="White" Background="#3a388a" 
-                Margin="57,18,57,19"/>
-        <Button Content="Бригадир" Grid.Column="2" Grid.ColumnSpan="5" x:Name="SignInButtonB" Grid.Row="10" Grid.RowSpan="2"  Cursor="Hand" 
-                Click="SignInButtonB_Click" FontFamily="Arial Bold" FontSize="20" BorderThickness="2" BorderBrush="White" Background="#3a388a" 
-                Margin="57,18,57,19"/>
-        </Grid>
+    </Grid>
 </Window>

@@ -14,6 +14,16 @@ namespace CleaningDLL.Entity
             [Description("Завершена")] сompleted = 3,
             [Description("Отменена")] canceled = 4
         }
+        public static List<string> GetStatusesForAdmin(string st)
+        {
+            Status startStatus = GetValueFromDescription<Status>(st);
+            List<string> list = new List<string>();
+            foreach (Status status in Enum.GetValues(typeof(Status)))
+            {
+                    list.Add(GetDescription(status));
+            }
+            return list;
+        }
         public static List<string> GetStatusesForBrigadir(string st)
         {
             Status startStatus = GetValueFromDescription<Status>(st);

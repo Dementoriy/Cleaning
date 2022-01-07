@@ -26,6 +26,7 @@ namespace CleaningDLL.Entity
         public int FinalPrice { get; set; }
         public int ApproximateTime { get; set; }
         public string? Comment { get; set; }
+        //public List<ProvidedService> ProvidedServices { get; set; } = new List<ProvidedService>();
 
         private static ApplicationContext db = Context.Db;
 

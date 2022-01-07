@@ -27,7 +27,7 @@ namespace WPFCleaning.Admin
         }
         private void CheckWait_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (!(bool)CheckInProcess.IsChecked && !(bool)CheckFinish.IsChecked)
+            if (!CheckInProcess.IsChecked.GetValueOrDefault() && !CheckFinish.IsChecked.GetValueOrDefault())
                 SelectedOrderInfo();
         }
         private void CheckInProcess_Checked(object sender, RoutedEventArgs e)
@@ -38,7 +38,7 @@ namespace WPFCleaning.Admin
         }
         private void CheckInProcess_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (!(bool)CheckWait.IsChecked && !(bool)CheckFinish.IsChecked)
+            if (!CheckWait.IsChecked.GetValueOrDefault() && !CheckFinish.IsChecked.GetValueOrDefault())
                 SelectedOrderInfo();
         }
         private void CheckFinish_Checked(object sender, RoutedEventArgs e)
@@ -49,7 +49,7 @@ namespace WPFCleaning.Admin
         }
         private void CheckFinish_Unchecked(object sender, RoutedEventArgs e)
         {
-            if (!(bool)CheckWait.IsChecked && !(bool)CheckInProcess.IsChecked)
+            if (!CheckWait.IsChecked.GetValueOrDefault() && !CheckInProcess.IsChecked.GetValueOrDefault())
                 SelectedOrderInfo();
         }
         public void AddAplication()
@@ -102,10 +102,10 @@ namespace WPFCleaning.Admin
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ApplicationsFullInfo applicationsFullInfo = new ApplicationsFullInfo();
             Order.OrderInfo selectedOrder = (Order.OrderInfo)dataGridApplication.SelectedValue;
+            ApplicationsFullInfo applicationsFullInfo = new ApplicationsFullInfo(selectedOrder.ID, this);
             applicationsFullInfo.Show();
-            applicationsFullInfo.AddSelectedOrder(selectedOrder.ID);
+            applicationsFullInfo.AddSelectedOrder();
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)

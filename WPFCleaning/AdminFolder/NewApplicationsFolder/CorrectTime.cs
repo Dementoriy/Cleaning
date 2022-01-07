@@ -10,11 +10,6 @@ namespace WPFCleaning.Admin
 {
     public static class CorrectTime
     {
-        public static int GetSecByTime(string tt)
-        {
-            int sec = (Convert.ToInt32(tt.Substring(0, 1)) * 60 * 60) + (Convert.ToInt32(tt.Substring(4, 2)) * 60);
-            return sec;
-        }
         public static void PreviewTextInput(NewApplication newApplication, TextCompositionEventArgs e)
         {
             string tt = newApplication.SelectTime.Text;
