@@ -52,7 +52,7 @@ namespace WPFCleaning.Admin
             Entrance.Text = order.Address.Entrance;
             Apartment_Number.Text = order.Address.Apartment_Number;
 
-            PriceBox.Text = order.FinalPrice.ToString();
+            PriceBox.Text = Order.GetPriceByInt(order.FinalPrice);
             ApproximateTime.Text = Order.GetTimeByInt(order.ApproximateTime);
             StatusBox.Text = order.Status;
 
@@ -124,17 +124,20 @@ namespace WPFCleaning.Admin
         public void SaveUpdatedOrder_Click(object sender, RoutedEventArgs e)
         {
             string NewDate = (DatePicker.Text + " " + SelectTime.Text);
+            if (DateTime.Parse(NewDate) > DateTime.Today)
+            {
+                order.Status = StatusBox.Text;
+                order.Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text));
+                order.Date = DateTime.Parse(NewDate);
+                order.FinalPrice = Convert.ToInt32(PriceBox.Text);
+                order.Comment = Comment.Text;
 
-            order.Status = StatusBox.Text;
-            order.Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text));
-            order.Date = DateTime.Parse(NewDate);
-            order.FinalPrice = Convert.ToInt32(PriceBox.Text);
-            order.Comment = Comment.Text;
-
-            Context.Db.SaveChanges();
-            MessageBox.Show("Заявка изменена успешно!");
-            _applications.SelectedOrderInfo();
-            this.Close();
+                Context.Db.SaveChanges();
+                MessageBox.Show("Заявка изменена успешно!");
+                _applications.SelectedOrderInfo();
+                this.Close();
+            }
+            else MessageBox.Show("Некорректная дата");
         }
 
         private void UpdateOrder_Click(object sender, RoutedEventArgs e)

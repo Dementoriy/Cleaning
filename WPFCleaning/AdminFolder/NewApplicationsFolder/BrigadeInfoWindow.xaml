@@ -39,9 +39,14 @@
         </StackPanel>
 
 
-        <DatePicker x:Name="DatePickerSearch" materialDesign:HintAssist.Hint="Выберете дату" SelectedDate="{x:Static sys:DateTime.Now}" 
-                    Grid.Row="10" Grid.Column="0" Margin="20 0 0 0" SelectedDateFormat="Short" FontFamily="Arial Bold" FontSize="18" 
-                    CalendarClosed="DatePickerSearch_CalendarClosed"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" Margin="20 0 0 0">
+            <DatePicker x:Name="DatePickerSearch" SelectedDate="{x:Static sys:DateTime.Now}" materialDesign:HintAssist.Hint="Выберете дату"
+                        Width="190" SelectedDateFormat="Short" FontFamily="Arial Bold" FontSize="20" 
+                        CalendarClosed="DatePickerSearch_CalendarClosed" PreviewTextInput="DatePickerSearch_PreviewTextInput" />
+            <Button x:Name="DelDate" Background="#d8d8f2" Margin="10 0 0 0" Click="DelDateButton_Click" BorderThickness="0" Padding="7 1 7 1">
+                <materialDesign:PackIcon Kind="Backspace" Foreground="Black"/>
+            </Button>
+        </StackPanel>
 
         <DataGrid x:Name="dataGridApplication" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="9" Margin="0,0,2,0"
                   FontSize="20" BorderThickness="1" FontFamily="Arial Bold" AutoGenerateColumns="False" ItemsSource="{Binding}" 

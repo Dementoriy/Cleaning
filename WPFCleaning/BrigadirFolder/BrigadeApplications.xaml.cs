@@ -108,5 +108,10 @@ namespace WPFCleaning.Brigadir
             applicationsFullInfo.Show();
             applicationsFullInfo.AddSelectedOrder(selectedOrder.ID);
         }
+
+        private void DatePickerSearch_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+        }
     }
 }

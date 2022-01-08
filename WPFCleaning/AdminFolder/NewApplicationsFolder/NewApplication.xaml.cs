@@ -23,7 +23,7 @@ namespace WPFCleaning.Admin
             ChemistryCleanBox.IsEnabled = false;
             WindowCleanBox.IsEnabled = false;
             DezinfectionBox.IsEnabled = false;
-            PriceBox.Text = "0";
+            PriceBox.Text = "0 ₽";
             ApproximateTime.Text = "0ч. 0мин.";
         }
 

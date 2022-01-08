@@ -131,7 +131,7 @@ namespace WPFCleaning.Admin
 
             newApplication.at = newApplication.approximateTime;
 
-            newApplication.PriceBox.Text = newApplication.finalPrice.ToString();
+            newApplication.PriceBox.Text = Order.GetPriceByInt(Convert.ToInt32(newApplication.finalPrice));
             newApplication.ApproximateTime.Text = Order.GetTimeByInt(newApplication.approximateTime);
         }
     }

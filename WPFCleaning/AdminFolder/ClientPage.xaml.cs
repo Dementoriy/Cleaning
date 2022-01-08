@@ -80,7 +80,7 @@ namespace WPFCleaning.Admin
             string t = Telefon.Text;
             if (t.Length == 0)
             {
-                Telefon.Text = "+";
+                Telefon.Text = "+7";
                 Telefon.SelectionStart = Telefon.Text.Length; //коретка в конец строки
             }
             if (t.Length >= 12)

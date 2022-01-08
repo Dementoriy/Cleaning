@@ -85,6 +85,18 @@ namespace CleaningDLL.Entity
             public string ApproximateTime { get; set; }
             public int FinalPrice { get; set; }
         }
+        public static string GetPriceByInt(int p)
+        {
+            return (p + " ₽");
+        }
+        public static int GetPriceByString(string p)
+        {
+            //string r = p.Substring(p.Length - 2);
+            //p = p - r;
+            //int price = Convert.ToInt32(p.Substring(p.Length-2));
+            int price = Convert.ToInt32(p.Trim(new Char[] { ' ', '₽' }));
+            return price;
+        }
         public static string GetTimeByInt(int t)
         {
             t = t / 60;

@@ -33,7 +33,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Row="10" Grid.Column="5">
             <TextBox x:Name="SearchBox" materialDesign:HintAssist.Hint="Поиск:" Background="#d8d8f2" Height="38" Width="200" Cursor="IBeam" 
-                     Margin="0 3 0 3" FontSize="18" TextChanged="SearchBox_TextChanged"/>
+                     Margin="0 3 0 3" FontSize="18" TextChanged="SearchBox_TextChanged" Padding="0 6 0 0"/>
             <Button Margin="5 0 0 0" FontFamily="Arial Bold" FontSize="20" Background="#3a388a" Foreground ="White" Cursor="IBeam" BorderBrush="White"
                     BorderThickness="2" Height="40" Click="ButtonSearch_Click" HorizontalAlignment="Right">
                 <materialDesign:PackIcon Kind="Search"/>
@@ -63,9 +63,10 @@
             <StackPanel Orientation="Vertical" Margin="0 0 -10 0">
                 <DatePicker Name="DatePickerSearchStart" SelectedDate="{x:Static sys:DateTime.Now}" materialDesign:HintAssist.Hint="Выберите дату" 
                             Margin="10 0 0 0" SelectedDateFormat="Short" CalendarClosed="DatePickerSearchStart_CalendarClosed" FontFamily="Arial Bold" 
-                            FontSize="18"/>
-                <DatePicker Name="DatePickerSearchEnd" materialDesign:HintAssist.Hint="Выберите дату" Margin="10 4 0 0" SelectedDateFormat="Short" 
-                            CalendarClosed="DatePickerSearchEnd_CalendarClosed" FontFamily="Arial Bold" FontSize="18"/>
+                            FontSize="18" PreviewTextInput="DatePickerSearch_PreviewTextInput" />
+                <DatePicker Name="DatePickerSearchEnd" materialDesign:HintAssist.Hint="Выберите дату" Margin="10 4 0 0" 
+                            SelectedDateFormat="Short" CalendarClosed="DatePickerSearchEnd_CalendarClosed" FontFamily="Arial Bold"
+                            FontSize="18" PreviewTextInput="DatePickerSearch_PreviewTextInput"/>
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <Button x:Name="DelDateStart" Background="#d8d8f2" Margin="14 0 0 0" Click="DelDateStartButton_Click" BorderThickness="0" 

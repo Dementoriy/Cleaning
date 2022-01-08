@@ -55,5 +55,25 @@ namespace WPFCleaning.Admin
         {
             SelectedOrderInfo();
         }
+
+        private void DatePickerSearch_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            int val;
+            if (!Int32.TryParse(e.Text, out val) && e.Text != ".")
+            {
+                e.Handled = true; // отклоняем ввод
+            }
+        }
+
+        private void DelDateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DatePickerSearch.Text != "")
+            {
+                DatePickerSearch.Text = "";
+                SelectedOrderInfo();
+            }
+            else
+                SelectedOrderInfo();
+        }
     }
 }

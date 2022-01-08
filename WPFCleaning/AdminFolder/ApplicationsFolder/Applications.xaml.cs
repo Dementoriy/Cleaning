@@ -113,7 +113,7 @@ namespace WPFCleaning.Admin
             SelectedOrderInfo();
         }
 
-        private void DelDateEndButton_Click(object sender, RoutedEventArgs e)
+        private void DelDateButton_Click(object sender, RoutedEventArgs e)
         {
             if (DatePickerSearch.Text != "")
             {
@@ -122,6 +122,15 @@ namespace WPFCleaning.Admin
             }
             else
                 SelectedOrderInfo();
+        }
+
+        private void DatePickerSearch_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int val;
+            if (!Int32.TryParse(e.Text, out val) && e.Text != ".")
+            {
+                e.Handled = true; // отклоняем ввод
+            }
         }
     }
 }

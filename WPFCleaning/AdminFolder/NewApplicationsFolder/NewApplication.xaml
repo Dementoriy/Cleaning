@@ -95,7 +95,7 @@
                          VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black" 
                          GotFocus="KolvoService_GotFocus" LostFocus="KolvoService_LostFocus" PreviewTextInput="CheckToInt" 
                          PreviewKeyDown="CheckKeyDown" TextChanged="CorrectSquare_TextChanged"/>
-                <TextBox x:Name="KolvoCarpet" materialDesign:HintAssist.Hint="Количество ковров:" Text="0" 
+                <TextBox x:Name="KolvoCarpet" materialDesign:HintAssist.Hint="Площадь ковров:" Text="0" 
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" HorizontalAlignment="Left" TextWrapping="Wrap" 
                          VerticalAlignment="Top" Width="261" Height="40" Cursor="IBeam" FontFamily="Arial bold" Foreground="Black" 
                          GotFocus="KolvoService_GotFocus" LostFocus="KolvoService_LostFocus" PreviewTextInput="CheckToInt" 
@@ -131,7 +131,8 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <ComboBox materialDesign:HintAssist.Hint="Выберите бригаду:" x:Name="BrigadeBox" Margin="10 10 5 0" Height="50" Width="230" 
-                          FontFamily="Arial bold" Background="#d8d8f2" FontSize="20" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                          FontFamily="Arial bold" Background="#d8d8f2" FontSize="20" Cursor="Hand" 
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                     <TextBlock Text="1" Style="{StaticResource MaterialDesignTextBlock}" HorizontalAlignment="Left" TextWrapping="Wrap" 
                                VerticalAlignment="Top" Width="200" Height="40" Cursor="IBeam" FontFamily="Arial bold" FontSize="20" 
                                Foreground="Black"/>
@@ -153,11 +154,12 @@
             </Border>
             <StackPanel Orientation="Horizontal" Margin="0 18 0 14">
                 <TextBlock Text="Цена:" FontFamily="Arial Bold" FontSize="20" Margin="5 0 0 0"/>
-                <TextBox x:Name="PriceBox" Width="190" Margin="34 0 0 0" FontFamily="Arial Bold" FontSize="20" IsReadOnly="True" Cursor="IBeam"/>
+                <TextBox x:Name="PriceBox" Width="190" Margin="34 0 0 0" FontFamily="Arial Bold" FontSize="20" 
+                         IsReadOnly="True" Cursor="Arrow"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="≈Время:" FontFamily="Arial Bold" FontSize="20" Margin="5 18 0 0"/>
-                <TextBox x:Name="ApproximateTime" Width="190" Margin="10 0 0 0" Cursor="IBeam" FontFamily="Arial Bold" FontSize="20" 
+                <TextBox x:Name="ApproximateTime" Width="190" Margin="10 0 0 0" Cursor="Arrow" FontFamily="Arial Bold" FontSize="20" 
                          IsReadOnly="True" VerticalAlignment="Bottom"/>
             </StackPanel>
             

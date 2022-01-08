@@ -45,7 +45,7 @@ namespace WPFCleaning.Brigadir
             Entrance.Text = order.Address.Entrance;
             Apartment_Number.Text = order.Address.Apartment_Number;
 
-            PriceBox.Text = order.FinalPrice.ToString();
+            PriceBox.Text = Order.GetPriceByInt(order.FinalPrice);
             ApproximateTime.Text = Order.GetTimeByInt(order.ApproximateTime);
             StatusBox.Text = order.Status;
 

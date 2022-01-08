@@ -29,7 +29,7 @@ namespace WPFCleaning.Brigadir
                 || e.Telefone.ToString().ToLower().Contains(SearchBox.Text.ToLower())
                 ).ToList();
             }
-            dataGridApplication.ItemsSource = listSort.Where(d => d.Brigade == _br.BrigadeID);
+            dataGridApplication.ItemsSource = listSort.Where(d => d.Brigade == _br.BrigadeID).OrderBy(o => o.Positions);
         }
 
         private void ButtonSearch_Click(object sender, RoutedEventArgs e)

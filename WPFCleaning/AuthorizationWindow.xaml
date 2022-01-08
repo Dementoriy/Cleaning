@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        WindowStartupLocation="CenterScreen"
         xmlns:local="clr-namespace:WPFCleaning"
         mc:Ignorable="d"
          MinHeight="500" MaxHeight="500" MinWidth="400" MaxWidth="400"
@@ -36,15 +37,13 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="1" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="8"  FontSize="20" FontFamily="Segoe UI"
-                Padding="50 30 0 0" FontWeight="Black" HorizontalContentAlignment="Center" Margin="0,0,57,0">Авторизация</Label>
-        <TextBox x:Name="TextBoxLogin" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="7" materialDesign:HintAssist.Hint="Введите логин" 
-                 Padding="5 0 0 0 " FontSize="18" BorderThickness="2" Cursor="IBeam" Margin="7,34,57,34" Grid.RowSpan="3"></TextBox>
-        <PasswordBox x:Name="PasswordBox" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="7" Padding="5 0 0 0 " 
-                     materialDesign:HintAssist.Hint="Введите пароль" FontSize="18" BorderThickness="2" Margin="7,34,57,0" 
-                     Grid.RowSpan="2"></PasswordBox>
-        <Button Content="Войти" Grid.Column="2" Grid.ColumnSpan="5" x:Name="SignInButton" Grid.Row="8" Grid.RowSpan="2" Cursor="Hand" 
-                Click="SignInButton_Click" FontFamily="Arial Bold" FontSize="20" BorderThickness="2" BorderBrush="White" Background="#3a388a" 
-                Margin="57,18,57,19"/>
+        <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3"  FontSize="24" FontFamily="Arial Bold"
+               FontWeight="Black" HorizontalContentAlignment="Center" Content="Авторизация"/>
+        <TextBox x:Name="TextBoxLogin" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="6" materialDesign:HintAssist.Hint="Введите логин" 
+                 Padding="2 5 0 0 " FontSize="18" BorderThickness="2" Cursor="IBeam" FontFamily="Arial Bold"/>
+        <PasswordBox x:Name="PasswordBox" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="6" Padding="2 5 0 0 " 
+                     materialDesign:HintAssist.Hint="Введите пароль" FontSize="18" BorderThickness="2" FontFamily="Arial Bold" Cursor="IBeam"/>
+        <Button Content="Войти" Grid.Column="3" Grid.ColumnSpan="3" x:Name="SignInButton" Grid.Row="8" Cursor="Hand" FontSize="20"
+                Click="SignInButton_Click" FontFamily="Arial Bold" BorderThickness="2" BorderBrush="White" Background="#3a388a"/>
     </Grid>
 </Window>

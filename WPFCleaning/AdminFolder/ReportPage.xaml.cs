@@ -161,7 +161,15 @@ namespace WPFCleaning.Admin
             }
             KolvoOrderBox.Text = orders.Count().ToString();
             KolvoTimeBox.Text = Order.GetTimeByInt(sec);
-            PriceBox.Text = fp.ToString();
+            PriceBox.Text = Order.GetPriceByInt(fp);
+        }
+        private void DatePickerSearch_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int val;
+            if (!Int32.TryParse(e.Text, out val) && e.Text != ".")
+            {
+                e.Handled = true; // отклоняем ввод
+            }
         }
     }
 }

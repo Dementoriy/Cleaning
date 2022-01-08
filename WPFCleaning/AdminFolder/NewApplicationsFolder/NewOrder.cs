@@ -51,7 +51,8 @@ namespace WPFCleaning.Admin
                         Address = address,
                         Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(newApplication.BrigadeBox.Text)),
                         Date = DateTime.Parse(NewDate),
-                        FinalPrice = Convert.ToInt32(newApplication.PriceBox.Text),
+                        FinalPrice = Order.GetPriceByString(newApplication.PriceBox.Text),
+                        //Convert.ToInt32(newApplication.PriceBox.Text),
                         ApproximateTime = newApplication.at,
                         Comment = newApplication.Comment.Text
                     };

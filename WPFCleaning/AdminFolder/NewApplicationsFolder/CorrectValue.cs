@@ -60,27 +60,27 @@ namespace WPFCleaning.Admin
             if (newApplication.ChemistryClean.IsChecked.GetValueOrDefault() && newApplication.KolvoSofa.Text != "0" 
                 && int.TryParse(newApplication.KolvoSofa.Text, out x))
             {
-                if (x > 6)
+                if (x > 30)
                 {
-                    MessageBox.Show("Диванов больше 6!");
+                    MessageBox.Show("Диванов(мест) больше 30!");
                     newApplication.KolvoSofa.Text = "0";
                 }  
             }
             if (newApplication.ChemistryClean.IsChecked.GetValueOrDefault() && newApplication.KolvoArmcheir.Text != "0" 
                 && int.TryParse(newApplication.KolvoArmcheir.Text, out x))
             {
-                if( x > 6)
+                if( x > 30)
                 {
-                    MessageBox.Show("Кресел больше 6!");
+                    MessageBox.Show("Кресел больше 30!");
                     newApplication.KolvoArmcheir.Text = "0";
                 }
             }
             if (newApplication.ChemistryClean.IsChecked.GetValueOrDefault() && newApplication.KolvoCarpet.Text != "0" 
                 && int.TryParse(newApplication.KolvoCarpet.Text, out x))
             {
-                if(x > 10)
+                if(x > 20)
                 {
-                    MessageBox.Show("Площадь ковра больше 10!");
+                    MessageBox.Show("Площадь ковра больше 20!");
                     newApplication.KolvoCarpet.Text = "0";
                 }
             }
@@ -131,7 +131,7 @@ namespace WPFCleaning.Admin
                 MessageBox.Show("Нажмите кнопку рассчитать!");
                 return false;
             }
-            else if (Convert.ToInt32(newApplication.PriceBox.Text) == 0)
+            else if (Order.GetPriceByString(newApplication.PriceBox.Text) == 0)
             {
                 MessageBox.Show("Ни одна из услуг не выбрана");
                 return false;
