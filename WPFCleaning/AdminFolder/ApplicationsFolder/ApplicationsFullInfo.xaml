@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPFCleaning"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-         Height="1080" Width="1920" Title="&quot;Чистый дом&quot;" Icon="/logo2.png">
+         Height="1080" Width="1920" Title="&quot;Чистый дом&quot;" Icon="/AdminFolder/ApplicationsFolder/logo.ico">
     <Grid Background="#d8d8f2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

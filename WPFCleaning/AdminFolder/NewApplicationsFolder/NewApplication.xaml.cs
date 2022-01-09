@@ -41,10 +41,9 @@ namespace WPFCleaning.Admin
         {
 
             WindowCleanBox.IsEnabled = false;
-            OrderPrice.Calculate(this, _clientPage);
             KolvoWindow.Text = "0";
             KolvoDoor.Text = "0";
-
+            OrderPrice.Calculate(this, _clientPage);
         }
         private void ChemistryClean_Checked(object sender, RoutedEventArgs e)
         {
@@ -53,10 +52,10 @@ namespace WPFCleaning.Admin
         private void ChemistryClean_Unchecked(object sender, RoutedEventArgs e)
         {
             ChemistryCleanBox.IsEnabled = false;
-            OrderPrice.Calculate(this, _clientPage);
             KolvoSofa.Text = "0";
             KolvoArmcheir.Text = "0";
             KolvoCarpet.Text = "0";
+            OrderPrice.Calculate(this, _clientPage);
         }
         private void Dezinfection_Checked(object sender, RoutedEventArgs e)
         {
@@ -65,8 +64,8 @@ namespace WPFCleaning.Admin
         private void Dezinfection_Unchecked(object sender, RoutedEventArgs e)
         {
             DezinfectionBox.IsEnabled = false;
-            OrderPrice.Calculate(this, _clientPage);
             KolvoDezinfection.Text = "0";
+            OrderPrice.Calculate(this, _clientPage);
         }
 
         private void CheckExpressClean_Checked(object sender, RoutedEventArgs e)
@@ -204,6 +203,7 @@ namespace WPFCleaning.Admin
 
         private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {
+            OrderPrice.Calculate(this, _clientPage);
             arrayService = OrderPrice.arrayService;
             NewOrder.AddOrder(this, _clientPage, _emp);
         }

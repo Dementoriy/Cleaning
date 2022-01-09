@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="logo2.png" />
+    <None Remove="AdminFolder\ApplicationsFolder\logo.ico" />
+    <None Remove="AdminFolder\logo.ico" />
+    <None Remove="AdminFolder\NewApplicationsFolder\logo.ico" />
+    <None Remove="BrigadirFolder\logo.ico" />
+    <None Remove="logo.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,7 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="logo2.png" />
+    <Resource Include="AdminFolder\ApplicationsFolder\logo.ico" />
+    <Resource Include="AdminFolder\logo.ico" />
+    <Resource Include="AdminFolder\NewApplicationsFolder\logo.ico" />
+    <Resource Include="BrigadirFolder\logo.ico" />
+    <Resource Include="logo.ico" />
   </ItemGroup>
 
 </Project>

@@ -28,40 +28,57 @@ namespace WPFCleaning.Admin
             newApplication.finalPrice = 0;
             newApplication.approximateTime = 0;
 
-            foreach(var checkBox in GetCheckBoxIsChecked(newApplication))
+            List<CheckBox> checkBoxes = GetCheckBoxIsChecked(newApplication);
+            if(checkBoxes.Count != 0)
             {
-                if (checkBox.Name == newApplication.CheckExpressClean.Name || 
-                    checkBox.Name == newApplication.CheckGeneralClean.Name || 
-                    checkBox.Name == newApplication.CheckBuildingClean.Name ||
-                    checkBox.Name == newApplication.CheckOfficeClean.Name)
+                if (checkBoxes[0].Name == newApplication.CheckExpressClean.Name ||
+                    checkBoxes[0].Name == newApplication.CheckGeneralClean.Name ||
+                    checkBoxes[0].Name == newApplication.CheckBuildingClean.Name ||
+                    checkBoxes[0].Name == newApplication.CheckOfficeClean.Name)
                 {
-                    arrayService[0, 0] = (Service.GetIdService(checkBox.Content.ToString()));
-                    arrayService[1, 0] = Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                    newApplication.finalPrice += Service.GetServiceById(Service.GetIdService(checkBox.Content.ToString())).Price
-                        * Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                    newApplication.approximateTime += Service.GetServiceById(Service.GetIdService(checkBox.Content.ToString())).Time
-                        * Convert.ToInt32(newApplication.TextBoxSquare.Text);
-                }
-                if(checkBox.Name == newApplication.WindowClean.Name ||
-                    checkBox.Name == newApplication.ChemistryClean.Name ||
-                    checkBox.Name == newApplication.Dezinfection.Name)
-                {
-                    List<int> quantityService = GetTextFromTextBox(newApplication);
-                    for(int i = 1; i<=6; i++)
+                    if (newApplication.TextBoxSquare.Text != "")
                     {
-                        arrayService[1, i] = quantityService[i-1];
-                        newApplication.finalPrice += quantityService[i-1] * Service.GetServiceById(arrayService[0,i]).Price;
-                        newApplication.approximateTime += quantityService[i-1] * Service.GetServiceById(arrayService[0, i]).Time;
+                        arrayService[0, 0] = (Service.GetIdService(checkBoxes[0].Content.ToString()));
+                        arrayService[1, 0] = Convert.ToInt32(newApplication.TextBoxSquare.Text);
+                        newApplication.finalPrice += Service.GetServiceById(Service.GetIdService(checkBoxes[0].Content.ToString())).Price
+                            * Convert.ToInt32(newApplication.TextBoxSquare.Text);
+                        newApplication.approximateTime += Service.GetServiceById(Service.GetIdService(checkBoxes[0].Content.ToString())).Time
+                            * Convert.ToInt32(newApplication.TextBoxSquare.Text);
                     }
+                    else
+                    {
+                        checkBoxes[0].IsChecked = false;
+                        MessageBox.Show("Введите площадь");
+                        checkBoxes.RemoveAll(e => e.IsChecked.GetValueOrDefault());
+                    }
+                    checkBoxes.RemoveAt(0);
                 }
-            }
-            if (clientPage.CheckOldClient.IsChecked.GetValueOrDefault())
-            {
-                newApplication.finalPrice = Convert.ToInt32((newApplication.finalPrice * 90) / 100);
-            }
+                
+                decimal tmpPrice = newApplication.finalPrice;
+                int tmpApproximateTime = newApplication.approximateTime;
+                foreach (var checkBox in checkBoxes)
+                {
+                    newApplication.finalPrice = tmpPrice;
+                    newApplication.approximateTime = tmpApproximateTime;
 
-            newApplication.PriceBox.Text = Order.GetPriceByInt(Convert.ToInt32(newApplication.finalPrice));
-            newApplication.ApproximateTime.Text = Order.GetTimeByInt(newApplication.approximateTime);
+                    List<int> quantityService = GetTextFromTextBox(newApplication);
+                    for (int i = 1; i <= 6; i++)
+                    {
+                        arrayService[1, i] = quantityService[i - 1];
+                        newApplication.finalPrice += quantityService[i - 1] * Service.GetServiceById(arrayService[0, i]).Price;
+                        newApplication.approximateTime += quantityService[i - 1] * Service.GetServiceById(arrayService[0, i]).Time;
+                    }
+                    
+                }
+                if (clientPage.CheckOldClient.IsChecked.GetValueOrDefault())
+                {
+                    newApplication.finalPrice = Convert.ToInt32((newApplication.finalPrice * 90) / 100);
+                }
+
+                newApplication.PriceBox.Text = Order.GetPriceByInt(Convert.ToInt32(newApplication.finalPrice));
+                newApplication.ApproximateTime.Text = Order.GetTimeByInt(newApplication.approximateTime);
+            }
+            
         }
         public static List<CheckBox> GetCheckBoxIsChecked(NewApplication newApplication)
         {

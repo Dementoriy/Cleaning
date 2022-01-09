@@ -139,7 +139,7 @@ namespace WPFCleaning.Admin
             }
             else if (newApplication.PriceBox.Text == "")
             {
-                MessageBox.Show("Нажмите кнопку рассчитать!");
+                MessageBox.Show("Ни одна из услуг не выбрана");
                 return false;
             }
             else if (Order.GetPriceByString(newApplication.PriceBox.Text) == 0)

@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:WPFCleaning"
         mc:Ignorable="d"
          MinHeight="500" MaxHeight="500" MinWidth="400" MaxWidth="400"
-        Title=" &quot;Чистый дом&quot;" Height="500" Width="400" Icon="/logo2.png">
+        Title=" &quot;Чистый дом&quot;" Height="500" Width="400" Icon="/logo.ico">
 
     <Grid Background="Lavender">
         <Grid.ColumnDefinitions>
