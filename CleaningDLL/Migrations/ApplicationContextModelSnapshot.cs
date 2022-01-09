@@ -111,31 +111,24 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("ClientTelefonNumber")
-                        .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("character varying(12)");
-
                     b.Property<bool>("IsOldClient")
                         .HasColumnType("boolean");
 
                     b.Property<string>("MiddleName")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
 
                     b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ClientTelefonNumber")
+                    b.HasIndex("PhoneNumber")
                         .IsUnique();
 
                     b.ToTable("Client");
@@ -339,12 +332,7 @@ namespace CleaningDLL.Migrations
                     b.Property<int?>("BrigadeID")
                         .HasColumnType("integer");
 
-                    b.Property<string>("EmployeeTelefonNumber")
-                        .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("character varying(12)");
-
-                    b.Property<DateTime>("Employment_Date")
+                    b.Property<DateTime>("EmploymentDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Login")
@@ -352,13 +340,10 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("character varying(50)");
 
                     b.Property<string>("MiddleName")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.Property<string>("PassportData")
                         .IsRequired()
@@ -369,20 +354,18 @@ namespace CleaningDLL.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("character varying(64)");
 
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
                     b.Property<int>("PositionID")
                         .HasColumnType("integer");
 
                     b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
                     b.HasIndex("BrigadeID");
-
-                    b.HasIndex("EmployeeTelefonNumber")
-                        .IsUnique();
 
                     b.HasIndex("Login")
                         .IsUnique();
@@ -393,6 +376,9 @@ namespace CleaningDLL.Migrations
                     b.HasIndex("Password")
                         .IsUnique();
 
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique();
+
                     b.HasIndex("PositionID");
 
                     b.ToTable("Employee");
@@ -401,13 +387,13 @@ namespace CleaningDLL.Migrations
                         new
                         {
                             ID = 1,
-                            EmployeeTelefonNumber = "+79536773183",
-                            Employment_Date = new DateTime(2021, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified),
+                            EmploymentDate = new DateTime(2021, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified),
                             Login = "admin",
                             MiddleName = "Михайлович",
                             Name = "Дмитрий",
                             PassportData = "1111222222",
                             Password = "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+                            PhoneNumber = "+79536773183",
                             PositionID = 1,
                             Surname = "Ведерников"
                         },
@@ -415,13 +401,13 @@ namespace CleaningDLL.Migrations
                         {
                             ID = 2,
                             BrigadeID = 1,
-                            EmployeeTelefonNumber = "+79536856008",
-                            Employment_Date = new DateTime(2021, 11, 30, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmploymentDate = new DateTime(2021, 11, 30, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "brigadir1",
                             MiddleName = "Анатольевич",
                             Name = "Иван",
                             PassportData = "1111333333",
                             Password = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+                            PhoneNumber = "+79536856008",
                             PositionID = 2,
                             Surname = "Бессонов"
                         },
@@ -429,13 +415,13 @@ namespace CleaningDLL.Migrations
                         {
                             ID = 3,
                             BrigadeID = 2,
-                            EmployeeTelefonNumber = "+79123646993",
-                            Employment_Date = new DateTime(2021, 11, 30, 11, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmploymentDate = new DateTime(2021, 11, 30, 11, 0, 0, 0, DateTimeKind.Unspecified),
                             Login = "brigadir2",
                             MiddleName = "Николаевич",
                             Name = "Александр",
                             PassportData = "1111444444",
                             Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
+                            PhoneNumber = "+79123646993",
                             PositionID = 2,
                             Surname = "Заболотский"
                         },
@@ -443,11 +429,11 @@ namespace CleaningDLL.Migrations
                         {
                             ID = 4,
                             BrigadeID = 1,
-                            EmployeeTelefonNumber = "+79536952565",
-                            Employment_Date = new DateTime(2021, 12, 1, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                            EmploymentDate = new DateTime(2021, 12, 1, 11, 30, 0, 0, DateTimeKind.Unspecified),
                             MiddleName = "Игоревич",
                             Name = "Дмитрий",
                             PassportData = "1111555555",
+                            PhoneNumber = "+79536952565",
                             PositionID = 3,
                             Surname = "Москалев"
                         },
@@ -455,11 +441,11 @@ namespace CleaningDLL.Migrations
                         {
                             ID = 5,
                             BrigadeID = 1,
-                            EmployeeTelefonNumber = "+79091324445",
-                            Employment_Date = new DateTime(2021, 12, 1, 11, 30, 0, 0, DateTimeKind.Unspecified),
+                            EmploymentDate = new DateTime(2021, 12, 1, 11, 30, 0, 0, DateTimeKind.Unspecified),
                             MiddleName = "Владимирович",
                             Name = "Роман",
                             PassportData = "1111666666",
+                            PhoneNumber = "+79091324445",
                             PositionID = 3,
                             Surname = "Суслов"
                         },
@@ -467,11 +453,11 @@ namespace CleaningDLL.Migrations
                         {
                             ID = 6,
                             BrigadeID = 2,
-                            EmployeeTelefonNumber = "+79123644673",
-                            Employment_Date = new DateTime(2021, 12, 2, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmploymentDate = new DateTime(2021, 12, 2, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             MiddleName = "Игоревич",
                             Name = "Максим",
                             PassportData = "1111777777",
+                            PhoneNumber = "+79123644673",
                             PositionID = 3,
                             Surname = "Орлов"
                         },
@@ -479,11 +465,11 @@ namespace CleaningDLL.Migrations
                         {
                             ID = 7,
                             BrigadeID = 2,
-                            EmployeeTelefonNumber = "+79229357609",
-                            Employment_Date = new DateTime(2021, 12, 2, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmploymentDate = new DateTime(2021, 12, 2, 10, 0, 0, 0, DateTimeKind.Unspecified),
                             MiddleName = "Константинович",
                             Name = "Дмитрий",
                             PassportData = "1111888888",
+                            PhoneNumber = "+79229357609",
                             PositionID = 3,
                             Surname = "Целищев"
                         });

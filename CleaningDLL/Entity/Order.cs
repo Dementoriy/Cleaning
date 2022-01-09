@@ -87,7 +87,7 @@ namespace CleaningDLL.Entity
                         Status = o.Status,
                         Client = o.Client.AddFIO(),
                         Address = a.AddAddress(),
-                        Telefone = o.Client.ClientTelefonNumber,
+                        Telefone = o.Client.PhoneNumber,
                         FinalPrice = o.FinalPrice,
                         ApproximateTime = GetTimeByInt(o.ApproximateTime).ToString()
                     }).ToList();

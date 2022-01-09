@@ -7,18 +7,11 @@ using System.Threading.Tasks;
 
 namespace CleaningDLL.Entity
 {
-    public class Employee //Сотрудник
+    public class Employee : Human //Сотрудник
     {
         public int ID { get; set; }
         [Required]
-        [MaxLength(50)] public string Surname { get; set; }
-        [Required]
-        [MaxLength(50)] public string Name { get; set; }
-        [MaxLength(50)] public string? MiddleName { get; set; }
-        [Required]
         [MaxLength(10)] public string PassportData { get; set; }
-        [Required]
-        [MaxLength(12)] public string EmployeeTelefonNumber { get; set; }
         [Required]
         public virtual Position Position { get; set; }
         [Required]
@@ -26,7 +19,7 @@ namespace CleaningDLL.Entity
         public virtual Brigade? Brigade { get; set; }
         public int? BrigadeID { get; set; }
         [Required]
-        public DateTime Employment_Date { get; set; }
+        public DateTime EmploymentDate { get; set; }
         [MaxLength(50)] public string? Login { get; set; }
         [MaxLength(64)] [MinLength(64)] public string? Password { get; set; }
 
@@ -34,17 +27,13 @@ namespace CleaningDLL.Entity
         {
 
         }
-        public Employee(string Surname, string Name, string? MiddleName, string PassportData, string EmployeeTelefonNumber, 
-            int PositionID, int? BrigadeID, DateTime Employment_Date, string? Login, string? Password)
+        public Employee(string Surname, string Name, string MiddleName, string PassportData, string PhoneNumber, 
+            int PositionID, int? BrigadeID, DateTime EmploymentDate, string? Login, string? Password) : base(Surname, Name, MiddleName, PhoneNumber)
         {
-            this.Surname = Surname;
-            this.Name = Name;
-            this.MiddleName = MiddleName;
             this.PassportData = PassportData;
-            this.EmployeeTelefonNumber = EmployeeTelefonNumber;
             this.PositionID = PositionID;
             this.BrigadeID = BrigadeID;
-            this.Employment_Date = Employment_Date;
+            this.EmploymentDate = EmploymentDate;
             this.Login = Login;
             this.Password = Password;
         }
@@ -88,9 +77,9 @@ namespace CleaningDLL.Entity
                         ID = e.ID,
                         Cleaner = e.AddFIO(),
                         Positions = p.NamePosition,
-                        WorkExperience = e.Employment_Date.ToString("d"), //(DateTime.Today - e.Employment_Date).ToString("d"),
+                        WorkExperience = e.EmploymentDate.ToString("d"), //(DateTime.Today - e.Employment_Date).ToString("d"),
                         Brigade = e.Brigade.ID,
-                        Telefone = e.EmployeeTelefonNumber,
+                        Telefone = e.PhoneNumber,
                     }).ToList();
         }
         public class EmployeeFullInfo

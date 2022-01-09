@@ -33,7 +33,7 @@ namespace WPFCleaning.Brigadir
 
         public void AddSelectedOrder(int id)
         {
-            Telefon.Text = order.Client.ClientTelefonNumber;
+            Telefon.Text = order.Client.PhoneNumber;
             Surname.Text = order.Client.Surname;
             Name.Text = order.Client.Name;
             if (order.Client.MiddleName != null) MiddleName.Text = order.Client.MiddleName;
@@ -52,7 +52,7 @@ namespace WPFCleaning.Brigadir
 
             Employee brigadir = Employee.GetBrigadirByBrigada(order.BrigadeID);
 
-            BrigadirTelefon.Text = brigadir.EmployeeTelefonNumber;
+            BrigadirTelefon.Text = brigadir.PhoneNumber;
             BrigadirSurname.Text = brigadir.Surname;
             BrigadirName.Text = brigadir.Name;
             BrigadirMiddleName.Text = brigadir.MiddleName;

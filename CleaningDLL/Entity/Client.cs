@@ -5,16 +5,9 @@ using System.Linq;
 
 namespace CleaningDLL.Entity
 {
-    public class Client //Клиент
+    public class Client : Human //Клиент
     {
         public int ID { get; set; }
-        [Required]
-        [MaxLength(50)] public string Surname { get; set; }
-        [Required]
-        [MaxLength(50)] public string Name { get; set; }
-        [MaxLength(50)] public string? MiddleName { get; set; }
-        [Required]
-        [MaxLength(12)] public string ClientTelefonNumber { get; set; }
         [Required]
         public bool IsOldClient { get; set; }
 
@@ -22,12 +15,8 @@ namespace CleaningDLL.Entity
         {
 
         }
-        public Client(string Surname, string Name, string? MiddleName, string ClientTelefonNumber, bool IsOldClient)
+        public Client(string Surname, string Name, string MiddleName, string PhoneNumber, bool IsOldClient) : base(Surname, Name, MiddleName, PhoneNumber)
         {
-            this.Surname = Surname;
-            this.Name = Name;
-            this.MiddleName = MiddleName;
-            this.ClientTelefonNumber = ClientTelefonNumber;
             this.IsOldClient = IsOldClient;
         }
 
@@ -40,19 +29,11 @@ namespace CleaningDLL.Entity
         }
         public static Client GetClientByTelefon(string telefon)
         {
-            return db.Client.Where(e => e.ClientTelefonNumber == telefon).ToList()[0];
+            return db.Client.Where(e => e.PhoneNumber == telefon).ToList()[0];
         }
         public static bool ClientByTelefonIsNew(string telefon)
         {
-            try
-            {
-                Client client = db.Client.Where(e => e.ClientTelefonNumber == telefon).ToList()[0];
-                return false;
-            }
-            catch
-            {
-                return true;
-            }
+            return !db.Client.Where(e => e.PhoneNumber == telefon).Any();
         }
         public string AddFIO()
         {
@@ -64,7 +45,7 @@ namespace CleaningDLL.Entity
         public static List<ClientInfo> GetClientInfo(string Telefon) //Клиент не связан с адресом. В листе хранится клиент с разными адресами
         {
             return (from c in db.Client
-                    where c.ClientTelefonNumber == Telefon
+                    where c.PhoneNumber == Telefon
                     join o in db.Order on c.ID equals o.Client.ID
                     join a in db.Address on o.Address.ID equals a.ID
                     select new ClientInfo()
@@ -95,9 +76,9 @@ namespace CleaningDLL.Entity
             public bool IsOldClient { get; set; }
         }
         
-        public static bool proverkaClientTelefon(string ClientTelefonNumber)
+        public static bool proverkaClientTelefon(string Telefon)
         {
-                return db.Client.Where(a => a.ClientTelefonNumber == ClientTelefonNumber).Any();
+                return db.Client.Where(a => a.PhoneNumber == Telefon).Any();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace WPFCleaning.Admin
                     Surname = clientPage.Surname.Text,
                     Name = clientPage.Name.Text,
                     MiddleName = clientPage.MiddleName.Text,
-                    ClientTelefonNumber = clientPage.Telefon.Text,
+                    PhoneNumber = clientPage.Telefon.Text,
                     IsOldClient = false
                 };
             }

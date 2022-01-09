@@ -41,10 +41,10 @@ namespace CleaningDLL
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Employee>().HasIndex(s => s.EmployeeTelefonNumber).IsUnique();
+            modelBuilder.Ignore<Human>();
+            modelBuilder.Entity<Employee>().HasIndex(s => s.PhoneNumber).IsUnique();
             modelBuilder.Entity<Employee>().HasIndex(s => s.PassportData).IsUnique();
-            modelBuilder.Entity<Client>().HasIndex(s => s.ClientTelefonNumber).IsUnique();
-            modelBuilder.Entity<Client>().HasIndex(s => s.ClientTelefonNumber).IsUnique();
+            modelBuilder.Entity<Client>().HasIndex(s => s.PhoneNumber).IsUnique();
             modelBuilder.Entity<Provider>().HasIndex(s => s.CompanyName).IsUnique();
             modelBuilder.Entity<Provider>().HasIndex(s => s.ProviderTelefonNumber).IsUnique();
             modelBuilder.Entity<ReferenceUnitsOfMeasurement>().HasIndex(s => s.Unit).IsUnique();
