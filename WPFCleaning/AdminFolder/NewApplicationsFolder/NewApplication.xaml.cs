@@ -4,6 +4,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using CleaningDLL.Entity;
 using CleaningDLL;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WPFCleaning.Admin
 {
@@ -30,8 +32,8 @@ namespace WPFCleaning.Admin
         public int idService;
         public decimal finalPrice = 0;
         public int approximateTime = 0;
-        
-    private void WindowClean_Checked(object sender, RoutedEventArgs e)
+
+        private void WindowClean_Checked(object sender, RoutedEventArgs e)
         {
             WindowCleanBox.IsEnabled = WindowClean.IsEnabled;
         }
@@ -69,6 +71,7 @@ namespace WPFCleaning.Admin
 
         private void CheckExpressClean_Checked(object sender, RoutedEventArgs e)
         {
+            int x = 0;
             if (TextBoxSquare.Text != "")
             {
                 CheckGeneralClean.IsChecked = false;
@@ -81,10 +84,20 @@ namespace WPFCleaning.Admin
             {
                 CheckExpressClean.IsChecked = false;
                 MessageBox.Show("Введите площадь!");
-            } 
+            }
+            if (int.TryParse(TextBoxSquare.Text, out x))
+            {
+                if (x > 200)
+                {
+                    CheckExpressClean.IsChecked = false;
+                    MessageBox.Show("Площадь больше 200!");
+                    TextBoxSquare.Text = "";
+                }
+            }
         }
         private void CheckGeneralClean_Checked(object sender, RoutedEventArgs e)
         {
+            int x = 0;
             if (TextBoxSquare.Text != "")
             {
                 CheckExpressClean.IsChecked = false;
@@ -98,9 +111,19 @@ namespace WPFCleaning.Admin
                 CheckGeneralClean.IsChecked = false;
                 MessageBox.Show("Введите площадь!");
             }
+            if (int.TryParse(TextBoxSquare.Text, out x))
+            {
+                if(x > 100)
+                {
+                    CheckGeneralClean.IsChecked = false;
+                    MessageBox.Show("Площадь больше 100!");
+                    TextBoxSquare.Text = "";
+                }
+            }
         }
         private void CheckBuildingClean_Checked(object sender, RoutedEventArgs e)
         {
+            int x = 0;
             if (TextBoxSquare.Text != "")
             {
                 CheckExpressClean.IsChecked = false;
@@ -114,9 +137,19 @@ namespace WPFCleaning.Admin
                 CheckBuildingClean.IsChecked = false;
                 MessageBox.Show("Введите площадь!");
             }
+            if (int.TryParse(TextBoxSquare.Text, out x))
+            {
+                if (x > 100)
+                {
+                    CheckBuildingClean.IsChecked = false;
+                    MessageBox.Show("Площадь больше 100!");
+                    TextBoxSquare.Text = "";
+                }
+            }
         }
         private void CheckOfficeClean_Checked(object sender, RoutedEventArgs e)
         {
+            int x = 0;
             if (TextBoxSquare.Text != "")
             {
                 CheckExpressClean.IsChecked = false;
@@ -130,11 +163,19 @@ namespace WPFCleaning.Admin
                 CheckOfficeClean.IsChecked = false;
                 MessageBox.Show("Введите площадь!");
             }
+            if (int.TryParse(TextBoxSquare.Text, out x))
+            {
+                if (x > 200)
+                {
+                    CheckOfficeClean.IsChecked = false;
+                    MessageBox.Show("Площадь больше 200!");
+                    TextBoxSquare.Text = "";
+                }
+            }
         }
         private void CheckService_Unchecked(object sender, RoutedEventArgs e)
         {
             OrderPrice.Calculate(this, _clientPage);
-            //TextBoxSquare.Text = "";
         }
 
         public void ClearNewApplication()
@@ -163,13 +204,10 @@ namespace WPFCleaning.Admin
 
         private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {
-            OrderPrice.Calculate(this, _clientPage);
             arrayService = OrderPrice.arrayService;
             NewOrder.AddOrder(this, _clientPage, _emp);
         }
 
-        public int at = 0;
-  
         private void BtnBrigadeInfo_Click(object sender, RoutedEventArgs e)
         {
             if (BrigadeBox.SelectedIndex != -1)

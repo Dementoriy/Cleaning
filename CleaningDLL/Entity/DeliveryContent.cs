@@ -12,7 +12,18 @@ namespace CleaningDLL.Entity
         public int ID { get; set; }
         [Required]
         public virtual Consumable Consumable { get; set; }
+        public int ConsumableID { get; set; }
         [Required]
-        public int Delivery_Content_Amount { get; set; }
-}
+        public int DeliveryContentAmount { get; set; }
+
+        public DeliveryContent()
+        {
+
+        }
+        public DeliveryContent(int ConsumableID, int DeliveryContentAmount)
+        {
+            this.ConsumableID = ConsumableID;
+            this.DeliveryContentAmount = DeliveryContentAmount;
+        }
+    }
 }

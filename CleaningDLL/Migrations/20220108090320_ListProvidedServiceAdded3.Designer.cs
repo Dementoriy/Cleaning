@@ -3,15 +3,17 @@ using System;
 using CleaningDLL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CleaningDLL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220108090320_ListProvidedServiceAdded3")]
+    partial class ListProvidedServiceAdded3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,18 +70,6 @@ namespace CleaningDLL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Brigade");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Smena_Number = "Смена1"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Smena_Number = "Смена2"
-                        });
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.BrigadeInventory", b =>
@@ -89,10 +79,10 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("BrigadeID")
+                    b.Property<int?>("BrigadeID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("InventoryID")
+                    b.Property<int?>("InventoryID")
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
@@ -148,15 +138,12 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ConsumableName")
+                    b.Property<string>("Consumable_Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<decimal>("CurrentPrice")
+                    b.Property<decimal>("Current_Price")
                         .HasColumnType("numeric");
 
                     b.Property<string>("Description")
@@ -164,15 +151,18 @@ namespace CleaningDLL.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)");
 
-                    b.Property<int>("ReferenceUnitsOfMeasurementID")
+                    b.Property<int?>("UnitID")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("amount")
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ConsumableName")
+                    b.HasIndex("Consumable_Name")
                         .IsUnique();
 
-                    b.HasIndex("ReferenceUnitsOfMeasurementID");
+                    b.HasIndex("UnitID");
 
                     b.ToTable("Consumable");
                 });
@@ -184,15 +174,15 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("ConsumptionRateID")
+                    b.Property<int?>("Consumption_RateID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ServiceID")
+                    b.Property<int?>("ServiceID")
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ConsumptionRateID");
+                    b.HasIndex("Consumption_RateID");
 
                     b.HasIndex("ServiceID");
 
@@ -206,7 +196,7 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("ConsumableID")
+                    b.Property<int?>("ConsumableID")
                         .HasColumnType("integer");
 
                     b.Property<string>("Consumption")
@@ -214,14 +204,14 @@ namespace CleaningDLL.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)");
 
-                    b.Property<int>("ReferenceUnitsOfMeasurementID")
+                    b.Property<int?>("UnitID")
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
 
                     b.HasIndex("ConsumableID");
 
-                    b.HasIndex("ReferenceUnitsOfMeasurementID");
+                    b.HasIndex("UnitID");
 
                     b.ToTable("ConsumptionRate");
                 });
@@ -233,13 +223,13 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("ClientID")
+                    b.Property<int?>("ClientID")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("DateOfContract")
+                    b.Property<DateTime>("Date_Of_Contract")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("EmployeeID")
+                    b.Property<int?>("EmployeeID")
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
@@ -258,21 +248,21 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("DeliveryContentID")
+                    b.Property<int?>("Delivery_ContentID")
                         .HasColumnType("integer");
 
-                    b.Property<decimal>("DeliveryCost")
+                    b.Property<decimal>("Delivery_Cost")
                         .HasColumnType("numeric");
 
-                    b.Property<DateTime>("DeliveryDate")
+                    b.Property<DateTime>("Delivery_Date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("ProviderID")
+                    b.Property<int?>("ProviderID")
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("DeliveryContentID");
+                    b.HasIndex("Delivery_ContentID");
 
                     b.HasIndex("ProviderID");
 
@@ -286,10 +276,10 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("ConsumableID")
+                    b.Property<int?>("ConsumableID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("DeliveryContentAmount")
+                    b.Property<int>("Delivery_Content_Amount")
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
@@ -306,16 +296,16 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("DeliveryContractDate")
+                    b.Property<DateTime>("Delivery_Contract_Date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("EmployeeID")
+                    b.Property<int?>("EmployeeID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ProviderID")
+                    b.Property<int?>("ProviderID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("PurchaseRequisitionID")
+                    b.Property<int?>("Purchase_RequisitionID")
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
@@ -324,7 +314,7 @@ namespace CleaningDLL.Migrations
 
                     b.HasIndex("ProviderID");
 
-                    b.HasIndex("PurchaseRequisitionID");
+                    b.HasIndex("Purchase_RequisitionID");
 
                     b.ToTable("DeliveryContract");
                 });
@@ -396,97 +386,6 @@ namespace CleaningDLL.Migrations
                     b.HasIndex("PositionID");
 
                     b.ToTable("Employee");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            EmployeeTelefonNumber = "+79536773183",
-                            Employment_Date = new DateTime(2021, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified),
-                            Login = "admin",
-                            MiddleName = "Михайлович",
-                            Name = "Дмитрий",
-                            PassportData = "1111222222",
-                            Password = "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
-                            PositionID = 1,
-                            Surname = "Ведерников"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            BrigadeID = 1,
-                            EmployeeTelefonNumber = "+79536856008",
-                            Employment_Date = new DateTime(2021, 11, 30, 11, 0, 0, 0, DateTimeKind.Unspecified),
-                            Login = "brigadir1",
-                            MiddleName = "Анатольевич",
-                            Name = "Иван",
-                            PassportData = "1111333333",
-                            Password = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
-                            PositionID = 2,
-                            Surname = "Бессонов"
-                        },
-                        new
-                        {
-                            ID = 3,
-                            BrigadeID = 2,
-                            EmployeeTelefonNumber = "+79123646993",
-                            Employment_Date = new DateTime(2021, 11, 30, 11, 0, 0, 0, DateTimeKind.Unspecified),
-                            Login = "brigadir2",
-                            MiddleName = "Николаевич",
-                            Name = "Александр",
-                            PassportData = "1111444444",
-                            Password = "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5",
-                            PositionID = 2,
-                            Surname = "Заболотский"
-                        },
-                        new
-                        {
-                            ID = 4,
-                            BrigadeID = 1,
-                            EmployeeTelefonNumber = "+79536952565",
-                            Employment_Date = new DateTime(2021, 12, 1, 11, 30, 0, 0, DateTimeKind.Unspecified),
-                            MiddleName = "Игоревич",
-                            Name = "Дмитрий",
-                            PassportData = "1111555555",
-                            PositionID = 3,
-                            Surname = "Москалев"
-                        },
-                        new
-                        {
-                            ID = 5,
-                            BrigadeID = 1,
-                            EmployeeTelefonNumber = "+79091324445",
-                            Employment_Date = new DateTime(2021, 12, 1, 11, 30, 0, 0, DateTimeKind.Unspecified),
-                            MiddleName = "Владимирович",
-                            Name = "Роман",
-                            PassportData = "1111666666",
-                            PositionID = 3,
-                            Surname = "Суслов"
-                        },
-                        new
-                        {
-                            ID = 6,
-                            BrigadeID = 2,
-                            EmployeeTelefonNumber = "+79123644673",
-                            Employment_Date = new DateTime(2021, 12, 2, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            MiddleName = "Игоревич",
-                            Name = "Максим",
-                            PassportData = "1111777777",
-                            PositionID = 3,
-                            Surname = "Орлов"
-                        },
-                        new
-                        {
-                            ID = 7,
-                            BrigadeID = 2,
-                            EmployeeTelefonNumber = "+79229357609",
-                            Employment_Date = new DateTime(2021, 12, 2, 10, 0, 0, 0, DateTimeKind.Unspecified),
-                            MiddleName = "Константинович",
-                            Name = "Дмитрий",
-                            PassportData = "1111888888",
-                            PositionID = 3,
-                            Surname = "Целищев"
-                        });
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.Inventory", b =>
@@ -496,7 +395,7 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("DateOfReceiving")
+                    b.Property<DateTime>("Date_of_Receiving")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
@@ -504,27 +403,27 @@ namespace CleaningDLL.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)");
 
-                    b.Property<string>("InventoryName")
+                    b.Property<string>("Inventory_Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<int>("InventoryTypeID")
+                    b.Property<int?>("Inventory_TypeID")
                         .HasColumnType("integer");
 
-                    b.Property<string>("LifeTime")
+                    b.Property<string>("Life_Time")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<string>("UseTime")
+                    b.Property<string>("Use_Time")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("InventoryTypeID");
+                    b.HasIndex("Inventory_TypeID");
 
                     b.ToTable("Inventory");
                 });
@@ -536,7 +435,7 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)");
@@ -544,28 +443,6 @@ namespace CleaningDLL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("InventoryType");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Name = "Пылесос"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Name = "Стеклоочиститель"
-                        },
-                        new
-                        {
-                            ID = 3,
-                            Name = "Вакуумный очиститель"
-                        },
-                        new
-                        {
-                            ID = 4,
-                            Name = "Дезинфектор"
-                        });
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.Order", b =>
@@ -575,7 +452,7 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("AddressID")
+                    b.Property<int?>("AddressID")
                         .HasColumnType("integer");
 
                     b.Property<int>("ApproximateTime")
@@ -584,7 +461,7 @@ namespace CleaningDLL.Migrations
                     b.Property<int>("BrigadeID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ClientID")
+                    b.Property<int?>("ClientID")
                         .HasColumnType("integer");
 
                     b.Property<string>("Comment")
@@ -593,7 +470,7 @@ namespace CleaningDLL.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("EmployeeID")
+                    b.Property<int?>("EmployeeID")
                         .HasColumnType("integer");
 
                     b.Property<int>("FinalPrice")
@@ -637,26 +514,6 @@ namespace CleaningDLL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Position");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Description = "Обрабатывать заявки",
-                            NamePosition = "Администратор"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Description = "Главный клинер. Заведует бригадой",
-                            NamePosition = "Бригадир"
-                        },
-                        new
-                        {
-                            ID = 3,
-                            Description = "Совершать уборку на объекте",
-                            NamePosition = "Клинер"
-                        });
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.ProvidedService", b =>
@@ -691,13 +548,13 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("AddressID")
-                        .HasColumnType("integer");
-
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
+
+                    b.Property<int?>("ProviderAddressID")
+                        .HasColumnType("integer");
 
                     b.Property<string>("ProviderTelefonNumber")
                         .IsRequired()
@@ -706,10 +563,10 @@ namespace CleaningDLL.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AddressID");
-
                     b.HasIndex("CompanyName")
                         .IsUnique();
+
+                    b.HasIndex("ProviderAddressID");
 
                     b.HasIndex("ProviderTelefonNumber")
                         .IsUnique();
@@ -724,13 +581,13 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("EmployeeID")
+                    b.Property<int?>("EmployeeID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ProviderID")
+                    b.Property<int?>("ProviderID")
                         .HasColumnType("integer");
 
-                    b.Property<int>("RequisitionContentID")
+                    b.Property<int?>("RequisitionContentID")
                         .HasColumnType("integer");
 
                     b.Property<string>("Status")
@@ -784,7 +641,7 @@ namespace CleaningDLL.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ConsumableID")
+                    b.Property<int?>("ConsumableID")
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
@@ -806,13 +663,13 @@ namespace CleaningDLL.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
-                    b.Property<int>("InventoryTypeID")
+                    b.Property<int?>("Inventory_TypeID")
                         .HasColumnType("integer");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("ServiceName")
+                    b.Property<string>("Service_Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
@@ -822,116 +679,20 @@ namespace CleaningDLL.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("InventoryTypeID");
+                    b.HasIndex("Inventory_TypeID");
 
                     b.ToTable("Service");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Description = "Поддерживающая уборка. Объект должен быть в незапущенном состоянии. Цена за 1м2.",
-                            InventoryTypeID = 1,
-                            Price = 40m,
-                            ServiceName = "Экспресс уборка",
-                            Time = 100
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Description = "Генеральная уборка. Цена за 1м2.",
-                            InventoryTypeID = 1,
-                            Price = 70m,
-                            ServiceName = "Генеральная уборка",
-                            Time = 220
-                        },
-                        new
-                        {
-                            ID = 3,
-                            Description = "Уборка на объекте после ремонта/стройки (Обильное загрязнение). Цена за 1м2.",
-                            InventoryTypeID = 1,
-                            Price = 80m,
-                            ServiceName = "Послестроительная уборка",
-                            Time = 220
-                        },
-                        new
-                        {
-                            ID = 4,
-                            Description = "Уборка офисных помещений. Цена за 1м2.",
-                            InventoryTypeID = 1,
-                            Price = 50m,
-                            ServiceName = "Уборка офисов",
-                            Time = 100
-                        },
-                        new
-                        {
-                            ID = 5,
-                            Description = "Мойка окон. Цена за 1 створу.",
-                            InventoryTypeID = 2,
-                            Price = 250m,
-                            ServiceName = "Мойка окон",
-                            Time = 60
-                        },
-                        new
-                        {
-                            ID = 6,
-                            Description = "Мойка стеклянных дверей балконов и лоджий. Цена за 1 дверь.",
-                            InventoryTypeID = 2,
-                            Price = 500m,
-                            ServiceName = "Мойка стеклянных дверей",
-                            Time = 120
-                        },
-                        new
-                        {
-                            ID = 7,
-                            Description = "Химчистка диванов. Мягкой мебели. Цена за 1 место.",
-                            InventoryTypeID = 3,
-                            Price = 300m,
-                            ServiceName = "Химчистка диванов",
-                            Time = 3600
-                        },
-                        new
-                        {
-                            ID = 8,
-                            Description = "Химчистка кресел. Мягкой мебели. Цена за 1 кресло.",
-                            InventoryTypeID = 3,
-                            Price = 300m,
-                            ServiceName = "Химчистка кресел",
-                            Time = 3600
-                        },
-                        new
-                        {
-                            ID = 9,
-                            Description = "Химчистка ковров, матрасов. Цена за 1м2.",
-                            InventoryTypeID = 3,
-                            Price = 150m,
-                            ServiceName = "Химчистка ковров",
-                            Time = 300
-                        },
-                        new
-                        {
-                            ID = 10,
-                            Description = "Дезинфекция помещений, твердых поверхносте, воздуха. Цена за 1м2.",
-                            InventoryTypeID = 4,
-                            Price = 40m,
-                            ServiceName = "Дезинфекция",
-                            Time = 30
-                        });
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.BrigadeInventory", b =>
                 {
                     b.HasOne("CleaningDLL.Entity.Brigade", "Brigade")
                         .WithMany()
-                        .HasForeignKey("BrigadeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BrigadeID");
 
                     b.HasOne("CleaningDLL.Entity.Inventory", "Inventory")
                         .WithMany()
-                        .HasForeignKey("InventoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("InventoryID");
 
                     b.Navigation("Brigade");
 
@@ -940,30 +701,24 @@ namespace CleaningDLL.Migrations
 
             modelBuilder.Entity("CleaningDLL.Entity.Consumable", b =>
                 {
-                    b.HasOne("CleaningDLL.Entity.ReferenceUnitsOfMeasurement", "ReferenceUnitsOfMeasurement")
+                    b.HasOne("CleaningDLL.Entity.ReferenceUnitsOfMeasurement", "Unit")
                         .WithMany()
-                        .HasForeignKey("ReferenceUnitsOfMeasurementID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UnitID");
 
-                    b.Navigation("ReferenceUnitsOfMeasurement");
+                    b.Navigation("Unit");
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.ConsumablesService", b =>
                 {
-                    b.HasOne("CleaningDLL.Entity.ConsumptionRate", "ConsumptionRate")
+                    b.HasOne("CleaningDLL.Entity.ConsumptionRate", "Consumption_Rate")
                         .WithMany()
-                        .HasForeignKey("ConsumptionRateID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Consumption_RateID");
 
                     b.HasOne("CleaningDLL.Entity.Service", "Service")
                         .WithMany()
-                        .HasForeignKey("ServiceID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ServiceID");
 
-                    b.Navigation("ConsumptionRate");
+                    b.Navigation("Consumption_Rate");
 
                     b.Navigation("Service");
                 });
@@ -972,34 +727,26 @@ namespace CleaningDLL.Migrations
                 {
                     b.HasOne("CleaningDLL.Entity.Consumable", "Consumable")
                         .WithMany()
-                        .HasForeignKey("ConsumableID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ConsumableID");
 
-                    b.HasOne("CleaningDLL.Entity.ReferenceUnitsOfMeasurement", "ReferenceUnitsOfMeasurement")
+                    b.HasOne("CleaningDLL.Entity.ReferenceUnitsOfMeasurement", "Unit")
                         .WithMany()
-                        .HasForeignKey("ReferenceUnitsOfMeasurementID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UnitID");
 
                     b.Navigation("Consumable");
 
-                    b.Navigation("ReferenceUnitsOfMeasurement");
+                    b.Navigation("Unit");
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.Contract", b =>
                 {
                     b.HasOne("CleaningDLL.Entity.Client", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClientID");
 
                     b.HasOne("CleaningDLL.Entity.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeID");
 
                     b.Navigation("Client");
 
@@ -1008,19 +755,15 @@ namespace CleaningDLL.Migrations
 
             modelBuilder.Entity("CleaningDLL.Entity.Delivery", b =>
                 {
-                    b.HasOne("CleaningDLL.Entity.DeliveryContent", "DeliveryContent")
+                    b.HasOne("CleaningDLL.Entity.DeliveryContent", "Delivery_Content")
                         .WithMany()
-                        .HasForeignKey("DeliveryContentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Delivery_ContentID");
 
                     b.HasOne("CleaningDLL.Entity.Provider", "Provider")
                         .WithMany()
-                        .HasForeignKey("ProviderID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProviderID");
 
-                    b.Navigation("DeliveryContent");
+                    b.Navigation("Delivery_Content");
 
                     b.Navigation("Provider");
                 });
@@ -1029,9 +772,7 @@ namespace CleaningDLL.Migrations
                 {
                     b.HasOne("CleaningDLL.Entity.Consumable", "Consumable")
                         .WithMany()
-                        .HasForeignKey("ConsumableID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ConsumableID");
 
                     b.Navigation("Consumable");
                 });
@@ -1040,27 +781,21 @@ namespace CleaningDLL.Migrations
                 {
                     b.HasOne("CleaningDLL.Entity.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeID");
 
                     b.HasOne("CleaningDLL.Entity.Provider", "Provider")
                         .WithMany()
-                        .HasForeignKey("ProviderID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProviderID");
 
-                    b.HasOne("CleaningDLL.Entity.PurchaseRequisition", "PurchaseRequisition")
+                    b.HasOne("CleaningDLL.Entity.PurchaseRequisition", "Purchase_Requisition")
                         .WithMany()
-                        .HasForeignKey("PurchaseRequisitionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Purchase_RequisitionID");
 
                     b.Navigation("Employee");
 
                     b.Navigation("Provider");
 
-                    b.Navigation("PurchaseRequisition");
+                    b.Navigation("Purchase_Requisition");
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.Employee", b =>
@@ -1082,22 +817,18 @@ namespace CleaningDLL.Migrations
 
             modelBuilder.Entity("CleaningDLL.Entity.Inventory", b =>
                 {
-                    b.HasOne("CleaningDLL.Entity.InventoryType", "InventoryType")
+                    b.HasOne("CleaningDLL.Entity.InventoryType", "Inventory_Type")
                         .WithMany()
-                        .HasForeignKey("InventoryTypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Inventory_TypeID");
 
-                    b.Navigation("InventoryType");
+                    b.Navigation("Inventory_Type");
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.Order", b =>
                 {
                     b.HasOne("CleaningDLL.Entity.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressID");
 
                     b.HasOne("CleaningDLL.Entity.Brigade", "Brigade")
                         .WithMany()
@@ -1107,15 +838,11 @@ namespace CleaningDLL.Migrations
 
                     b.HasOne("CleaningDLL.Entity.Client", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClientID");
 
                     b.HasOne("CleaningDLL.Entity.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeID");
 
                     b.Navigation("Address");
 
@@ -1129,13 +856,13 @@ namespace CleaningDLL.Migrations
             modelBuilder.Entity("CleaningDLL.Entity.ProvidedService", b =>
                 {
                     b.HasOne("CleaningDLL.Entity.Order", "Order")
-                        .WithMany()
+                        .WithMany("ProvidedServicesList")
                         .HasForeignKey("OrderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CleaningDLL.Entity.Service", "Service")
-                        .WithMany()
+                        .WithMany("ProvidedServicesList")
                         .HasForeignKey("ServiceID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1147,34 +874,26 @@ namespace CleaningDLL.Migrations
 
             modelBuilder.Entity("CleaningDLL.Entity.Provider", b =>
                 {
-                    b.HasOne("CleaningDLL.Entity.Address", "Address")
+                    b.HasOne("CleaningDLL.Entity.Address", "ProviderAddress")
                         .WithMany()
-                        .HasForeignKey("AddressID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProviderAddressID");
 
-                    b.Navigation("Address");
+                    b.Navigation("ProviderAddress");
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.PurchaseRequisition", b =>
                 {
                     b.HasOne("CleaningDLL.Entity.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeID");
 
                     b.HasOne("CleaningDLL.Entity.Provider", "Provider")
                         .WithMany()
-                        .HasForeignKey("ProviderID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProviderID");
 
                     b.HasOne("CleaningDLL.Entity.RequisitionContent", "RequisitionContent")
                         .WithMany()
-                        .HasForeignKey("RequisitionContentID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RequisitionContentID");
 
                     b.Navigation("Employee");
 
@@ -1187,27 +906,33 @@ namespace CleaningDLL.Migrations
                 {
                     b.HasOne("CleaningDLL.Entity.Consumable", "Consumable")
                         .WithMany()
-                        .HasForeignKey("ConsumableID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ConsumableID");
 
                     b.Navigation("Consumable");
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.Service", b =>
                 {
-                    b.HasOne("CleaningDLL.Entity.InventoryType", "InventoryType")
+                    b.HasOne("CleaningDLL.Entity.InventoryType", "Inventory_Type")
                         .WithMany()
-                        .HasForeignKey("InventoryTypeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Inventory_TypeID");
 
-                    b.Navigation("InventoryType");
+                    b.Navigation("Inventory_Type");
+                });
+
+            modelBuilder.Entity("CleaningDLL.Entity.Order", b =>
+                {
+                    b.Navigation("ProvidedServicesList");
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.Position", b =>
                 {
                     b.Navigation("Employees");
+                });
+
+            modelBuilder.Entity("CleaningDLL.Entity.Service", b =>
+                {
+                    b.Navigation("ProvidedServicesList");
                 });
 #pragma warning restore 612, 618
         }

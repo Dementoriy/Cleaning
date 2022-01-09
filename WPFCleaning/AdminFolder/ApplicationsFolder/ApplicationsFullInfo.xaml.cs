@@ -35,6 +35,7 @@ namespace WPFCleaning.Admin
             SelectTime.IsEnabled = false;
             BtnBrigadeInfo.IsEnabled = false;
             Comment.IsEnabled = false;
+            UpdateOrder.IsEnabled = true;
         }
         public void AddSelectedOrder()
         {
@@ -58,6 +59,10 @@ namespace WPFCleaning.Admin
 
             DatePicker.Text = order.Date.ToString("d");
             SelectTime.Text = order.Date.ToString("t");
+            if(!int.TryParse(SelectTime.Text.Substring(0,2),out int i))
+            {
+                SelectTime.Text = "0" + SelectTime.Text;
+            }
             BrigadeBox.Text = order.BrigadeID.ToString();
 
             Employee brigadir = Employee.GetBrigadirByBrigada(order.BrigadeID);
@@ -94,17 +99,29 @@ namespace WPFCleaning.Admin
                     Square.Text = p.Amount.ToString();
                     CheckOfficeClean.IsChecked = true;
                 }
-                if (p.ServiceID == 5 || p.ServiceID == 6)
+                if (p.ServiceID == 5)
                 {
                     WindowClean.IsChecked = true;
                     KolvoWindow.Text = pvs.Where(a => a.ServiceID == 5).FirstOrDefault().Amount.ToString();
-                    KolvoDoor.Text = pvs.Where(a => a.ServiceID == 6).FirstOrDefault().Amount.ToString();
                 }
-                if (p.ServiceID == 7 || p.ServiceID == 8 || p.ServiceID == 9)
+                if (p.ServiceID == 6)
+                {
+                    KolvoDoor.Text = pvs.Where(a => a.ServiceID == 6).FirstOrDefault().Amount.ToString();
+                    WindowClean.IsChecked = true;
+                }
+                if (p.ServiceID == 7)
                 {
                     ChemistryClean.IsChecked = true;
                     KolvoSofa.Text = pvs.Where(a => a.ServiceID == 7).FirstOrDefault().Amount.ToString();
+                }
+                if (p.ServiceID == 8)
+                {
+                    ChemistryClean.IsChecked = true;
                     KolvoArmcheir.Text = pvs.Where(a => a.ServiceID == 8).FirstOrDefault().Amount.ToString();
+                }
+                if (p.ServiceID == 9)
+                {
+                    ChemistryClean.IsChecked = true;
                     KolvoCarpet.Text = pvs.Where(a => a.ServiceID == 9).FirstOrDefault().Amount.ToString();
                 }
                 if (p.ServiceID == 10)
@@ -124,17 +141,19 @@ namespace WPFCleaning.Admin
         public void SaveUpdatedOrder_Click(object sender, RoutedEventArgs e)
         {
             string NewDate = (DatePicker.Text + " " + SelectTime.Text);
-            if (DateTime.Parse(NewDate) > DateTime.Today)
+            if (DateTime.Parse(NewDate) > DateTime.Now)
             {
                 order.Status = StatusBox.Text;
                 order.Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text));
                 order.Date = DateTime.Parse(NewDate);
-                order.FinalPrice = Convert.ToInt32(PriceBox.Text);
+                order.FinalPrice = Order.GetPriceByString(PriceBox.Text); 
                 order.Comment = Comment.Text;
 
                 Context.Db.SaveChanges();
                 MessageBox.Show("Заявка изменена успешно!");
-                _applications.SelectedOrderInfo();
+                if(_applications != null)
+                    _applications.SelectedOrderInfo();
+                UpdateOrder.IsEnabled = true;
                 this.Close();
             }
             else MessageBox.Show("Некорректная дата");
@@ -142,13 +161,21 @@ namespace WPFCleaning.Admin
 
         private void UpdateOrder_Click(object sender, RoutedEventArgs e)
         {
-            StatusBox.IsEnabled = true;
-            SaveUpdatedOrder.IsEnabled = true;
-            BrigadeBox.IsEnabled = true;
-            DatePicker.IsEnabled = true;
-            SelectTime.IsEnabled = true;
-            BtnBrigadeInfo.IsEnabled = true;
-            Comment.IsEnabled = true;
+            if (StatusBox.Text == "Завершена" || StatusBox.Text == "Отменена")
+            {
+                MessageBox.Show("Статус заявки изменить нельзя!");
+            }
+            else
+            {
+                StatusBox.IsEnabled = true;
+                SaveUpdatedOrder.IsEnabled = true;
+                BrigadeBox.IsEnabled = true;
+                DatePicker.IsEnabled = true;
+                SelectTime.IsEnabled = true;
+                BtnBrigadeInfo.IsEnabled = true;
+                Comment.IsEnabled = true;
+                UpdateOrder.IsEnabled = false;
+            }
         }
         public void GetStatus()
         {

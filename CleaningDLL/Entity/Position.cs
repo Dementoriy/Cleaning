@@ -18,7 +18,13 @@ namespace CleaningDLL.Entity
         private static ApplicationContext db = Context.Db;
         public Position()
         {
+
+        }
+        public Position(string NamePosition, string Description)
+        {
             Employees = new List<Employee>();
+            this.NamePosition = NamePosition;
+            this.Description = Description;
         }
         public static Position GetByID(int id)
         {

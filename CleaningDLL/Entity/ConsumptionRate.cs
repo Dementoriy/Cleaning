@@ -14,8 +14,19 @@ namespace CleaningDLL.Entity
         [MaxLength(150)] public string Consumption { get; set; }
         [Required]
         public virtual Consumable Consumable { get; set; }
+        public int ConsumableID { get; set; }
         [Required]
-        public virtual ReferenceUnitsOfMeasurement Unit { get; set; }
+        public virtual ReferenceUnitsOfMeasurement ReferenceUnitsOfMeasurement { get; set; }
+        public int ReferenceUnitsOfMeasurementID { get; set; }
+        public ConsumptionRate()
+        {
 
+        }
+        public ConsumptionRate(string Consumption, int ConsumableID, int ReferenceUnitsOfMeasurementID)
+        {
+            this.Consumption = Consumption;
+            this.ConsumableID = ConsumableID;
+            this.ReferenceUnitsOfMeasurementID = ReferenceUnitsOfMeasurementID;
+        }
     }
 }

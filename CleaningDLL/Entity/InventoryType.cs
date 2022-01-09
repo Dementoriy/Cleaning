@@ -11,6 +11,15 @@ namespace CleaningDLL.Entity
     {
         public int ID { get; set; }
         [Required]
-        [MaxLength(150)] public string Description { get; set; }
+        [MaxLength(150)] public string Name { get; set; }
+
+        public InventoryType()
+        {
+
+        }
+        public InventoryType(string Name)
+        {
+            this.Name = Name;
+        }
     }
 }

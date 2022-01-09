@@ -13,11 +13,14 @@ namespace CleaningDLL.Entity
         [Required]
         [MaxLength(50)] public string Status { get; set; }
         [Required]
-        public virtual Client Client{ get; set; }
+        public virtual Client Client { get; set; }
+        public int ClientID { get; set; }
         [Required]
         public virtual Employee Employee { get; set; }
+        public int EmployeeID { get; set; }
         [Required]
         public virtual Address Address { get; set; }
+        public int AddressID { get; set; }
         [Required]
         public virtual Brigade Brigade { get; set; }
         public int BrigadeID { get; set; }
@@ -26,7 +29,24 @@ namespace CleaningDLL.Entity
         public int FinalPrice { get; set; }
         public int ApproximateTime { get; set; }
         public string? Comment { get; set; }
-        //public List<ProvidedService> ProvidedServices { get; set; } = new List<ProvidedService>();
+
+        public Order()
+        {
+
+        }
+        public Order(string Status, int ClientID, int EmployeeID, int AddressID,int BrigadeID, DateTime Date,
+            int FinalPrice, int ApproximateTime, string? Comment)
+        {
+            this.Status = Status;
+            this.ClientID = ClientID;
+            this.EmployeeID = EmployeeID;
+            this.AddressID = AddressID;
+            this.BrigadeID = BrigadeID;
+            this.Date = Date;
+            this.FinalPrice = FinalPrice;
+            this.ApproximateTime = ApproximateTime;
+            this.Comment = Comment;
+        }
 
         private static ApplicationContext db = Context.Db;
 

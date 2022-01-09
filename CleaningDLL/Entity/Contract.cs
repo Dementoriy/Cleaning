@@ -12,9 +12,22 @@ namespace CleaningDLL.Entity
         public int ID { get; set; }
         [Required]
         public virtual Employee Employee { get; set; }
+        public int EmployeeID { get; set; }
         [Required]
         public virtual Client Client { get; set; }
+        public int ClientID { get; set; }
         [Required]
-        public DateTime Date_Of_Contract { get; set; }
+        public DateTime DateOfContract { get; set; }
+
+        public Contract()
+        {
+
+        }
+        public Contract(int EmployeeID, int ClientID, DateTime DateOfContract)
+        {
+            this.EmployeeID = EmployeeID;
+            this.ClientID = ClientID;
+            this.DateOfContract = DateOfContract;
+        }
     }
 }

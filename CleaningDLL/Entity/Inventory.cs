@@ -11,16 +11,32 @@ namespace CleaningDLL.Entity
     {
         public int ID { get; set; }
         [Required]
-        [MaxLength(50)] public string Inventory_Name { get; set; }
+        [MaxLength(50)] public string InventoryName { get; set; }
         [Required]
         [MaxLength(150)] public string Description { get; set; }
         [Required]
-        public virtual InventoryType Inventory_Type { get; set; }
+        public virtual InventoryType InventoryType { get; set; }
+        public int InventoryTypeID { get; set; }
         [Required]
-        [MaxLength(50)] public string Use_Time { get; set; }
+        [MaxLength(50)] public string UseTime { get; set; }
         [Required]
-        [MaxLength(50)] public string Life_Time { get; set; }
+        [MaxLength(50)] public string LifeTime { get; set; }
         [Required]
-        public DateTime Date_of_Receiving { get; set; }
+        public DateTime DateOfReceiving { get; set; }
+
+        public Inventory()
+        {
+
+        }
+        public Inventory(string InventoryName, string Description, int InventoryTypeID, string UseTime, 
+            string LifeTime, DateTime DateOfReceiving)
+        {
+            this.InventoryName = InventoryName;
+            this.Description = Description;
+            this.InventoryTypeID = InventoryTypeID;
+            this.UseTime = UseTime;
+            this.LifeTime = LifeTime;
+            this.DateOfReceiving = DateOfReceiving;
+        }
     }
 }

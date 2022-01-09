@@ -18,6 +18,19 @@ namespace CleaningDLL.Entity
         [Required]
         public bool IsOldClient { get; set; }
 
+        public Client()
+        {
+
+        }
+        public Client(string Surname, string Name, string? MiddleName, string ClientTelefonNumber, bool IsOldClient)
+        {
+            this.Surname = Surname;
+            this.Name = Name;
+            this.MiddleName = MiddleName;
+            this.ClientTelefonNumber = ClientTelefonNumber;
+            this.IsOldClient = IsOldClient;
+        }
+
         private static ApplicationContext db = Context.Db;
 
         public static void ClientIsOld(int id)

@@ -11,21 +11,35 @@ namespace CleaningDLL.Entity
     {
         public int ID { get; set; }
         [Required]
-        [MaxLength(100)] public string Service_Name { get; set; }
+        [MaxLength(100)] public string ServiceName { get; set; }
         [Required]
         [MaxLength(200)] public string Description { get; set; }
         [Required]
         public decimal Price { get; set; }
-        public virtual InventoryType? Inventory_Type { get; set; }
+        public virtual InventoryType? InventoryType { get; set; }
+        public int InventoryTypeID { get; set; }
         [Required]
         public int Time { get; set; }
+
+        public Service()
+        {
+
+        }
+        public Service(string ServiceName, string Description, decimal Price, int InventoryTypeID, int Time)
+        {
+            this.ServiceName = ServiceName;
+            this.Description = Description;
+            this.Price = Price;
+            this.InventoryTypeID = InventoryTypeID;
+            this.Time = Time;
+        }
 
         private static ApplicationContext db = Context.Db;
 
         public static int GetIdService(string str)
         {
             int idService;
-            Service service = db.Service.Where(s => s.Service_Name == str).FirstOrDefault();
+            Service service = db.Service.Where(s => s.ServiceName == str).FirstOrDefault();
             idService = service.ID;
             return idService;
         }

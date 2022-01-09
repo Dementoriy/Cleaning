@@ -11,14 +11,28 @@ namespace CleaningDLL.Entity
     {
         public int ID { get; set; }
         [Required]
-        [MaxLength(50)] public string Consumable_Name { get; set; }
+        [MaxLength(50)] public string ConsumableName { get; set; }
         [Required]
         [MaxLength(150)] public string Description { get; set; }
         [Required]
-        public decimal Current_Price { get; set; }
+        public decimal CurrentPrice { get; set; }
         [Required]
-        public virtual ReferenceUnitsOfMeasurement Unit { get; set; }
+        public virtual ReferenceUnitsOfMeasurement ReferenceUnitsOfMeasurement { get; set; }
+        public int ReferenceUnitsOfMeasurementID { get; set; }
         [Required]
-        public int amount { get; set; }
+        public int Amount { get; set; }
+
+        public Consumable()
+        {
+
+        }
+        public Consumable(string ConsumableName, string Description, decimal CurrentPrice, int ReferenceUnitsOfMeasurementID, int Amount)
+        {
+            this.ConsumableName = ConsumableName;
+            this.Description = Description;
+            this.CurrentPrice = CurrentPrice;
+            this.ReferenceUnitsOfMeasurementID = ReferenceUnitsOfMeasurementID;
+            this.Amount = Amount;
+        }
     }
 }

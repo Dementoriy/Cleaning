@@ -17,6 +17,18 @@ namespace CleaningDLL.Entity
         [MaxLength(10)] public string? Building { get; set; }
         [MaxLength(10)] public string? Entrance { get; set; }
         [MaxLength(10)] public string? Apartment_Number { get; set; }
+        public Address()
+        {
+
+        }
+        public Address(string Street, string HouseNumber, string? Building, string? Entrance, string? Apartment_Number)
+        {
+            this.Street = Street;
+            this.HouseNumber = HouseNumber;
+            this.Building = Building;
+            this.Entrance = Entrance;
+            this.Apartment_Number = Apartment_Number;
+        }
         public string AddAddress()
         {
             string str = $"ул.{Street}, д.{HouseNumber}. ";

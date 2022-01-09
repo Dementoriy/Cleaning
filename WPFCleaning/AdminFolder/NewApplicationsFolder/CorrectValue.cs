@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using CleaningDLL.Entity;
 using CleaningDLL;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace WPFCleaning.Admin
 {
@@ -15,27 +16,27 @@ namespace WPFCleaning.Admin
         {
             int x = 0;
             if (newApplication.CheckExpressClean.IsChecked.GetValueOrDefault() && newApplication.TextBoxSquare.Text != "" 
-                && Convert.ToInt32(newApplication.TextBoxSquare.Text) > 240)
+                && Convert.ToInt32(newApplication.TextBoxSquare.Text) > 200)
             {
-                MessageBox.Show("Площадь больше 240!");
+                MessageBox.Show("Площадь больше 200!");
                 newApplication.TextBoxSquare.Text = "";
             }
             if (newApplication.CheckGeneralClean.IsChecked.GetValueOrDefault() && newApplication.TextBoxSquare.Text != "" 
-                && Convert.ToInt32(newApplication.TextBoxSquare.Text) > 96)
+                && Convert.ToInt32(newApplication.TextBoxSquare.Text) > 100)
             {
-                MessageBox.Show("Площадь больше 96!");
+                MessageBox.Show("Площадь больше 100!");
                 newApplication.TextBoxSquare.Text = "";
             }
             if (newApplication.CheckBuildingClean.IsChecked.GetValueOrDefault() && newApplication.TextBoxSquare.Text != "" 
-                && Convert.ToInt32(newApplication.TextBoxSquare.Text) > 72)
+                && Convert.ToInt32(newApplication.TextBoxSquare.Text) > 100)
             {
-                MessageBox.Show("Площадь больше 72!");
+                MessageBox.Show("Площадь больше 100!");
                 newApplication.TextBoxSquare.Text = "";
             }
             if (newApplication.CheckOfficeClean.IsChecked.GetValueOrDefault() && newApplication.TextBoxSquare.Text != "" 
-                && Convert.ToInt32(newApplication.TextBoxSquare.Text) > 135)
+                && Convert.ToInt32(newApplication.TextBoxSquare.Text) > 200)
             {
-                MessageBox.Show("Площадь больше 135!");
+                MessageBox.Show("Площадь больше 200!");
                 newApplication.TextBoxSquare.Text = "";
             }
             if (newApplication.WindowClean.IsChecked.GetValueOrDefault() && newApplication.KolvoWindow.Text != "0" 
@@ -98,7 +99,17 @@ namespace WPFCleaning.Admin
         {
             if (clientPage.Telefon.Text == "")
             {
-                MessageBox.Show("Заполните клиента!");
+                MessageBox.Show("Введите номер телефона клиента!");
+                return false;
+            }
+            else if (clientPage.Surname.Text == "")
+            {
+                MessageBox.Show("Укажите фамилию клиента!");
+                return false;
+            }
+            else if(clientPage.Name.Text == "")
+            {
+                MessageBox.Show("Укажите имя клиента!");
                 return false;
             }
             else if (clientPage.Street.Text == "")

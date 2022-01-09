@@ -54,7 +54,7 @@ namespace WPFCleaning.Admin
 
         private List<Order.OrderInfo> _listSort;
 
-        private void SelectedOrderInfo()
+        public void SelectedOrderInfo()
         {
             List<Order.OrderInfo> listSort = Order.GetOrderInfo();
             if (CheckFinish.IsChecked == true)

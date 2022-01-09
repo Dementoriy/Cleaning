@@ -15,5 +15,14 @@ namespace CleaningDLL.Entity
         [Required]
         [MaxLength(150)] public string Description { get; set; }
 
+        public ReferenceUnitsOfMeasurement()
+        {
+
+        }
+        public ReferenceUnitsOfMeasurement(string Unit, string Description)
+        {
+            this.Unit = Unit;
+            this.Description = Description;
+        }
     }
 }

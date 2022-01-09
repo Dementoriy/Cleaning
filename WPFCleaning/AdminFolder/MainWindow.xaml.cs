@@ -12,10 +12,10 @@ namespace WPFCleaning.Admin
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Page reportPage { get; }
-        public Page clientPage { get; }
-        public Page newApplication { get; }
-        public Page applications;
+        public ReportPage reportPage { get; }
+        public ClientPage clientPage { get; }
+        public NewApplication newApplication { get; }
+        public Applications applications;
         public Employee emp { get; }
         public MainWindow(Employee e)
         {
@@ -38,6 +38,7 @@ namespace WPFCleaning.Admin
         private void ButtonClickReport(object sender, RoutedEventArgs e)
         {
             View.Navigate(reportPage);
+            reportPage.SelectedOrderInfo();
             ReportBtn.BorderBrush = Brushes.White;
             ClientBtn.BorderBrush = Brushes.Black;
             NewOrderBtn.BorderBrush = Brushes.Black;
@@ -51,7 +52,7 @@ namespace WPFCleaning.Admin
             NewOrderBtn.BorderBrush = Brushes.Black;
             OrderBtn.BorderBrush = Brushes.Black;
         }
-        public void GoNewApplication()
+        private void ButtonClickNewApplication(object sender, RoutedEventArgs e)
         {
             View.Navigate(newApplication);
             ReportBtn.BorderBrush = Brushes.Black;
@@ -59,15 +60,11 @@ namespace WPFCleaning.Admin
             NewOrderBtn.BorderBrush = Brushes.White;
             OrderBtn.BorderBrush = Brushes.Black;
         }
-        private void ButtonClickNewApplication(object sender, RoutedEventArgs e)
-        {
-            GoNewApplication();
-        }
 
         private void ButtonClickApplication(object sender, RoutedEventArgs e)
         {
             View.Navigate(applications);
-            //Applications.SelectedOrderInfo();
+            applications.SelectedOrderInfo();
             ReportBtn.BorderBrush = Brushes.Black;
             ClientBtn.BorderBrush = Brushes.Black;
             NewOrderBtn.BorderBrush = Brushes.Black;

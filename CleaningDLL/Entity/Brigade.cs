@@ -15,6 +15,14 @@ namespace CleaningDLL.Entity
 
         private static ApplicationContext db = Context.Db;
 
+        public Brigade()
+        {
+
+        }
+        public Brigade(string Smena_Number)
+        {
+            this.Smena_Number = Smena_Number;
+        }
         public static Brigade GetBrigadeByID(int id)
         {
             return db.Brigade.Where(e => e.ID == id).FirstOrDefault();

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using CleaningDLL.Entity;
+using System;
 
 namespace CleaningDLL
 {
@@ -33,6 +34,11 @@ namespace CleaningDLL
             Context.AddDb(this);
             //Database.EnsureCreated();
         }
+        public static DbContextOptions<ApplicationContext> GetDb()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+            return optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Cleaning;Username=postgres;Password=qwertyuiop228").Options;
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>().HasIndex(s => s.EmployeeTelefonNumber).IsUnique();
@@ -42,14 +48,15 @@ namespace CleaningDLL
             modelBuilder.Entity<Provider>().HasIndex(s => s.CompanyName).IsUnique();
             modelBuilder.Entity<Provider>().HasIndex(s => s.ProviderTelefonNumber).IsUnique();
             modelBuilder.Entity<ReferenceUnitsOfMeasurement>().HasIndex(s => s.Unit).IsUnique();
-            modelBuilder.Entity<Consumable>().HasIndex(s => s.Consumable_Name).IsUnique();
+            modelBuilder.Entity<Consumable>().HasIndex(s => s.ConsumableName).IsUnique();
             modelBuilder.Entity<Employee>().HasIndex(s => s.Login).IsUnique();
             modelBuilder.Entity<Employee>().HasIndex(s => s.Password).IsUnique();
-        }
-        public static DbContextOptions<ApplicationContext> GetDb()
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            return optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Cleaning;Username=postgres;Password=qwertyuiop228").Options;
+
+            modelBuilder.Entity<Position>(EntityConfigure.PositionConfigure);
+            modelBuilder.Entity<Brigade>(EntityConfigure.BrigadeConfigure);
+            modelBuilder.Entity<Employee>(EntityConfigure.EmployeeConfigure);
+            modelBuilder.Entity<InventoryType>(EntityConfigure.InventoryTypeConfigure);
+            modelBuilder.Entity<Service>(EntityConfigure.ServiceConfigure);
         }
     }
 }

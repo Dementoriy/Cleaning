@@ -19,6 +19,16 @@ namespace CleaningDLL.Entity
         [Required]
         public int Amount { get; set; }
 
+        public ProvidedService()
+        {
+
+        }
+        public ProvidedService(int OrderID, int ServiceID, int Amount)
+        {
+            this.OrderID = OrderID;
+            this.ServiceID = ServiceID;
+            this.Amount = Amount;
+        }
 
         private static ApplicationContext db = Context.Db;
 

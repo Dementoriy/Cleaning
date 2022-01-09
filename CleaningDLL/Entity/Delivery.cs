@@ -12,12 +12,25 @@ namespace CleaningDLL.Entity
         public int ID { get; set; }
         [Required]
         public virtual Provider Provider { get; set; }
+        public int ProviderID { get; set; }
         [Required]
-        public DateTime Delivery_Date { get; set; }
+        public DateTime DeliveryDate { get; set; }
         [Required]
-        public decimal Delivery_Cost { get; set; }
+        public decimal DeliveryCost { get; set; }
         [Required]
-        public virtual DeliveryContent Delivery_Content { get; set; }
+        public virtual DeliveryContent DeliveryContent { get; set; }
+        public int DeliveryContentID { get; set; }
 
+        public Delivery()
+        {
+
+        }
+        public Delivery(int ProviderID, DateTime DeliveryDate, decimal DeliveryCost, int DeliveryContentID)
+        {
+            this.ProviderID = ProviderID;
+            this.DeliveryDate = DeliveryDate;
+            this.DeliveryCost = DeliveryCost;
+            this.DeliveryContentID = DeliveryContentID;
+        }
     }
 }

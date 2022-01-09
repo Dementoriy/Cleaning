@@ -30,6 +30,25 @@ namespace CleaningDLL.Entity
         [MaxLength(50)] public string? Login { get; set; }
         [MaxLength(64)] [MinLength(64)] public string? Password { get; set; }
 
+        public Employee()
+        {
+
+        }
+        public Employee(string Surname, string Name, string? MiddleName, string PassportData, string EmployeeTelefonNumber, 
+            int PositionID, int? BrigadeID, DateTime Employment_Date, string? Login, string? Password)
+        {
+            this.Surname = Surname;
+            this.Name = Name;
+            this.MiddleName = MiddleName;
+            this.PassportData = PassportData;
+            this.EmployeeTelefonNumber = EmployeeTelefonNumber;
+            this.PositionID = PositionID;
+            this.BrigadeID = BrigadeID;
+            this.Employment_Date = Employment_Date;
+            this.Login = Login;
+            this.Password = Password;
+        }
+
         public String AddFIO()
         {
             string str = $"{Surname} {Name.Substring(0, 1)}.";

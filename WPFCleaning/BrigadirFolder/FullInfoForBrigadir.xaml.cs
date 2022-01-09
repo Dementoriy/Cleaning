@@ -28,6 +28,7 @@ namespace WPFCleaning.Brigadir
             GetStatus();
             StatusBox.IsEnabled = false;
             SaveUpdatedOrder.IsEnabled = false;
+            UpdateOrder.IsEnabled = true;
         }
 
         public void AddSelectedOrder(int id)
@@ -83,17 +84,29 @@ namespace WPFCleaning.Brigadir
                     CheckOfficeClean.IsChecked = true;
                     Sqare.Text = p.Amount.ToString();
                 }
-                if (p.ServiceID == 5 || p.ServiceID == 6)
+                if (p.ServiceID == 5)
                 {
                     WindowClean.IsChecked = true;
                     KolvoWindow.Text = pvs.Where(a => a.ServiceID == 5).FirstOrDefault().Amount.ToString();
-                    KolvoDoor.Text = pvs.Where(a => a.ServiceID == 6).FirstOrDefault().Amount.ToString();
                 }
-                if (p.ServiceID == 7 || p.ServiceID == 8 || p.ServiceID == 9)
+                if (p.ServiceID == 6)
+                {
+                    KolvoDoor.Text = pvs.Where(a => a.ServiceID == 6).FirstOrDefault().Amount.ToString();
+                    WindowClean.IsChecked = true;
+                }
+                if (p.ServiceID == 7)
                 {
                     ChemistryClean.IsChecked = true;
                     KolvoSofa.Text = pvs.Where(a => a.ServiceID == 7).FirstOrDefault().Amount.ToString();
+                }
+                if (p.ServiceID == 8)
+                {
+                    ChemistryClean.IsChecked = true;
                     KolvoArmcheir.Text = pvs.Where(a => a.ServiceID == 8).FirstOrDefault().Amount.ToString();
+                }
+                if (p.ServiceID == 9)
+                {
+                    ChemistryClean.IsChecked = true;
                     KolvoCarpet.Text = pvs.Where(a => a.ServiceID == 9).FirstOrDefault().Amount.ToString();
                 }
                 if (p.ServiceID == 10)
@@ -116,20 +129,21 @@ namespace WPFCleaning.Brigadir
             Context.Db.SaveChanges();
             MessageBox.Show("Статус заявки изменен успешно!");
             _brigadeApplications.SelectedOrderInfo();
+            UpdateOrder.IsEnabled = true;
             this.Close();
         }
 
         private void UpdateOrder_Click(object sender, RoutedEventArgs e)
         {
-            if (StatusBox.Text == "Завершена")
+            if (StatusBox.Text == "Завершена" || StatusBox.Text == "Отменена")
             {
                 MessageBox.Show("Статус заявки изменить нельзя!");
-                this.Close();
             }
             else
             {
                 StatusBox.IsEnabled = true;
                 SaveUpdatedOrder.IsEnabled = true;
+                UpdateOrder.IsEnabled = false;
             }    
         }
         public void GetStatus()

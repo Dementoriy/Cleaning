@@ -15,6 +15,18 @@ namespace CleaningDLL.Entity
         [Required]
         [MaxLength(12)] public string ProviderTelefonNumber { get; set; }
         [Required]
-        public virtual Address ProviderAddress { get; set; }
+        public virtual Address Address { get; set; }
+        public int AddressID { get; set; }
+
+        public Provider()
+        {
+
+        }
+        public Provider(string CompanyName, string ProviderTelefonNumber, int AddressID)
+        {
+            this.CompanyName = CompanyName;
+            this.ProviderTelefonNumber = ProviderTelefonNumber;
+            this.AddressID = AddressID;
+        }
     }
 }

@@ -43,7 +43,7 @@ namespace WPFCleaning.Admin
             }
             if (tt.Length == 2)
             {
-                if (Convert.ToInt32(tt.Substring(0, 2)) > 23)
+               if (Convert.ToInt32(tt.Substring(0, 2)) > 23)
                 {
                     afi.SelectTime.Text = tt.Remove(1, 1);
                     afi.SelectTime.SelectionStart = afi.SelectTime.Text.Length;
