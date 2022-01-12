@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Castle.Core.Internal;
-
+﻿
 namespace CleaningDLL.Entity
 {
     public abstract class Human

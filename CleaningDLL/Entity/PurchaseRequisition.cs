@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CleaningDLL.Entity
 {
@@ -26,12 +21,12 @@ namespace CleaningDLL.Entity
         {
 
         }
-        public PurchaseRequisition(string Status, int EmployeeID, int ProviderID, int RequisitionContentID)
+        public PurchaseRequisition(string Status, Employee Employee, Provider Provider, RequisitionContent RequisitionContent)
         {
             this.Status = Status;
-            this.EmployeeID = EmployeeID;
-            this.ProviderID = ProviderID;
-            this.RequisitionContentID = RequisitionContentID;
+            this.Employee = Employee;
+            this.Provider = Provider;
+            this.RequisitionContent = RequisitionContent;
         }
     }
 }

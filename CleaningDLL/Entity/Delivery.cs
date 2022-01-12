@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleaningDLL.Entity
 {
@@ -25,12 +21,12 @@ namespace CleaningDLL.Entity
         {
 
         }
-        public Delivery(int ProviderID, DateTime DeliveryDate, decimal DeliveryCost, int DeliveryContentID)
+        public Delivery(Provider Provider, DateTime DeliveryDate, decimal DeliveryCost, DeliveryContent DeliveryContent)
         {
-            this.ProviderID = ProviderID;
+            this.Provider = Provider;
             this.DeliveryDate = DeliveryDate;
             this.DeliveryCost = DeliveryCost;
-            this.DeliveryContentID = DeliveryContentID;
+            this.DeliveryContent = DeliveryContent;
         }
     }
 }

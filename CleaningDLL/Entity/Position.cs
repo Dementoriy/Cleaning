@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleaningDLL.Entity
 {
@@ -15,6 +12,7 @@ namespace CleaningDLL.Entity
         [Required]
         [MaxLength(150)] public string Description { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
+
         private static ApplicationContext db = Context.Db;
         public Position()
         {

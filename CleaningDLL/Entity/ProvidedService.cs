@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleaningDLL.Entity
 {
@@ -23,10 +20,10 @@ namespace CleaningDLL.Entity
         {
 
         }
-        public ProvidedService(int OrderID, int ServiceID, int Amount)
+        public ProvidedService(Order Order, Service Service, int Amount)
         {
-            this.OrderID = OrderID;
-            this.ServiceID = ServiceID;
+            this.Order = Order;
+            this.Service = Service;
             this.Amount = Amount;
         }
 

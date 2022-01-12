@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleaningDLL.Entity
 {
@@ -11,7 +7,7 @@ namespace CleaningDLL.Entity
     {
         public int ID { get; set; }
         [Required]
-        [MaxLength(10)] public string Smena_Number { get; set; }
+        [MaxLength(10)] public string SmenaNumber { get; set; }
 
         private static ApplicationContext db = Context.Db;
 
@@ -21,7 +17,7 @@ namespace CleaningDLL.Entity
         }
         public Brigade(string Smena_Number)
         {
-            this.Smena_Number = Smena_Number;
+            this.SmenaNumber = Smena_Number;
         }
         public static Brigade GetBrigadeByID(int id)
         {

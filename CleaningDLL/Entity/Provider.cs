@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CleaningDLL.Entity
 {
@@ -22,11 +17,11 @@ namespace CleaningDLL.Entity
         {
 
         }
-        public Provider(string CompanyName, string ProviderTelefonNumber, int AddressID)
+        public Provider(string CompanyName, string ProviderTelefonNumber, Address Address)
         {
             this.CompanyName = CompanyName;
             this.ProviderTelefonNumber = ProviderTelefonNumber;
-            this.AddressID = AddressID;
+            this.Address = Address;
         }
     }
 }

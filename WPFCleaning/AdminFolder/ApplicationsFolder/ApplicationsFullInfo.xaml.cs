@@ -14,7 +14,6 @@ namespace WPFCleaning.Admin
     /// </summary>
     public partial class ApplicationsFullInfo : Window
     {
-        private static ApplicationContext db = Context.Db;
         private Applications _applications;
         Order order;
         public int idService;

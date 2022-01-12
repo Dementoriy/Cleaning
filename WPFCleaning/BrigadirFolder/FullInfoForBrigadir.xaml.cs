@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using CleaningDLL;
 using CleaningDLL.Entity;
 using System.Linq;
-using System.Windows.Media;
 
 namespace WPFCleaning.Brigadir
 {
@@ -16,7 +13,6 @@ namespace WPFCleaning.Brigadir
     /// </summary>
     public partial class FullInfoForBrigadir : Window
     {
-        private static ApplicationContext db = Context.Db;
         Order order;
         private BrigadeApplications _brigadeApplications;
         public FullInfoForBrigadir(int id, BrigadeApplications ba)

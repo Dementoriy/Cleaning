@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleaningDLL.Entity
 {
@@ -27,8 +25,8 @@ namespace CleaningDLL.Entity
         {
 
         }
-        public Employee(string Surname, string Name, string MiddleName, string PassportData, string PhoneNumber, 
-            int PositionID, int? BrigadeID, DateTime EmploymentDate, string? Login, string? Password) : base(Surname, Name, MiddleName, PhoneNumber)
+        public Employee(string Surname, string Name, string MiddleName, string PassportData, string PhoneNumber, int PositionID, int? BrigadeID,
+            DateTime EmploymentDate, string? Login, string? Password) : base(Surname, Name, MiddleName, PhoneNumber)
         {
             this.PassportData = PassportData;
             this.PositionID = PositionID;

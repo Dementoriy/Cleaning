@@ -3,15 +3,17 @@ using System;
 using CleaningDLL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CleaningDLL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220112124403_compozition1")]
+    partial class compozition1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,7 +62,7 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("SmenaNumber")
+                    b.Property<string>("Smena_Number")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
@@ -73,12 +75,12 @@ namespace CleaningDLL.Migrations
                         new
                         {
                             ID = 1,
-                            SmenaNumber = "Смена1"
+                            Smena_Number = "Смена1"
                         },
                         new
                         {
                             ID = 2,
-                            SmenaNumber = "Смена2"
+                            Smena_Number = "Смена2"
                         });
                 });
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CleaningDLL.Entity
 {
@@ -21,10 +16,10 @@ namespace CleaningDLL.Entity
         {
 
         }
-        public BrigadeInventory(int BrigadeID, int InventoryID)
+        public BrigadeInventory(Brigade Brigade, Inventory Inventory)
         {
-            this.BrigadeID = BrigadeID;
-            this.InventoryID = InventoryID;
+            this.Brigade = Brigade;
+            this.Inventory = Inventory;
         }
     }
 }

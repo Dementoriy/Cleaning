@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CleaningDLL.Entity
 {
@@ -22,11 +17,11 @@ namespace CleaningDLL.Entity
         {
 
         }
-        public ConsumptionRate(string Consumption, int ConsumableID, int ReferenceUnitsOfMeasurementID)
+        public ConsumptionRate(string Consumption, Consumable Consumable, ReferenceUnitsOfMeasurement ReferenceUnitsOfMeasurement)
         {
             this.Consumption = Consumption;
-            this.ConsumableID = ConsumableID;
-            this.ReferenceUnitsOfMeasurementID = ReferenceUnitsOfMeasurementID;
+            this.Consumable = Consumable;
+            this.ReferenceUnitsOfMeasurement = ReferenceUnitsOfMeasurement;
         }
     }
 }

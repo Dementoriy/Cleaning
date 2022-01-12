@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Reflection;
 
 namespace CleaningDLL.Entity
 {
@@ -29,23 +27,25 @@ namespace CleaningDLL.Entity
         public int FinalPrice { get; set; }
         public int ApproximateTime { get; set; }
         public string? Comment { get; set; }
+        public Contract? Contract { get; set; }
 
         public Order()
         {
-
+            
         }
-        public Order(string Status, int ClientID, int EmployeeID, int AddressID,int BrigadeID, DateTime Date,
+        public Order(string Status, Client Client, Employee Employee, Address Address, Brigade Brigade, DateTime Date,
             int FinalPrice, int ApproximateTime, string? Comment)
         {
             this.Status = Status;
-            this.ClientID = ClientID;
-            this.EmployeeID = EmployeeID;
-            this.AddressID = AddressID;
-            this.BrigadeID = BrigadeID;
+            this.Client = Client;
+            this.Employee = Employee;
+            this.Address = Address;
+            this.Brigade = Brigade;
             this.Date = Date;
             this.FinalPrice = FinalPrice;
             this.ApproximateTime = ApproximateTime;
             this.Comment = Comment;
+            this.Contract = new Contract( Employee, Client, DateTime.Now);
         }
 
         private static ApplicationContext db = Context.Db;
@@ -111,9 +111,6 @@ namespace CleaningDLL.Entity
         }
         public static int GetPriceByString(string p)
         {
-            //string r = p.Substring(p.Length - 2);
-            //p = p - r;
-            //int price = Convert.ToInt32(p.Substring(p.Length-2));
             int price = Convert.ToInt32(p.Trim(new Char[] { ' ', '₽' }));
             return price;
         }

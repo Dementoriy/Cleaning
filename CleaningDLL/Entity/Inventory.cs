@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleaningDLL.Entity
 {
@@ -28,12 +24,12 @@ namespace CleaningDLL.Entity
         {
 
         }
-        public Inventory(string InventoryName, string Description, int InventoryTypeID, string UseTime, 
+        public Inventory(string InventoryName, string Description, InventoryType InventoryType, string UseTime, 
             string LifeTime, DateTime DateOfReceiving)
         {
             this.InventoryName = InventoryName;
             this.Description = Description;
-            this.InventoryTypeID = InventoryTypeID;
+            this.InventoryType = InventoryType;
             this.UseTime = UseTime;
             this.LifeTime = LifeTime;
             this.DateOfReceiving = DateOfReceiving;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CleaningDLL.Entity
 {
@@ -20,9 +15,9 @@ namespace CleaningDLL.Entity
         {
 
         }
-        public DeliveryContent(int ConsumableID, int DeliveryContentAmount)
+        public DeliveryContent(Consumable Consumable, int DeliveryContentAmount)
         {
-            this.ConsumableID = ConsumableID;
+            this.Consumable = Consumable;
             this.DeliveryContentAmount = DeliveryContentAmount;
         }
     }

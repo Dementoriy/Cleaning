@@ -15,26 +15,12 @@ namespace WPFCleaning.Admin
 
             if (Client.ClientByTelefonIsNew(clientPage.Telefon.Text))
             {
-                client = new Client
-                {
-                    Surname = clientPage.Surname.Text,
-                    Name = clientPage.Name.Text,
-                    MiddleName = clientPage.MiddleName.Text,
-                    PhoneNumber = clientPage.Telefon.Text,
-                    IsOldClient = false
-                };
+                client = new Client(clientPage.Surname.Text, clientPage.Name.Text, clientPage.MiddleName.Text, clientPage.Telefon.Text, false);
             }
             else client = Client.GetClientByTelefon(clientPage.Telefon.Text);
 
-            var address = new Address
-            {
-                Street = clientPage.Street.Text,
-                HouseNumber = clientPage.HouseNumber.Text,
-                Building = clientPage.Building.Text,
-                Entrance = clientPage.Entrance.Text,
-                Apartment_Number = clientPage.Apartment_Number.Text
-            };
-
+            var address = new Address(clientPage.Street.Text, clientPage.HouseNumber.Text, clientPage.Building.Text, clientPage.Entrance.Text,
+                clientPage.Apartment_Number.Text);
 
             if (newApplication.IsCorrectData())
             {
@@ -44,41 +30,25 @@ namespace WPFCleaning.Admin
                 {
                     if (DateTime.Parse(NewDate) > DateTime.Now)
                     {
-                        order = new Order
-                        {
-                            Status = EnumStatus.GetDescription(EnumStatus.Status.wait),
-                            Client = client,
-                            Employee = emp,
-                            Address = address,
-                            Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(newApplication.BrigadeBox.Text)),
-                            Date = DateTime.Parse(NewDate),
-                            FinalPrice = Order.GetPriceByString(newApplication.PriceBox.Text),
-                            ApproximateTime = newApplication.approximateTime,
-                            Comment = newApplication.Comment.Text
-                        };
+                        order = new Order(EnumStatus.GetDescription(EnumStatus.Status.wait), client, emp, address,
+                            Brigade.GetBrigadeByID(Convert.ToInt32(newApplication.BrigadeBox.Text)), DateTime.Parse(NewDate),
+                            Order.GetPriceByString(newApplication.PriceBox.Text), newApplication.approximateTime,
+                            newApplication.Comment.Text);
+
                         Context.Db.Order.Add(order);
+
                         for (int i = 0; i < 7; i++)
                         {
                             if (newApplication.arrayService[1, i] != 0)
                             {
-                                var providedService = new ProvidedService
-                                {
-                                    Order = order,
-                                    Service = Service.GetServiceById(newApplication.arrayService[0, i]),
-                                    Amount = newApplication.arrayService[1, i],
-                                };
+                                var providedService = new ProvidedService(order, Service.GetServiceById(newApplication.arrayService[0, i]),
+                                    newApplication.arrayService[1, i]);
+
                                 Context.Db.ProvidedService.Add(providedService);
                             }
                         }
-                        var contract = new Contract
-                        {
-                            Client = client,
-                            Employee = emp,
-                            DateOfContract = DateTime.Now
-                        };
 
                         Context.Db.Address.Add(address);
-                        Context.Db.Contract.Add(contract);
                         Context.Db.SaveChanges();
                         MessageBox.Show("Успешно!");
                         newApplication.ClearNewApplication();
