@@ -12,13 +12,10 @@ namespace CleaningDLL.Entity
         [MaxLength(50)] public string Status { get; set; }
         [Required]
         public virtual Client Client { get; set; }
-        public int ClientID { get; set; }
         [Required]
         public virtual Employee Employee { get; set; }
-        public int EmployeeID { get; set; }
         [Required]
         public virtual Address Address { get; set; }
-        public int AddressID { get; set; }
         [Required]
         public virtual Brigade Brigade { get; set; }
         public int BrigadeID { get; set; }

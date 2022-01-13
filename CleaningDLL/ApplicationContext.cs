@@ -32,7 +32,6 @@ namespace CleaningDLL
         {
             Database.Migrate();
             Context.AddDb(this);
-            //Database.EnsureCreated();
         }
         public static DbContextOptions<ApplicationContext> GetDb()
         {

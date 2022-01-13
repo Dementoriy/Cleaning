@@ -8,13 +8,10 @@ namespace CleaningDLL.Entity
         public int ID { get; set; }
         [Required]
         public virtual Employee Employee { get; set; }
-        public int EmployeeID { get; set; }
         [Required]
         public virtual Provider Provider { get; set; }
-        public int ProviderID { get; set; }
         [Required]
         public virtual PurchaseRequisition PurchaseRequisition { get; set; }
-        public int PurchaseRequisitionID { get; set; }
         [Required]
         public DateTime DeliveryContractDate { get; set; }
 

@@ -7,10 +7,8 @@ namespace CleaningDLL.Entity
         public int ID { get; set; }
         [Required]
         public virtual Brigade Brigade { get; set; }
-        public int BrigadeID { get; set; }
         [Required]
         public virtual Inventory Inventory { get; set; }
-        public int InventoryID { get; set; }
 
         public BrigadeInventory()
         {
