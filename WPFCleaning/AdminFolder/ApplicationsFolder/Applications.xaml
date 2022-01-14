@@ -51,6 +51,8 @@
             <CheckBox x:Name="CheckFinish" Foreground ="White" Background="White" FontFamily="Arial Bold" Margin="15,0,0,0"  FontSize="18"
                       Checked="CheckFinish_Checked" Unchecked="CheckFinish_Unchecked" Cursor="Hand">Завершена</CheckBox>
         </Border>
+        <Button x:Name="Contract" Background="#3a388a" Grid.Column="4" Grid.Row="10" Margin="40 3 40 2" Height="40" BorderBrush="White"
+                FontSize="18" FontFamily="Arial Bold" Content="Договор" Click="Contract_Click"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="10" Grid.Column="0" Margin="20 0 0 0">
             <DatePicker x:Name="DatePickerSearch" SelectedDate="{x:Static sys:DateTime.Now}" materialDesign:HintAssist.Hint="Выберете дату"

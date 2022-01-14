@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Linq;
 using CleaningDLL.Entity;
+using WPFCleaning.AdminFolder.ApplicationsFolder;
 
 namespace WPFCleaning.Admin
 {
@@ -131,6 +132,18 @@ namespace WPFCleaning.Admin
             {
                 e.Handled = true; // отклоняем ввод
             }
+        }
+
+        private void Contract_Click(object sender, RoutedEventArgs e)
+        {
+            if (dataGridApplication.SelectedValue != null)
+            {
+                Order.OrderInfo selectedOrder = (Order.OrderInfo)dataGridApplication.SelectedValue;
+                Order order = Order.GetOrderById(selectedOrder.ID);
+                ContractWindow contractWindow = new ContractWindow(order);
+                contractWindow.Show();
+            }
+            else MessageBox.Show("Заявка не выбрана!");
         }
     }
 }

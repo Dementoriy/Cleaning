@@ -1,7 +1,7 @@
 ﻿
 namespace CleaningDLL.Entity
 {
-    public abstract class Human
+    public class Human
     {
         public string Surname { get; set; }
         public string Name { get; set; }
@@ -25,6 +25,18 @@ namespace CleaningDLL.Entity
             this.Name = Name;
             this.MiddleName = MiddleName;
             this.PhoneNumber = PhoneNumber;
+        }
+        public virtual string AddFIO()
+        {
+            string str = $"{Surname} {Name.Substring(0, 1)}.";
+            if (MiddleName != "") str += $"{MiddleName.Substring(0, 1)}.";
+            return str;
+        }
+        public virtual string GetFullName()
+        {
+            string str = $"{Surname} {Name}";
+            if (MiddleName != "") str += $" {MiddleName}";
+            return str;
         }
     }
 }

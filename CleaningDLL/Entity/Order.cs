@@ -25,6 +25,7 @@ namespace CleaningDLL.Entity
         public int ApproximateTime { get; set; }
         public string? Comment { get; set; }
         public Contract? Contract { get; set; }
+        public int ContractID { get; set; }
 
         public Order()
         {

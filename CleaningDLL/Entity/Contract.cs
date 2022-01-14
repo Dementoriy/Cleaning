@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace CleaningDLL.Entity
 {
@@ -12,6 +13,7 @@ namespace CleaningDLL.Entity
         public virtual Client Client { get; set; }
         [Required]
         public DateTime DateOfContract { get; set; }
+        private static ApplicationContext db = Context.Db;
 
         public Contract()
         {
@@ -22,6 +24,10 @@ namespace CleaningDLL.Entity
             this.Employee = Employee;
             this.Client = Client;
             this.DateOfContract = DateOfContract;
+        }
+        public static Contract GetContractById(int id)
+        {
+            return db.Contract.Where(c => c.ID == id).FirstOrDefault();
         }
     }
 }

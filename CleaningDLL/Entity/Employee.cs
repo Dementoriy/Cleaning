@@ -21,6 +21,9 @@ namespace CleaningDLL.Entity
         [MaxLength(50)] public string? Login { get; set; }
         [MaxLength(64)] [MinLength(64)] public string? Password { get; set; }
 
+        private static ApplicationContext db = Context.Db;
+
+
         public Employee()
         {
 
@@ -35,12 +38,15 @@ namespace CleaningDLL.Entity
             this.Login = Login;
             this.Password = Password;
         }
-
-        public String AddFIO()
+        public override string GetFullName()
         {
-            string str = $"{Surname} {Name.Substring(0, 1)}.";
-            if (MiddleName != null) str += $"{MiddleName.Substring(0, 1)}.";
-            return str;
+            if(BrigadeID != null )
+            {
+                return "Исполнитель: " + base.GetFullName();
+
+            }
+            return "Заявку принял: " + base.GetFullName();
+
         }
         public class EmployeeInfo
         {
@@ -49,7 +55,6 @@ namespace CleaningDLL.Entity
             public string MiddleName { get; set; }
         }
 
-        private static ApplicationContext db = Context.Db;
 
         public static Employee GetBrigadirByBrigada(int id)
         {
@@ -75,7 +80,7 @@ namespace CleaningDLL.Entity
                         ID = e.ID,
                         Cleaner = e.AddFIO(),
                         Positions = p.NamePosition,
-                        WorkExperience = e.EmploymentDate.ToString("d"), //(DateTime.Today - e.Employment_Date).ToString("d"),
+                        WorkExperience = e.EmploymentDate.ToString("d"), 
                         Brigade = e.Brigade.ID,
                         Telefone = e.PhoneNumber,
                     }).ToList();

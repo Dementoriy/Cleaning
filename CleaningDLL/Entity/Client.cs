@@ -9,17 +9,22 @@ namespace CleaningDLL.Entity
         public int ID { get; set; }
         [Required]
         public bool IsOldClient { get; set; }
+        private static ApplicationContext db = Context.Db;
 
         public Client()
         {
 
         }
-        public Client(string Surname, string Name, string MiddleName, string PhoneNumber, bool IsOldClient) : base(Surname, Name, MiddleName, PhoneNumber)
+        public Client(string Surname, string Name, string MiddleName, string PhoneNumber, bool IsOldClient)
+            : base(Surname, Name, MiddleName, PhoneNumber)
         {
             this.IsOldClient = IsOldClient;
         }
 
-        private static ApplicationContext db = Context.Db;
+        public override string GetFullName()
+        {
+            return "Клиент: " + base.GetFullName();
+        }
 
         public static void ClientIsOld(int id)
         {
@@ -34,12 +39,8 @@ namespace CleaningDLL.Entity
         {
             return !db.Client.Where(e => e.PhoneNumber == telefon).Any();
         }
-        public string AddFIO()
-        {
-            string str = $"{Surname} {Name.Substring(0, 1)}.";
-            if (MiddleName != "") str += $"{MiddleName.Substring(0, 1)}.";
-            return str;
-        }
+        
+        
 
         public static List<ClientInfo> GetClientInfo(string Telefon) //Клиент не связан с адресом. В листе хранится клиент с разными адресами
         {
