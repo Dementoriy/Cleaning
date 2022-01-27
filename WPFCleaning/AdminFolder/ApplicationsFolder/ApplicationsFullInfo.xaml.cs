@@ -6,11 +6,12 @@ using System.Windows.Input;
 using CleaningDLL.Entity;
 using System.Linq;
 using CleaningDLL;
+using WPFCleaning.AdminFolder.ApplicationsFolder;
 
 namespace WPFCleaning.Admin
 {
     /// <summary>
-    /// Логика взаимодействия для ApplicationsFullInfo.xaml
+    /// Класс реализующий отображение полной информации о заявке
     /// </summary>
     public partial class ApplicationsFullInfo : Window
     {
@@ -74,61 +75,7 @@ namespace WPFCleaning.Admin
 
             Comment.Text = order.Comment;
 
-            List<ProvidedService> pvs = ProvidedService.GetPSByOrder(order.ID);
-
-            foreach (var p in pvs)
-            {
-                if (p.ServiceID == 1)
-                {
-                    Square.Text = p.Amount.ToString();
-                    CheckExpressClean.IsChecked = true;
-                }
-                if (p.ServiceID == 2)
-                {
-                    Square.Text = p.Amount.ToString();
-                    CheckGeneralClean.IsChecked = true;
-                }
-                if (p.ServiceID == 3)
-                {
-                    Square.Text = p.Amount.ToString();
-                    CheckBuildingClean.IsChecked = true;                 
-                }
-                if (p.ServiceID == 4)
-                {
-                    Square.Text = p.Amount.ToString();
-                    CheckOfficeClean.IsChecked = true;
-                }
-                if (p.ServiceID == 5)
-                {
-                    WindowClean.IsChecked = true;
-                    KolvoWindow.Text = pvs.Where(a => a.ServiceID == 5).FirstOrDefault().Amount.ToString();
-                }
-                if (p.ServiceID == 6)
-                {
-                    KolvoDoor.Text = pvs.Where(a => a.ServiceID == 6).FirstOrDefault().Amount.ToString();
-                    WindowClean.IsChecked = true;
-                }
-                if (p.ServiceID == 7)
-                {
-                    ChemistryClean.IsChecked = true;
-                    KolvoSofa.Text = pvs.Where(a => a.ServiceID == 7).FirstOrDefault().Amount.ToString();
-                }
-                if (p.ServiceID == 8)
-                {
-                    ChemistryClean.IsChecked = true;
-                    KolvoArmcheir.Text = pvs.Where(a => a.ServiceID == 8).FirstOrDefault().Amount.ToString();
-                }
-                if (p.ServiceID == 9)
-                {
-                    ChemistryClean.IsChecked = true;
-                    KolvoCarpet.Text = pvs.Where(a => a.ServiceID == 9).FirstOrDefault().Amount.ToString();
-                }
-                if (p.ServiceID == 10)
-                {
-                    Dezinfection.IsChecked = true;
-                    KolvoDezinfection.Text = pvs.Where(a => a.ServiceID == 10).FirstOrDefault().Amount.ToString();
-                }
-            }
+            CheckService.GetCheckedService(order.ID, this);
         }
 
         private void LockSelection(object sender, EventArgs e)

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 using CleaningDLL.Entity;
 using CleaningDLL;
-
+//
 namespace WPFCleaning.Admin
 {
     public static class NewOrder
@@ -53,6 +51,7 @@ namespace WPFCleaning.Admin
                         MessageBox.Show("Успешно!");
                         newApplication.ClearNewApplication();
                         clientPage.ClearClientInfo();
+                        clientPage.ClearClientTelefone();
                     }
                     else MessageBox.Show("Что-то пошло не так :(");
                 }

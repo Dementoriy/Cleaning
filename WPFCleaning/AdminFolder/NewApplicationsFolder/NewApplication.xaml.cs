@@ -3,9 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CleaningDLL.Entity;
-using CleaningDLL;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace WPFCleaning.Admin
 {

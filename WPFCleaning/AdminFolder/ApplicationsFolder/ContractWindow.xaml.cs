@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using CleaningDLL.Entity;
-using CleaningDLL;
 using System.Collections.Generic;
 using System;
 

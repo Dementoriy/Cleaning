@@ -49,13 +49,16 @@ namespace WPFCleaning.Admin
             else
             {
                 System.Windows.MessageBox.Show("Клиента нет в БД");
+                ClearClientInfo();
             }
                 
         }
-
-        public void ClearClientInfo()
+        public void ClearClientTelefone()
         {
             Telefon.Text = "";
+        }
+        public void ClearClientInfo()
+        {
             Surname.Text = "";
             Name.Text = "";
             MiddleName.Text = "";
