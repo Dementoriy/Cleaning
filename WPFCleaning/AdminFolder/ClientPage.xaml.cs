@@ -33,11 +33,12 @@ namespace WPFCleaning.Admin
                 Surname.Text = client.Surname;
                 Name.Text = client.Name;
                 MiddleName.Text = client.MiddleName;
+                CityDistrict.Text = client.CityDistrict;
+                Settlement.Text = client.Settlement;
                 Street.Text = client.Street;
                 HouseNumber.Text = client.HouseNumber;
-                Building.Text = client.Building;
-                Entrance.Text = client.Entrance;
-                Apartment_Number.Text = client.Apartment_Number;
+                Block.Text = client.Block;
+                ApartmentNumber.Text = client.ApartmentNumber;
                 if (Order.IsOldClienCheck(client.ID))
                 {
                     CheckOldClient.IsChecked = true;
@@ -62,11 +63,12 @@ namespace WPFCleaning.Admin
             Surname.Text = "";
             Name.Text = "";
             MiddleName.Text = "";
+            CityDistrict.Text = "";
+            Settlement.Text = "";
             Street.Text = "";
             HouseNumber.Text = "";
-            Building.Text = "";
-            Entrance.Text = "";
-            Apartment_Number.Text = "";
+            Block.Text = "";
+            ApartmentNumber.Text = "";
             CheckOldClient.IsChecked = false;
         }
 

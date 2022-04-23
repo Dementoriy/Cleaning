@@ -10,6 +10,7 @@ namespace CleaningDLL
         public DbSet<Order> Order { get; set; }
         public DbSet<Brigade> Brigade { get; set; }
         public DbSet<Client> Client { get; set; }
+        public DbSet<ClientAddresses> ClientAddresses { get; set; }
         public DbSet<Consumable> Consumable { get; set; }
         public DbSet<ConsumptionRate> ConsumptionRate { get; set; }
         public DbSet<Contract> Contract { get; set; }

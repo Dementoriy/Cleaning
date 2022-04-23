@@ -7,13 +7,13 @@ namespace CleaningDLL.Entity
     {
         public int ID { get; set; }
         [Required]
-        public virtual Provider Provider { get; set; }
+        public Provider Provider { get; set; }
         [Required]
         public DateTime DeliveryDate { get; set; }
         [Required]
         public decimal DeliveryCost { get; set; }
         [Required]
-        public virtual DeliveryContent DeliveryContent { get; set; }
+        public DeliveryContent DeliveryContent { get; set; }
 
         public Delivery()
         {

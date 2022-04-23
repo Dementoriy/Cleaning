@@ -6,7 +6,7 @@ namespace CleaningDLL.Entity
     {
         public int ID { get; set; }
         [Required]
-        public virtual Consumable Consumable { get; set; }
+        public Consumable Consumable { get; set; }
         [Required]
         public int DeliveryContentAmount { get; set; }
 

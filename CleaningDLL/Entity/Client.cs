@@ -9,16 +9,22 @@ namespace CleaningDLL.Entity
         public int ID { get; set; }
         [Required]
         public bool IsOldClient { get; set; }
+        [MaxLength(50)] public string? Login { get; set; }
+        [MaxLength(64)][MinLength(64)] public string? Password { get; set; }
+        public string? Email { get; set; }
         private static ApplicationContext db = Context.Db;
 
         public Client()
         {
 
         }
-        public Client(string Surname, string Name, string MiddleName, string PhoneNumber, bool IsOldClient)
+        public Client(string Surname, string Name, string MiddleName, string PhoneNumber, bool IsOldClient, string? Login, string? Password, string? Email)
             : base(Surname, Name, MiddleName, PhoneNumber)
         {
             this.IsOldClient = IsOldClient;
+            this.Login = Login;
+            this.Password = Password;
+            this.Email = Email;
         }
 
         public override string GetFullName()
@@ -54,11 +60,12 @@ namespace CleaningDLL.Entity
                         Surname = c.Surname,
                         Name = c.Name,
                         MiddleName = c.MiddleName,
+                        //CityDistrict = a.CityDistrict,
+                        Settlement = a.Settlement,
                         Street = a.Street,
                         HouseNumber = a.HouseNumber,
-                        Building = a.Building,
-                        Entrance = a.Entrance,
-                        Apartment_Number = a.Apartment_Number,
+                        Block = a.Block,
+                        ApartmentNumber = a.ApartmentNumber,
                         IsOldClient = c.IsOldClient
                     }).ToList();
         }
@@ -68,11 +75,12 @@ namespace CleaningDLL.Entity
             public string Surname { get; set; }
             public string Name { get; set; }
             public string MiddleName { get; set; }
-            public string Street { get; set; }
             public string HouseNumber { get; set; }
-            public string Building { get; set; }
-            public string Entrance { get; set; }
-            public string Apartment_Number { get; set; }
+            public string CityDistrict { get; set; }
+            public string Settlement { get; set; }
+            public string Street { get; set; }
+            public string Block { get; set; }
+            public string ApartmentNumber { get; set; }
             public bool IsOldClient { get; set; }
         }
         

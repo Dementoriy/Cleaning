@@ -8,11 +8,11 @@ namespace CleaningDLL.Entity
         [Required]
         [MaxLength(50)] public string Status { get; set; }
         [Required]
-        public virtual Employee Employee { get; set; }
+        public Employee Employee { get; set; }
         [Required]
-        public virtual Provider Provider { get; set; }
+        public Provider Provider { get; set; }
         [Required]
-        public virtual RequisitionContent RequisitionContent { get; set; }
+        public RequisitionContent RequisitionContent { get; set; }
         public int RequisitionContentID { get; set; }
 
         public PurchaseRequisition()

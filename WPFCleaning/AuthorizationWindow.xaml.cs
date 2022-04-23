@@ -17,7 +17,7 @@ namespace WPFCleaning
         public AuthorizationWindow()
         {
             new ApplicationContext(ApplicationContext.GetDb());
-            Order.CheckOrder();
+            // Order.CheckOrder();
             InitializeComponent();
         }
         private void SignInButton_Click(object sender, RoutedEventArgs e)

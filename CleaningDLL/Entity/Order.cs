@@ -11,13 +11,13 @@ namespace CleaningDLL.Entity
         [Required]
         [MaxLength(50)] public string Status { get; set; }
         [Required]
-        public virtual Client Client { get; set; }
+        public Client Client { get; set; }
         [Required]
-        public virtual Employee Employee { get; set; }
+        public Employee Employee { get; set; }
         [Required]
-        public virtual Address Address { get; set; }
+        public Address Address { get; set; }
         [Required]
-        public virtual Brigade Brigade { get; set; }
+        public Brigade Brigade { get; set; }
         public int BrigadeID { get; set; }
         [Required]
         public DateTime Date { get; set; }
@@ -26,13 +26,14 @@ namespace CleaningDLL.Entity
         public string? Comment { get; set; }
         public Contract? Contract { get; set; }
         public int ContractID { get; set; }
+        public int? Rating { get; set; }
 
         public Order()
         {
             
         }
         public Order(string Status, Client Client, Employee Employee, Address Address, Brigade Brigade, DateTime Date,
-            int FinalPrice, int ApproximateTime, string? Comment)
+            int FinalPrice, int ApproximateTime, string? Comment, int? Rating)
         {
             this.Status = Status;
             this.Client = Client;
@@ -44,20 +45,21 @@ namespace CleaningDLL.Entity
             this.ApproximateTime = ApproximateTime;
             this.Comment = Comment;
             this.Contract = new Contract( Employee, Client, DateTime.Now);
+            this.Rating = Rating;
         }
 
         private static ApplicationContext db = Context.Db;
 
-        public static void CheckOrder()
-        {
-            List<Order> orders = db.Order.Where(o => o.Status == EnumStatus.GetDescription(EnumStatus.Status.wait) && o.Date < DateTime.Today).ToList();
-            foreach (var d in orders)
-            {
-                d.Status = EnumStatus.GetDescription(EnumStatus.Status.canceled);
-                
-            }
-            db.SaveChanges();
-        }
+        //отмена заявки
+        //public static void CheckOrder()
+        //{
+        //    List<Order> orders = db.Order.Where(o => o.Status == EnumStatus.GetDescription(EnumStatus.Status.scheduledDeparture) && o.Date < DateTime.Today).ToList();
+        //    foreach (var d in orders)
+        //    {
+        //        d.Status = EnumStatus.GetDescription(EnumStatus.Status.canceled);
+        //    }
+        //    db.SaveChanges();
+        //}
         public static bool IsOldClienCheck(int clientId)
         {
             List<Order> ordersByClientID = db.Order.Where(o => o.Client.ID == clientId && o.Status == EnumStatus.GetDescription(EnumStatus.Status.сompleted)).ToList();

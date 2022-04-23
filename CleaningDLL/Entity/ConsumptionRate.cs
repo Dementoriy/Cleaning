@@ -8,9 +8,9 @@ namespace CleaningDLL.Entity
         [Required]
         [MaxLength(150)] public string Consumption { get; set; }
         [Required]
-        public virtual Consumable Consumable { get; set; }
+        public Consumable Consumable { get; set; }
         [Required]
-        public virtual ReferenceUnitsOfMeasurement ReferenceUnitsOfMeasurement { get; set; }
+        public ReferenceUnitsOfMeasurement ReferenceUnitsOfMeasurement { get; set; }
         public ConsumptionRate()
         {
 

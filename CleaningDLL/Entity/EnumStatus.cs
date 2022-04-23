@@ -9,10 +9,12 @@ namespace CleaningDLL.Entity
     {
         public enum Status
         {
-            [Description("Ожидает")] wait = 1,
+            [Description("Назначен выезд")] scheduledDeparture = 1,
             [Description("В процессе")] inProcessing = 2,
             [Description("Завершена")] сompleted = 3,
-            [Description("Отменена")] canceled = 4
+            [Description("Отменена")] canceled = 4,
+            [Description("Cформирована")] formed = 5,
+            [Description("Оплачена")] paid = 6
         }
         public static List<string> GetStatusesForAdmin(string st)
         {

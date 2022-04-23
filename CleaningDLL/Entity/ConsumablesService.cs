@@ -6,9 +6,9 @@ namespace CleaningDLL.Entity
     {
         public int ID { get; set; }
         [Required]
-        public virtual Service Service { get; set; }
+        public Service Service { get; set; }
         [Required]
-        public virtual ConsumptionRate ConsumptionRate { get; set; }
+        public ConsumptionRate ConsumptionRate { get; set; }
 
         public ConsumablesService()
         {

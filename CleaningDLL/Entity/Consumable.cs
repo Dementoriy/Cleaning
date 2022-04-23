@@ -12,7 +12,7 @@ namespace CleaningDLL.Entity
         [Required]
         public decimal CurrentPrice { get; set; }
         [Required]
-        public virtual ReferenceUnitsOfMeasurement ReferenceUnitsOfMeasurement { get; set; }
+        public ReferenceUnitsOfMeasurement ReferenceUnitsOfMeasurement { get; set; }
         public int ReferenceUnitsOfMeasurementID { get; set; }
         [Required]
         public int Amount { get; set; }

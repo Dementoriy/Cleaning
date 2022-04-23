@@ -60,21 +60,25 @@
                            VerticalAlignment="Center"/>
             </Border>
 
-            <TextBox x:Name="Street" materialDesign:HintAssist.Hint="Улица" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40"
-                     FontFamily="Arial bold" FontSize="16" Margin="0 0 0 0" IsReadOnly="True" Cursor="No"/>
-            <TextBox x:Name="HouseNumber" materialDesign:HintAssist.Hint="Номер дома" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40"
-                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True" Cursor="No"/>
-            <TextBox x:Name="Building" materialDesign:HintAssist.Hint="Корпус" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40"
-                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True" Cursor="No"/>
-            <TextBox x:Name="Entrance" materialDesign:HintAssist.Hint="Подъезд" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40"
-                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True" Cursor="No"/>
-            <TextBox x:Name="Apartment_Number" materialDesign:HintAssist.Hint="Квартира" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40"
-                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0" IsReadOnly="True" Cursor="No"/>
+            <TextBox x:Name="CityDistrict" materialDesign:HintAssist.Hint="Район города" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" 
+                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
+            <TextBox x:Name="Settlement" materialDesign:HintAssist.Hint="Населенный пункт" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" 
+                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
+            <TextBox x:Name="Street" materialDesign:HintAssist.Hint="Улица" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" 
+                     FontFamily="Arial bold" FontSize="16" Margin="0 0 0 0"/>
+
+            <TextBox x:Name="HouseNumber" materialDesign:HintAssist.Hint="Номер дома" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" 
+                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
+            <TextBox x:Name="Block" materialDesign:HintAssist.Hint="Корпус/строение" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" 
+                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
+            <TextBox x:Name="ApartmentNumber" materialDesign:HintAssist.Hint="Квартира" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" 
+                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
             <Border BorderBrush="#3a388a" BorderThickness="3" CornerRadius="3" Margin="0 50 0 0">
                 <TextBox x:Name="Comment" AcceptsReturn="True" Height="75" Width="290" materialDesign:HintAssist.Hint="Комментарий:"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Arial Bold" FontSize="22" HorizontalAlignment="Left"

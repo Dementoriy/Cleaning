@@ -11,10 +11,10 @@ namespace CleaningDLL.Entity
         [Required]
         [MaxLength(10)] public string PassportData { get; set; }
         [Required]
-        public virtual Position Position { get; set; }
+        public Position Position { get; set; }
         [Required]
         public int PositionID { get; set; }
-        public virtual Brigade? Brigade { get; set; }
+        public Brigade? Brigade { get; set; }
         public int? BrigadeID { get; set; }
         [Required]
         public DateTime EmploymentDate { get; set; }

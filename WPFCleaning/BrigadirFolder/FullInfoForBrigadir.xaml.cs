@@ -36,11 +36,12 @@ namespace WPFCleaning.Brigadir
 
             if (order.Client.IsOldClient) CheckOldClient.IsChecked = true;
 
+            //CityDistrict.Text = order.Address.CityDistrict;
+            Settlement.Text = order.Address.Settlement;
             Street.Text = order.Address.Street;
             HouseNumber.Text = order.Address.HouseNumber;
-            Building.Text = order.Address.Building;
-            Entrance.Text = order.Address.Entrance;
-            Apartment_Number.Text = order.Address.Apartment_Number;
+            Block.Text = order.Address.Block;
+            ApartmentNumber.Text = order.Address.ApartmentNumber;
 
             PriceBox.Text = Order.GetPriceByInt(order.FinalPrice);
             ApproximateTime.Text = Order.GetTimeByInt(order.ApproximateTime);

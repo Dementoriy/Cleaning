@@ -12,7 +12,7 @@ namespace CleaningDLL.Entity
         [MaxLength(200)] public string Description { get; set; }
         [Required]
         public decimal Price { get; set; }
-        public virtual InventoryType? InventoryType { get; set; }
+        public InventoryType? InventoryType { get; set; }
         public int InventoryTypeID { get; set; }
         [Required]
         public int Time { get; set; }

@@ -1,49 +1,70 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace CleaningDLL.Entity
 {
     public class Address //Адрес
     {
         public int ID { get; set; }
+        //public string? CityDistrict { get; set; }
+        public string? Settlement { get; set; }
         [Required]
         [MaxLength(100)] public string Street { get; set; }
+
         [Required]
         [MaxLength(10)] public string HouseNumber { get; set; }
-        [MaxLength(10)] public string? Building { get; set; }
-        [MaxLength(10)] public string? Entrance { get; set; }
-        [MaxLength(10)] public string? Apartment_Number { get; set; }
+        [MaxLength(10)] public string? Block { get; set; }
+        [MaxLength(10)] public string? ApartmentNumber { get; set; }
+        private static ApplicationContext db = Context.Db;
         public Address()
         {
 
         }
-        public Address(string Street, string HouseNumber, string? Building, string? Entrance, string? Apartment_Number)
+        public Address(/*string? CityDistrict,*/ string? Settlement, string Street, string HouseNumber, string? Block, string? ApartmentNumber)
         {
+            //this.CityDistrict = CityDistrict;
+            this.Settlement = Settlement;
             this.Street = Street;
             this.HouseNumber = HouseNumber;
-            this.Building = Building;
-            this.Entrance = Entrance;
-            this.Apartment_Number = Apartment_Number;
+            this.Block = Block;
+            this.ApartmentNumber = ApartmentNumber;
         }
         public string AddAddress()
         {
-            string str = $"ул.{Street}, д.{HouseNumber}. ";
+            string str = "";
+            //if (CityDistrict != "")
+            //{
+            //    str += CityDistrict + ", ";
+            //}
+            if (Settlement != "")
+            {
+                str += Settlement + ", ";
+            }
+            str += $"ул.{Street}, д.{HouseNumber}. ";
             int x = str.Length - 2;
-            if (Building != "")
+            if (Block != "")
             {
                 str = str.Remove(x);
-                str += $", к.{Building}, ";
+                str += $", к.{Block}, ";
             }
-            if (Entrance != "")
+            if (ApartmentNumber != "")
             {
                 str = str.Remove(x);
-                str += $", п.{Entrance}.";
-            }
-            if (Apartment_Number != "")
-            {
-                str = str.Remove(x);
-                str += $", кв.{Apartment_Number}.";
+                str += $", кв.{ApartmentNumber}.";
             }
             return str;
+        }
+        public static Address GetAddress(/*string cityDistrict,*/ string settlement, string street, 
+            string houseNumber, string block, string apartmentNumber)
+        {
+            return db.Address.Where(e => /*e.CityDistrict == cityDistrict &&*/ e.Settlement == settlement && e.Street == street
+            && e.HouseNumber == houseNumber && e.Block == block && e.ApartmentNumber == apartmentNumber).ToList()[0];
+        }
+        public static bool CheckAddress(/*string cityDistrict,*/ string settlement, string street,
+            string houseNumber, string block, string apartmentNumber)
+        {
+            return !db.Address.Where(e => /*e.CityDistrict == cityDistrict &&*/ e.Settlement == settlement && e.Street == street
+            && e.HouseNumber == houseNumber && e.Block == block && e.ApartmentNumber == apartmentNumber).Any();
         }
     }
 }

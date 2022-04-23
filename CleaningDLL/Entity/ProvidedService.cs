@@ -8,10 +8,10 @@ namespace CleaningDLL.Entity
     {
         public int ID { get; set; }
         [Required]
-        public virtual Order Order { get; set; }
+        public Order Order { get; set; }
         public int OrderID { get; set; }
         [Required]
-        public virtual Service Service { get; set; }
+        public Service Service { get; set; }
         public int ServiceID { get; set; }
         [Required]
         public int Amount { get; set; }

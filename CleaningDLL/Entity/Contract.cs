@@ -8,9 +8,9 @@ namespace CleaningDLL.Entity
     {
         public int ID { get; set; }
         [Required]
-        public virtual Employee Employee { get; set; }
+        public Employee Employee { get; set; }
         [Required]
-        public virtual Client Client { get; set; }
+        public Client Client { get; set; }
         [Required]
         public DateTime DateOfContract { get; set; }
         private static ApplicationContext db = Context.Db;
