@@ -60,7 +60,7 @@ namespace CleaningDLL.Entity
                         Surname = c.Surname,
                         Name = c.Name,
                         MiddleName = c.MiddleName,
-                        //CityDistrict = a.CityDistrict,
+                        CityDistrict = a.CityDistrict,
                         Settlement = a.Settlement,
                         Street = a.Street,
                         HouseNumber = a.HouseNumber,

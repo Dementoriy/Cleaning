@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CleaningDLL.Entity;
+using System.Linq;
 
 namespace WPFCleaning.Admin
 {
@@ -24,6 +26,8 @@ namespace WPFCleaning.Admin
             DezinfectionBox.IsEnabled = false;
             PriceBox.Text = "0 ₽";
             ApproximateTime.Text = "0ч. 0мин.";
+            GetRoomType();
+            RoomTypeBox.SelectedItem = "Квартира";
         }
 
         public int idService;
@@ -64,7 +68,19 @@ namespace WPFCleaning.Admin
             KolvoDezinfection.Text = "0";
             OrderPrice.Calculate(this, _clientPage);
         }
-
+        public void GetRoomType()
+        {
+            var roomType = RoomType.GetRoomType();
+            RoomTypeBox.ItemsSource = roomType;
+        }
+        private void RoomTypeBox_LostMouseCapture(object sender, MouseEventArgs e)
+        {
+            PriceBox.Text = "";
+            finalPrice = 0;
+            //var selectedItems = (e.AddedItems as IList<ComboBoxItem>);
+            var selectedItems = RoomTypeBox.Text;
+            OrderPrice.Calculate(this, _clientPage, selectedItems);
+        }
         private void CheckExpressClean_Checked(object sender, RoutedEventArgs e)
         {
             int x = 0;
@@ -72,7 +88,7 @@ namespace WPFCleaning.Admin
             {
                 CheckGeneralClean.IsChecked = false;
                 CheckBuildingClean.IsChecked = false;
-                CheckOfficeClean.IsChecked = false;
+                CheckComplexСleaningClean.IsChecked = false;
                 idService = Service.GetIdService(CheckExpressClean.Content.ToString());
                 OrderPrice.Calculate(this, _clientPage);
             }
@@ -98,7 +114,7 @@ namespace WPFCleaning.Admin
             {
                 CheckExpressClean.IsChecked = false;
                 CheckBuildingClean.IsChecked = false;
-                CheckOfficeClean.IsChecked = false;
+                CheckComplexСleaningClean.IsChecked = false;
                 idService = Service.GetIdService(CheckGeneralClean.Content.ToString());
                 OrderPrice.Calculate(this, _clientPage);
             }
@@ -124,7 +140,7 @@ namespace WPFCleaning.Admin
             {
                 CheckExpressClean.IsChecked = false;
                 CheckGeneralClean.IsChecked = false;
-                CheckOfficeClean.IsChecked = false;
+                CheckComplexСleaningClean.IsChecked = false;
                 idService = Service.GetIdService(CheckBuildingClean.Content.ToString());
                 OrderPrice.Calculate(this, _clientPage);
             }
@@ -143,7 +159,7 @@ namespace WPFCleaning.Admin
                 }
             }
         }
-        private void CheckOfficeClean_Checked(object sender, RoutedEventArgs e)
+        private void CheckComplexСleaningClean_Checked(object sender, RoutedEventArgs e)
         {
             int x = 0;
             if (TextBoxSquare.Text != "")
@@ -151,19 +167,19 @@ namespace WPFCleaning.Admin
                 CheckExpressClean.IsChecked = false;
                 CheckGeneralClean.IsChecked = false;
                 CheckBuildingClean.IsChecked = false;
-                idService = Service.GetIdService(CheckOfficeClean.Content.ToString());
+                idService = Service.GetIdService(CheckComplexСleaningClean.Content.ToString());
                 OrderPrice.Calculate(this, _clientPage);
             }
             else
             {
-                CheckOfficeClean.IsChecked = false;
+                CheckComplexСleaningClean.IsChecked = false;
                 MessageBox.Show("Введите площадь!");
             }
             if (int.TryParse(TextBoxSquare.Text, out x))
             {
                 if (x > 200)
                 {
-                    CheckOfficeClean.IsChecked = false;
+                    CheckComplexСleaningClean.IsChecked = false;
                     MessageBox.Show("Площадь больше 200!");
                     TextBoxSquare.Text = "";
                 }
@@ -179,7 +195,7 @@ namespace WPFCleaning.Admin
             CheckExpressClean.IsChecked = false;
             CheckGeneralClean.IsChecked = false;
             CheckBuildingClean.IsChecked = false;
-            CheckOfficeClean.IsChecked = false;
+            CheckComplexСleaningClean.IsChecked = false;
             WindowClean.IsChecked = false;
             ChemistryClean.IsChecked = false;
             Dezinfection.IsChecked = false;
@@ -190,6 +206,7 @@ namespace WPFCleaning.Admin
             PriceBox.Text = "";
             ApproximateTime.Text = "";
             Comment.Text = "";
+            RoomTypeBox.Text = "";
         }
         public bool IsCorrectData()
         {

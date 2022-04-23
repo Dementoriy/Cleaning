@@ -22,44 +22,51 @@ namespace WPFCleaning.Admin
             }
             else client = Client.GetClientByTelefon(clientPage.Telefon.Text);
 
-            string enteredAddress = "Киров, " + clientPage.CityDistrict.Text + ", " + clientPage.Settlement.Text + ", " + clientPage.Street.Text + ", "
-                    + clientPage.HouseNumber.Text + ", " + clientPage.Block.Text + ", " + clientPage.ApartmentNumber.Text;
+            string enteredAddress = "Кировская область, Киров, " + ", " + clientPage.CityDistrict.Text + clientPage.Settlement.Text + ", " 
+                + clientPage.Street.Text + " (" + clientPage.CityDistrict.Text + "), " + clientPage.HouseNumber.Text + ", " + clientPage.Block.Text + ", " + clientPage.ApartmentNumber.Text;
 
             var token = "24446a45461d9e48f334ed4d55e7ebdd8e66f39f";
             var api = new SuggestClientAsync(token);
             var result = await api.SuggestAddress(enteredAddress);
 
-            //Проверки!
-            List<string?> addressList = new List<string?>() {/*result.suggestions[0].data.city_district.ToString(),*/
-                result.suggestions[0].data.settlement.ToString(), result.suggestions[0].data.street.ToString(),
-                result.suggestions[0].data.house.ToString(), result.suggestions[0].data.block.ToString(),
-                result.suggestions[0].data.flat.ToString()};
-
-            for(int i = 0; i < addressList.Count; i++)
+            if (result.suggestions.Count == 0)
             {
-                if (addressList[i] == null)
-                {
-                    addressList[i] = "";
-                }
+                MessageBox.Show("Адрес не найден");
+                return;
             }
 
-            //var address = new CleaningDLL.Entity.Address(addressList[0], addressList[1],
-            //    addressList[2], addressList[3], addressList[4], addressList[5]);
+            List<string?> addressList = new List<string?>() {result.suggestions[0].data.city_district,
+                result.suggestions[0].data.settlement, result.suggestions[0].data.street,
+                result.suggestions[0].data.house, result.suggestions[0].data.block,
+                result.suggestions[0].data.flat};
+
+            //for(int i = 0; i < addressList.Count; i++)
+            //{
+            //    if (addressList[i] == null)
+            //    {
+            //        addressList[i] = "";
+            //    }
+            //}
 
             CleaningDLL.Entity.Address address;
 
             if (CleaningDLL.Entity.Address.CheckAddress(addressList[0], addressList[1],
-                addressList[2], addressList[3], addressList[4]/*, addressList[5]*/))
+                addressList[2], addressList[3], addressList[4], addressList[5]))
             {
                 address = new CleaningDLL.Entity.Address(addressList[0], addressList[1], addressList[2], 
-                    addressList[3], addressList[4]/*, addressList[5]*/);
+                    addressList[3], addressList[4], addressList[5]);
+                Context.Db.Address.Add(address);
             }
             else address = CleaningDLL.Entity.Address.GetAddress(addressList[0], addressList[1], addressList[2],
-                    addressList[3], addressList[4]/*, addressList[5]*/);
+                    addressList[3], addressList[4], addressList[5]);
 
-
-            var ClientAddresses = new ClientAddresses(address, client, "Дом");
-            Context.Db.ClientAddresses.Add(ClientAddresses);
+            ClientAddresses clientAddresses;
+            if (ClientAddresses.CheckClientAddresses(address, client))
+            {
+                clientAddresses = new ClientAddresses(address, client, "Дом");
+                Context.Db.ClientAddresses.Add(clientAddresses);
+            }
+            else clientAddresses = ClientAddresses.GetClientAddresses(address, client);
 
             if (newApplication.IsCorrectData())
             {
@@ -85,7 +92,7 @@ namespace WPFCleaning.Admin
                         }
                     }
 
-                    Context.Db.Address.Add(address);
+
                     Context.Db.SaveChanges();
                     MessageBox.Show("Успешно!");
                     newApplication.ClearNewApplication();

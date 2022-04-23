@@ -36,7 +36,7 @@ namespace WPFCleaning.Brigadir
 
             if (order.Client.IsOldClient) CheckOldClient.IsChecked = true;
 
-            //CityDistrict.Text = order.Address.CityDistrict;
+            CityDistrict.Text = order.Address.CityDistrict;
             Settlement.Text = order.Address.Settlement;
             Street.Text = order.Address.Street;
             HouseNumber.Text = order.Address.HouseNumber;

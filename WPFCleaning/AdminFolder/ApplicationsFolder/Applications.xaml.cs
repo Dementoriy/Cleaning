@@ -76,7 +76,8 @@ namespace WPFCleaning.Admin
             }
             else if(CheckWait.IsChecked == true)
             {
-                listSort = listSort.Where(e => e.Status == "Ожидает").ToList();
+                listSort = listSort.Where(e => e.Status == "Ожидает" || e.Status == "Оплачена" || 
+                e.Status == "Сформирована" || e.Status == "Назначен выезд").ToList();
             }
             if (DatePickerSearch.Text != "")
             {

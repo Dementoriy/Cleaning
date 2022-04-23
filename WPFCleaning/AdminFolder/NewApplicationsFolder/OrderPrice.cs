@@ -11,7 +11,7 @@ namespace WPFCleaning.Admin
     {
         public static int[,] arrayService = new int[2, 7];
 
-        public static void Calculate(NewApplication newApplication, ClientPage clientPage)
+        public static void Calculate(NewApplication newApplication, ClientPage clientPage, string selectedItems = "")
         {
             Array.Clear(arrayService, 0, arrayService.Length);
             arrayService[0, 1] = Service.GetIdService("Мойка окон");
@@ -32,7 +32,7 @@ namespace WPFCleaning.Admin
                 if (checkBoxes[0].Name == newApplication.CheckExpressClean.Name ||
                     checkBoxes[0].Name == newApplication.CheckGeneralClean.Name ||
                     checkBoxes[0].Name == newApplication.CheckBuildingClean.Name ||
-                    checkBoxes[0].Name == newApplication.CheckOfficeClean.Name)
+                    checkBoxes[0].Name == newApplication.CheckComplexСleaningClean.Name)
                 {
                     if (newApplication.TextBoxSquare.Text != "")
                     {
@@ -73,6 +73,9 @@ namespace WPFCleaning.Admin
                     newApplication.finalPrice = Convert.ToInt32((newApplication.finalPrice * 90) / 100);
                 }
 
+                RoomType roomType = RoomType.GetСoefficientByType(selectedItems);
+                newApplication.finalPrice *= roomType.Сoefficient;
+
                 newApplication.PriceBox.Text = Order.GetPriceByInt(Convert.ToInt32(newApplication.finalPrice));
                 newApplication.ApproximateTime.Text = Order.GetTimeByInt(newApplication.approximateTime);
             }
@@ -84,7 +87,7 @@ namespace WPFCleaning.Admin
             list.Add(newApplication.CheckExpressClean);
             list.Add(newApplication.CheckGeneralClean);
             list.Add(newApplication.CheckBuildingClean);
-            list.Add(newApplication.CheckOfficeClean);
+            list.Add(newApplication.CheckComplexСleaningClean);
             list.Add(newApplication.ChemistryClean);
             list.Add(newApplication.WindowClean);
             list.Add(newApplication.Dezinfection);

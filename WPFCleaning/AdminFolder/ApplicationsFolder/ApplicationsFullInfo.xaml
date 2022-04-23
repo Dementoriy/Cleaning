@@ -61,25 +61,25 @@
             </Border>
 
             <TextBox x:Name="CityDistrict" materialDesign:HintAssist.Hint="Район города" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" 
-                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" 
+                     FontFamily="Arial bold" FontSize="16" Margin="0 0 0 0" Cursor="No" IsReadOnly="True"/>
             <TextBox x:Name="Settlement" materialDesign:HintAssist.Hint="Населенный пункт" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" 
-                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" 
+                     FontFamily="Arial bold" FontSize="16" Margin="0 5 0 0" Cursor="No" IsReadOnly="True"/>
             <TextBox x:Name="Street" materialDesign:HintAssist.Hint="Улица" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" 
-                     FontFamily="Arial bold" FontSize="16" Margin="0 0 0 0"/>
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" 
+                     FontFamily="Arial bold" FontSize="16" Margin="0 5 0 0" Cursor="No" IsReadOnly="True"/>
 
             <TextBox x:Name="HouseNumber" materialDesign:HintAssist.Hint="Номер дома" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                     HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" 
-                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
+                     HorizontalAlignment="Left"  TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40"  
+                     FontFamily="Arial bold" FontSize="16" Margin="0 5 0 0" Cursor="No" IsReadOnly="True"/>
             <TextBox x:Name="Block" materialDesign:HintAssist.Hint="Корпус/строение" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" 
-                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" 
+                     FontFamily="Arial bold" FontSize="16" Margin="0 5 0 0" Cursor="No" IsReadOnly="True"/>
             <TextBox x:Name="ApartmentNumber" materialDesign:HintAssist.Hint="Квартира" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
-                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" Cursor="IBeam" 
-                     FontFamily="Arial bold" FontSize="16" Margin="0 10 0 0"/>
-            <Border BorderBrush="#3a388a" BorderThickness="3" CornerRadius="3" Margin="0 50 0 0">
+                     HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Height="40" 
+                     FontFamily="Arial bold" FontSize="16" Margin="0 5 0 0" Cursor="No" IsReadOnly="True"/>
+            <Border BorderBrush="#3a388a" BorderThickness="3" CornerRadius="3" Margin="0 10 0 0">
                 <TextBox x:Name="Comment" AcceptsReturn="True" Height="75" Width="290" materialDesign:HintAssist.Hint="Комментарий:"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Arial Bold" FontSize="22" HorizontalAlignment="Left"
                          TextWrapping="Wrap" Cursor="Arrow" Margin="2 0 0 0"/>

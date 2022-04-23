@@ -33,7 +33,7 @@ namespace WPFCleaning.Admin
                 MessageBox.Show("Площадь больше 100!");
                 newApplication.TextBoxSquare.Text = "";
             }
-            if (newApplication.CheckOfficeClean.IsChecked.GetValueOrDefault() && newApplication.TextBoxSquare.Text != "" 
+            if (newApplication.CheckComplexСleaningClean.IsChecked.GetValueOrDefault() && newApplication.TextBoxSquare.Text != "" 
                 && Convert.ToInt32(newApplication.TextBoxSquare.Text) > 200)
             {
                 MessageBox.Show("Площадь больше 200!");
@@ -135,6 +135,11 @@ namespace WPFCleaning.Admin
             else if (newApplication.BrigadeBox.Text == "")
             {
                 MessageBox.Show("Введите бригаду!");
+                return false;
+            }
+            else if (newApplication.RoomTypeBox.Text == "")
+            {
+                MessageBox.Show("Выберите тип помещения");
                 return false;
             }
             else if (newApplication.PriceBox.Text == "")

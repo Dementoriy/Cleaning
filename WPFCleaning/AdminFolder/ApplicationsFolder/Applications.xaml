@@ -83,7 +83,7 @@
                 <DataGridTextColumn Header="Дата" Width="134" Binding="{Binding Path=Date}"/>
                 <DataGridTextColumn Header="Время" Width="100" Binding="{Binding Path=Time}"/>
                 <DataGridTextColumn Header="Адрес" Width="400" Binding="{Binding Path=Address}"/>
-                <DataGridTextColumn Header="Статус" Width="150" Binding="{Binding Path=Status}"/>
+                <DataGridTextColumn Header="Статус" Width="170" Binding="{Binding Path=Status}"/>
                 <DataGridTextColumn Header="≈Время" Width="160" Binding="{Binding Path=ApproximateTime}"/>
                 <DataGridTextColumn Header="Бригада" Width="120" Binding="{Binding Path=Brigade}"/>
                 <DataGridTextColumn Header="Телефон" Width="200" Binding="{Binding Path=Telefone}"/>

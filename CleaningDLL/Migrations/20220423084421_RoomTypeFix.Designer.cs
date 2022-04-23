@@ -3,15 +3,17 @@ using System;
 using CleaningDLL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CleaningDLL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220423084421_RoomTypeFix")]
+    partial class RoomTypeFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,9 +35,6 @@ namespace CleaningDLL.Migrations
                     b.Property<string>("Block")
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
-
-                    b.Property<string>("CityDistrict")
-                        .HasColumnType("text");
 
                     b.Property<string>("HouseNumber")
                         .IsRequired()
@@ -844,8 +843,8 @@ namespace CleaningDLL.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("Сoefficient")
-                        .HasColumnType("numeric");
+                    b.Property<double>("Сoefficient")
+                        .HasColumnType("double precision");
 
                     b.HasKey("ID");
 

@@ -7,6 +7,7 @@ namespace CleaningDLL
     public class ApplicationContext : DbContext
     {
         public DbSet<Address> Address { get; set; }
+        public DbSet<RoomType> RoomType { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<Brigade> Brigade { get; set; }
         public DbSet<Client> Client { get; set; }

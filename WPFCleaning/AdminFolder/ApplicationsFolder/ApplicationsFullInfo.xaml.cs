@@ -88,7 +88,8 @@ namespace WPFCleaning.Admin
         public void SaveUpdatedOrder_Click(object sender, RoutedEventArgs e)
         {
             string NewDate = (DatePicker.Text + " " + SelectTime.Text);
-            if (DateTime.Parse(NewDate) > DateTime.Now)
+            if ((DateTime.Parse(NewDate) > DateTime.Now || DateTime.Parse(NewDate) == order.Date) && 
+                (StatusBox.Text != "Завершена" || StatusBox.Text != "Отменена"))
             {
                 order.Status = StatusBox.Text;
                 order.Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text));
