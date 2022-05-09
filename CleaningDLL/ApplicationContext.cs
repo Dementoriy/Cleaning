@@ -38,7 +38,7 @@ namespace CleaningDLL
         public static DbContextOptions<ApplicationContext> GetDb()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            return optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Cleaning;Username=postgres;Password=qwertyuiop228").Options;
+            return optionsBuilder.UseNpgsql("Host=45.10.244.15;Port=55532;Database=work100004;Username=work100004;Password=IFNz81Glc|9b~JiPOviN").Options;
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
