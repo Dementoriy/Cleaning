@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Npgsql;
 
 namespace CleaningDLL.Entity
 {
@@ -12,19 +13,22 @@ namespace CleaningDLL.Entity
         [MaxLength(50)] public string? Login { get; set; }
         [MaxLength(64)][MinLength(64)] public string? Password { get; set; }
         public string? Email { get; set; }
+        public string? Avatar { get; set; }
         private static ApplicationContext db = Context.Db;
+        private static NpgsqlConnection npgsql = Context.npgsql;
 
         public Client()
         {
 
         }
-        public Client(string Surname, string Name, string MiddleName, string PhoneNumber, bool IsOldClient, string? Login, string? Password, string? Email)
+        public Client(string Surname, string Name, string MiddleName, string PhoneNumber, bool IsOldClient, string? Login, string? Password, string? Email, string? Avatar)
             : base(Surname, Name, MiddleName, PhoneNumber)
         {
             this.IsOldClient = IsOldClient;
             this.Login = Login;
             this.Password = Password;
             this.Email = Email;
+            this.Avatar = Avatar;
         }
 
         public override string GetFullName()
@@ -34,21 +38,21 @@ namespace CleaningDLL.Entity
 
         public static void ClientIsOld(int id)
         {
-            Client oldClient = db.Client.Where(c => c.ID == id).FirstOrDefault();
+            Client oldClient = db.Client.FirstOrDefault(c => c.ID == id);
             oldClient.IsOldClient = true;
         }
         public static Client GetClientByTelefon(string telefon)
         {
-            return db.Client.Where(e => e.PhoneNumber == telefon).ToList()[0];
+            return db.Client.FirstOrDefault(e => e.PhoneNumber == telefon);
         }
         public static bool ClientByTelefonIsNew(string telefon)
         {
-            return !db.Client.Where(e => e.PhoneNumber == telefon).Any();
+            return !db.Client.Any(e => e.PhoneNumber == telefon);
         }
         
         
 
-        public static List<ClientInfo> GetClientInfo(string Telefon) //Клиент не связан с адресом. В листе хранится клиент с разными адресами
+        public static List<ClientInfo> GetClientInfo(string Telefon)
         {
             return (from c in db.Client
                     where c.PhoneNumber == Telefon
@@ -86,7 +90,28 @@ namespace CleaningDLL.Entity
         
         public static bool proverkaClientTelefon(string Telefon)
         {
-                return db.Client.Where(a => a.PhoneNumber == Telefon).Any();
+                return db.Client.Any(a => a.PhoneNumber == Telefon);
+        }
+
+        public static bool Add(Client client)
+        {
+            var command = new NpgsqlCommand("INSERT INTO \"Client\" (\"Surname\",\"Name\",\"MiddleName\",\"PhoneNumber\", " +
+                " \"IsOldClient\"  ) VALUES " +
+                                            "(@Surname, @Name, @MiddleName, @PhoneNumber, @IsOldClient)", npgsql);
+            NpgsqlParameter surnameParam = new NpgsqlParameter("@Surname", client.Surname);
+            NpgsqlParameter nameParam = new NpgsqlParameter("@Name", client.Name);
+            NpgsqlParameter middleNameParam = new NpgsqlParameter("@MiddleName", client.MiddleName);
+            NpgsqlParameter telefonParam = new NpgsqlParameter("@PhoneNumber", client.PhoneNumber);
+            NpgsqlParameter isOldParam = new NpgsqlParameter("@IsOldClient", client.IsOldClient);
+            command.Parameters.Add(surnameParam);
+            command.Parameters.Add(nameParam);
+            command.Parameters.Add(middleNameParam);
+            command.Parameters.Add(telefonParam);
+            command.Parameters.Add(isOldParam);
+            var query = command.ExecuteNonQuery();
+            db.Entry(client).Reload();
+            return query > 0;
+
         }
     }
 }

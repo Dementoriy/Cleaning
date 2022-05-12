@@ -33,12 +33,13 @@ namespace CleaningDLL
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
             Database.Migrate();
-            Context.AddDb(this);
+            new Context(this);
         }
+        public static string ConnectionString = "Host=45.10.244.15;Port=55532;Database=work100004;Username=work100004;Password=IFNz81Glc|9b~JiPOviN";
         public static DbContextOptions<ApplicationContext> GetDb()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
-            return optionsBuilder.UseNpgsql("Host=45.10.244.15;Port=55532;Database=work100004;Username=work100004;Password=IFNz81Glc|9b~JiPOviN").Options;
+            return optionsBuilder.UseNpgsql(ConnectionString).Options;
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -58,6 +59,8 @@ namespace CleaningDLL
             modelBuilder.Entity<Employee>(EntityConfigure.EmployeeConfigure);
             modelBuilder.Entity<InventoryType>(EntityConfigure.InventoryTypeConfigure);
             modelBuilder.Entity<Service>(EntityConfigure.ServiceConfigure);
+            modelBuilder.Entity<ReferenceUnitsOfMeasurement>(EntityConfigure.ReferenceUnitsOfMeasurementConfigure);
+            modelBuilder.Entity<RoomType>(EntityConfigure.RoomTypeConfigure);
         }
     }
 }

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CleaningDLL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220422153443_fixNewBD")]
-    partial class fixNewBD
+    [Migration("20220510070204_updateService")]
+    partial class updateService
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,18 +28,31 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Apartment_Number")
+                    b.Property<string>("AddressName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ApartmentNumber")
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
 
-                    b.Property<string>("Building")
+                    b.Property<string>("Block")
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
+
+                    b.Property<string>("CityDistrict")
+                        .HasColumnType("text");
 
                     b.Property<string>("HouseNumber")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("character varying(10)");
+
+                    b.Property<int?>("RoomTypeID")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Settlement")
+                        .HasColumnType("text");
 
                     b.Property<string>("Street")
                         .IsRequired()
@@ -47,6 +60,8 @@ namespace CleaningDLL.Migrations
                         .HasColumnType("character varying(100)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("RoomTypeID");
 
                     b.ToTable("Address");
                 });
@@ -108,6 +123,9 @@ namespace CleaningDLL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Avatar")
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
@@ -807,6 +825,44 @@ namespace CleaningDLL.Migrations
                         .IsUnique();
 
                     b.ToTable("ReferenceUnitsOfMeasurement");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Description = "Измеряется в метрах квадратных",
+                            Unit = "м2"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Description = "Измеряется в штуках",
+                            Unit = "шт"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Description = "Измеряется в упаковках",
+                            Unit = "упаковка"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Description = "Измеряется в литрах",
+                            Unit = "л"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Description = "Измеряется в килограммах",
+                            Unit = "кг"
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Description = "Измеряется в граммах",
+                            Unit = "г"
+                        });
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.RequisitionContent", b =>
@@ -829,6 +885,51 @@ namespace CleaningDLL.Migrations
                     b.ToTable("RequisitionContent");
                 });
 
+            modelBuilder.Entity("CleaningDLL.Entity.RoomType", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Сoefficient")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("RoomType");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Type = "Квартира",
+                            Сoefficient = 1.2m
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Type = "Дом",
+                            Сoefficient = 1.3m
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Type = "Офис",
+                            Сoefficient = 1m
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Type = "Другое",
+                            Сoefficient = 1.5m
+                        });
+                });
+
             modelBuilder.Entity("CleaningDLL.Entity.Service", b =>
                 {
                     b.Property<int>("ID")
@@ -840,6 +941,9 @@ namespace CleaningDLL.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
 
                     b.Property<int>("InventoryTypeID")
                         .HasColumnType("integer");
@@ -855,9 +959,14 @@ namespace CleaningDLL.Migrations
                     b.Property<int>("Time")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("UnitsID")
+                        .HasColumnType("integer");
+
                     b.HasKey("ID");
 
                     b.HasIndex("InventoryTypeID");
+
+                    b.HasIndex("UnitsID");
 
                     b.ToTable("Service");
 
@@ -892,10 +1001,10 @@ namespace CleaningDLL.Migrations
                         new
                         {
                             ID = 4,
-                            Description = "Уборка офисных помещений. Цена за 1м2.",
+                            Description = "Комплексная уборка помещений нужна, чтобы более тщательно убрать квартиру, в которой периодически убираются. Цена за 1м2.",
                             InventoryTypeID = 1,
                             Price = 50m,
-                            ServiceName = "Уборка офисов",
+                            ServiceName = "Комплексная уборка",
                             Time = 100
                         },
                         new
@@ -952,6 +1061,15 @@ namespace CleaningDLL.Migrations
                             ServiceName = "Дезинфекция",
                             Time = 30
                         });
+                });
+
+            modelBuilder.Entity("CleaningDLL.Entity.Address", b =>
+                {
+                    b.HasOne("CleaningDLL.Entity.RoomType", "RoomType")
+                        .WithMany()
+                        .HasForeignKey("RoomTypeID");
+
+                    b.Navigation("RoomType");
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.BrigadeInventory", b =>
@@ -1216,7 +1334,13 @@ namespace CleaningDLL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CleaningDLL.Entity.ReferenceUnitsOfMeasurement", "Units")
+                        .WithMany()
+                        .HasForeignKey("UnitsID");
+
                     b.Navigation("InventoryType");
+
+                    b.Navigation("Units");
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.Position", b =>

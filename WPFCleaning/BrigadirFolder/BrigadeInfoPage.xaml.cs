@@ -20,7 +20,7 @@ namespace WPFCleaning.Brigadir
         }
         private void SelectedEmployeeInfo()
         {
-            List<Employee.EmployeeFullInfo> listSort = Employee.GetEmployeeFullInfo();
+            IEnumerable<Employee.EmployeeFullInfo> listSort = Employee.GetEmployeeFullInfo();
             if (SearchBox.Text != "")
             {
                 listSort = listSort.Where(e => e.Cleaner.ToLower().Contains(SearchBox.Text.ToLower())

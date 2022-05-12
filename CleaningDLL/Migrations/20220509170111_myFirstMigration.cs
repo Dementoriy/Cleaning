@@ -4,34 +4,17 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CleaningDLL.Migrations
 {
-    public partial class HumanAdded : Migration
+    public partial class myFirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Address",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Street = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    HouseNumber = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
-                    Building = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
-                    Entrance = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
-                    Apartment_Number = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Address", x => x.ID);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Brigade",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Smena_Number = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false)
+                    SmenaNumber = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,10 +28,14 @@ namespace CleaningDLL.Migrations
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     IsOldClient = table.Column<bool>(type: "boolean", nullable: false),
-                    Surname = table.Column<string>(type: "text", nullable: true),
-                    Name = table.Column<string>(type: "text", nullable: true),
+                    Login = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    Password = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    Avatar = table.Column<string>(type: "text", nullable: true),
+                    Surname = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
                     MiddleName = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true)
+                    PhoneNumber = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -97,24 +84,17 @@ namespace CleaningDLL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Provider",
+                name: "RoomType",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CompanyName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    ProviderTelefonNumber = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: false),
-                    AddressID = table.Column<int>(type: "integer", nullable: false)
+                    Type = table.Column<string>(type: "text", nullable: false),
+                    Сoefficient = table.Column<decimal>(type: "numeric", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Provider", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Provider_Address_AddressID",
-                        column: x => x.AddressID,
-                        principalTable: "Address",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_RoomType", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -125,7 +105,7 @@ namespace CleaningDLL.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     InventoryName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-                    InventoryTypeID = table.Column<int>(type: "integer", nullable: false),
+                    InventoryTypeID = table.Column<int>(type: "integer", nullable: true),
                     UseTime = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     LifeTime = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     DateOfReceiving = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
@@ -138,7 +118,7 @@ namespace CleaningDLL.Migrations
                         column: x => x.InventoryTypeID,
                         principalTable: "InventoryType",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,10 +156,10 @@ namespace CleaningDLL.Migrations
                     EmploymentDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Login = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     Password = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    Surname = table.Column<string>(type: "text", nullable: true),
-                    Name = table.Column<string>(type: "text", nullable: true),
+                    Surname = table.Column<string>(type: "text", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
                     MiddleName = table.Column<string>(type: "text", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: true)
+                    PhoneNumber = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -222,13 +202,39 @@ namespace CleaningDLL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Address",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CityDistrict = table.Column<string>(type: "text", nullable: true),
+                    Settlement = table.Column<string>(type: "text", nullable: true),
+                    Street = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    HouseNumber = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: false),
+                    Block = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
+                    ApartmentNumber = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
+                    RoomTypeID = table.Column<int>(type: "integer", nullable: true),
+                    AddressName = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Address", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Address_RoomType_RoomTypeID",
+                        column: x => x.RoomTypeID,
+                        principalTable: "RoomType",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BrigadeInventory",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    BrigadeID = table.Column<int>(type: "integer", nullable: false),
-                    InventoryID = table.Column<int>(type: "integer", nullable: false)
+                    BrigadeID = table.Column<int>(type: "integer", nullable: true),
+                    InventoryID = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -238,13 +244,13 @@ namespace CleaningDLL.Migrations
                         column: x => x.BrigadeID,
                         principalTable: "Brigade",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_BrigadeInventory_Inventory_InventoryID",
                         column: x => x.InventoryID,
                         principalTable: "Inventory",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -253,8 +259,8 @@ namespace CleaningDLL.Migrations
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    EmployeeID = table.Column<int>(type: "integer", nullable: false),
-                    ClientID = table.Column<int>(type: "integer", nullable: false),
+                    EmployeeID = table.Column<int>(type: "integer", nullable: true),
+                    ClientID = table.Column<int>(type: "integer", nullable: true),
                     DateOfContract = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
@@ -265,13 +271,128 @@ namespace CleaningDLL.Migrations
                         column: x => x.ClientID,
                         principalTable: "Client",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Contract_Employee_EmployeeID",
                         column: x => x.EmployeeID,
                         principalTable: "Employee",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ConsumptionRate",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Consumption = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
+                    ConsumableID = table.Column<int>(type: "integer", nullable: true),
+                    ReferenceUnitsOfMeasurementID = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ConsumptionRate", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_ConsumptionRate_Consumable_ConsumableID",
+                        column: x => x.ConsumableID,
+                        principalTable: "Consumable",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ConsumptionRate_ReferenceUnitsOfMeasurement_ReferenceUnitsO~",
+                        column: x => x.ReferenceUnitsOfMeasurementID,
+                        principalTable: "ReferenceUnitsOfMeasurement",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DeliveryContent",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ConsumableID = table.Column<int>(type: "integer", nullable: true),
+                    DeliveryContentAmount = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeliveryContent", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_DeliveryContent_Consumable_ConsumableID",
+                        column: x => x.ConsumableID,
+                        principalTable: "Consumable",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RequisitionContent",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ConsumableID = table.Column<int>(type: "integer", nullable: true),
+                    Amount = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RequisitionContent", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_RequisitionContent_Consumable_ConsumableID",
+                        column: x => x.ConsumableID,
+                        principalTable: "Consumable",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ClientAddresses",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    AddressID = table.Column<int>(type: "integer", nullable: true),
+                    ClientID = table.Column<int>(type: "integer", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClientAddresses", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_ClientAddresses_Address_AddressID",
+                        column: x => x.AddressID,
+                        principalTable: "Address",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ClientAddresses_Client_ClientID",
+                        column: x => x.ClientID,
+                        principalTable: "Client",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Provider",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CompanyName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    ProviderTelefonNumber = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: false),
+                    AddressID = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Provider", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Provider_Address_AddressID",
+                        column: x => x.AddressID,
+                        principalTable: "Address",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -281,14 +402,16 @@ namespace CleaningDLL.Migrations
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    ClientID = table.Column<int>(type: "integer", nullable: false),
-                    EmployeeID = table.Column<int>(type: "integer", nullable: false),
-                    AddressID = table.Column<int>(type: "integer", nullable: false),
+                    ClientID = table.Column<int>(type: "integer", nullable: true),
+                    EmployeeID = table.Column<int>(type: "integer", nullable: true),
+                    AddressID = table.Column<int>(type: "integer", nullable: true),
                     BrigadeID = table.Column<int>(type: "integer", nullable: false),
                     Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     FinalPrice = table.Column<int>(type: "integer", nullable: false),
                     ApproximateTime = table.Column<int>(type: "integer", nullable: false),
-                    Comment = table.Column<string>(type: "text", nullable: true)
+                    Comment = table.Column<string>(type: "text", nullable: true),
+                    ContractID = table.Column<int>(type: "integer", nullable: false),
+                    Rating = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -298,7 +421,7 @@ namespace CleaningDLL.Migrations
                         column: x => x.AddressID,
                         principalTable: "Address",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Order_Brigade_BrigadeID",
                         column: x => x.BrigadeID,
@@ -310,78 +433,105 @@ namespace CleaningDLL.Migrations
                         column: x => x.ClientID,
                         principalTable: "Client",
                         principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Order_Contract_ContractID",
+                        column: x => x.ContractID,
+                        principalTable: "Contract",
+                        principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Order_Employee_EmployeeID",
                         column: x => x.EmployeeID,
                         principalTable: "Employee",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ConsumptionRate",
+                name: "ConsumablesService",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Consumption = table.Column<string>(type: "character varying(150)", maxLength: 150, nullable: false),
-                    ConsumableID = table.Column<int>(type: "integer", nullable: false),
-                    ReferenceUnitsOfMeasurementID = table.Column<int>(type: "integer", nullable: false)
+                    ServiceID = table.Column<int>(type: "integer", nullable: true),
+                    ConsumptionRateID = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ConsumptionRate", x => x.ID);
+                    table.PrimaryKey("PK_ConsumablesService", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_ConsumptionRate_Consumable_ConsumableID",
-                        column: x => x.ConsumableID,
-                        principalTable: "Consumable",
+                        name: "FK_ConsumablesService_ConsumptionRate_ConsumptionRateID",
+                        column: x => x.ConsumptionRateID,
+                        principalTable: "ConsumptionRate",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ConsumptionRate_ReferenceUnitsOfMeasurement_ReferenceUnitsO~",
-                        column: x => x.ReferenceUnitsOfMeasurementID,
-                        principalTable: "ReferenceUnitsOfMeasurement",
+                        name: "FK_ConsumablesService_Service_ServiceID",
+                        column: x => x.ServiceID,
+                        principalTable: "Service",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "DeliveryContent",
+                name: "Delivery",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ConsumableID = table.Column<int>(type: "integer", nullable: false),
-                    DeliveryContentAmount = table.Column<int>(type: "integer", nullable: false)
+                    ProviderID = table.Column<int>(type: "integer", nullable: true),
+                    DeliveryDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    DeliveryCost = table.Column<decimal>(type: "numeric", nullable: false),
+                    DeliveryContentID = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DeliveryContent", x => x.ID);
+                    table.PrimaryKey("PK_Delivery", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_DeliveryContent_Consumable_ConsumableID",
-                        column: x => x.ConsumableID,
-                        principalTable: "Consumable",
+                        name: "FK_Delivery_DeliveryContent_DeliveryContentID",
+                        column: x => x.DeliveryContentID,
+                        principalTable: "DeliveryContent",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Delivery_Provider_ProviderID",
+                        column: x => x.ProviderID,
+                        principalTable: "Provider",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "RequisitionContent",
+                name: "PurchaseRequisition",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ConsumableID = table.Column<int>(type: "integer", nullable: false),
-                    Amount = table.Column<int>(type: "integer", nullable: false)
+                    Status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    EmployeeID = table.Column<int>(type: "integer", nullable: true),
+                    ProviderID = table.Column<int>(type: "integer", nullable: true),
+                    RequisitionContentID = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RequisitionContent", x => x.ID);
+                    table.PrimaryKey("PK_PurchaseRequisition", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_RequisitionContent_Consumable_ConsumableID",
-                        column: x => x.ConsumableID,
-                        principalTable: "Consumable",
+                        name: "FK_PurchaseRequisition_Employee_EmployeeID",
+                        column: x => x.EmployeeID,
+                        principalTable: "Employee",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PurchaseRequisition_Provider_ProviderID",
+                        column: x => x.ProviderID,
+                        principalTable: "Provider",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PurchaseRequisition_RequisitionContent_RequisitionContentID",
+                        column: x => x.RequisitionContentID,
+                        principalTable: "RequisitionContent",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -414,102 +564,14 @@ namespace CleaningDLL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ConsumablesService",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ServiceID = table.Column<int>(type: "integer", nullable: false),
-                    ConsumptionRateID = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ConsumablesService", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_ConsumablesService_ConsumptionRate_ConsumptionRateID",
-                        column: x => x.ConsumptionRateID,
-                        principalTable: "ConsumptionRate",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ConsumablesService_Service_ServiceID",
-                        column: x => x.ServiceID,
-                        principalTable: "Service",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Delivery",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ProviderID = table.Column<int>(type: "integer", nullable: false),
-                    DeliveryDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    DeliveryCost = table.Column<decimal>(type: "numeric", nullable: false),
-                    DeliveryContentID = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Delivery", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Delivery_DeliveryContent_DeliveryContentID",
-                        column: x => x.DeliveryContentID,
-                        principalTable: "DeliveryContent",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Delivery_Provider_ProviderID",
-                        column: x => x.ProviderID,
-                        principalTable: "Provider",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PurchaseRequisition",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    EmployeeID = table.Column<int>(type: "integer", nullable: false),
-                    ProviderID = table.Column<int>(type: "integer", nullable: false),
-                    RequisitionContentID = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PurchaseRequisition", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_PurchaseRequisition_Employee_EmployeeID",
-                        column: x => x.EmployeeID,
-                        principalTable: "Employee",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PurchaseRequisition_Provider_ProviderID",
-                        column: x => x.ProviderID,
-                        principalTable: "Provider",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PurchaseRequisition_RequisitionContent_RequisitionContentID",
-                        column: x => x.RequisitionContentID,
-                        principalTable: "RequisitionContent",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DeliveryContract",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    EmployeeID = table.Column<int>(type: "integer", nullable: false),
-                    ProviderID = table.Column<int>(type: "integer", nullable: false),
-                    PurchaseRequisitionID = table.Column<int>(type: "integer", nullable: false),
+                    EmployeeID = table.Column<int>(type: "integer", nullable: true),
+                    ProviderID = table.Column<int>(type: "integer", nullable: true),
+                    PurchaseRequisitionID = table.Column<int>(type: "integer", nullable: true),
                     DeliveryContractDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
@@ -520,24 +582,24 @@ namespace CleaningDLL.Migrations
                         column: x => x.EmployeeID,
                         principalTable: "Employee",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_DeliveryContract_Provider_ProviderID",
                         column: x => x.ProviderID,
                         principalTable: "Provider",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_DeliveryContract_PurchaseRequisition_PurchaseRequisitionID",
                         column: x => x.PurchaseRequisitionID,
                         principalTable: "PurchaseRequisition",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "Brigade",
-                columns: new[] { "ID", "Smena_Number" },
+                columns: new[] { "ID", "SmenaNumber" },
                 values: new object[,]
                 {
                     { 1, "Смена1" },
@@ -597,6 +659,11 @@ namespace CleaningDLL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Address_RoomTypeID",
+                table: "Address",
+                column: "RoomTypeID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BrigadeInventory_BrigadeID",
                 table: "BrigadeInventory",
                 column: "BrigadeID");
@@ -611,6 +678,16 @@ namespace CleaningDLL.Migrations
                 table: "Client",
                 column: "PhoneNumber",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClientAddresses_AddressID",
+                table: "ClientAddresses",
+                column: "AddressID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClientAddresses_ClientID",
+                table: "ClientAddresses",
+                column: "ClientID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Consumable_ConsumableName",
@@ -738,6 +815,11 @@ namespace CleaningDLL.Migrations
                 column: "ClientID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Order_ContractID",
+                table: "Order",
+                column: "ContractID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Order_EmployeeID",
                 table: "Order",
                 column: "EmployeeID");
@@ -807,10 +889,10 @@ namespace CleaningDLL.Migrations
                 name: "BrigadeInventory");
 
             migrationBuilder.DropTable(
-                name: "ConsumablesService");
+                name: "ClientAddresses");
 
             migrationBuilder.DropTable(
-                name: "Contract");
+                name: "ConsumablesService");
 
             migrationBuilder.DropTable(
                 name: "Delivery");
@@ -846,10 +928,7 @@ namespace CleaningDLL.Migrations
                 name: "RequisitionContent");
 
             migrationBuilder.DropTable(
-                name: "Client");
-
-            migrationBuilder.DropTable(
-                name: "Employee");
+                name: "Contract");
 
             migrationBuilder.DropTable(
                 name: "InventoryType");
@@ -861,13 +940,22 @@ namespace CleaningDLL.Migrations
                 name: "Consumable");
 
             migrationBuilder.DropTable(
+                name: "Client");
+
+            migrationBuilder.DropTable(
+                name: "Employee");
+
+            migrationBuilder.DropTable(
+                name: "RoomType");
+
+            migrationBuilder.DropTable(
+                name: "ReferenceUnitsOfMeasurement");
+
+            migrationBuilder.DropTable(
                 name: "Brigade");
 
             migrationBuilder.DropTable(
                 name: "Position");
-
-            migrationBuilder.DropTable(
-                name: "ReferenceUnitsOfMeasurement");
         }
     }
 }

@@ -36,5 +36,10 @@ namespace CleaningDLL.Entity
                     select ps
                     ).ToList();
         }
+        public static void Add(ProvidedService providedService)
+        {
+            db.ProvidedService.Add(providedService);
+            db.SaveChanges();
+        }
     }
 }

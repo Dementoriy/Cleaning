@@ -26,7 +26,7 @@ namespace CleaningDLL.Entity
         }
         public static Position GetByID(int id)
         {
-            return db.Position.Where(d => d.ID == id).FirstOrDefault();
+            return db.Position.FirstOrDefault(d => d.ID == id);
         }
     }
 }

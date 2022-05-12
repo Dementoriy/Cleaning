@@ -47,7 +47,7 @@ namespace WPFCleaning.Admin
 
             if (order.Client.IsOldClient) CheckOldClient.IsChecked = true;
 
-            //CityDistrict.Text = order.Address.CityDistrict;
+            CityDistrict.Text = order.Address.CityDistrict;
             Settlement.Text = order.Address.Settlement;
             Street.Text = order.Address.Street;
             HouseNumber.Text = order.Address.HouseNumber;
@@ -91,15 +91,21 @@ namespace WPFCleaning.Admin
             if ((DateTime.Parse(NewDate) > DateTime.Now || DateTime.Parse(NewDate) == order.Date) && 
                 (StatusBox.Text != "Завершена" || StatusBox.Text != "Отменена"))
             {
-                order.Status = StatusBox.Text;
-                order.Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text));
-                order.Date = DateTime.Parse(NewDate);
-                order.FinalPrice = Order.GetPriceByString(PriceBox.Text); 
-                order.Comment = Comment.Text;
+                //order.Status = StatusBox.Text;
+                //order.Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text));
+                //order.Date = DateTime.Parse(NewDate);
+                //order.FinalPrice = Order.GetPriceByString(PriceBox.Text); 
+                //order.Comment = Comment.Text;
 
-                Context.Db.SaveChanges();
-                MessageBox.Show("Заявка изменена успешно!");
-                if(_applications != null)
+                if (Order.UpdateOrder(order, StatusBox.Text, Convert.ToInt32(BrigadeBox.Text),
+                    DateTime.Parse(NewDate), Order.GetPriceByString(PriceBox.Text), Comment.Text))
+                {
+                    MessageBox.Show("Заявка изменена успешно!");
+                }
+                else MessageBox.Show("Заявку изменить не удалось");
+
+                //Context.Db.SaveChanges();
+                if (_applications != null)
                     _applications.SelectedOrderInfo();
                 UpdateOrder.IsEnabled = true;
                 this.Close();

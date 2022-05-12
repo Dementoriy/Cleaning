@@ -219,7 +219,16 @@ namespace WPFCleaning.Admin
         {
             OrderPrice.Calculate(this, _clientPage);
             arrayService = OrderPrice.arrayService;
-            NewOrder.AddOrder(this, _clientPage, _emp);
+            Client client;
+
+            if (Client.ClientByTelefonIsNew(_clientPage.Telefon.Text))
+            {
+                client = new Client(_clientPage.Surname.Text, _clientPage.Name.Text, _clientPage.MiddleName.Text, _clientPage.Telefon.Text,
+                    false, null, null, null, null);
+                Client.Add(client);
+            }
+            else client = Client.GetClientByTelefon(_clientPage.Telefon.Text);
+            NewOrder.AddOrder(this, _clientPage, _emp, client);
         }
 
         private void BtnBrigadeInfo_Click(object sender, RoutedEventArgs e)

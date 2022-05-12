@@ -52,11 +52,11 @@ namespace WPFCleaning.Admin
             SelectedOrderInfo();
         }
 
-        private List<Order.OrderInfo> _listSort;
+        private IEnumerable<Order.OrderInfo> _listSort;
 
         public void SelectedOrderInfo()
         {
-            List<Order.OrderInfo> listSort = Order.GetOrderInfo();
+            var listSort = Order.GetOrderInfo();
             if (CheckFinish.IsChecked == true)
             {
                 listSort = listSort.Where(e => e.Status == "Завершена").ToList();
