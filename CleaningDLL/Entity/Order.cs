@@ -113,7 +113,7 @@ namespace CleaningDLL.Entity
             int m = t % 60;
             return (h + "ч. " + m + "мин.");
         }
-        public static bool UpdateOrder(Order order, string status, int brigade, DateTime date, int price, string comment)
+        public static bool UpdateOrder(Order order)
         {
             var command = new NpgsqlCommand("UPDATE \"Order\" SET " +
                                             "\"Status\" = @status, \"BrigadeID\" = @brigade, " +

@@ -11,8 +11,17 @@ namespace WPFCleaning.Admin
 {
     public static class NewOrder
     {
-        public static void AddOrder(NewApplication newApplication, ClientPage clientPage, Employee emp, Client client)
+        public static void AddOrder(NewApplication newApplication, ClientPage clientPage, Employee emp/*, Client client*/)
         {
+            Client client;
+
+            if (Client.ClientByTelefonIsNew(clientPage.Telefon.Text))
+            {
+                client = new Client(clientPage.Surname.Text, clientPage.Name.Text, clientPage.MiddleName.Text, clientPage.Telefon.Text,
+                    false, null, null, null, null);
+            }
+            else client = Client.GetClientByTelefon(clientPage.Telefon.Text);
+
             string enteredAddress = "Кировская область, Киров, " + ", " + clientPage.CityDistrict.Text + clientPage.Settlement.Text + ", " 
                 + clientPage.Street.Text + " (" + clientPage.CityDistrict.Text + "), " + clientPage.HouseNumber.Text + ", " + clientPage.Block.Text + ", " + clientPage.ApartmentNumber.Text;
 

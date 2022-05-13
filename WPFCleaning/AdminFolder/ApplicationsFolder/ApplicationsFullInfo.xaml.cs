@@ -91,14 +91,13 @@ namespace WPFCleaning.Admin
             if ((DateTime.Parse(NewDate) > DateTime.Now || DateTime.Parse(NewDate) == order.Date) && 
                 (StatusBox.Text != "Завершена" || StatusBox.Text != "Отменена"))
             {
-                //order.Status = StatusBox.Text;
-                //order.Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text));
-                //order.Date = DateTime.Parse(NewDate);
-                //order.FinalPrice = Order.GetPriceByString(PriceBox.Text); 
-                //order.Comment = Comment.Text;
+                order.Status = StatusBox.Text;
+                order.Brigade = Brigade.GetBrigadeByID(Convert.ToInt32(BrigadeBox.Text));
+                order.Date = DateTime.Parse(NewDate);
+                order.FinalPrice = Order.GetPriceByString(PriceBox.Text); 
+                order.Comment = Comment.Text;
 
-                if (Order.UpdateOrder(order, StatusBox.Text, Convert.ToInt32(BrigadeBox.Text),
-                    DateTime.Parse(NewDate), Order.GetPriceByString(PriceBox.Text), Comment.Text))
+                if (Order.UpdateOrder(order))
                 {
                     MessageBox.Show("Заявка изменена успешно!");
                 }
