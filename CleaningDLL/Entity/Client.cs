@@ -49,8 +49,25 @@ namespace CleaningDLL.Entity
         {
             return !db.Client.Any(e => e.PhoneNumber == telefon);
         }
-        
-        
+
+        public static Client GetClient(string login, string pass)
+        {
+            return db.Client.Where(e => e.Login == login && e.Password == pass).FirstOrDefault();
+        }
+        public bool AddClient()
+        {
+            try
+            {
+                db.Client.Add(this);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
 
         public static List<ClientInfo> GetClientInfo(string Telefon)
         {
@@ -78,13 +95,13 @@ namespace CleaningDLL.Entity
             public int ID { get; set; }
             public string Surname { get; set; }
             public string Name { get; set; }
-            public string MiddleName { get; set; }
+            public string? MiddleName { get; set; }
             public string HouseNumber { get; set; }
-            public string CityDistrict { get; set; }
-            public string Settlement { get; set; }
+            public string? CityDistrict { get; set; }
+            public string? Settlement { get; set; }
             public string Street { get; set; }
-            public string Block { get; set; }
-            public string ApartmentNumber { get; set; }
+            public string? Block { get; set; }
+            public string? ApartmentNumber { get; set; }
             public bool IsOldClient { get; set; }
         }
         
@@ -112,6 +129,28 @@ namespace CleaningDLL.Entity
             db.Entry(client).Reload();
             return query > 0;
 
+        }
+
+        public static Client? GetClientLogin(string login)
+        {
+            return db.Client.FirstOrDefault(c => c.Login == login);
+        }
+
+        internal static Client? GetClientAuth(string login, string pass)
+        {
+            return db.Client.FirstOrDefault(c => c.Login == login && c.Password == pass);
+        }
+        public bool Update()
+        {
+            try
+            {
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

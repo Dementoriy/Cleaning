@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace CleaningDLL.Entity
@@ -48,6 +49,10 @@ namespace CleaningDLL.Entity
         public static Service GetServiceById(int idService)
         {
             return db.Service.FirstOrDefault(s => s.ID == idService);
+        }
+        public static List<Service> GetService()
+        {
+            return db.Service.ToList();
         }
     }
 }
