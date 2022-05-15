@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace CleaningDLL.Entity
 {
-    public class ReferenceUnitsOfMeasurement //Справочник единиц измерения
+    public class ReferenceUnitsOfMeasurement
     {
         public int ID { get; set; }
         [Required]

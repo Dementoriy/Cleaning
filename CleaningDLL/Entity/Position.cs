@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CleaningDLL.Entity
 {
-    public class Position //Должность
+    public class Position
     {
         public int ID { get; set; }
         [Required]

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CleaningDLL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220509170111_myFirstMigration")]
-    partial class myFirstMigration
+    [Migration("20220515152029_MyFirstMigration")]
+    partial class MyFirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -825,6 +825,44 @@ namespace CleaningDLL.Migrations
                         .IsUnique();
 
                     b.ToTable("ReferenceUnitsOfMeasurement");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Description = "Измеряется в метрах квадратных",
+                            Unit = "м2"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Description = "Измеряется в штуках",
+                            Unit = "шт"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Description = "Измеряется в упаковках",
+                            Unit = "упаковка"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Description = "Измеряется в литрах",
+                            Unit = "л"
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Description = "Измеряется в килограммах",
+                            Unit = "кг"
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Description = "Измеряется в граммах",
+                            Unit = "г"
+                        });
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.RequisitionContent", b =>
@@ -864,6 +902,32 @@ namespace CleaningDLL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("RoomType");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Type = "Квартира",
+                            Сoefficient = 1.2m
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Type = "Дом",
+                            Сoefficient = 1.3m
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Type = "Офис",
+                            Сoefficient = 1m
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Type = "Другое",
+                            Сoefficient = 1.5m
+                        });
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.Service", b =>
@@ -877,6 +941,9 @@ namespace CleaningDLL.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
 
                     b.Property<int>("InventoryTypeID")
                         .HasColumnType("integer");
@@ -892,9 +959,14 @@ namespace CleaningDLL.Migrations
                     b.Property<int>("Time")
                         .HasColumnType("integer");
 
+                    b.Property<int>("UnitsID")
+                        .HasColumnType("integer");
+
                     b.HasKey("ID");
 
                     b.HasIndex("InventoryTypeID");
+
+                    b.HasIndex("UnitsID");
 
                     b.ToTable("Service");
 
@@ -906,7 +978,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 1,
                             Price = 40m,
                             ServiceName = "Экспресс уборка",
-                            Time = 100
+                            Time = 100,
+                            UnitsID = 1
                         },
                         new
                         {
@@ -915,7 +988,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 1,
                             Price = 70m,
                             ServiceName = "Генеральная уборка",
-                            Time = 220
+                            Time = 220,
+                            UnitsID = 1
                         },
                         new
                         {
@@ -924,16 +998,18 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 1,
                             Price = 80m,
                             ServiceName = "Послестроительная уборка",
-                            Time = 220
+                            Time = 220,
+                            UnitsID = 1
                         },
                         new
                         {
                             ID = 4,
-                            Description = "Уборка офисных помещений. Цена за 1м2.",
+                            Description = "Комплексная уборка помещений нужна, чтобы более тщательно убрать квартиру, в которой периодически убираются. Цена за 1м2.",
                             InventoryTypeID = 1,
                             Price = 50m,
-                            ServiceName = "Уборка офисов",
-                            Time = 100
+                            ServiceName = "Комплексная уборка",
+                            Time = 100,
+                            UnitsID = 1
                         },
                         new
                         {
@@ -942,7 +1018,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 2,
                             Price = 250m,
                             ServiceName = "Мойка окон",
-                            Time = 60
+                            Time = 60,
+                            UnitsID = 2
                         },
                         new
                         {
@@ -951,7 +1028,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 2,
                             Price = 500m,
                             ServiceName = "Мойка стеклянных дверей",
-                            Time = 120
+                            Time = 120,
+                            UnitsID = 2
                         },
                         new
                         {
@@ -960,7 +1038,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 3,
                             Price = 300m,
                             ServiceName = "Химчистка диванов",
-                            Time = 3600
+                            Time = 3600,
+                            UnitsID = 2
                         },
                         new
                         {
@@ -969,7 +1048,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 3,
                             Price = 300m,
                             ServiceName = "Химчистка кресел",
-                            Time = 3600
+                            Time = 3600,
+                            UnitsID = 2
                         },
                         new
                         {
@@ -978,7 +1058,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 3,
                             Price = 150m,
                             ServiceName = "Химчистка ковров",
-                            Time = 300
+                            Time = 300,
+                            UnitsID = 1
                         },
                         new
                         {
@@ -987,7 +1068,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 4,
                             Price = 40m,
                             ServiceName = "Дезинфекция",
-                            Time = 30
+                            Time = 30,
+                            UnitsID = 2
                         });
                 });
 
@@ -1262,7 +1344,15 @@ namespace CleaningDLL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CleaningDLL.Entity.ReferenceUnitsOfMeasurement", "Units")
+                        .WithMany()
+                        .HasForeignKey("UnitsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("InventoryType");
+
+                    b.Navigation("Units");
                 });
 
             modelBuilder.Entity("CleaningDLL.Entity.Position", b =>

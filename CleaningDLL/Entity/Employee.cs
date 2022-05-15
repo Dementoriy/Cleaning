@@ -6,7 +6,7 @@ using Npgsql;
 
 namespace CleaningDLL.Entity
 {
-    public class Employee : Human //Сотрудник
+    public class Employee : Human
     {
         public int ID { get; set; }
         [Required]

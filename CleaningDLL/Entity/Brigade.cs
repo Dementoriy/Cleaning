@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace CleaningDLL.Entity
 {
-    public class Brigade //Бригада
+    public class Brigade 
     {
         public int ID { get; set; }
         [Required]

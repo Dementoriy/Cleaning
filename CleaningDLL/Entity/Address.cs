@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace CleaningDLL.Entity
 {
-    public class Address //Адрес
+    public class Address
     {
         public int ID { get; set; }
         public string? CityDistrict { get; set; }

@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CleaningDLL.Migrations
 {
-    public partial class myFirstMigration : Migration
+    public partial class MyFirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -122,29 +122,6 @@ namespace CleaningDLL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Service",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ServiceName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
-                    Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    InventoryTypeID = table.Column<int>(type: "integer", nullable: false),
-                    Time = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Service", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Service_InventoryType_InventoryTypeID",
-                        column: x => x.InventoryTypeID,
-                        principalTable: "InventoryType",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Employee",
                 columns: table => new
                 {
@@ -196,6 +173,37 @@ namespace CleaningDLL.Migrations
                     table.ForeignKey(
                         name: "FK_Consumable_ReferenceUnitsOfMeasurement_ReferenceUnitsOfMeas~",
                         column: x => x.ReferenceUnitsOfMeasurementID,
+                        principalTable: "ReferenceUnitsOfMeasurement",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Service",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ServiceName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Description = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    InventoryTypeID = table.Column<int>(type: "integer", nullable: false),
+                    Time = table.Column<int>(type: "integer", nullable: false),
+                    UnitsID = table.Column<int>(type: "integer", nullable: false),
+                    Image = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Service", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Service_InventoryType_InventoryTypeID",
+                        column: x => x.InventoryTypeID,
+                        principalTable: "InventoryType",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Service_ReferenceUnitsOfMeasurement_UnitsID",
+                        column: x => x.UnitsID,
                         principalTable: "ReferenceUnitsOfMeasurement",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -628,34 +636,58 @@ namespace CleaningDLL.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "ReferenceUnitsOfMeasurement",
+                columns: new[] { "ID", "Description", "Unit" },
+                values: new object[,]
+                {
+                    { 6, "Измеряется в граммах", "г" },
+                    { 5, "Измеряется в килограммах", "кг" },
+                    { 4, "Измеряется в литрах", "л" },
+                    { 1, "Измеряется в метрах квадратных", "м2" },
+                    { 2, "Измеряется в штуках", "шт" },
+                    { 3, "Измеряется в упаковках", "упаковка" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RoomType",
+                columns: new[] { "ID", "Type", "Сoefficient" },
+                values: new object[,]
+                {
+                    { 3, "Офис", 1m },
+                    { 1, "Квартира", 1.2m },
+                    { 2, "Дом", 1.3m },
+                    { 4, "Другое", 1.5m }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Employee",
                 columns: new[] { "ID", "BrigadeID", "EmploymentDate", "Login", "MiddleName", "Name", "PassportData", "Password", "PhoneNumber", "PositionID", "Surname" },
                 values: new object[,]
                 {
-                    { 7, 2, new DateTime(2021, 12, 2, 10, 0, 0, 0, DateTimeKind.Unspecified), null, "Константинович", "Дмитрий", "1111888888", null, "+79229357609", 3, "Целищев" },
-                    { 5, 1, new DateTime(2021, 12, 1, 11, 30, 0, 0, DateTimeKind.Unspecified), null, "Владимирович", "Роман", "1111666666", null, "+79091324445", 3, "Суслов" },
-                    { 4, 1, new DateTime(2021, 12, 1, 11, 30, 0, 0, DateTimeKind.Unspecified), null, "Игоревич", "Дмитрий", "1111555555", null, "+79536952565", 3, "Москалев" },
-                    { 3, 2, new DateTime(2021, 11, 30, 11, 0, 0, 0, DateTimeKind.Unspecified), "brigadir2", "Николаевич", "Александр", "1111444444", "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", "+79123646993", 2, "Заболотский" },
-                    { 2, 1, new DateTime(2021, 11, 30, 11, 0, 0, 0, DateTimeKind.Unspecified), "brigadir1", "Анатольевич", "Иван", "1111333333", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "+79536856008", 2, "Бессонов" },
                     { 1, null, new DateTime(2021, 11, 30, 10, 30, 0, 0, DateTimeKind.Unspecified), "admin", "Михайлович", "Дмитрий", "1111222222", "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3", "+79536773183", 1, "Ведерников" },
-                    { 6, 2, new DateTime(2021, 12, 2, 10, 0, 0, 0, DateTimeKind.Unspecified), null, "Игоревич", "Максим", "1111777777", null, "+79123644673", 3, "Орлов" }
+                    { 2, 1, new DateTime(2021, 11, 30, 11, 0, 0, 0, DateTimeKind.Unspecified), "brigadir1", "Анатольевич", "Иван", "1111333333", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "+79536856008", 2, "Бессонов" },
+                    { 3, 2, new DateTime(2021, 11, 30, 11, 0, 0, 0, DateTimeKind.Unspecified), "brigadir2", "Николаевич", "Александр", "1111444444", "5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5", "+79123646993", 2, "Заболотский" },
+                    { 4, 1, new DateTime(2021, 12, 1, 11, 30, 0, 0, DateTimeKind.Unspecified), null, "Игоревич", "Дмитрий", "1111555555", null, "+79536952565", 3, "Москалев" },
+                    { 5, 1, new DateTime(2021, 12, 1, 11, 30, 0, 0, DateTimeKind.Unspecified), null, "Владимирович", "Роман", "1111666666", null, "+79091324445", 3, "Суслов" },
+                    { 6, 2, new DateTime(2021, 12, 2, 10, 0, 0, 0, DateTimeKind.Unspecified), null, "Игоревич", "Максим", "1111777777", null, "+79123644673", 3, "Орлов" },
+                    { 7, 2, new DateTime(2021, 12, 2, 10, 0, 0, 0, DateTimeKind.Unspecified), null, "Константинович", "Дмитрий", "1111888888", null, "+79229357609", 3, "Целищев" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Service",
-                columns: new[] { "ID", "Description", "InventoryTypeID", "Price", "ServiceName", "Time" },
+                columns: new[] { "ID", "Description", "Image", "InventoryTypeID", "Price", "ServiceName", "Time", "UnitsID" },
                 values: new object[,]
                 {
-                    { 10, "Дезинфекция помещений, твердых поверхносте, воздуха. Цена за 1м2.", 4, 40m, "Дезинфекция", 30 },
-                    { 9, "Химчистка ковров, матрасов. Цена за 1м2.", 3, 150m, "Химчистка ковров", 300 },
-                    { 7, "Химчистка диванов. Мягкой мебели. Цена за 1 место.", 3, 300m, "Химчистка диванов", 3600 },
-                    { 6, "Мойка стеклянных дверей балконов и лоджий. Цена за 1 дверь.", 2, 500m, "Мойка стеклянных дверей", 120 },
-                    { 5, "Мойка окон. Цена за 1 створу.", 2, 250m, "Мойка окон", 60 },
-                    { 4, "Уборка офисных помещений. Цена за 1м2.", 1, 50m, "Уборка офисов", 100 },
-                    { 3, "Уборка на объекте после ремонта/стройки (Обильное загрязнение). Цена за 1м2.", 1, 80m, "Послестроительная уборка", 220 },
-                    { 2, "Генеральная уборка. Цена за 1м2.", 1, 70m, "Генеральная уборка", 220 },
-                    { 8, "Химчистка кресел. Мягкой мебели. Цена за 1 кресло.", 3, 300m, "Химчистка кресел", 3600 },
-                    { 1, "Поддерживающая уборка. Объект должен быть в незапущенном состоянии. Цена за 1м2.", 1, 40m, "Экспресс уборка", 100 }
+                    { 7, "Химчистка диванов. Мягкой мебели. Цена за 1 место.", null, 3, 300m, "Химчистка диванов", 3600, 2 },
+                    { 6, "Мойка стеклянных дверей балконов и лоджий. Цена за 1 дверь.", null, 2, 500m, "Мойка стеклянных дверей", 120, 2 },
+                    { 5, "Мойка окон. Цена за 1 створу.", null, 2, 250m, "Мойка окон", 60, 2 },
+                    { 9, "Химчистка ковров, матрасов. Цена за 1м2.", null, 3, 150m, "Химчистка ковров", 300, 1 },
+                    { 2, "Генеральная уборка. Цена за 1м2.", null, 1, 70m, "Генеральная уборка", 220, 1 },
+                    { 3, "Уборка на объекте после ремонта/стройки (Обильное загрязнение). Цена за 1м2.", null, 1, 80m, "Послестроительная уборка", 220, 1 },
+                    { 8, "Химчистка кресел. Мягкой мебели. Цена за 1 кресло.", null, 3, 300m, "Химчистка кресел", 3600, 2 },
+                    { 1, "Поддерживающая уборка. Объект должен быть в незапущенном состоянии. Цена за 1м2.", null, 1, 40m, "Экспресс уборка", 100, 1 },
+                    { 4, "Комплексная уборка помещений нужна, чтобы более тщательно убрать квартиру, в которой периодически убираются. Цена за 1м2.", null, 1, 50m, "Комплексная уборка", 100, 1 },
+                    { 10, "Дезинфекция помещений, твердых поверхносте, воздуха. Цена за 1м2.", null, 4, 40m, "Дезинфекция", 30, 2 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -881,6 +913,11 @@ namespace CleaningDLL.Migrations
                 name: "IX_Service_InventoryTypeID",
                 table: "Service",
                 column: "InventoryTypeID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Service_UnitsID",
+                table: "Service",
+                column: "UnitsID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

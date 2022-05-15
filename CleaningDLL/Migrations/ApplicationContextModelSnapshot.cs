@@ -957,7 +957,7 @@ namespace CleaningDLL.Migrations
                     b.Property<int>("Time")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("UnitsID")
+                    b.Property<int>("UnitsID")
                         .HasColumnType("integer");
 
                     b.HasKey("ID");
@@ -976,7 +976,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 1,
                             Price = 40m,
                             ServiceName = "Экспресс уборка",
-                            Time = 100
+                            Time = 100,
+                            UnitsID = 1
                         },
                         new
                         {
@@ -985,7 +986,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 1,
                             Price = 70m,
                             ServiceName = "Генеральная уборка",
-                            Time = 220
+                            Time = 220,
+                            UnitsID = 1
                         },
                         new
                         {
@@ -994,7 +996,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 1,
                             Price = 80m,
                             ServiceName = "Послестроительная уборка",
-                            Time = 220
+                            Time = 220,
+                            UnitsID = 1
                         },
                         new
                         {
@@ -1003,7 +1006,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 1,
                             Price = 50m,
                             ServiceName = "Комплексная уборка",
-                            Time = 100
+                            Time = 100,
+                            UnitsID = 1
                         },
                         new
                         {
@@ -1012,7 +1016,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 2,
                             Price = 250m,
                             ServiceName = "Мойка окон",
-                            Time = 60
+                            Time = 60,
+                            UnitsID = 2
                         },
                         new
                         {
@@ -1021,7 +1026,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 2,
                             Price = 500m,
                             ServiceName = "Мойка стеклянных дверей",
-                            Time = 120
+                            Time = 120,
+                            UnitsID = 2
                         },
                         new
                         {
@@ -1030,7 +1036,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 3,
                             Price = 300m,
                             ServiceName = "Химчистка диванов",
-                            Time = 3600
+                            Time = 3600,
+                            UnitsID = 2
                         },
                         new
                         {
@@ -1039,7 +1046,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 3,
                             Price = 300m,
                             ServiceName = "Химчистка кресел",
-                            Time = 3600
+                            Time = 3600,
+                            UnitsID = 2
                         },
                         new
                         {
@@ -1048,7 +1056,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 3,
                             Price = 150m,
                             ServiceName = "Химчистка ковров",
-                            Time = 300
+                            Time = 300,
+                            UnitsID = 1
                         },
                         new
                         {
@@ -1057,7 +1066,8 @@ namespace CleaningDLL.Migrations
                             InventoryTypeID = 4,
                             Price = 40m,
                             ServiceName = "Дезинфекция",
-                            Time = 30
+                            Time = 30,
+                            UnitsID = 2
                         });
                 });
 
@@ -1334,7 +1344,9 @@ namespace CleaningDLL.Migrations
 
                     b.HasOne("CleaningDLL.Entity.ReferenceUnitsOfMeasurement", "Units")
                         .WithMany()
-                        .HasForeignKey("UnitsID");
+                        .HasForeignKey("UnitsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("InventoryType");
 

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace CleaningDLL.Entity
 {
-    public class Service //Услуга
+    public class Service
     {
         public int ID { get; set; }
         [Required]
@@ -18,6 +18,7 @@ namespace CleaningDLL.Entity
         public int Time { get; set; }
         [Required]
         public ReferenceUnitsOfMeasurement Units { get; set; }
+        public int UnitsID { get; set; }
         public string? Image { get; set; }
 
         public Service()

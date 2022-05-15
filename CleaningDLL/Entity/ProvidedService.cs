@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace CleaningDLL.Entity
 {
-    public class ProvidedService //Оказываемая услуга
+    public class ProvidedService
     {
         public int ID { get; set; }
         [Required]
