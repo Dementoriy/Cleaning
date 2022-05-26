@@ -5,6 +5,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Linq;
 using CleaningDLL.Entity;
+using Microsoft.Win32;
+using System.IO;
+using NPOI.XSSF.UserModel;
 
 namespace WPFCleaning.Admin
 {
@@ -20,7 +23,7 @@ namespace WPFCleaning.Admin
             SelectedOrderInfo();
             CheckFinish.IsChecked = true;
         }
-        
+
         public void AddAplication()
         {
             dataGridOrder.ItemsSource = Order.GetOrderInfo();
@@ -170,6 +173,169 @@ namespace WPFCleaning.Admin
             {
                 e.Handled = true; // отклоняем ввод
             }
+        }
+
+        private void ToReportBtn(object sender, RoutedEventArgs e)
+        {
+
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.InitialDirectory = Environment
+            .GetFolderPath(Environment.SpecialFolder.Desktop);
+            dialog.DefaultExt = ".xlsx";
+            dialog.Filter =
+            "Таблицы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*";
+            dialog.FilterIndex = 1;
+            dialog.FileName = "Отчет";
+            if (dialog.ShowDialog() == true)
+            {
+                var file = new FileStream(dialog.FileName, FileMode.Create, FileAccess.ReadWrite);
+                var template = new MemoryStream(Properties.Resources.Shablon, true);
+                var workbook = new XSSFWorkbook(template);
+                var sheet = workbook.GetSheetAt(0);
+
+
+                sheet.GetRow(6).CreateCell(7);
+                sheet.GetRow(7).CreateCell(2);
+                sheet.GetRow(7).CreateCell(7);
+                sheet.GetRow(8).CreateCell(2);
+                sheet.GetRow(8).CreateCell(7);
+
+                sheet.GetRow(2).GetCell(7).SetCellValue(DateTime.Today.ToShortDateString());
+                sheet.GetRow(7).GetCell(2).SetCellValue(DatePickerSearchStart.Text);
+                sheet.GetRow(8).GetCell(2).SetCellValue(DatePickerSearchEnd.Text);
+                sheet.GetRow(6).GetCell(7).SetCellValue(KolvoOrderBox.Text);
+                sheet.GetRow(7).GetCell(7).SetCellValue(KolvoTimeBox.Text);
+                sheet.GetRow(8).GetCell(7).SetCellValue(PriceBox.Text);
+
+                sheet.ShiftRows(11, 11 + int.Parse(KolvoOrderBox.Text), int.Parse(KolvoOrderBox.Text), true, true);
+                int row = 11;
+
+                var listSort = Order.GetOrderInfo();
+
+                if (DatePickerSearchEnd.Text != "" && DatePickerSearchStart.Text != "")
+                {
+                    DateTime dtStart = DatePickerSearchStart.SelectedDate.Value;
+                    DateTime dtEnd = DatePickerSearchEnd.SelectedDate.Value;
+
+                    if (DatePickerSearchStart.SelectedDate.Value <= DatePickerSearchEnd.SelectedDate.Value)
+                        listSort = listSort.Where(e => DateTime.Parse(e.Date) >= dtStart.Date && DateTime.Parse(e.Date) <= dtEnd.Date).ToList();
+                    else
+                    {
+                        MessageBox.Show("Дата конца периода больше \n даты начала периода");
+                        DatePickerSearchEnd.Text = "";
+                    }
+                    if (CheckFinish.IsChecked == true)
+                    {
+                        listSort = listSort.Where(e => e.Status == "Завершена").ToList();
+                    }
+                    else if (CheckCanceled.IsChecked == true)
+                    {
+                        listSort = listSort.Where(e => e.Status == "Отменена").ToList();
+                    }
+
+                    foreach (var item in listSort.OrderBy(x => x.ID))
+                    {
+                        var rowInsert = sheet.CreateRow(row);
+                        rowInsert.CreateCell(0).SetCellValue(row - 10);
+                        rowInsert.GetCell(0).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                        rowInsert.CreateCell(1).SetCellValue(item.ID);
+                        rowInsert.GetCell(1).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                        rowInsert.CreateCell(2).SetCellValue(item.Date);
+                        rowInsert.GetCell(2).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                        rowInsert.CreateCell(3).SetCellValue(item.Time);
+                        rowInsert.GetCell(3).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                        rowInsert.CreateCell(4).SetCellValue(item.Address);
+                        rowInsert.GetCell(4).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                        rowInsert.CreateCell(5).SetCellValue(item.Status);
+                        rowInsert.GetCell(5).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                        rowInsert.CreateCell(6).SetCellValue(item.Brigade);
+                        rowInsert.GetCell(6).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                        rowInsert.CreateCell(7).SetCellValue(item.FinalPrice);
+                        rowInsert.GetCell(7).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                        rowInsert.CreateCell(8).SetCellValue(item.ApproximateTime);
+                        rowInsert.GetCell(8).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                        row++;
+                    }
+
+                    workbook.Write(file);
+                    MessageBox.Show("Отчет успешно создан");
+                }
+        }
+        //private void ToReportBtn(object sender, RoutedEventArgs e)
+        //{
+        //    SaveFileDialog dialog = new SaveFileDialog();
+        //    dialog.InitialDirectory = Environment
+        //    .GetFolderPath(Environment.SpecialFolder.Desktop);
+        //    dialog.DefaultExt = ".xlsx";
+        //    dialog.Filter = "Таблицы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*";
+        //    dialog.FilterIndex = 1;
+        //    dialog.FileName = "Отчет";
+        //    if (dialog.ShowDialog() == true)
+        //    {
+        //        var file = new FileStream(dialog.FileName, FileMode.Create, FileAccess.ReadWrite);
+        //        var template = new MemoryStream(Properties.Resources.Shablon, true);
+        //        var workbook = new XSSFWorkbook(template);
+        //        var sheet = workbook.GetSheetAt(0);
+
+        //        sheet.GetRow(2).GetCell(7).SetCellValue(DateTime.Today.ToShortDateString());
+
+        //        sheet.GetRow(6).GetCell(7).SetCellValue(KolvoOrderBox.Text);
+        //        sheet.GetRow(7).GetCell(7).SetCellValue(KolvoTimeBox.Text);
+        //        sheet.GetRow(8).GetCell(7).SetCellValue(PriceBox.Text);
+
+        //        sheet.ShiftRows(11, 11 + int.Parse(KolvoOrderBox.Text), int.Parse(KolvoOrderBox.Text), true, true);
+        //        int row = 11;
+
+        //        var listSort = Order.GetOrderInfo();
+
+        //        if (DatePickerSearchEnd.Text != "" && DatePickerSearchStart.Text != "")
+        //        {
+        //            DateTime dtStart = DatePickerSearchStart.SelectedDate.Value;
+        //            DateTime dtEnd = DatePickerSearchEnd.SelectedDate.Value;
+
+        //            if (DatePickerSearchStart.SelectedDate.Value <= DatePickerSearchEnd.SelectedDate.Value)
+        //                listSort = listSort.Where(e => DateTime.Parse(e.Date) >= dtStart.Date && DateTime.Parse(e.Date) <= dtEnd.Date).ToList();
+        //            else
+        //            {
+        //                MessageBox.Show("Дата конца периода больше \n даты начала периода");
+        //                DatePickerSearchEnd.Text = "";
+        //            }
+        //            if (CheckFinish.IsChecked == true)
+        //            {
+        //                listSort = listSort.Where(e => e.Status == "Завершена").ToList();
+        //            }
+        //            else if (CheckCanceled.IsChecked == true)
+        //            {
+        //                listSort = listSort.Where(e => e.Status == "Отменена").ToList();
+        //            }
+
+        //            foreach (var item in listSort.OrderBy(x => x.ID))
+        //            {
+        //                var rowInsert = sheet.CreateRow(row);
+        //                rowInsert.CreateCell(0).SetCellValue(row - 10);
+        //                rowInsert.GetCell(0).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+        //                rowInsert.CreateCell(1).SetCellValue(item.ID);
+        //                rowInsert.GetCell(1).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+        //                rowInsert.CreateCell(2).SetCellValue(item.Date);
+        //                rowInsert.GetCell(2).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+        //                rowInsert.CreateCell(3).SetCellValue(item.Time);
+        //                rowInsert.GetCell(3).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+        //                rowInsert.CreateCell(4).SetCellValue(item.Address);
+        //                rowInsert.GetCell(4).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+        //                rowInsert.CreateCell(5).SetCellValue(item.Status);
+        //                rowInsert.GetCell(5).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+        //                rowInsert.CreateCell(6).SetCellValue(item.Brigade);
+        //                rowInsert.GetCell(6).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+        //                rowInsert.CreateCell(7).SetCellValue(item.FinalPrice);
+        //                rowInsert.GetCell(7).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+        //                rowInsert.CreateCell(8).SetCellValue(item.ApproximateTime);
+        //                rowInsert.GetCell(8).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+        //                row++;
+        //            }
+
+        //            workbook.Write(file);
+        //        }
+        //   }
         }
     }
 }

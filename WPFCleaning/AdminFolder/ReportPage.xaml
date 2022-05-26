@@ -77,23 +77,21 @@
                 </Button>
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Row="5" Grid.Column="5" Grid.RowSpan="2" Margin="10 0 0 0">
+        <StackPanel Grid.Row="4" Grid.Column="5" Grid.RowSpan="5" Margin="10 0 0 0">
             <Label Content="Количество заявок:" FontFamily="Arial Bold" FontSize="20" Foreground="Black"/>
             <TextBox x:Name="KolvoOrderBox" Background="White" Height="38" Width="220" Margin="6 10 0 0" 
                      VerticalAlignment="Bottom" FontSize="20" Padding="2 13 0 0" 
                      FontFamily="Arial Bold" IsReadOnly="True" HorizontalAlignment="Left" Cursor="Arrow"/>
-        </StackPanel>
-        <StackPanel Grid.Row="6" Grid.Column="5" Grid.RowSpan="2" Margin="10 10 0 0">
             <Label Content="Затраченное время:" FontFamily="Arial Bold" FontSize="20" Foreground="Black"/>
             <TextBox x:Name="KolvoTimeBox" Background="White" Height="38" Width="220" Margin="6 10 0 0" 
                      FontFamily="Arial Bold" FontSize="20" Padding="2 13 0 0"
                      IsReadOnly="True" HorizontalAlignment="Left" Cursor="Arrow"/>
-        </StackPanel>
-        <StackPanel Grid.Row="7" Grid.Column="5" Grid.RowSpan="2" Margin="10 30 0 0">
             <Label Content="Выручка за период:" FontFamily="Arial Bold" FontSize="20" Foreground="Black"/>
             <TextBox x:Name="PriceBox" Background="White" Height="38" Width="220" Margin="6 10 0 0" 
                      FontSize="20" FontFamily="Arial Bold" Padding="2 13 0 0"
                      IsReadOnly="True" HorizontalAlignment="Left" Cursor="Arrow"/>
+            <Button Content="Сформировать отчет" Cursor="Hand" Margin="0 30 0 0" Width="200" FontSize="14" FontFamily="Arial Bold" 
+                    Background="#3a388a" BorderThickness="2" BorderBrush="White" Click="ToReportBtn"/>
         </StackPanel>
 
         <DataGrid x:Name="dataGridOrder" IsReadOnly="True" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="10" Margin="0 0 2 0" 
