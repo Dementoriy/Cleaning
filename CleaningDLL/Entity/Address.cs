@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace CleaningDLL.Entity
@@ -19,13 +20,14 @@ namespace CleaningDLL.Entity
         public RoomType RoomType { get; set; }
         [Required]
         public string AddressName { get; set; }
+        public string FullAddress { get; set; }
         private static ApplicationContext db = Context.Db;
         public Address()
         {
 
         }
         public Address(string? CityDistrict, string? Settlement, string Street, string HouseNumber, string? Block, 
-            string? ApartmentNumber, RoomType RoomType, string AddressName)
+            string? ApartmentNumber, RoomType RoomType, string AddressName, string FullAddress)
         {
             this.CityDistrict = CityDistrict;
             this.Settlement = Settlement;
@@ -35,6 +37,7 @@ namespace CleaningDLL.Entity
             this.ApartmentNumber = ApartmentNumber;
             this.RoomType = RoomType;
             this.AddressName = AddressName;
+            this.FullAddress = FullAddress;
         }
         public string AddAddress()
         {
@@ -60,6 +63,10 @@ namespace CleaningDLL.Entity
                 str += $", кв.{ApartmentNumber}.";
             }
             return str;
+        }
+        public static List<Address> GetAddress()
+        {
+            return db.Address.ToList();
         }
         public static Address GetAddress(string cityDistrict, string settlement, string street, 
             string houseNumber, string block, string apartmentNumber)

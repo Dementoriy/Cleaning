@@ -22,12 +22,14 @@ namespace WPFCleaning.Admin
             }
             else client = Client.GetClientByTelefon(clientPage.Telefon.Text);
 
-            string enteredAddress = "Кировская область, Киров, " + ", " + clientPage.CityDistrict.Text + clientPage.Settlement.Text + ", " 
+            string enteredAddress = "Кировская область, Киров, " + clientPage.CityDistrict.Text + clientPage.Settlement.Text + ", " 
                 + clientPage.Street.Text + " (" + clientPage.CityDistrict.Text + "), " + clientPage.HouseNumber.Text + ", " + clientPage.Block.Text + ", " + clientPage.ApartmentNumber.Text;
 
             var token = "24446a45461d9e48f334ed4d55e7ebdd8e66f39f";
             var api = new SuggestClient(token);
             var result =api.SuggestAddress(enteredAddress);
+
+            enteredAddress = enteredAddress.Substring(0, 26);
 
             if (result.suggestions.Count == 0)
             {
@@ -47,12 +49,11 @@ namespace WPFCleaning.Admin
             {
                 RoomType roomType = RoomType.GetRoomTypeByName(newApplication.RoomTypeBox.Text);
                 address = new CleaningDLL.Entity.Address(addressList[0], addressList[1], addressList[2], 
-                    addressList[3], addressList[4], addressList[5], roomType, "Дом");
+                    addressList[3], addressList[4], addressList[5], roomType, "Дом", enteredAddress);
                 CleaningDLL.Entity.Address.Add(address);
             }
             else address = CleaningDLL.Entity.Address.GetAddress(addressList[0], addressList[1], addressList[2],
                     addressList[3], addressList[4], addressList[5]);
-            //Context.Db.Address.Add(address);
 
             ClientAddresses clientAddresses;
             if (ClientAddresses.CheckClientAddresses(address, client))
@@ -61,7 +62,6 @@ namespace WPFCleaning.Admin
                 ClientAddresses.Add(clientAddresses);
             }
             else clientAddresses = ClientAddresses.GetClientAddresses(address, client);
-            //Context.Db.ClientAddresses.Add(clientAddresses);
 
             if (newApplication.IsCorrectData())
             {
@@ -74,7 +74,6 @@ namespace WPFCleaning.Admin
                         Order.GetPriceByString(newApplication.PriceBox.Text), newApplication.approximateTime,
                         newApplication.Comment.Text, null);
 
-                    //Context.Db.Order.Add(order);
                     Order.Add(order);
 
                     for (int i = 0; i < 7; i++)
@@ -84,14 +83,12 @@ namespace WPFCleaning.Admin
                             var providedService = new ProvidedService(order, Service.GetServiceById(newApplication.arrayService[0, i]),
                                 newApplication.arrayService[1, i]);
 
-                            //Context.Db.ProvidedService.Add(providedService);
                             ProvidedService.Add(providedService);
                             
                         }
                     }
 
                     Order.Update(order);
-                    //Context.Db.SaveChanges();
                     MessageBox.Show("Успешно!");
                     newApplication.ClearNewApplication();
                     clientPage.ClearClientInfo();
