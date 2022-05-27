@@ -22,14 +22,36 @@ namespace WPFCleaning.Admin
             }
             else client = Client.GetClientByTelefon(clientPage.Telefon.Text);
 
-            string enteredAddress = "Кировская область, Киров, " + clientPage.CityDistrict.Text + clientPage.Settlement.Text + ", " 
-                + clientPage.Street.Text + " (" + clientPage.CityDistrict.Text + "), " + clientPage.HouseNumber.Text + ", " + clientPage.Block.Text + ", " + clientPage.ApartmentNumber.Text;
+            string enteredAddress = "Кировская область, Киров, ";
+
+            if (clientPage.CityDistrict.Text != "" && clientPage.CityDistrict.Text != null)
+            {
+                enteredAddress += clientPage.CityDistrict.Text + ", ";
+            }
+            if (clientPage.Settlement.Text != "" && clientPage.Settlement.Text != null)
+            {
+                enteredAddress += clientPage.Settlement.Text + ", ";
+            }
+            enteredAddress += $"ул.{clientPage.Street.Text} {clientPage.HouseNumber.Text}. ";
+            int x = enteredAddress.Length - 2;
+            if (clientPage.Block.Text != "" && clientPage.Block.Text != null )
+            {
+                enteredAddress = enteredAddress.Remove(x);
+                enteredAddress += $", к.{clientPage.Block.Text}, ";
+            }
+            if (clientPage.ApartmentNumber.Text != "" && clientPage.ApartmentNumber.Text != null)
+            {
+                enteredAddress = enteredAddress.Remove(x);
+                enteredAddress += $", кв.{clientPage.ApartmentNumber.Text}.";
+            }
+            //"Кировская область, Киров, " + clientPage.CityDistrict.Text + ", " + clientPage.Settlement.Text + ", " 
+            //    + clientPage.Street.Text + /*" (" + clientPage.CityDistrict.Text + "), "*/ ", " + clientPage.HouseNumber.Text + ", " + clientPage.Block.Text + ", " + clientPage.ApartmentNumber.Text;
 
             var token = "24446a45461d9e48f334ed4d55e7ebdd8e66f39f";
             var api = new SuggestClient(token);
             var result =api.SuggestAddress(enteredAddress);
 
-            enteredAddress = enteredAddress.Substring(26, enteredAddress.Length);
+            enteredAddress = enteredAddress.Substring(26);
 
             if (result.suggestions.Count == 0)
             {

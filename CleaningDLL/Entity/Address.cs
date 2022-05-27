@@ -52,14 +52,14 @@ namespace CleaningDLL.Entity
             {
                 str += Settlement + ", ";
             }
-            str += $"ул.{Street}, д.{HouseNumber}. ";
+            str += $"ул.{Street} {HouseNumber}. ";
             int x = str.Length - 2;
-            if (Block != "")
+            if (Block != "" && Block != null)
             {
                 str = str.Remove(x);
                 str += $", к.{Block}, ";
             }
-            if (ApartmentNumber != "")
+            if (ApartmentNumber != "" && ApartmentNumber != null)
             {
                 str = str.Remove(x);
                 str += $", кв.{ApartmentNumber}.";

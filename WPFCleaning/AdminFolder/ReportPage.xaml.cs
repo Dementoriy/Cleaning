@@ -177,6 +177,21 @@ namespace WPFCleaning.Admin
 
         private void ToReportBtn(object sender, RoutedEventArgs e)
         {
+            if (DatePickerSearchEnd.Text == "" || DatePickerSearchStart.Text == "")
+            {
+                MessageBox.Show("Выберите временной промежуток");
+                return;
+            }
+            if (DatePickerSearchStart.SelectedDate.Value > DatePickerSearchEnd.SelectedDate.Value)
+            {
+                MessageBox.Show("Дата конца больше даты начала!");
+                return;
+            }
+            if (KolvoOrderBox.Text == "" || KolvoOrderBox.Text == null)
+            {
+                MessageBox.Show("Нажмите рассчитать");
+                return;
+            }
 
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.InitialDirectory = Environment
@@ -192,7 +207,6 @@ namespace WPFCleaning.Admin
                 var template = new MemoryStream(Properties.Resources.Shablon, true);
                 var workbook = new XSSFWorkbook(template);
                 var sheet = workbook.GetSheetAt(0);
-
 
                 sheet.GetRow(6).CreateCell(7);
                 sheet.GetRow(7).CreateCell(2);
@@ -212,130 +226,48 @@ namespace WPFCleaning.Admin
 
                 var listSort = Order.GetOrderInfo();
 
-                if (DatePickerSearchEnd.Text != "" && DatePickerSearchStart.Text != "")
+
+                DateTime dtStart = DatePickerSearchStart.SelectedDate.Value;
+                DateTime dtEnd = DatePickerSearchEnd.SelectedDate.Value;
+
+                listSort = listSort.Where(e => DateTime.Parse(e.Date) >= dtStart.Date && DateTime.Parse(e.Date) <= dtEnd.Date).ToList();
+
+                if (CheckFinish.IsChecked == true)
                 {
-                    DateTime dtStart = DatePickerSearchStart.SelectedDate.Value;
-                    DateTime dtEnd = DatePickerSearchEnd.SelectedDate.Value;
-
-                    if (DatePickerSearchStart.SelectedDate.Value <= DatePickerSearchEnd.SelectedDate.Value)
-                        listSort = listSort.Where(e => DateTime.Parse(e.Date) >= dtStart.Date && DateTime.Parse(e.Date) <= dtEnd.Date).ToList();
-                    else
-                    {
-                        MessageBox.Show("Дата конца периода больше \n даты начала периода");
-                        DatePickerSearchEnd.Text = "";
-                    }
-                    if (CheckFinish.IsChecked == true)
-                    {
-                        listSort = listSort.Where(e => e.Status == "Завершена").ToList();
-                    }
-                    else if (CheckCanceled.IsChecked == true)
-                    {
-                        listSort = listSort.Where(e => e.Status == "Отменена").ToList();
-                    }
-
-                    foreach (var item in listSort.OrderBy(x => x.ID))
-                    {
-                        var rowInsert = sheet.CreateRow(row);
-                        rowInsert.CreateCell(0).SetCellValue(row - 10);
-                        rowInsert.GetCell(0).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-                        rowInsert.CreateCell(1).SetCellValue(item.ID);
-                        rowInsert.GetCell(1).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-                        rowInsert.CreateCell(2).SetCellValue(item.Date);
-                        rowInsert.GetCell(2).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-                        rowInsert.CreateCell(3).SetCellValue(item.Time);
-                        rowInsert.GetCell(3).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-                        rowInsert.CreateCell(4).SetCellValue(item.Address);
-                        rowInsert.GetCell(4).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-                        rowInsert.CreateCell(5).SetCellValue(item.Status);
-                        rowInsert.GetCell(5).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-                        rowInsert.CreateCell(6).SetCellValue(item.Brigade);
-                        rowInsert.GetCell(6).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-                        rowInsert.CreateCell(7).SetCellValue(item.FinalPrice);
-                        rowInsert.GetCell(7).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-                        rowInsert.CreateCell(8).SetCellValue(item.ApproximateTime);
-                        rowInsert.GetCell(8).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-                        row++;
-                    }
-
-                    workbook.Write(file);
-                    MessageBox.Show("Отчет успешно создан");
+                    listSort = listSort.Where(e => e.Status == "Завершена").ToList();
                 }
-        }
-        //private void ToReportBtn(object sender, RoutedEventArgs e)
-        //{
-        //    SaveFileDialog dialog = new SaveFileDialog();
-        //    dialog.InitialDirectory = Environment
-        //    .GetFolderPath(Environment.SpecialFolder.Desktop);
-        //    dialog.DefaultExt = ".xlsx";
-        //    dialog.Filter = "Таблицы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*";
-        //    dialog.FilterIndex = 1;
-        //    dialog.FileName = "Отчет";
-        //    if (dialog.ShowDialog() == true)
-        //    {
-        //        var file = new FileStream(dialog.FileName, FileMode.Create, FileAccess.ReadWrite);
-        //        var template = new MemoryStream(Properties.Resources.Shablon, true);
-        //        var workbook = new XSSFWorkbook(template);
-        //        var sheet = workbook.GetSheetAt(0);
+                else if (CheckCanceled.IsChecked == true)
+                {
+                    listSort = listSort.Where(e => e.Status == "Отменена").ToList();
+                }
 
-        //        sheet.GetRow(2).GetCell(7).SetCellValue(DateTime.Today.ToShortDateString());
+                foreach (var item in listSort.OrderBy(x => x.ID))
+                {
+                    var rowInsert = sheet.CreateRow(row);
+                    rowInsert.CreateCell(0).SetCellValue(row - 10);
+                    rowInsert.GetCell(0).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                    rowInsert.CreateCell(1).SetCellValue(item.ID);
+                    rowInsert.GetCell(1).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                    rowInsert.CreateCell(2).SetCellValue(item.Date);
+                    rowInsert.GetCell(2).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                    rowInsert.CreateCell(3).SetCellValue(item.Time);
+                    rowInsert.GetCell(3).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                    rowInsert.CreateCell(4).SetCellValue(item.Address);
+                    rowInsert.GetCell(4).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                    rowInsert.CreateCell(5).SetCellValue(item.Status);
+                    rowInsert.GetCell(5).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                    rowInsert.CreateCell(6).SetCellValue(item.Brigade);
+                    rowInsert.GetCell(6).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                    rowInsert.CreateCell(7).SetCellValue(item.FinalPrice);
+                    rowInsert.GetCell(7).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                    rowInsert.CreateCell(8).SetCellValue(item.ApproximateTime);
+                    rowInsert.GetCell(8).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
+                    row++;
+                }
 
-        //        sheet.GetRow(6).GetCell(7).SetCellValue(KolvoOrderBox.Text);
-        //        sheet.GetRow(7).GetCell(7).SetCellValue(KolvoTimeBox.Text);
-        //        sheet.GetRow(8).GetCell(7).SetCellValue(PriceBox.Text);
-
-        //        sheet.ShiftRows(11, 11 + int.Parse(KolvoOrderBox.Text), int.Parse(KolvoOrderBox.Text), true, true);
-        //        int row = 11;
-
-        //        var listSort = Order.GetOrderInfo();
-
-        //        if (DatePickerSearchEnd.Text != "" && DatePickerSearchStart.Text != "")
-        //        {
-        //            DateTime dtStart = DatePickerSearchStart.SelectedDate.Value;
-        //            DateTime dtEnd = DatePickerSearchEnd.SelectedDate.Value;
-
-        //            if (DatePickerSearchStart.SelectedDate.Value <= DatePickerSearchEnd.SelectedDate.Value)
-        //                listSort = listSort.Where(e => DateTime.Parse(e.Date) >= dtStart.Date && DateTime.Parse(e.Date) <= dtEnd.Date).ToList();
-        //            else
-        //            {
-        //                MessageBox.Show("Дата конца периода больше \n даты начала периода");
-        //                DatePickerSearchEnd.Text = "";
-        //            }
-        //            if (CheckFinish.IsChecked == true)
-        //            {
-        //                listSort = listSort.Where(e => e.Status == "Завершена").ToList();
-        //            }
-        //            else if (CheckCanceled.IsChecked == true)
-        //            {
-        //                listSort = listSort.Where(e => e.Status == "Отменена").ToList();
-        //            }
-
-        //            foreach (var item in listSort.OrderBy(x => x.ID))
-        //            {
-        //                var rowInsert = sheet.CreateRow(row);
-        //                rowInsert.CreateCell(0).SetCellValue(row - 10);
-        //                rowInsert.GetCell(0).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-        //                rowInsert.CreateCell(1).SetCellValue(item.ID);
-        //                rowInsert.GetCell(1).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-        //                rowInsert.CreateCell(2).SetCellValue(item.Date);
-        //                rowInsert.GetCell(2).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-        //                rowInsert.CreateCell(3).SetCellValue(item.Time);
-        //                rowInsert.GetCell(3).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-        //                rowInsert.CreateCell(4).SetCellValue(item.Address);
-        //                rowInsert.GetCell(4).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-        //                rowInsert.CreateCell(5).SetCellValue(item.Status);
-        //                rowInsert.GetCell(5).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-        //                rowInsert.CreateCell(6).SetCellValue(item.Brigade);
-        //                rowInsert.GetCell(6).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-        //                rowInsert.CreateCell(7).SetCellValue(item.FinalPrice);
-        //                rowInsert.GetCell(7).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-        //                rowInsert.CreateCell(8).SetCellValue(item.ApproximateTime);
-        //                rowInsert.GetCell(8).CellStyle = sheet.GetRow(10).GetCell(0).CellStyle;
-        //                row++;
-        //            }
-
-        //            workbook.Write(file);
-        //        }
-        //   }
+                workbook.Write(file);
+                MessageBox.Show("Отчет успешно создан");
+            }
         }
     }
 }
