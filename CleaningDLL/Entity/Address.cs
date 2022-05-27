@@ -21,13 +21,14 @@ namespace CleaningDLL.Entity
         [Required]
         public string AddressName { get; set; }
         public string FullAddress { get; set; }
+        public bool CurrentAddress { get; set; }
         private static ApplicationContext db = Context.Db;
         public Address()
         {
 
         }
         public Address(string? CityDistrict, string? Settlement, string Street, string HouseNumber, string? Block, 
-            string? ApartmentNumber, RoomType RoomType, string AddressName, string FullAddress)
+            string? ApartmentNumber, RoomType RoomType, string AddressName, string FullAddress, bool CurrentAddress)
         {
             this.CityDistrict = CityDistrict;
             this.Settlement = Settlement;
@@ -38,6 +39,7 @@ namespace CleaningDLL.Entity
             this.RoomType = RoomType;
             this.AddressName = AddressName;
             this.FullAddress = FullAddress;
+            this.CurrentAddress = CurrentAddress;
         }
         public string AddAddress()
         {

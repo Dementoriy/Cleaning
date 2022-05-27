@@ -29,7 +29,7 @@ namespace WPFCleaning.Admin
             var api = new SuggestClient(token);
             var result =api.SuggestAddress(enteredAddress);
 
-            enteredAddress = enteredAddress.Substring(0, 26);
+            enteredAddress = enteredAddress.Substring(26, enteredAddress.Length);
 
             if (result.suggestions.Count == 0)
             {
@@ -49,7 +49,7 @@ namespace WPFCleaning.Admin
             {
                 RoomType roomType = RoomType.GetRoomTypeByName(newApplication.RoomTypeBox.Text);
                 address = new CleaningDLL.Entity.Address(addressList[0], addressList[1], addressList[2], 
-                    addressList[3], addressList[4], addressList[5], roomType, "Дом", enteredAddress);
+                    addressList[3], addressList[4], addressList[5], roomType, "Дом", enteredAddress, true);
                 CleaningDLL.Entity.Address.Add(address);
             }
             else address = CleaningDLL.Entity.Address.GetAddress(addressList[0], addressList[1], addressList[2],
@@ -58,7 +58,7 @@ namespace WPFCleaning.Admin
             ClientAddresses clientAddresses;
             if (ClientAddresses.CheckClientAddresses(address, client))
             {
-                clientAddresses = new ClientAddresses(address, client, "Дом");
+                clientAddresses = new ClientAddresses(address, client);
                 ClientAddresses.Add(clientAddresses);
             }
             else clientAddresses = ClientAddresses.GetClientAddresses(address, client);
