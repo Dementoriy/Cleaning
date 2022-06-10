@@ -28,24 +28,43 @@ namespace WPFCleaning.Admin
             if (Client.proverkaClientTelefon(Telefon.Text))
             {
                 var lastAddress = Client.GetClientInfo(Telefon.Text).ToArray().Length - 1;
-                Client.ClientInfo client = Client.GetClientInfo(Telefon.Text)[lastAddress];
-
-                Surname.Text = client.Surname;
-                Name.Text = client.Name;
-                MiddleName.Text = client.MiddleName;
-                CityDistrict.Text = client.CityDistrict;
-                Settlement.Text = client.Settlement;
-                Street.Text = client.Street;
-                HouseNumber.Text = client.HouseNumber;
-                Block.Text = client.Block;
-                ApartmentNumber.Text = client.ApartmentNumber;
-                if (Order.IsOldClienCheck(client.ID))
+                if(lastAddress == -1)
                 {
-                    CheckOldClient.IsChecked = true;
-                    Client.ClientIsOld(client.ID);
-                    db.SaveChanges();
+                    Client client = Client.GetClientByTelefon(Telefon.Text);
+
+                    Surname.Text = client.Surname;
+                    Name.Text = client.Name;
+                    MiddleName.Text = client.MiddleName;
+                    if (Order.IsOldClienCheck(client.ID))
+                    {
+                        CheckOldClient.IsChecked = true;
+                        Client.ClientIsOld(client.ID);
+                        db.SaveChanges();
+                    }
+                    else CheckOldClient.IsChecked = false;
                 }
-                else CheckOldClient.IsChecked = false;
+                else
+                {
+                    Client.ClientInfo client = Client.GetClientInfo(Telefon.Text)[lastAddress];
+
+                    Surname.Text = client.Surname;
+                    Name.Text = client.Name;
+                    MiddleName.Text = client.MiddleName;
+                    CityDistrict.Text = client.CityDistrict;
+                    Settlement.Text = client.Settlement;
+                    Street.Text = client.Street;
+                    HouseNumber.Text = client.HouseNumber;
+                    Block.Text = client.Block;
+                    ApartmentNumber.Text = client.ApartmentNumber;
+                    if (Order.IsOldClienCheck(client.ID))
+                    {
+                        CheckOldClient.IsChecked = true;
+                        Client.ClientIsOld(client.ID);
+                        db.SaveChanges();
+                    }
+                    else CheckOldClient.IsChecked = false;
+                }
+                
             }
             else
             {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Npgsql;
@@ -38,21 +39,51 @@ namespace CleaningDLL.Entity
 
         public static void ClientIsOld(int id)
         {
-            Client oldClient = db.Client.FirstOrDefault(c => c.ID == id);
-            oldClient.IsOldClient = true;
+            try
+            {
+                Client oldClient = db.Client.FirstOrDefault(c => c.ID == id);
+                oldClient.IsOldClient = true;
+            }
+            catch (Exception ex)
+            {
+                return ;
+            }
+
         }
         public static Client GetClientByTelefon(string telefon)
         {
-            return db.Client.FirstOrDefault(e => e.PhoneNumber == telefon);
+            try
+            {
+                return db.Client.FirstOrDefault(e => e.PhoneNumber == telefon);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
         }
         public static bool ClientByTelefonIsNew(string telefon)
         {
-            return !db.Client.Any(e => e.PhoneNumber == telefon);
+            try
+            {
+                return !db.Client.Any(e => e.PhoneNumber == telefon);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public static Client GetClient(string login, string pass)
         {
-            return db.Client.Where(e => e.Login == login && e.Password == pass).FirstOrDefault();
+            try
+            {
+                return db.Client.Where(e => e.Login == login && e.Password == pass).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
         public bool AddClient()
         {
@@ -71,6 +102,8 @@ namespace CleaningDLL.Entity
 
         public static List<ClientInfo> GetClientInfo(string Telefon)
         {
+            try
+            {
             return (from c in db.Client
                     where c.PhoneNumber == Telefon
                     join o in db.Order on c.ID equals o.Client.ID
@@ -89,17 +122,23 @@ namespace CleaningDLL.Entity
                         ApartmentNumber = a.ApartmentNumber,
                         IsOldClient = c.IsOldClient
                     }).ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
+       
         public class ClientInfo
         {
             public int ID { get; set; }
             public string Surname { get; set; }
             public string Name { get; set; }
             public string? MiddleName { get; set; }
-            public string HouseNumber { get; set; }
+            public string? HouseNumber { get; set; }
             public string? CityDistrict { get; set; }
             public string? Settlement { get; set; }
-            public string Street { get; set; }
+            public string? Street { get; set; }
             public string? Block { get; set; }
             public string? ApartmentNumber { get; set; }
             public bool IsOldClient { get; set; }
@@ -107,7 +146,14 @@ namespace CleaningDLL.Entity
         
         public static bool proverkaClientTelefon(string Telefon)
         {
+            try
+            {
                 return db.Client.Any(a => a.PhoneNumber == Telefon);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public static bool Add(Client client)
@@ -133,12 +179,26 @@ namespace CleaningDLL.Entity
 
         public static Client? GetClientLogin(string login)
         {
-            return db.Client.FirstOrDefault(c => c.Login == login);
+            try
+            {
+                return db.Client.FirstOrDefault(c => c.Login == login);
+            }
+            catch(Exception ex)
+            { 
+                return null;
+            }
         }
 
         internal static Client? GetClientAuth(string login, string pass)
         {
-            return db.Client.FirstOrDefault(c => c.Login == login && c.Password == pass);
+            try
+            {
+                return db.Client.FirstOrDefault(c => c.Login == login && c.Password == pass);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
         public bool Update()
         {
