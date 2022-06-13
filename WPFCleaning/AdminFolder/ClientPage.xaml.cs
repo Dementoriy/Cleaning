@@ -18,8 +18,8 @@ namespace WPFCleaning.Admin
         {
             this.window = window;
             InitializeComponent();
-
         }
+
         private MainWindow window;
 
         private static ApplicationContext db = Context.Db;
@@ -35,6 +35,7 @@ namespace WPFCleaning.Admin
                     Surname.Text = client.Surname;
                     Name.Text = client.Name;
                     MiddleName.Text = client.MiddleName;
+                    window.newApplication.RoomTypeBox.SelectedItem = "Квартира";
                     if (Order.IsOldClienCheck(client.ID))
                     {
                         CheckOldClient.IsChecked = true;
@@ -56,6 +57,7 @@ namespace WPFCleaning.Admin
                     HouseNumber.Text = client.HouseNumber;
                     Block.Text = client.Block;
                     ApartmentNumber.Text = client.ApartmentNumber;
+                    window.newApplication.RoomTypeBox.SelectedItem = client.RoomType;
                     if (Order.IsOldClienCheck(client.ID))
                     {
                         CheckOldClient.IsChecked = true;

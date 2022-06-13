@@ -11,7 +11,7 @@ namespace WPFCleaning.Admin
     {
         public static int[,] arrayService = new int[2, 7];
 
-        public static void Calculate(NewApplication newApplication, ClientPage clientPage, string selectedItems = "")
+        public static void Calculate(NewApplication newApplication, ClientPage clientPage, string selectedItems)
         {
             Array.Clear(arrayService, 0, arrayService.Length);
             arrayService[0, 1] = Service.GetIdService("Мойка окон");
@@ -73,7 +73,7 @@ namespace WPFCleaning.Admin
                     newApplication.finalPrice = Convert.ToInt32((newApplication.finalPrice * 90) / 100);
                 }
 
-                RoomType roomType = RoomType.GetСoefficientByType(selectedItems);
+                RoomType roomType = RoomType.GetСoefficientByType(selectedItems.ToString());
                 newApplication.finalPrice *= roomType.Сoefficient;
 
                 newApplication.PriceBox.Text = Order.GetPriceByInt(Convert.ToInt32(newApplication.finalPrice));

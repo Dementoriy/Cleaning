@@ -27,7 +27,18 @@ namespace WPFCleaning.Admin
             PriceBox.Text = "0 ₽";
             ApproximateTime.Text = "0ч. 0мин.";
             GetRoomType();
-            RoomTypeBox.SelectedItem = "Квартира";
+
+            //var lastAddress = Client.GetClientInfo(_clientPage.Telefon.ToString()).ToArray().Length - 1;
+            //if(lastAddress == -1)
+            //{
+            //    RoomTypeBox.SelectedItem = "Квартира";
+            //}
+            //else
+            //{
+            //    Client.ClientInfo clientInfo = Client.GetClientInfo(_clientPage.Telefon.ToString())[lastAddress];
+            //    RoomTypeBox.SelectedItem = clientInfo.RoomType;
+            //}
+
         }
 
         public int idService;
@@ -44,7 +55,8 @@ namespace WPFCleaning.Admin
             WindowCleanBox.IsEnabled = false;
             KolvoWindow.Text = "0";
             KolvoDoor.Text = "0";
-            OrderPrice.Calculate(this, _clientPage);
+            var selectedItems = RoomTypeBox.Text;
+            OrderPrice.Calculate(this, _clientPage, selectedItems);
         }
         private void ChemistryClean_Checked(object sender, RoutedEventArgs e)
         {
@@ -56,7 +68,8 @@ namespace WPFCleaning.Admin
             KolvoSofa.Text = "0";
             KolvoArmcheir.Text = "0";
             KolvoCarpet.Text = "0";
-            OrderPrice.Calculate(this, _clientPage);
+            var selectedItems = RoomTypeBox.Text;
+            OrderPrice.Calculate(this, _clientPage, selectedItems);
         }
         private void Dezinfection_Checked(object sender, RoutedEventArgs e)
         {
@@ -66,7 +79,8 @@ namespace WPFCleaning.Admin
         {
             DezinfectionBox.IsEnabled = false;
             KolvoDezinfection.Text = "0";
-            OrderPrice.Calculate(this, _clientPage);
+            var selectedItems = RoomTypeBox.Text;
+            OrderPrice.Calculate(this, _clientPage, selectedItems);
         }
         public void GetRoomType()
         {
@@ -90,7 +104,8 @@ namespace WPFCleaning.Admin
                 CheckBuildingClean.IsChecked = false;
                 CheckComplexСleaningClean.IsChecked = false;
                 idService = Service.GetIdService(CheckExpressClean.Content.ToString());
-                OrderPrice.Calculate(this, _clientPage);
+                var selectedItems = RoomTypeBox.Text;
+                OrderPrice.Calculate(this, _clientPage, selectedItems);
             }
             else
             {
@@ -116,7 +131,8 @@ namespace WPFCleaning.Admin
                 CheckBuildingClean.IsChecked = false;
                 CheckComplexСleaningClean.IsChecked = false;
                 idService = Service.GetIdService(CheckGeneralClean.Content.ToString());
-                OrderPrice.Calculate(this, _clientPage);
+                var selectedItems = RoomTypeBox.Text;
+                OrderPrice.Calculate(this, _clientPage, selectedItems);
             }
             else
             {
@@ -142,7 +158,8 @@ namespace WPFCleaning.Admin
                 CheckGeneralClean.IsChecked = false;
                 CheckComplexСleaningClean.IsChecked = false;
                 idService = Service.GetIdService(CheckBuildingClean.Content.ToString());
-                OrderPrice.Calculate(this, _clientPage);
+                var selectedItems = RoomTypeBox.Text;
+                OrderPrice.Calculate(this, _clientPage, selectedItems);
             }
             else
             {
@@ -168,7 +185,8 @@ namespace WPFCleaning.Admin
                 CheckGeneralClean.IsChecked = false;
                 CheckBuildingClean.IsChecked = false;
                 idService = Service.GetIdService(CheckComplexСleaningClean.Content.ToString());
-                OrderPrice.Calculate(this, _clientPage);
+                var selectedItems = RoomTypeBox.Text;
+                OrderPrice.Calculate(this, _clientPage, selectedItems);
             }
             else
             {
@@ -187,7 +205,8 @@ namespace WPFCleaning.Admin
         }
         private void CheckService_Unchecked(object sender, RoutedEventArgs e)
         {
-            OrderPrice.Calculate(this, _clientPage);
+            var selectedItems = RoomTypeBox.Text;
+            OrderPrice.Calculate(this, _clientPage, selectedItems);
         }
 
         public void ClearNewApplication()
@@ -217,7 +236,8 @@ namespace WPFCleaning.Admin
 
         private void ButtonAddOrder_Click(object sender, RoutedEventArgs e)
         {
-            OrderPrice.Calculate(this, _clientPage);
+            var selectedItems = RoomTypeBox.Text;
+            OrderPrice.Calculate(this, _clientPage, selectedItems);
             arrayService = OrderPrice.arrayService;
             //Client client;
 
@@ -257,7 +277,8 @@ namespace WPFCleaning.Admin
             {
                 textBox.Text = "0";
             }
-            OrderPrice.Calculate(this, _clientPage);
+            var selectedItems = RoomTypeBox.Text;
+            OrderPrice.Calculate(this, _clientPage, selectedItems);
         }
         private void SelectTime_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {

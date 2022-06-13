@@ -66,16 +66,17 @@ namespace WPFCleaning.Admin
 
             CleaningDLL.Entity.Address address;
 
+            RoomType roomType = RoomType.GetRoomTypeByName(newApplication.RoomTypeBox.Text);
+
             if (CleaningDLL.Entity.Address.CheckAddress(addressList[0], addressList[1],
-                addressList[2], addressList[3], addressList[4], addressList[5]))
+                addressList[2], addressList[3], addressList[4], addressList[5], roomType.Type))
             {
-                RoomType roomType = RoomType.GetRoomTypeByName(newApplication.RoomTypeBox.Text);
                 address = new CleaningDLL.Entity.Address(addressList[0], addressList[1], addressList[2], 
                     addressList[3], addressList[4], addressList[5], roomType, "Дом", enteredAddress, true);
                 CleaningDLL.Entity.Address.Add(address);
             }
             else address = CleaningDLL.Entity.Address.GetAddress(addressList[0], addressList[1], addressList[2],
-                    addressList[3], addressList[4], addressList[5]);
+                    addressList[3], addressList[4], addressList[5], roomType);
 
             ClientAddresses clientAddresses;
             if (ClientAddresses.CheckClientAddresses(address, client))

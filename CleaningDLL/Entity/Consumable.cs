@@ -1,4 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace CleaningDLL.Entity
 {
@@ -16,6 +20,7 @@ namespace CleaningDLL.Entity
         public int ReferenceUnitsOfMeasurementID { get; set; }
         [Required]
         public int Amount { get; set; }
+        private static ApplicationContext db = Context.Db;
 
         public Consumable()
         {
@@ -28,6 +33,40 @@ namespace CleaningDLL.Entity
             this.CurrentPrice = CurrentPrice;
             this.ReferenceUnitsOfMeasurementID = ReferenceUnitsOfMeasurementID;
             this.Amount = Amount;
+        }
+
+        public static List<Consumable> GetConsumable()
+        {
+            try
+            {
+                return db.Consumable.ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public static List<Consumable> GetConsumableByService(int id)
+        {
+            try
+            {
+                return (from c in db.Consumable
+                        join cr in db.ConsumptionRate on c.ID equals cr.Consumable.ID
+                        join cs in db.ConsumablesService on cr.ID equals cs.ConsumptionRate.ID
+                        where cs.Service.ID == id
+                        orderby c.ID
+                        select new Consumable()
+                        {
+                            ID = c.ID,
+                            ConsumableName = c.ConsumableName,
+                            Description = c.Description
+                        }).Distinct().ToList();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }
